@@ -4,12 +4,14 @@
 :root {
     --text-color: black;
     --secondary-text-color: #71717a;;
-    --foreground-color: #18181B;
-    --foreground-color-hover: #4c4c51;
+    --foreground-color: #f4f4f5;
+    --primary-color: #18181B;
+    --primary-color-hover: #4c4c51;
     --border-color: #E5E7EB;
     --background-color: white;
     --background-color-hover: #F3F4F6;
-    --footer-background-color: #f4f4f566;;
+    --footer-background-color: #f4f4f566;
+    --icon-background: #18181b1a;
     --max-width: 1400px;
 }
 
@@ -21,8 +23,7 @@
 }
 
 button {
-    border: 1px solid var(--foreground-color);
-    background-color: var(--foreground-color);
+    background-color: var(--primary-color);
     color: var(--background-color);
     border: none;
     font-weight: 500;
@@ -33,7 +34,7 @@ button {
 }
 
 button:hover {
-    background-color: var(--foreground-color-hover);    
+    background-color: var(--primary-color-hover);    
 }
 
 .secondary-button {
@@ -66,6 +67,20 @@ button:hover {
     height: 1rem;
 }
 
+.large-button {
+    gap: 1rem;
+    padding: 13.5px 2rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+.medium-button {
+    line-height: 1.25rem;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
 
 a {
     font-weight: 500;
@@ -75,7 +90,22 @@ a {
 }
 
 a:hover {
-    color: var(--foreground-color-hover);
+    color: var(--primary-color-hover);
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+main div {
+    max-width: calc(var(--max-width) - 32px);
+    width: 100vw;
+    padding: 0 16px;
+}
+main div div {
+    width: auto;
+    padding: 0;
 }
 /*general styles end */
 

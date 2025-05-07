@@ -1,0 +1,124 @@
+/* This file contains the CSS styles for the home page of the application. Not including the header, footer and general styles. */
+
+/* Hero section styles */
+.hero-container {
+    padding-top: 2rem;
+    justify-content: center;
+    padding-bottom: 3rem;
+}
+
+.hero-container h1 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 2.25rem;
+    margin-bottom: 1rem;
+}
+
+.hero-container p {
+    text-align: center;
+    font-size: 1.25rem;
+    color: var(--secondary-text-color);
+    margin-bottom: 1.5rem;
+}
+.hero-container div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+.hero-container div button svg {
+    stroke: white;
+}
+/* Hero section styles end */
+
+
+/* start-sharing-container styles */
+.start-sharing-container {
+    display: flex;
+    background-color: var(--foreground-color);
+    border-radius: 0.5rem;
+    padding: 2rem;
+    margin-bottom: 3rem;
+}
+
+.start-sharing {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 650px;
+}
+
+.start-sharing h2 {
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.start-sharing p {
+    margin-bottom: 1.5rem;
+}
+
+.start-sharing button {
+    width: fit-content;
+}
+
+.start-sharing-image {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.start-sharing-image div{
+    padding: 60px;
+    background-color: white;
+    border-radius: 100%;
+}
+
+
+/* How to use section styles */
+.how-to-container {
+    padding-bottom: 2rem;
+}
+
+.how-to-container h2 {
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.how-to-container div {
+    display: flex;
+    gap: 2rem;
+}
+
+.how-to-step { 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    gap: 0.5rem !important;
+}
+
+.how-to-step div {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    background-color: var(--icon-background);
+}
+
+.how-tp-step h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.how-to-step p {
+    text-align: center;
+}
+/* How to use section styles end */
+
