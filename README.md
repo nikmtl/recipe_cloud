@@ -2,7 +2,7 @@
 
 **Recipe Cloud** ist eine Webanwendung zur Verwaltung und zum Austausch von Rezepten. Nutzerinnen und Nutzer können Rezepte erstellen, speichern, durchsuchen und bewerten – alles zentral an einem Ort. Die Anwendung wurde im Rahmen des Moduls *Webengineering 2* entwickelt und basiert auf PHP, HTML, CSS, JavaScript und MySQL.
 
-Das Projekt dient dazu, praktische Erfahrungen mit **PHP** und **SQL** zu sammeln und das Verständnis für serverseitige Webentwicklung mit Datenbankanbindung zu vertiefen.
+Das Projekt dient dazu, praktische Erfahrungen mit **PHP** und **SQL** zu sammeln und das Verständnis für serverseitige Webentwicklung mit Datenbankanbindung zu vertiefen.Die Anwendung wurde bewusst ohne den Einsatz von Frameworks oder Bibliotheken entwickelt. Es kommen ausschließlich reines **HTML**, **CSS**, **JavaScript** und **PHP** zum Einsatz, um die grundlegenden Konzepte und Techniken der Webentwicklung zu vertiefen.
 
 ---
 
