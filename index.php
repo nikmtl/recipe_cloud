@@ -9,7 +9,7 @@
     <title>Recipe Cloud</title>
 
     <!-- Load stylesheets -->
-    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
     <!-- Load Inter font from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +21,7 @@
     <header>
         <div>
             <div class="logo-container">
-                <img src="src/img/logo.svg" alt="Recipe Cloud Logo" class="logo" width="24" height="24">
+                <img src="assets/img/logo.svg" alt="Recipe Cloud Logo" class="logo" width="24" height="24">
                 <h1>Recipe Cloud</h1>
             </div>
             <div class="nav-links">
