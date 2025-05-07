@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="src/img/logo_with_bg.svg" type="image/svg+xml">
+    <link rel="icon" href="assets/img/logo_with_bg.svg" type="image/svg+xml">
     <meta name="description" content="Recipe Cloud - Your go-to place for delicious recipes.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipe Cloud</title>
@@ -11,7 +11,7 @@
     <!-- Load stylesheets -->
     <link rel="stylesheet" href="assets/css/style.css">
 
-    <!-- Load Inter font from Google Fonts -->
+    <!-- Load Inter font from Google Fonts --> <!--TODO: change to own font loading because of EU law-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
