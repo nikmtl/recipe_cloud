@@ -1,13 +1,15 @@
 /* This file contains the general CSS styles for the application. It includes styles for the header, buttons, and other elements. */
 
-/*global styles*/
+/*general styles*/
 :root {
     --text-color: black;
+    --secondary-text-color: #71717a;;
     --foreground-color: #18181B;
     --foreground-color-hover: #4c4c51;
     --border-color: #E5E7EB;
     --background-color: white;
     --background-color-hover: #F3F4F6;
+    --footer-background-color: #f4f4f566;;
     --max-width: 1400px;
 }
 
@@ -19,6 +21,7 @@
 }
 
 button {
+    border: 1px solid var(--foreground-color);
     background-color: var(--foreground-color);
     color: var(--background-color);
     border: none;
@@ -74,11 +77,10 @@ a {
 a:hover {
     color: var(--foreground-color-hover);
 }
-
+/*general styles end */
 
 /*header styles*/
 header {
-    position: sticky;
     display: flex;
     justify-content: center;
     border-bottom: 1px solid var(--border-color);
@@ -98,6 +100,8 @@ header div div {
 }
 
 .logo-container {
+    display: flex;
+    align-items: center;
     width: fit-content;
     justify-content: flex-start;
     gap: 0.5rem;
@@ -116,3 +120,71 @@ header div div {
     justify-content: flex-end;
     gap: 1rem;
 }
+/*header styles end*/
+
+
+/*footer styles*/
+footer {
+    display: flex;
+    justify-content: center;
+    background-color: var(--footer-background-color);
+    border-top: 1px solid var(--border-color);
+}
+
+footer div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    max-width: calc(var(--max-width) - 32px);
+    width: 100vw;
+    padding: 2rem 16px;
+    gap: 3%;
+}
+
+footer div div {
+    display: block;
+    padding: 0;
+    width: fit-content;
+    width: 100%;
+}
+
+.footer-logo-container div{
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 10px;
+    margin-bottom: 1rem;
+}
+.footer-logo-container p {
+    color: var(--secondary-text-color);
+    font-size: 0.875rem;
+}
+
+.footer-links-container h2{
+    margin-bottom: 1rem;
+    font-weight: 600;
+    font-size: inherit;
+}
+
+.footer-links-container div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.footer-links-container div a{
+    font-weight: 400;
+    color: var(--secondary-text-color);
+}
+
+.footer-links-container div a:hover{
+    color: var(--text-color);
+}
+
+/*footer styles end*/
+
