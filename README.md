@@ -1,4 +1,4 @@
-# <img src="https://github.com/Edamame04/recipe_cloud/blob/main/src/img/logo_with_bg.svg" alt="logo" width="30"/> Recipe Cloud – Deine digitale Rezeptwolke
+# <img src="https://github.com/Edamame04/recipe_cloud/blob/main/assets/img/logo_with_bg.svg" alt="logo" width="30"/> Recipe Cloud – Deine digitale Rezeptwolke
 
 **Recipe Cloud** ist eine Webanwendung zur Verwaltung und zum Austausch von Rezepten. Nutzerinnen und Nutzer können Rezepte erstellen, speichern, durchsuchen und bewerten – alles zentral an einem Ort. Die Anwendung wurde im Rahmen des Moduls *Webengineering 2* entwickelt und basiert auf PHP, HTML, CSS, JavaScript und MySQL.
 
@@ -84,17 +84,9 @@ recipe-cloud/
 │
 ├── index.php
 │
-├── includes/
-│   ├── db.php
-│   ├── session.php
-│   └── header.php
-│
 ├── assets/
 │   ├── css/
-│   └── images/
-│
-├── uploads/
-│   └── [Rezeptbilder]
+│   └── img/
 │
 └── README.md
 ```
