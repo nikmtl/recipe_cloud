@@ -57,3 +57,51 @@ Das Projekt dient dazu, praktische Erfahrungen mit **PHP** und **SQL** zu sammel
 1. Projekt clonen:
    ```bash
    git clone https://github.com/Edamame04/recipe_cloud
+
+2. MySQL-Datenbank anlegen, z. B. `recipe_cloud`, und ggf. `recipe_cloud.sql` importieren
+
+3. Datenbankverbindung in `db.php` konfigurieren:
+
+   ```php
+   $host = 'localhost';
+   $db   = 'recipe_cloud';
+   $user = 'root';
+   $pass = '';
+   ```
+
+4. Projekt im lokalen Webserver (z. B. mit XAMPP) aufrufen:
+
+   ```
+   http://localhost/recipe-cloud/
+   ```
+
+---
+
+## 📁 Projektstruktur (nicht aktuell)
+
+```
+recipe-cloud/
+│
+├── index.php
+│
+├── includes/
+│   ├── db.php
+│   ├── session.php
+│   └── header.php
+│
+├── assets/
+│   ├── css/
+│   └── images/
+│
+├── uploads/
+│   └── [Rezeptbilder]
+│
+└── README.md
+```
+
+---
+
+## 🖼️ Screenshots (optional)
+
+> Hier werden Screenshots ergänzt (Startseite, Rezeptdetails, etc.)
+
