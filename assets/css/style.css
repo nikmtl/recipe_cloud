@@ -1,12 +1,15 @@
 :root {
+    --text-color: black;
     --foreground-color: #18181B;
     --foreground-color-hover: #4c4c51;
     --border-color: #E5E7EB;
+    --background-color: white;
+    --background-color-hover: #F3F4F6;
 }
 
 * {
-    background-color: white;
-    color: black;
+    background-color: var(--background-color);
+    color: var(--text-color);
     font-family: "Inter", sans-serif;
     margin: 0;
     padding: 0;
@@ -14,7 +17,7 @@
 
 button {
     background-color: var(--foreground-color);
-    color: white;
+    color: var(--background-color);
     border: none;
     padding: 8.5px 12px;
     border-radius: 6px;
@@ -26,14 +29,17 @@ button:hover {
 }
 
 .secondary-button {
-    background-color: white;
-    color: black;
-    border: 2px solid var(--foreground-color);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: 1px solid var(--foreground-color);
+}
+.secondary-button:hover {
+    background-color: var(--background-color-hover);
 }
 
 a {
     text-decoration: none;
-    color: black;
+    color: var(--text-color);
 }
 
 a:hover {
