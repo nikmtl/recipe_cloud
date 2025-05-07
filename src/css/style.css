@@ -1,0 +1,83 @@
+:root {
+    --foreground-color: #18181B;
+    --foreground-color-hover: #4c4c51;
+    --border-color: #E5E7EB;
+}
+
+* {
+    background-color: white;
+    color: black;
+    font-family: "Inter", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    background-color: var(--foreground-color);
+    color: white;
+    border: none;
+    padding: 8.5px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--foreground-color-hover);    
+}
+
+.secondary-button {
+    background-color: white;
+    color: black;
+    border: 2px solid var(--foreground-color);
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    color: var(--foreground-color-hover);
+}
+
+
+
+header {
+    position: sticky;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+header div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    width: 100vw;
+    padding: 16px;
+}
+
+header div div {
+    padding: 0;
+}
+
+.logo-container {
+    width: fit-content;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 10px;
+}
+
+.nav-links {
+    width: fit-content;
+    justify-content: center;
+    gap: 20px;
+}
+
+.auth-buttons {
+    width: fit-content;
+    justify-content: flex-end;
+    gap: 20px;
+}
