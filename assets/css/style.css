@@ -1,3 +1,6 @@
+/* This file contains the general CSS styles for the application. It includes styles for the header, buttons, and other elements. */
+
+/*global styles*/
 :root {
     --text-color: black;
     --foreground-color: #18181B;
@@ -5,10 +8,10 @@
     --border-color: #E5E7EB;
     --background-color: white;
     --background-color-hover: #F3F4F6;
+    --max-width: 1400px;
 }
 
 * {
-    background-color: var(--background-color);
     color: var(--text-color);
     font-family: "Inter", sans-serif;
     margin: 0;
@@ -19,6 +22,8 @@ button {
     background-color: var(--foreground-color);
     color: var(--background-color);
     border: none;
+    font-weight: 500;
+    font-size: 0.875rem;
     padding: 8.5px 12px;
     border-radius: 6px;
     cursor: pointer;
@@ -31,13 +36,37 @@ button:hover {
 .secondary-button {
     background-color: var(--background-color);
     color: var(--text-color);
-    border: 1px solid var(--foreground-color);
+    border: 1px solid var(--border-color);
 }
 .secondary-button:hover {
     background-color: var(--background-color-hover);
 }
 
+.gost-button {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: none;
+}
+.gost-button:hover {
+    background-color: var(--background-color-hover);
+}
+
+.icon-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.icon-button svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+
 a {
+    font-weight: 500;
+    font-size: 0.875rem;
     text-decoration: none;
     color: var(--text-color);
 }
@@ -47,7 +76,7 @@ a:hover {
 }
 
 
-
+/*header styles*/
 header {
     position: sticky;
     display: flex;
@@ -59,7 +88,7 @@ header div {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1400px;
+    max-width: calc(var(--max-width) - 32px);
     width: 100vw;
     padding: 16px;
 }
@@ -79,11 +108,11 @@ header div div {
 .nav-links {
     width: fit-content;
     justify-content: center;
-    gap: 20px;
+    gap: 1.5rem;
 }
 
 .auth-buttons {
     width: fit-content;
     justify-content: flex-end;
-    gap: 20px;
+    gap: 1rem;
 }
