@@ -25,7 +25,7 @@
 button {
     background-color: var(--primary-color);
     color: var(--background-color);
-    border: none;
+    border: 1px solid var(--primary-color);
     font-weight: 500;
     font-size: 0.875rem;
     padding: 8.5px 12px;
@@ -34,7 +34,8 @@ button {
 }
 
 button:hover {
-    background-color: var(--primary-color-hover);    
+    background-color: var(--primary-color-hover);   
+    border: 1px solid var(--primary-color-hover); 
 }
 
 .secondary-button {
@@ -44,6 +45,7 @@ button:hover {
 }
 .secondary-button:hover {
     background-color: var(--background-color-hover);
+    border: 1px solid var(--border-color);
 }
 
 .gost-button {
@@ -52,6 +54,7 @@ button:hover {
     border: none;
 }
 .gost-button:hover {
+    border: none !important;
     background-color: var(--background-color-hover);
 }
 

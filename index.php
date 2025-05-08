@@ -31,22 +31,26 @@
                 <a href="recipes.php">Recipes</a>
                 <a href="upload.php">Upload</a>
             </div>
-            <div class="auth-buttons">
-                <button class="gost-button icon-button" onclick="location.href='recipes.php'">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search h-5 w-5">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <path d="m21 21-4.3-4.3"></path>
-                    </svg>
-                </button>
-                <button class="secondary-button icon-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user h-4 w-4 mr-2">
-                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
-                    Sign In
-                </button>
-                <button>Register</button>
-            </div>
+            <?php if (!isset($_SESSION["user_id"])): ?>
+                <div class="auth-buttons">
+                    <button class="gost-button icon-button" onclick="location.href='recipes.php'">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search h-5 w-5">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.3-4.3"></path>
+                        </svg>
+                    </button>
+                    <button class="secondary-button icon-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user h-4 w-4 mr-2">
+                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        Sign In
+                    </button>
+                    <button>Register</button>
+                </div>
+            <?php else: ?>
+                <p>Default Content</p>
+            <?php endif; ?>
         </div>
     </header>
     <main>
@@ -67,7 +71,15 @@
                     </button>
                 </div>
             </div>
+            <div class="featured-recipes-container">
+                <div class="featured-recipes-header">
+                    <h2>Featured Recipes</h2>
+                    <a href="recipes.php">View all</a>
+                </div>
+                <div class="featured-recipes">
 
+                </div>
+            </div>
             <div class="start-sharing-container">
                 <div class="start-sharing">
                     <h2>Share Your Culinary Creations</h2>
@@ -147,13 +159,22 @@
             </div>
             <div class="footer-links-container">
                 <h2>Connect</h2>
-                <div>       
+                <div>
                     <a href="https://github.com/Edamame04/recipe_cloud">GitHub</a>
                     <a href="https://github.com/Edamame04/recipe_cloud/issues">Report a Bug</a>
                 </div>
             </div>
         </div>
     </footer>
+
+    <?php
+    // if query string ?view=login is set, include showLoginForm()
+    if (isset($_GET['view']) && $_GET['view'] === 'login') {
+        if (!isset($_SESSION["user_id"])) {
+            //TODO: include login form
+        }
+    }
+    ?>
 </body>
 
 </html>

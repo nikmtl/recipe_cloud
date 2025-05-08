@@ -31,6 +31,13 @@
 }
 /* Hero section styles end */
 
+/* featured recipes section styles */
+.featured-recipes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
 
 /* start-sharing-container styles */
 .start-sharing-container {
@@ -72,7 +79,7 @@
     background-color: white;
     border-radius: 100%;
 }
-
+/* start-sharing-container styles end */
 
 /* How to use section styles */
 .how-to-container {
