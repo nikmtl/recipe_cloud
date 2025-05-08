@@ -36,7 +36,7 @@ Das Projekt dient dazu, praktische Erfahrungen mit **PHP** und **SQL** zu sammel
 
 ---
 
-## 🗃️ Datenbankmodell (Beispiel)
+## 🗃️ Datenbankmodell
 
 **users**  
 `id` *(PK)*, `username`, `email`, `password_hash`
