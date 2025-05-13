@@ -15,9 +15,10 @@ function connectToDatabase(){
 
     $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
     $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
-
+    
     try {
         $pdo = new PDO($dsn, $user, $pass, $options);
+        //The PHO has the benefit that the connection is automatically closed when the script ends.
     } catch (\PDOException $e) {
         die("Datenbankverbindung fehlgeschlagen: " . $e->getMessage());
     }

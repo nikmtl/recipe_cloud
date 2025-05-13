@@ -38,6 +38,7 @@
     align-items: center;
     margin-bottom: 2rem;
 }
+/* featured recipes section styles end */
 
 /* start-sharing-container styles */
 .start-sharing-container {
@@ -78,6 +79,12 @@
     padding: 60px;
     background-color: white;
     border-radius: 100%;
+}
+@media (max-width: 700px) {
+    .start-sharing-container {
+        flex-direction: column;
+        gap: 2rem;
+    }
 }
 /* start-sharing-container styles end */
 
@@ -126,6 +133,13 @@
 
 .how-to-step p {
     text-align: center;
+}
+
+/*responsive styles*/
+@media (max-width: 700px) {
+    .how-to-container div {
+        flex-direction: column;
+    }
 }
 /* How to use section styles end */
 

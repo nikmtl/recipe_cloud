@@ -2,17 +2,25 @@
 <html lang="en">
 
 <head>
+    <!-- meta tags -->
     <meta charset="UTF-8">
-    <link rel="icon" href="assets/img/logo_with_bg.svg" type="image/svg+xml">
     <meta name="description" content="Recipe Cloud - Your go-to place for delicious recipes.">
+    <meta name="keywords" content="recipes, cooking, food, share, discover">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Edamame04">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="application-name" content="Recipe Cloud">
+
+
+    <!-- favicon and title -->
+    <link rel="icon" href="assets/img/logo_with_bg.svg" type="image/svg+xml">
     <title>Recipe Cloud</title>
 
-    <!-- Load stylesheets -->
+    <!-- load stylesheets -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/home.css">
 
-    <!-- Load Inter font from Google Fonts -->
+    <!-- load Inter font from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
@@ -22,17 +30,20 @@
 <body>
     <header>
         <div>
-            <div class="logo-container">
+            <div class="logo-container" onclick="location.href='index.php'">
                 <img src="assets/img/logo.svg" alt="Recipe Cloud Logo" class="logo" width="24" height="24">
                 <h1>Recipe Cloud</h1>
             </div>
-            <div class="nav-links">
+            <div class="nav-links desktop-only">
                 <a href="">Home</a>
                 <a href="recipes.php">Recipes</a>
                 <a href="upload.php">Upload</a>
+                <?php if (isset($_SESSION["user_id"])): ?>
+                    <a href="profile.php?user_id=<?php echo $_SESSION['user_id']; ?>">My Profile</a>
+                <?php endif; ?>
             </div>
             <?php if (!isset($_SESSION["user_id"])): ?>
-                <div class="auth-buttons">
+                <div class="auth-buttons  desktop-only">
                     <button class="gost-button icon-button" onclick="location.href='recipes.php'">
                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search h-5 w-5">
                             <circle cx="11" cy="11" r="8"></circle>
@@ -49,10 +60,25 @@
                     <button>Register</button>
                 </div>
             <?php else: ?>
-                <p>Default Content</p>
+                <div class=" desktop-only">
+                    <button></button> <!--TODO: Placeholder for user profile button -->
+                </div>
             <?php endif; ?>
+            <!-- Mobile Navigation -->
+            <div class="mobile-only" style="width: fit-content">
+                <button class="icon-button gost-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu h-6 w-6">
+                        <path d="M3 12h18"></path>
+                        <path d="M3 6h18"></path>
+                        <path d="M3 18h18"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
     </header>
+    <div class="mobile-nav">
+        
+    </div>
     <main>
         <div>
             <div class="hero-container">
@@ -77,7 +103,9 @@
                     <a href="recipes.php">View all</a>
                 </div>
                 <div class="featured-recipes">
-
+                    <?php
+                    //TODO Fetch featured recipes from the database
+                    ?>
                 </div>
             </div>
             <div class="start-sharing-container">
