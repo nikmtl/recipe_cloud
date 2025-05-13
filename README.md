@@ -9,7 +9,7 @@ Das Projekt dient dazu, praktische Erfahrungen mit **PHP** und **SQL** zu sammel
 ## 🌟 Funktionen
 
 ### Öffentlich:
-- Startseite mit Rezeptvorschlägen oder neuesten Rezepten
+- Startseite mit Rezeptvorschlägen 
 - Rezeptübersicht mit Filter- und Suchfunktion
 - Detaillierte Rezeptanzeige (inkl. Zutaten, Zubereitung, Bildern)
 
@@ -18,7 +18,7 @@ Das Projekt dient dazu, praktische Erfahrungen mit **PHP** und **SQL** zu sammel
 - Eigenes Benutzerprofil
 - Rezepte erstellen, bearbeiten und löschen
 - Rezepte von anderen Nutzern bewerten und kommentieren
-- Favoritenliste oder „Merken“-Funktion (optional)
+- Favoritenliste oder „Merken“-Funktion 
 
 ### Optional/Erweiterbar:
 - Bild-Upload für Rezepte
@@ -31,24 +31,26 @@ Das Projekt dient dazu, praktische Erfahrungen mit **PHP** und **SQL** zu sammel
 
 - **Frontend:** HTML, CSS, JavaScript
 - **Backend:** PHP 8+ (Formularverarbeitung, Sessions)
-- **Datenbank:** MySQL / MariaDB
-- **Tools:** XAMPP / phpMyAdmin, Git & GitHub
+- **Datenbank:** MySQL 
 
 ---
 
-## 🗃️ Datenbankmodell
+## 🗃️ Datenbankmodell (aktuell)
 
-**users**  
-`id` *(PK)*, `username`, `email`, `password_hash`
+**users:**  
+`id *(PK)*`, `username`, `email`, `password_hash`
 
-**recipes**  
-`id` *(PK)*, `user_id` *(FK)*, `title`, `description`, `ingredients`, `instructions`, `category`, `image_path`, `created_at`
+**recipes:**  
+`id *(PK)*` , `user_id *(FK)*`, `title`, `description`, `prep_time`, `cook_time`, `difficulty_id *(FK)*`, `ingredients`, `instructions_csv`, `category`, `image_path`
 
-**ratings**  
-`id` *(PK)*, `user_id` *(FK)*, `recipe_id` *(FK)*, `rating`, `comment_text`, `created_at`
+**difficulty:**
+`id *(PK)*`, `difficulty`
 
-**favorites**
-`id` *(PK)*, `user_id` *(FK)*, `recipe_id` *(FK)*
+**ratings:**  
+`id *(PK)*`, `user_id *(FK)*`, `recipe_id *(FK)*`, `rating`, `comment_text`, `created_at`
+
+**favorites:**
+`id *(PK)*`, `user_id *(FK)*`, `recipe_id *(FK)*`
 
 ---
 
@@ -77,23 +79,27 @@ Das Projekt dient dazu, praktische Erfahrungen mit **PHP** und **SQL** zu sammel
 
 ---
 
-## 📁 Projektstruktur (nicht aktuell)
+## 📁 Projektstruktur (aktuell)
 
 ```
 recipe-cloud/
 │
 ├── index.php
+├── upload.php
 │
 ├── assets/
 │   ├── css/
 │   └── img/
+│
+├── be-logic/
+│   ├── db.php
 │
 └── README.md
 ```
 
 ---
 
-## 🖼️ Screenshots (optional)
+## 🖼️ Screenshots (kommt noch)
 
-> Hier werden Screenshots ergänzt (Startseite, Rezeptdetails, etc.)
+> Hier werden Screenshots ergänzt
 
