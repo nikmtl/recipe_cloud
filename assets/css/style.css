@@ -38,6 +38,10 @@ button:hover {
     border: 1px solid var(--primary-color-hover); 
 }
 
+button:focus {
+    border: 1px solid var(--primary-color-hover);
+}
+
 .secondary-button {
     background-color: var(--background-color);
     color: var(--text-color);
