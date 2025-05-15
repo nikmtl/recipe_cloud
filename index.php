@@ -20,6 +20,9 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/home.css">
 
+    <!-- load fontend view logic -->
+    <script src="assets/fe-logic/view.js" defer></script>
+
     <!-- load Inter font from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -64,9 +67,9 @@
                     <button></button> <!--TODO: Placeholder for user profile button -->
                 </div>
             <?php endif; ?>
-            <!-- Mobile Navigation -->
+            <!-- Mobile Hamburger Menu Button -->
             <div class="mobile-only" style="width: fit-content">
-                <button class="icon-button gost-button">
+                <button id="hamburger-icon" class="icon-button gost-button" onclick="toggleMobileMenu()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu h-6 w-6">
                         <path d="M3 12h18"></path>
                         <path d="M3 6h18"></path>
@@ -76,9 +79,24 @@
             </div>
         </div>
     </header>
-    <div class="mobile-nav">
-        
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-nav mobile-only">
+        <a href="">Home</a>
+        <a href="recipes.php">Recipes</a>
+        <a href="upload.php">Upload</a>
+        <?php if (isset($_SESSION["user_id"])): ?>
+            <a href="profile.php?user_id=<?php echo $_SESSION['user_id']; ?>">My Profile</a>
+        <?php endif; ?>
+        <button class="secondary-button icon-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user h-4 w-4 mr-2">
+                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            Sign In
+        </button>
+        <button>Register</button>
     </div>
+    <div class="mobile-nav-background mobile-only" id="mobile-nav-background"></div>
     <main>
         <div>
             <div class="hero-container">
@@ -157,7 +175,6 @@
                 </div>
             </div>
         </div>
-        </div>
     </main>
     <footer>
         <div>
@@ -194,7 +211,7 @@
             </div>
         </div>
     </footer>
-
+    
     <?php
     // if query string ?view=login is set, include showLoginForm()
     if (isset($_GET['view']) && $_GET['view'] === 'login') {

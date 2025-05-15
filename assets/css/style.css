@@ -135,9 +135,12 @@ main div div {
 
 /*header styles*/
 header {
+    z-index: 100;
+    position: relative;
     display: flex;
     justify-content: center;
     border-bottom: 1px solid var(--border-color);
+    background-color: var(--background-color);
 }
 
 header div {
@@ -176,7 +179,46 @@ header div div {
 }
 /*responsive styles*/
 @media (max-width: 700px) {
-    
+    .mobile-nav{
+        z-index: 100;
+        display: none;
+        position: absolute;
+        background-color: var(--background-color);
+        width: 100vw;
+        box-sizing: border-box;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 1px solid var(--border-color);
+        gap: 0.5rem;
+        padding: 1rem 16px;
+    }
+
+    .mobile-nav button{
+        width: 100%;
+    }
+
+    .mobile-nav a{
+        text-align: center;
+        width: 100%;
+        padding: 0.5rem 1rem;
+        font-weight: 500;
+        font-size: 0.875rem;
+        color: var(--text-color);
+    }
+
+    .mobile-nav-background{
+        position: fixed; /* Ensure it covers the entire page */
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* Use viewport height to cover the entire screen */
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 50;
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
 }
 /*header styles end*/
 
