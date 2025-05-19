@@ -18,17 +18,15 @@
 
     <!-- load stylesheets -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/auth.css">
+    <link rel="stylesheet" href="assets/css/home.css">
 
     <!-- load fontend view logic -->
     <script src="assets/fe-logic/view.js" defer></script>
-    <script src="assets/fe-logic/auth.js" defer></script>
 
     <!-- load Inter font from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-
 </head>
 
 <body>
@@ -42,11 +40,22 @@
                 <a href="index.php">Home</a>
                 <a href="recipes.php">Recipes</a>
                 <a href="upload.php">Upload</a>
-                <?php if (isset($_SESSION["user_id"])): ?>
-                    <a href="profile.php?user_id=<?php echo $_SESSION['user_id']; ?>">My Profile</a>
+                <?php session_start();
+                if (isset($_SESSION["username"])): ?>
+                    <a href="profile.php?u=<?php echo $_SESSION['username']; ?>">My Profile</a>
                 <?php endif; ?>
             </div>
-            <?php if (!isset($_SESSION["user_id"])): ?>
+            <?php if (isset($_SESSION["username"])): ?>
+                <form class=" desktop-only" method="POST" action="be-logic/auth.php">
+                    <input type="hidden" name="action" value="logout">
+                    <button class="secondary-button icon-button" type="submit">
+                        Sign Out
+                        <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24">
+                            <path d="m24,12s0,.002,0,.003c-.002.673-.266,1.304-.746,1.776l-4.142,4.077c-.097.096-.224.144-.351.144-.129,0-.258-.05-.356-.149-.193-.196-.191-.513.006-.707l4.142-4.077c.164-.162.281-.356.356-.566H6.5c-.276,0-.5-.224-.5-.5s.224-.5.5-.5h16.41c-.075-.213-.192-.409-.358-.572l-4.141-4.072c-.197-.193-.2-.51-.006-.707.193-.198.51-.2.707-.006l4.141,4.072c.481.474.747,1.106.747,1.782,0,0,0,.001,0,.002,0,0,0,0,0,0Zm-12.5,3c-.276,0-.5.224-.5.5v4c0,1.93-1.57,3.5-3.5,3.5h-3c-1.93,0-3.5-1.57-3.5-3.5V4.5c0-1.93,1.57-3.5,3.5-3.5h3c1.93,0,3.5,1.57,3.5,3.5v4c0,.276.224.5.5.5s.5-.224.5-.5v-4c0-2.481-2.019-4.5-4.5-4.5h-3C2.019,0,0,2.019,0,4.5v15c0,2.481,2.019,4.5,4.5,4.5h3c2.481,0,4.5-2.019,4.5-4.5v-4c0-.276-.224-.5-.5-.5Z" />
+                        </svg>
+                    </button>
+                </form>
+            <?php else: ?>
                 <div class="auth-buttons  desktop-only">
                     <button class="gost-button icon-button" onclick="location.href='recipes.php'">
                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search h-5 w-5">
@@ -62,16 +71,6 @@
                         Sign In
                     </button>
                     <button onclick="location.href='register.php'">Register</button>
-                </div>
-            <?php else: ?>
-                <div class=" desktop-only">
-                    <button class="secondary-button icon-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user h-4 w-4 mr-2">
-                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
-                        <?php echo $_SESSION["username"]; ?>
-                    </button>
                 </div>
             <?php endif; ?>
             <!-- Mobile Hamburger Menu Button -->
@@ -91,17 +90,30 @@
         <a href="">Home</a>
         <a href="recipes.php">Recipes</a>
         <a href="upload.php">Upload</a>
-        <?php if (isset($_SESSION["user_id"])): ?>
-            <a href="profile.php?user_id=<?php echo $_SESSION['user_id']; ?>">My Profile</a>
+        <?php if (isset($_SESSION["username"])): ?>
+            <a href="profile.php?u=<?php echo $_SESSION['username']; ?>">My Profile</a>
         <?php endif; ?>
-        <button class="secondary-button icon-button"  onclick="location.href='login.php'">
-            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user h-4 w-4 mr-2">
-                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-            </svg>
-            Sign In
-        </button>
-        <button  onclick="location.href='register.php'">Register</button>
+        <?php if (isset($_SESSION["username"])): ?>
+            <form method="POST" action="be-logic/auth.php">
+                <input type="hidden" name="action" value="logout">
+                <button class="secondary-button icon-button" type="submit">
+                    Sign Out
+                    <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24">
+                        <path d="m24,12s0,.002,0,.003c-.002.673-.266,1.304-.746,1.776l-4.142,4.077c-.097.096-.224.144-.351.144-.129,0-.258-.05-.356-.149-.193-.196-.191-.513.006-.707l4.142-4.077c.164-.162.281-.356.356-.566H6.5c-.276,0-.5-.224-.5-.5s.224-.5.5-.5h16.41c-.075-.213-.192-.409-.358-.572l-4.141-4.072c-.197-.193-.2-.51-.006-.707.193-.198.51-.2.707-.006l4.141,4.072c.481.474.747,1.106.747,1.782,0,0,0,.001,0,.002,0,0,0,0,0,0Zm-12.5,3c-.276,0-.5.224-.5.5v4c0,1.93-1.57,3.5-3.5,3.5h-3c-1.93,0-3.5-1.57-3.5-3.5V4.5c0-1.93,1.57-3.5,3.5-3.5h3c1.93,0,3.5,1.57,3.5,3.5v4c0,.276.224.5.5.5s.5-.224.5-.5v-4c0-2.481-2.019-4.5-4.5-4.5h-3C2.019,0,0,2.019,0,4.5v15c0,2.481,2.019,4.5,4.5,4.5h3c2.481,0,4.5-2.019,4.5-4.5v-4c0-.276-.224-.5-.5-.5Z" />
+                    </svg>
+                </button>
+            </form>
+        <?php else: ?>
+            <button class="secondary-button icon-button" onclick="location.href='login.php'">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user h-4 w-4 mr-2">
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                Sign In
+            </button>
+            <button onclick="location.href='register.php'">Register</button>
+
+        <?php endif; ?>
     </div>
     <div class="mobile-nav-background mobile-only" id="mobile-nav-background"></div>
     <main>

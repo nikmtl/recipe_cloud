@@ -3,7 +3,8 @@
 /*general styles*/
 :root {
     --text-color: black;
-    --secondary-text-color: #71717a;;
+    --secondary-text-color: #71717a;
+    ;
     --foreground-color: #f4f4f5;
     --primary-color: #18181B;
     --primary-color-hover: #4c4c51;
@@ -35,8 +36,8 @@ button {
 }
 
 button:hover {
-    background-color: var(--primary-color-hover);   
-    border: 1px solid var(--primary-color-hover); 
+    background-color: var(--primary-color-hover);
+    border: 1px solid var(--primary-color-hover);
 }
 
 button:focus {
@@ -48,6 +49,7 @@ button:focus {
     color: var(--text-color);
     border: 1px solid var(--border-color);
 }
+
 .secondary-button:hover {
     background-color: var(--background-color-hover);
     border: 1px solid var(--border-color);
@@ -58,6 +60,7 @@ button:focus {
     color: var(--text-color);
     border: none;
 }
+
 .gost-button:hover {
     border: none !important;
     background-color: var(--background-color-hover);
@@ -114,7 +117,7 @@ form {
 form input {
     border: 1px solid var(--border-color);
     padding: 0.5rem 1rem;
-    border-radius:calc(0.5rem - 2px);
+    border-radius: calc(0.5rem - 2px);
     width: calc(100% - 2rem);
     font-size: 0.875rem;
 }
@@ -154,30 +157,33 @@ main {
     justify-content: center;
     align-items: center;
 }
+
 main div {
     max-width: calc(var(--max-width) - 32px);
     width: 100vw;
     padding: 0 16px;
 }
+
 main div div {
     width: auto;
     padding: 0;
 }
 
 /*responsive styles*/
-.mobile-only{
+.mobile-only {
     display: none;
 }
+
 @media (max-width: 700px) {
     * {
         overflow-x: hidden;
     }
 
-    .desktop-only{
+    .desktop-only {
         display: none;
     }
 
-    .mobile-only{
+    .mobile-only {
         display: block;
     }
 
@@ -187,6 +193,7 @@ main div div {
 
 
 }
+
 /*general styles end */
 
 /*header styles*/
@@ -233,9 +240,16 @@ header div div {
     justify-content: flex-end;
     gap: 1rem;
 }
+
+header form {
+    border-radius: 0;
+    border: none;
+    padding: 0 !important;
+}
+
 /*responsive styles*/
 @media (max-width: 700px) {
-    .mobile-nav{
+    .mobile-nav {
         z-index: 100;
         display: none;
         position: absolute;
@@ -250,11 +264,11 @@ header div div {
         padding: 1rem 16px;
     }
 
-    .mobile-nav button{
+    .mobile-nav button {
         width: 100%;
     }
 
-    .mobile-nav a{
+    .mobile-nav a {
         text-align: center;
         width: 100%;
         padding: 0.5rem 1rem;
@@ -263,19 +277,29 @@ header div div {
         color: var(--text-color);
     }
 
-    .mobile-nav-background{
-        position: fixed; /* Ensure it covers the entire page */
+    .mobile-nav-background {
+        position: fixed;
+        /* Ensure it covers the entire page */
         top: 0;
         left: 0;
         width: 100vw;
-        height: 100vh; /* Use viewport height to cover the entire screen */
+        height: 100vh;
+        /* Use viewport height to cover the entire screen */
         background-color: rgba(0, 0, 0, 0.5);
         z-index: 50;
         display: none;
         justify-content: center;
         align-items: center;
     }
+
+    .mobile-nav form {
+        width: 100%;
+        border-radius: 0;
+        border: none;
+        padding: 0 !important;
+    }
 }
+
 /*header styles end*/
 
 
@@ -304,7 +328,7 @@ footer div div {
     width: 100%;
 }
 
-.footer-logo-container div{
+.footer-logo-container div {
     display: flex;
     align-items: center;
     width: fit-content;
@@ -314,18 +338,19 @@ footer div div {
     font-size: 10px;
     margin-bottom: 1rem;
 }
+
 .footer-logo-container p {
     color: var(--secondary-text-color);
     font-size: 0.875rem;
 }
 
-.footer-links-container h2{
+.footer-links-container h2 {
     margin-bottom: 1rem;
     font-weight: 600;
     font-size: inherit;
 }
 
-.footer-links-container div{
+.footer-links-container div {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -333,14 +358,15 @@ footer div div {
     gap: 1rem;
 }
 
-.footer-links-container div a{
+.footer-links-container div a {
     font-weight: 400;
     color: var(--secondary-text-color);
 }
 
-.footer-links-container div a:hover{
+.footer-links-container div a:hover {
     color: var(--text-color);
 }
+
 /*responsive styles*/
 @media (max-width: 700px) {
     footer div {
@@ -355,17 +381,14 @@ footer div div {
         gap: 0.5rem;
     }
 
-    .footer-logo-container div{
+    .footer-logo-container div {
         flex-direction: row;
     }
 
-    .footer-links-container div{
+    .footer-links-container div {
         gap: 1rem;
         margin-bottom: 0;
     }
 }
+
 /*footer styles end*/
-
-
-
-

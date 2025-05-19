@@ -1,11 +1,14 @@
 <?php
 require_once __DIR__ . '/db.php';
 
+
 if (isset($_POST['action']) && $_POST['action'] === 'register') {
     registerUser($pdo);
 } elseif (isset($_POST['action']) && $_POST['action'] === 'login') {
     loginUser($pdo);
-} else {
+} elseif (isset($_POST['action']) && $_POST['action'] === 'logout') {
+    logoutUser();
+}else {
     echo "Invalid action.";
 }
 
@@ -20,7 +23,11 @@ function registerUser($pdo) {
     // Insert user into the database
     $stmt = $pdo->prepare("INSERT INTO users (username, password_hash, email) VALUES (?, ?, ?)");
     if ($stmt->execute([$username, $hashedPassword, $email])) {
-        echo "User registered successfully!";
+        // Start session and set user ID
+        session_start();
+        $_SESSION['username'] = $username;
+        header('Location: ../profile.php?u=' . $_SESSION["username"]);
+        exit;
     } else {
         echo "Error registering user.";
     }
@@ -38,8 +45,10 @@ function loginUser($pdo) {
     if ($user && password_verify($password, $user['password_hash'])) {
         // Start session and set user ID
         session_start();
-        $_SESSION['username'] = $user['username'];
-        echo "Login successful!";
+        $_SESSION['username'] = $username;
+        header('Location: ../profile.php?u=' . $_SESSION["username"]);
+        //header('Location: ../profile.php?u=' . $_SESSION["username"]);
+        exit;
     } else {
         echo "Invalid username or password.";
     }
@@ -48,7 +57,7 @@ function loginUser($pdo) {
 function logoutUser() {
     session_start();
     session_destroy();
-    header('Location: index.php');
+    header('Location: ../index.php');
     exit;
 }
 
