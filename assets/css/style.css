@@ -147,9 +147,7 @@ form button {
 }
 
 .error-message {
-    margin-top: 8px;
-    color: var(--error-border);
-    font-size: 0.875rem;
+    color: var(--error-border) !important;
 }
 
 main {

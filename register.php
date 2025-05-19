@@ -22,6 +22,7 @@
 
     <!-- load fontend view logic -->
     <script src="assets/fe-logic/view.js" defer></script>
+    <script src="assets/fe-logic/auth.js" defer></script>
 
     <!-- load Inter font from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

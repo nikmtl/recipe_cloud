@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/db.php';
 
-
+// TODO: Add backend side input validation and sanitization
 if (isset($_POST['action']) && $_POST['action'] === 'register') {
     registerUser($pdo);
 } elseif (isset($_POST['action']) && $_POST['action'] === 'login') {
@@ -61,4 +61,9 @@ function logoutUser() {
     exit;
 }
 
+
+// TODO for the future: Add CSRF protection
+// TODO for the future: Add XSS protection
+
 ?>
+
