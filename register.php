@@ -39,7 +39,7 @@
                 <h1>Recipe Cloud</h1>
             </div>
             <div class="nav-links desktop-only">
-                <a href="">Home</a>
+                <a href="index.php">Home</a>
                 <a href="recipes.php">Recipes</a>
                 <a href="upload.php">Upload</a>
                 <?php if (isset($_SESSION["user_id"])): ?>

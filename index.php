@@ -16,18 +16,21 @@
     <link rel="icon" href="assets/img/logo_with_bg.svg" type="image/svg+xml">
     <title>Recipe Cloud</title>
 
-    <!-- load stylesheets -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/home.css">
-
-    <!-- load fontend view logic -->
-    <script src="assets/fe-logic/view.js" defer></script>
-
     <!-- load Inter font from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
+
+    <!-- load stylesheets -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/home.css">
+
+    <!-- load fontend logic -->
+    <script src="assets/fe-logic/view.js" defer></script>
+
+    <!-- load backend logic -->
+    <?php include 'be-logic/db.php'; ?>
 </head>
 
 <body>
