@@ -18,7 +18,7 @@
 
     <!-- load stylesheets -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/home.css">
+    <link rel="stylesheet" href="assets/css/auth.css">
 
     <!-- load fontend view logic -->
     <script src="assets/fe-logic/view.js" defer></script>
@@ -87,7 +87,7 @@
     </header>
     <!-- Mobile Navigation Menu -->
     <div class="mobile-nav mobile-only">
-        <a href="">Home</a>
+        <a href="index.php">Home</a>
         <a href="recipes.php">Recipes</a>
         <a href="upload.php">Upload</a>
         <?php if (isset($_SESSION["username"])): ?>
@@ -116,6 +116,50 @@
         <?php endif; ?>
     </div>
     <div class="mobile-nav-background mobile-only" id="mobile-nav-background"></div>
+    <main>
+        <div class="auth-container">
+            <img src="assets/img/logo.svg" alt="Recipe Cloud Logo" class="logo" width="40" height="40">
+            <h1>Create an account</h1>
+            <p>Enter your information to create an account</p>
+            <form id="register-form" method="POST" action="be-logic/auth.php">
+                <input type="hidden" name="action" value="register">
+                <div class="input-group">
+                    <label for="register-username">Username</label>
+                    <div>
+                        <input type="text" id="register-username" name="register-username" placeholder="JohnDoe" autocomplete="username">
+                        <!--required is checked by js to prevent the ugly default browser error message-->
+                        <p class="error-message" id="register-username-errormsg"></p>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="register-email">Email</label>
+                    <div>
+                        <input type="text" id="register-email" name="register-email" placeholder="name@example.com" autocomplete="email">
+                        <!--required and email formatting is checked by js to prevent the ugly default browser error message-->
+                        <p class="error-message" id="register-email-errormsg"></p>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="register-password">Password</label>
+                    <div>
+                        <input type="password" id="register-password" name="register-password" autocomplete="new-password">
+                        <!--required is checked by js to prevent the ugly default browser error message-->
+                        <p class="error-message" id="register-password-errormsg"></p>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="register-password-confirm">Confirm Password</label>
+                    <div id="register-password-confirm-container">
+                        <input type="password" id="register-password-confirm" autocomplete="new-password">
+                        <!--required is checked by js to prevent the ugly default browser error message-->
+                        <p class="error-message" id="register-password-confirm-errormsg"></p>
+                    </div>
+                </div>
+                <button type="submit">Create account</button>
+            </form>
+            <p class="auth-mode-switch">Already have an account? <a href="Login.php">Login</a></p>
+
+        </div>
     </main>
     <footer>
         <div>

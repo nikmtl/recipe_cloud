@@ -23,7 +23,6 @@
 
     <!-- load stylesheets -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/home.css">
 
     <!-- load fontend view logic -->
     <script src="assets/fe-logic/view.js" defer></script>
@@ -45,7 +44,7 @@
                 <a href="index.php">Home</a>
                 <a href="recipes.php">Recipes</a>
                 <a href="upload.php">Upload</a>
-                <?php session_start();
+                <?php
                 if (isset($_SESSION["username"])): ?>
                     <a href="profile.php?u=<?php echo $_SESSION['username']; ?>">My Profile</a>
                 <?php endif; ?>
@@ -92,7 +91,7 @@
     </header>
     <!-- Mobile Navigation Menu -->
     <div class="mobile-nav mobile-only">
-        <a href="">Home</a>
+        <a href="index.php">Home</a>
         <a href="recipes.php">Recipes</a>
         <a href="upload.php">Upload</a>
         <?php if (isset($_SESSION["username"])): ?>
@@ -122,7 +121,7 @@
     </div>
     <div class="mobile-nav-background mobile-only" id="mobile-nav-background"></div>
     <main>
-        
+
     </main>
     <footer>
         <div>

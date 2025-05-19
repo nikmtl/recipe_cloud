@@ -87,7 +87,7 @@
     </header>
     <!-- Mobile Navigation Menu -->
     <div class="mobile-nav mobile-only">
-        <a href="">Home</a>
+        <a href="index.php">Home</a>
         <a href="recipes.php">Recipes</a>
         <a href="upload.php">Upload</a>
         <?php if (isset($_SESSION["username"])): ?>
