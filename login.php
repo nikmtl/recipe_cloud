@@ -22,6 +22,7 @@
 
     <!-- load fontend view logic -->
     <script src="assets/fe-logic/view.js" defer></script>
+    <script src="assets/fe-logic/auth.js" defer></script>
 
     <!-- load Inter font from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -108,14 +109,22 @@
             <img src="assets/img/logo.svg" alt="Recipe Cloud Logo" class="logo" width="40" height="40">
             <h1>Welcome Back</h1>
             <p>Enter your credentials to access your account</p>
-            <form>
+            <form id="login-form">
                 <div class="input-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" required>
+                    <label for="login-username">Username</label>
+                    <div> 
+                        <input type="text" id="login-username" name="login-username" autocomplete="username" placeholder="JohnDoe">
+                        <!--required is checked by js to prevent the ugly default browser error message-->
+                        <p class="error-message" id="login-username-errormsg"></p>
+                    </div>
                 </div>
                 <div class="input-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required>
+                    <label for="login-password">Password</label>
+                    <div>
+                        <input type="password" id="login-password" name="login-password" autocomplete="current-password"> 
+                        <!--required is checked by js to prevent the ugly default browser error message-->
+                        <p class="error-message" id="login-password-errormsg"></p>
+                    </div>
                 </div>
                 <button type="submit">Sign in</button>
             </form>

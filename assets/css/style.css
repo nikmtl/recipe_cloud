@@ -12,6 +12,7 @@
     --background-color-hover: #F3F4F6;
     --footer-background-color: #f4f4f566;
     --icon-background: #18181b1a;
+    --error-border: #ec0c0c;
     --max-width: 1400px;
 }
 
@@ -123,6 +124,10 @@ form input:focus {
     outline: none;
 }
 
+form .error {
+    border-color: var(--error-border);
+}
+
 form button {
     width: 100%;
 }
@@ -138,10 +143,10 @@ form button {
     font-size: 0.875rem;
 }
 
-form .input-group p {
-    color: var(--secondary-text-color);
-    font-size: 0.75rem;
-    margin-top: 4px;
+.error-message {
+    margin-top: 8px;
+    color: var(--error-border);
+    font-size: 0.875rem;
 }
 
 main {
@@ -180,7 +185,7 @@ main div div {
         gap: 0;
     }
 
-    
+
 }
 /*general styles end */
 

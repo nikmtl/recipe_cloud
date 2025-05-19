@@ -22,6 +22,7 @@
 
     <!-- load fontend view logic -->
     <script src="assets/fe-logic/view.js" defer></script>
+    <script src="assets/fe-logic/auth.js" defer></script>
 
     <!-- load Inter font from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -108,25 +109,38 @@
             <img src="assets/img/logo.svg" alt="Recipe Cloud Logo" class="logo" width="40" height="40">
             <h1>Create an account</h1>
             <p>Enter your information to create an account</p>
-            <form>
+            <form id="register-form">
                 <div class="input-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" required placeholder="JohnDoe">
-                </div>
-                <div class="input-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required placeholder="name@example.com">
-                </div>
-                <div class="input-group">
-                    <label for="password">Password</label>
+                    <label for="register-username">Username</label>
                     <div>
-                        <input type="password" id="password" name="password" required>
-                        <p>Password must be at least 8 characters long</p>
+                        <input type="text" id="register-username" name="username" placeholder="JohnDoe" autocomplete="username">
+                        <!--required is checked by js to prevent the ugly default browser error message-->
+                        <p class="error-message" id="register-username-errormsg"></p>
                     </div>
                 </div>
                 <div class="input-group">
-                    <label for="password">Confirm Password</label>
-                    <input type="password" id="password" name="password" required>
+                    <label for="register-email">Email</label>
+                    <div>
+                        <input type="text" id="register-email" name="email" placeholder="name@example.com" autocomplete="email">
+                        <!--required and email formatting is checked by js to prevent the ugly default browser error message-->
+                        <p class="error-message" id="register-email-errormsg"></p>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="register-password">Password</label>
+                    <div>
+                        <input type="password" id="register-password" name="password" autocomplete="new-password">
+                        <!--required is checked by js to prevent the ugly default browser error message-->
+                        <p class="error-message" id="register-password-errormsg"></p>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="register-password-confirm">Confirm Password</label>
+                    <div id="register-password-confirm-container">
+                        <input type="password" id="register-password-confirm" name="password" autocomplete="new-password">
+                        <!--required is checked by js to prevent the ugly default browser error message-->
+                        <p class="error-message" id="register-password-confirm-errormsg"></p>
+                    </div>
                 </div>
                 <button type="submit">Create account</button>
             </form>
