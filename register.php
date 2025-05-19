@@ -18,7 +18,7 @@
 
     <!-- load stylesheets -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/home.css">
+    <link rel="stylesheet" href="assets/css/auth.css">
 
     <!-- load fontend view logic -->
     <script src="assets/fe-logic/view.js" defer></script>
@@ -100,86 +100,38 @@
             </svg>
             Sign In
         </button>
-        <button onclick="location.href='register.php'">Register</button>
+        <button  onclick="location.href='login.php'">Register</button>
     </div>
     <div class="mobile-nav-background mobile-only" id="mobile-nav-background"></div>
     <main>
-        <div>
-            <div class="hero-container">
-                <h1>Recipe Cloud</h1>
-                <p>Discover, share, and rate delicious recipes from around the world</p>
-                <div>
-                    <button class="icon-button large-button" onclick="location.href='upload.php'">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus mr-2 h-4 w-4">
-                            <path d="M5 12h14"></path>
-                            <path d="M12 5v14"></path>
-                        </svg>
-                        Upload Recipe
-                    </button>
-                    <button class="secondary-button large-button" onclick="location.href='recipes.php'">
-                        Browse All Recipes
-                    </button>
+        <div class="auth-container">
+            <img src="assets/img/logo.svg" alt="Recipe Cloud Logo" class="logo" width="40" height="40">
+            <h1>Create an account</h1>
+            <p>Enter your information to create an account</p>
+            <form>
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required placeholder="JohnDoe">
                 </div>
-            </div>
-            <div class="featured-recipes-container">
-                <div class="featured-recipes-header">
-                    <h2>Featured Recipes</h2>
-                    <a href="recipes.php">View all</a>
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="name@example.com">
                 </div>
-                <div class="featured-recipes">
-                    <?php
-                    //TODO Fetch featured recipes from the database
-                    ?>
-                </div>
-            </div>
-            <div class="start-sharing-container">
-                <div class="start-sharing">
-                    <h2>Share Your Culinary Creations</h2>
-                    <p>Have a recipe that everyone loves? Share it with our community and get feedback from food enthusiasts.</p>
-                    <button class="medium-button" onclick="location.href='upload.php'">
-                        Start Sharing
-                    </button>
-                </div>
-                <div class="start-sharing-image">
+                <div class="input-group">
+                    <label for="password">Password</label>
                     <div>
-                        <img src="assets/img/logo.svg" alt="logo">
+                        <input type="password" id="password" name="password" required>
+                        <p>Password must be at least 8 characters long</p>
                     </div>
                 </div>
-            </div>
+                <div class="input-group">
+                    <label for="password">Confirm Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit">Create account</button>
+            </form>
+            <p class="auth-mode-switch">Already have an account? <a href="Login.php">Login</a></p>
 
-            <div class="how-to-container">
-                <h2>How it works</h2>
-                <div>
-                    <div class="how-to-step">
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-8 w-8 text-primary">
-                                <path d="M5 12h14"></path>
-                                <path d="M12 5v14"></path>
-                            </svg>
-                        </div>
-                        <h3>Upload</h3>
-                        <p>Share your favorite recipes with detailed instructions and photos</p>
-                    </div>
-                    <div class="how-to-step">
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8 text-primary">
-                                <path d="M12 20v-6M6 20V10M18 20V4"></path>
-                            </svg>
-                        </div>
-                        <h3>Discover</h3>
-                        <p>Find new recipes from chefs and home cooks around the world</p>
-                    </div>
-                    <div class="how-to-step">
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-8 w-8 text-primary">
-                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                            </svg>
-                        </div>
-                        <h3>Rate & Review</h3>
-                        <p>Give feedback on recipes you've tried and help others find the best ones</p>
-                    </div>
-                </div>
-            </div>
         </div>
     </main>
     <footer>
