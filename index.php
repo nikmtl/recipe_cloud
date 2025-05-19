@@ -28,9 +28,6 @@
 
     <!-- load fontend logic -->
     <script src="assets/fe-logic/view.js" defer></script>
-
-    <!-- load backend logic -->
-    <?php include 'be-logic/db.php'; ?>
 </head>
 
 <body>

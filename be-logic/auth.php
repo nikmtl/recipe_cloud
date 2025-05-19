@@ -1,0 +1,55 @@
+<?php
+require_once __DIR__ . '/db.php';
+
+if (isset($_POST['action']) && $_POST['action'] === 'register') {
+    registerUser($pdo);
+} elseif (isset($_POST['action']) && $_POST['action'] === 'login') {
+    loginUser($pdo);
+} else {
+    echo "Invalid action.";
+}
+
+function registerUser($pdo) {
+    $username = $_POST['register-username'];
+    $password = $_POST['register-password'];
+    $email = $_POST['register-email'];
+
+    // Hash the password
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    // Insert user into the database
+    $stmt = $pdo->prepare("INSERT INTO users (username, password_hash, email) VALUES (?, ?, ?)");
+    if ($stmt->execute([$username, $hashedPassword, $email])) {
+        echo "User registered successfully!";
+    } else {
+        echo "Error registering user.";
+    }
+}
+
+function loginUser($pdo) {
+    $username = $_POST['login-username'];
+    $password = $_POST['login-password'];
+
+    // Fetch user from the database
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
+    $stmt->execute([$username]);
+    $user = $stmt->fetch();
+
+    if ($user && password_verify($password, $user['password_hash'])) {
+        // Start session and set user ID
+        session_start();
+        $_SESSION['username'] = $user['username'];
+        echo "Login successful!";
+    } else {
+        echo "Invalid username or password.";
+    }
+}
+
+function logoutUser() {
+    session_start();
+    session_destroy();
+    header('Location: index.php');
+    exit;
+}
+
+?>

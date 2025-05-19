@@ -109,7 +109,8 @@
             <img src="assets/img/logo.svg" alt="Recipe Cloud Logo" class="logo" width="40" height="40">
             <h1>Welcome Back</h1>
             <p>Enter your credentials to access your account</p>
-            <form id="login-form">
+            <form id="login-form" method="POST" action="be-logic/auth.php">
+                <input type="hidden" name="action" value="login">
                 <div class="input-group">
                     <label for="login-username">Username</label>
                     <div> 
