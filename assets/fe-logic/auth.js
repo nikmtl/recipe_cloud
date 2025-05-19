@@ -33,6 +33,11 @@ if (registerForm) {
             event.preventDefault();
         }
 
+        if (emailField.value.length > 50) {
+            displayError(emailField, emailError, "Email must be shorter than 50 characters.");
+            event.preventDefault();
+        }
+
         if (passwordField.value.length < 8) {
             displayError(passwordField, passwordError, "Password must be longer than 8 characters.");
             displayError(passwordField);
