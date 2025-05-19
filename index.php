@@ -64,7 +64,13 @@
                 </div>
             <?php else: ?>
                 <div class=" desktop-only">
-                    <button></button> <!--TODO: Placeholder for user profile button -->
+                    <button class="secondary-button icon-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user h-4 w-4 mr-2">
+                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <?php echo $_SESSION["username"]; ?>
+                    </button>
                 </div>
             <?php endif; ?>
             <!-- Mobile Hamburger Menu Button -->

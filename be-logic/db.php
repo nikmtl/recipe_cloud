@@ -27,17 +27,6 @@ function connectToDatabase(){
 }
 
 
-/* Zugriff auf geschützte Seiten 
-session_start();
-if (!isset($_SESSION["user_id"])) {
-    header("Location: login.php");
-    exit;
-}
-// Nutzer ist eingeloggt – man kann $_SESSION["username"] verwenden
-echo "Willkommen, " . htmlspecialchars($_SESSION["username"]) . "!";
-*/
-
-
 
 /* Logout */
 function logout(){
