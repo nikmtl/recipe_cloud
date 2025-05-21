@@ -2,6 +2,7 @@
 require_once __DIR__ . '/db.php';
 
 // TODO: Add backend side input validation and sanitization
+// TODO: Add backend side error handling
 if (isset($_POST['action']) && $_POST['action'] === 'register') {
     registerUser($pdo);
 } elseif (isset($_POST['action']) && $_POST['action'] === 'login') {
@@ -20,6 +21,7 @@ function registerUser($pdo) {
     // Hash the password
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
+    //TODO: Check if username or email already exists
     // Insert user into the database
     $stmt = $pdo->prepare("INSERT INTO users (username, password_hash, email) VALUES (?, ?, ?)");
     if ($stmt->execute([$username, $hashedPassword, $email])) {

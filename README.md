@@ -35,22 +35,19 @@ Das Projekt dient dazu, praktische Erfahrungen mit **PHP** und **SQL** zu sammel
 
 ---
 
-## 🗃️ Datenbankmodell (aktuell)
+## 🗃️ Datenbankmodell
 
 **users:**  
 `username*(PK)*`, `email`, `password_hash`
 
 **recipes:**  
-`id *(PK)*`, `user_id *(FK)*`, `title`, `description`, `prep_time`, `cook_time`, `difficulty`,  `servings`,  `category_id *(FK)*`, `image_path`
+`id *(PK)*`, `user_id *(FK)*`, `title`, `description`, `prep_time`, `cook_time`, `difficulty`,  `servings`, `category`, `image_path`
 
 **instructions**
 `id *(PK)*`, `instruction`, `recipe_id *(FK)*`
 
 **ingredients:**
 `id *(PK)*`, `amount`, `unit`, `ingredient`, `recipe_id *(FK)*`
-
-**category:**  
-`id *(PK)*`, `name`
 
 **ratings:**  
 `id *(PK)*`, `user_id *(FK)*`, `recipe_id *(FK)*`, `rating`, `comment_text`, `created_at`

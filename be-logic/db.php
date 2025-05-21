@@ -31,6 +31,8 @@ function initiateDatabaseConnection(){
 }
 
 function initializeTables($pdo) {
+    //TODO: add more checks for tables to prevent wrong data in the database (e.g. check if the difficulty is between 1 and 5)
+    //TODO: change the category to be a part of the recipe table
     // Create users table if it doesn't exist
     $sql = "CREATE TABLE IF NOT EXISTS users (
         username VARCHAR(20) PRIMARY KEY,

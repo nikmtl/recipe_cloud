@@ -173,10 +173,10 @@
                 </div>
             </div>
             <div class="footer-links-container">
-                <h2>Connect</h2>
+                <h2>Contact</h2>
                 <div>
-                    <a href="https://github.com/Edamame04/recipe_cloud">GitHub</a>
-                    <a href="https://github.com/Edamame04/recipe_cloud/issues">Report a Bug</a>
+                    <a href="https://github.com/Edamame04/recipe_cloud" target="_blank">GitHub</a>
+                    <a href="https://github.com/Edamame04/recipe_cloud/issues" target="_blank">Report a Bug</a>
                 </div>
             </div>
         </div>
