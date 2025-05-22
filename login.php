@@ -117,8 +117,7 @@
         <?php endif; ?>
     </div>
     <div class="mobile-nav-background mobile-only" id="mobile-nav-background"></div>
-    <main>
-        <div class="auth-container">
+    <main>        <div class="auth-container">
             <img src="assets/img/logo.svg" alt="Recipe Cloud Logo" class="logo" width="40" height="40">
             <h1>Welcome Back</h1>
             <?php
@@ -128,6 +127,11 @@
             } else {
                 echo '<p>Enter your credentials to access your account</p>';
             }
+            
+            // Display any general errors from backend validation
+            if (isset($_GET['errors']) && isset($_GET['errors']['general'])) {
+                echo '<p class="error-message">' . htmlspecialchars($_GET['errors']['general']) . '</p>';
+            }
             ?>
             <form id="login-form" method="POST" action="be-logic/auth.php">
                 <input type="hidden" name="action" value="login">
@@ -136,7 +140,11 @@
                     <div>
                         <input type="text" id="login-username" name="login-username" autocomplete="username" placeholder="JohnDoe">
                         <!--required is checked by js to prevent the ugly default browser error message-->
-                        <p class="error-message" id="login-username-errormsg"></p>
+                        <p class="error-message" id="login-username-errormsg">
+                            <?php if (isset($_GET['errors']) && isset($_GET['errors']['username'])) {
+                                echo htmlspecialchars($_GET['errors']['username']);
+                            } ?>
+                        </p>
                     </div>
                 </div>
                 <div class="input-group">
@@ -144,7 +152,11 @@
                     <div>
                         <input type="password" id="login-password" name="login-password" autocomplete="current-password">
                         <!--required is checked by js to prevent the ugly default browser error message-->
-                        <p class="error-message" id="login-password-errormsg"></p>
+                        <p class="error-message" id="login-password-errormsg">
+                            <?php if (isset($_GET['errors']) && isset($_GET['errors']['password'])) {
+                                echo htmlspecialchars($_GET['errors']['password']);
+                            } ?>
+                        </p>
                     </div>
                 </div>
                 <button type="submit">Sign in</button>
