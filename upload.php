@@ -123,15 +123,17 @@ require_once 'be-logic\protected_page.php';
     <div class="mobile-nav-background mobile-only" id="mobile-nav-background"></div>
     <main>
         <div class="upload-container">
-            <img src="assets/img/logo.svg" alt="Recipe Cloud Logo" class="logo" width="40" height="40">
-            <h2>Upload New Recipe</h2>
-            <p>Share your culinary masterpiece with the world</p>
+            <div class="upload-header">
+                <img src="assets/img/logo.svg" alt="Recipe Cloud Logo" width="24" height="24">
+                <h1>Upload New Recipe</h1>
+            </div>
+            <p class="upload-header-subtitle">Share your culinary masterpiece with the world</p>
 
             <div class="section-taps">
-                <button class="section-tap">Basic Info</button>
-                <button class="section-tap">Ingredients</button>
-                <button class="section-tap">Instructions</button>
-                <button class="section-tap">Media & Publish</button>
+                <button class="active-tap">Basic Info</button>
+                <button>Ingredients</button>
+                <button>Instructions</button>
+                <button>Media & Publish</button>
             </div>
             <form method="POST" action="be-logic/upload.php" enctype="multipart/form-data">
                 <div id="basic-info" class="section">
