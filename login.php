@@ -121,12 +121,19 @@
         <div class="auth-container">
             <img src="assets/img/logo.svg" alt="Recipe Cloud Logo" class="logo" width="40" height="40">
             <h1>Welcome Back</h1>
-            <p>Enter your credentials to access your account</p>
+            <?php
+            // Display info message if user want to do something that requires login
+            if (isset($_GET['msg'])) {
+                echo '<p>' . htmlspecialchars($_GET['msg']) . '</p>';
+            } else {
+                echo '<p>Enter your credentials to access your account</p>';
+            }
+            ?>
             <form id="login-form" method="POST" action="be-logic/auth.php">
                 <input type="hidden" name="action" value="login">
                 <div class="input-group">
                     <label for="login-username">Username</label>
-                    <div> 
+                    <div>
                         <input type="text" id="login-username" name="login-username" autocomplete="username" placeholder="JohnDoe">
                         <!--required is checked by js to prevent the ugly default browser error message-->
                         <p class="error-message" id="login-username-errormsg"></p>
@@ -135,7 +142,7 @@
                 <div class="input-group">
                     <label for="login-password">Password</label>
                     <div>
-                        <input type="password" id="login-password" name="login-password" autocomplete="current-password"> 
+                        <input type="password" id="login-password" name="login-password" autocomplete="current-password">
                         <!--required is checked by js to prevent the ugly default browser error message-->
                         <p class="error-message" id="login-password-errormsg"></p>
                     </div>
