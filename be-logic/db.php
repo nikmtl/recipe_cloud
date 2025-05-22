@@ -31,20 +31,11 @@ function initiateDatabaseConnection(){
 }
 
 function initializeTables($pdo) {
-    //TODO: add more checks for tables to prevent wrong data in the database (e.g. check if the difficulty is between 1 and 5)
-    //TODO: change the category to be a part of the recipe table
     // Create users table if it doesn't exist
     $sql = "CREATE TABLE IF NOT EXISTS users (
         username VARCHAR(20) PRIMARY KEY,
         email VARCHAR(50) NOT NULL UNIQUE,
         password_hash VARCHAR(255) NOT NULL
-    )";
-    $pdo->exec($sql);
-
-    // Create category table
-    $sql = "CREATE TABLE IF NOT EXISTS category (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        name VARCHAR(50) NOT NULL
     )";
     $pdo->exec($sql);
 
@@ -54,14 +45,13 @@ function initializeTables($pdo) {
         user_id VARCHAR(20),
         title VARCHAR(100) NOT NULL,
         description TEXT,
-        prep_time INT,
-        cook_time INT,
-        difficulty INT,
-        servings INT,
-        category_id INT,
+        prep_time_min INT,
+        cook_time_min INT,
+        difficulty INT CHECK (difficulty >= 1 AND difficulty <= 3),
+        servings INT CHECK (servings > 0),
+        category INT CHECK (category = 'appetizer' OR category = 'main' OR category = 'dessert' OR category = 'snack' OR category = 'drink' OR category = 'soup' OR category = 'salad' OR category = 'side' OR category = 'baking' OR category = 'sauce'),
         image_path VARCHAR(255),
-        FOREIGN KEY (user_id) REFERENCES users(username) ON DELETE SET NULL,
-        FOREIGN KEY (category_id) REFERENCES category(id) ON DELETE SET NULL
+        FOREIGN KEY (user_id) REFERENCES users(username) ON DELETE SET NULL
     )";
     $pdo->exec($sql);
 
@@ -77,8 +67,8 @@ function initializeTables($pdo) {
     // Create ingredients table
     $sql = "CREATE TABLE IF NOT EXISTS ingredients (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        amount VARCHAR(20),
-        unit VARCHAR(20),
+        amount INT,
+        unit VARCHAR(20) CHECK (unit = 'g' OR unit = 'kg' OR unit = 'ml' OR unit = 'l' OR unit = 'cup' OR unit = 'tbsp' OR unit = 'tsp' OR unit = 'oz' OR unit = 'lb'),
         ingredient VARCHAR(100) NOT NULL,
         recipe_id INT NOT NULL,
         FOREIGN KEY (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE
@@ -109,3 +99,14 @@ function initializeTables($pdo) {
     $pdo->exec($sql);
 }
 
+/*
+Issue	Status	Recommendation
+SQL Injection	Safe	Use prepared statements
+Password Hashing	Safe	Use password_hash()
+Input Validation	Missing	Validate/sanitize all input
+Duplicate Check	Missing	Check username/email before insert
+CSRF Protection	Missing	Add CSRF tokens
+XSS Protection	Missing	Escape output
+Error Handling	Weak	Log errors, show generic messages
+Session Security	Basic	Regenerate session ID, use user ID
+*/
