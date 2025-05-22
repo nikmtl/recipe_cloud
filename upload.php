@@ -1,5 +1,5 @@
 <?php
-    require_once 'be-logic\protected_page.php'; 
+require_once 'be-logic\protected_page.php';
 ?>
 
 
@@ -23,6 +23,7 @@
 
     <!-- load stylesheets -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/upload.css">
 
     <!-- load fontend view logic -->
     <script src="assets/fe-logic/view.js" defer></script>
@@ -121,7 +122,158 @@
     </div>
     <div class="mobile-nav-background mobile-only" id="mobile-nav-background"></div>
     <main>
+        <div class="upload-container">
+            <img src="assets/img/logo.svg" alt="Recipe Cloud Logo" class="logo" width="40" height="40">
+            <h2>Upload New Recipe</h2>
+            <p>Share your culinary masterpiece with the world</p>
 
+            <div class="section-taps">
+                <button class="section-tap">Basic Info</button>
+                <button class="section-tap">Ingredients</button>
+                <button class="section-tap">Instructions</button>
+                <button class="section-tap">Media & Publish</button>
+            </div>
+            <form method="POST" action="be-logic/upload.php" enctype="multipart/form-data">
+                <div id="basic-info" class="section">
+                    <h3>Basic Information</h3>
+                    <p>Let's start with the basic details of your recipe</p>
+                    <div class="input-group">
+                        <label for="recipe-title">Recipe Title</label>
+                        <input type="text" id="recipe-title" name="recipe-title" placeholder="e.g., Spaghetti Bolognese">
+                    </div>
+                    <div class="input-group">
+                        <label for="recipe-description">Description</label>
+                        <textarea id="recipe-description" name="recipe-description" placeholder="e.g., A classic Italian pasta dish with a rich and savory sauce."></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label for="recipe-prep-time">Preparation Time</label>
+                        <input type="text" id="recipe-prep-time" name="recipe-prep-time" placeholder="e.g., 30 minutes">
+                        <label for="recipe-cook-time">Cooking Time</label>
+                        <input type="text" id="recipe-cook-time" name="recipe-cook-time" placeholder="e.g., 1 hour">
+                        <label for="recipe-difficulty">Difficulty</label>
+                        <select id="recipe-difficulty" name="recipe-difficulty">
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="recipe-servings">Servings</label>
+                        <input type="number" id="recipe-servings" name="recipe-servings" placeholder="e.g., 4">
+                        <label for="recipe-category">Category</label>
+                        <select id="recipe-category" name="recipe-category">
+                            <option value="breakfast">Breakfast</option>
+
+                            <option value="appetizer">Appetizer</option>
+                            <option value="salad">Salad and Veggies</option>
+                            <option value="soup">Soup</option>
+                            <option value="sandwich">Sandwich</option>
+
+                            <option value="main">Main Course</option>
+                            <option value="side">Side Dish</option>
+
+                            <option value="snack">Snack and Dips</option>
+
+                            <option value="dessert">Dessert</option>
+                            <option value="baking">Baking</option>
+
+                            <option value="sauce">Sauce</option>
+
+                            <option value="drink">Drink</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="navigation-buttons"> 
+                    <button class="primary">Next: Ingredients</button>
+                </div>
+
+                <div id="ingredients" class="section">
+                    <h3>Ingredients</h3>
+                    <p>List all ingredients needed for your recipe</p>
+                    <div class="input-group">
+                        <input type="text" id="ingredient-amount" name="ingredient-amount" placeholder="e.g., 200">
+                        <select id="ingredient-unit" name="ingredient-unit">
+                            <option value="g">g</option>
+                            <option value="kg">kg</option>
+                            <option value="ml">ml</option>
+                            <option value="l">l</option>
+                            <option value="cup">cup</option>
+                            <option value="tbsp">tbsp</option>
+                            <option value="tsp">tsp</option>
+                            <option value="oz">oz</option>
+                            <option value="lb">lb</option>
+                        </select>
+                        <input type="text" id="ingredient-name" name="ingredient-name" placeholder="e.g., Spaghetti">
+                        <button> Add </button>
+                    </div>
+                    <div id="ingredient-list">
+                        <!-- List of added ingredients will be displayed here -->
+                    </div>
+                    <div class="tips">
+                        <p>Tips for adding ingredients:</p>
+                        <ul>
+                            <li>Add one ingredient per line</li>
+                            <li>Specify preparation if needed (e.g., chopped, minced)</li>
+                            <li>List ingredients in the order they will be used</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="navigation-buttons"> 
+                    <button class="secondary-button" type="button">Back: Basic Info</button>
+                    <button>Next: Instructions</button>
+                </div>
+
+                <div id="instructions" class="section">
+                    <h3>Instructions</h3>
+                    <p>Provide step-by-step instructions for your recipe</p>
+                    <div class="input-group">
+                        <textarea id="instruction-step" name="instruction-step" placeholder="e.g., Boil water in a large pot."></textarea>
+                        <button> Add Step</button>
+                    </div>
+                    <div id="instruction-list">
+                        <!-- List of added instructions will be displayed here -->
+                    </div>
+                    <div class="tips">
+                        <p>Tips for writing instructions:</p>
+                        <ul>
+                            <li>Add one step per line</li>
+                            <li>Be clear and concise</li>
+                            <li>Include cooking times and temperatures if applicable</li>
+                            <li>Mention visual cues (e.g., "until golden brown")</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="navigation-buttons"> 
+                    <button class="secondary-button" type="button">Back: Ingredients</button>
+                    <button>Next: Media & Publish</button>
+                </div>
+
+                <div id="media" class="section">
+                    <h3>Media Upload</h3>
+                    <p>Upload a image of your finished dish</p>
+                    <div class="input-group">
+                        <label for="recipe-image">Upload Image</label>
+                        <input type="file" id="recipe-image" name="recipe-image" accept="image/*">
+                    </div>
+                    <div class="tips">
+                        <p>Before publishing:</p>
+                        <ul>
+                            <li>Double-check all ingredients and measurements</li>
+                            <li>Ensure instructions are clear and complete</li>
+                            <li>Add a high-quality photo if possible</li>
+                            <li>Include any special tips or variations</li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="navigation-buttons"> 
+                    <button class="secondary-button" type="button">Back: Instructions</button>
+                    <button type="submit">Publish Recipe</button>
+                </div>
+            </form>
+
+        </div>
     </main>
     <footer>
         <div>

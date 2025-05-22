@@ -8,7 +8,8 @@ $pdo = initiateDatabaseConnection();
 
 
 
-function initiateDatabaseConnection(){
+function initiateDatabaseConnection()
+{
     $host = 'localhost';
     $db   = 'recipe_cloud';
     $user = 'root';
@@ -17,7 +18,7 @@ function initiateDatabaseConnection(){
 
     $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
     $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
-    
+
     try {
         $pdo = new PDO($dsn, $user, $pass, $options);
         //The PHO has the benefit that the connection is automatically closed when the script ends.
@@ -30,7 +31,8 @@ function initiateDatabaseConnection(){
     return $pdo;
 }
 
-function initializeTables($pdo) {
+function initializeTables($pdo)
+{
     // Create users table if it doesn't exist
     $sql = "CREATE TABLE IF NOT EXISTS users (
         username VARCHAR(20) PRIMARY KEY,
@@ -49,7 +51,7 @@ function initializeTables($pdo) {
         cook_time_min INT,
         difficulty INT CHECK (difficulty >= 1 AND difficulty <= 3),
         servings INT CHECK (servings > 0),
-        category INT CHECK (category = 'appetizer' OR category = 'main' OR category = 'dessert' OR category = 'snack' OR category = 'drink' OR category = 'soup' OR category = 'salad' OR category = 'side' OR category = 'baking' OR category = 'sauce'),
+        category INT CHECK CHECK (category = 'breakfast' OR category = 'appetizer' OR category = 'salad' OR category = 'soup' OR category = 'sandwich' OR category = 'main' OR category = 'side' OR category = 'snack' OR category = 'dessert' OR category = 'baking' OR category = 'sauce' OR category = 'drink'),
         image_path VARCHAR(255),
         FOREIGN KEY (user_id) REFERENCES users(username) ON DELETE SET NULL
     )";
