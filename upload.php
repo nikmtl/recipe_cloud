@@ -150,25 +150,25 @@ require_once 'be-logic\protected_page.php';
                     </div>
                     <div class="input-line">
                         <div class="input-group">
-                            <label for="recipe-prep-time">Preparation Time</label>
-                            <input type="text" id="recipe-prep-time" name="recipe-prep-time" placeholder="e.g., 30 minutes">
+                            <label for="recipe-prep-time">Preparation Time (minutes)</label>
+                            <input type="number" id="recipe-prep-time" name="recipe-prep-time" min="0">
                         </div>
                         <div class="input-group">
-                            <label for="recipe-cook-time">Cooking Time</label>
-                            <input type="text" id="recipe-cook-time" name="recipe-cook-time" placeholder="e.g., 1 hour">
+                            <label for="recipe-cook-time">Cooking Time  (minutes)</label>
+                            <input type="number" id="recipe-cook-time" name="recipe-cook-time" min="0">
                         </div>
                         <div class="input-group">
                             <label for="recipe-difficulty">Difficulty</label>
                             <select id="recipe-difficulty" name="recipe-difficulty">
-                                <option value="easy">Easy</option>
-                                <option value="medium">Medium</option>
-                                <option value="hard">Hard</option>
+                                <option value="1">Easy</option>
+                                <option value="2">Medium</option>
+                                <option value="3">Hard</option>
                             </select>
                         </div>
                     </div>
                     <div>
                         <label for="recipe-servings">Servings</label>
-                        <input type="number" id="recipe-servings" name="recipe-servings" placeholder="e.g., 4">
+                        <input type="number" id="recipe-servings" name="recipe-servings" min="1">
                         <label for="recipe-category">Category</label>
                         <select id="recipe-category" name="recipe-category">
                             <option value="breakfast">Breakfast</option>
