@@ -119,6 +119,7 @@ form input {
     border-radius: calc(0.5rem - 2px);
     width: calc(100% - 2rem);
     font-size: 0.875rem;
+    box-sizing: content-box;
 }
 
 form input:focus {

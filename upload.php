@@ -27,6 +27,7 @@ require_once 'be-logic\protected_page.php';
 
     <!-- load fontend view logic -->
     <script src="assets/fe-logic/view.js" defer></script>
+    <script src="assets/fe-logic/upload.js" defer></script>
 
     <!-- load Inter font from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -130,13 +131,13 @@ require_once 'be-logic\protected_page.php';
             <p class="upload-header-subtitle">Share your culinary masterpiece with the world</p>
 
             <div class="section-taps">
-                <button class="active-tap">Basic Info</button>
-                <button>Ingredients</button>
-                <button>Instructions</button>
-                <button>Media & Publish</button>
+                <button id="tap-header-basic-info" class="tap-header" onclick="openTap('tap-basic-info','tap-header-basic-info')">Basic Info</button>
+                <button id="tap-header-ingredients" class="tap-header" onclick="openTap('tap-ingredients', 'tap-header-ingredients')">Ingredients</button>
+                <button id="tap-header-instructions" class="tap-header" onclick="openTap('tap-instructions', 'tap-header-instructions')">Instructions</button>
+                <button id="tap-header-media-and-publish" class="tap-header" onclick="openTap('tap-media-and-publish', 'tap-header-media-and-publish')">Media & Publish</button>
             </div>
             <form method="POST" action="be-logic/upload.php" enctype="multipart/form-data">
-                <div id="basic-info" class="section">
+                <div id="tap-basic-info" class="tap">
                     <h3>Basic Information</h3>
                     <p>Let's start with the basic details of your recipe</p>
                     <div class="input-group">
@@ -147,17 +148,23 @@ require_once 'be-logic\protected_page.php';
                         <label for="recipe-description">Description</label>
                         <textarea id="recipe-description" name="recipe-description" placeholder="e.g., A classic Italian pasta dish with a rich and savory sauce."></textarea>
                     </div>
-                    <div class="input-group">
-                        <label for="recipe-prep-time">Preparation Time</label>
-                        <input type="text" id="recipe-prep-time" name="recipe-prep-time" placeholder="e.g., 30 minutes">
-                        <label for="recipe-cook-time">Cooking Time</label>
-                        <input type="text" id="recipe-cook-time" name="recipe-cook-time" placeholder="e.g., 1 hour">
-                        <label for="recipe-difficulty">Difficulty</label>
-                        <select id="recipe-difficulty" name="recipe-difficulty">
-                            <option value="easy">Easy</option>
-                            <option value="medium">Medium</option>
-                            <option value="hard">Hard</option>
-                        </select>
+                    <div class="input-line">
+                        <div class="input-group">
+                            <label for="recipe-prep-time">Preparation Time</label>
+                            <input type="text" id="recipe-prep-time" name="recipe-prep-time" placeholder="e.g., 30 minutes">
+                        </div>
+                        <div class="input-group">
+                            <label for="recipe-cook-time">Cooking Time</label>
+                            <input type="text" id="recipe-cook-time" name="recipe-cook-time" placeholder="e.g., 1 hour">
+                        </div>
+                        <div class="input-group">
+                            <label for="recipe-difficulty">Difficulty</label>
+                            <select id="recipe-difficulty" name="recipe-difficulty">
+                                <option value="easy">Easy</option>
+                                <option value="medium">Medium</option>
+                                <option value="hard">Hard</option>
+                            </select>
+                        </div>
                     </div>
                     <div>
                         <label for="recipe-servings">Servings</label>
@@ -185,15 +192,15 @@ require_once 'be-logic\protected_page.php';
 
                         </select>
                     </div>
-                </div>
-                <div class="navigation-buttons"> 
-                    <button class="primary">Next: Ingredients</button>
+                    <div class="navigation-buttons">
+                        <button class="primary" type="button" onclick="openTap('tap-ingredients', 'tap-header-ingredients')">Next: Ingredients</button>
+                    </div>
                 </div>
 
-                <div id="ingredients" class="section">
+                <div id="tap-ingredients" class="tap">
                     <h3>Ingredients</h3>
                     <p>List all ingredients needed for your recipe</p>
-                    <div class="input-group">
+                    <div class="input-line">
                         <input type="text" id="ingredient-amount" name="ingredient-amount" placeholder="e.g., 200">
                         <select id="ingredient-unit" name="ingredient-unit">
                             <option value="g">g</option>
@@ -205,9 +212,8 @@ require_once 'be-logic\protected_page.php';
                             <option value="tsp">tsp</option>
                             <option value="oz">oz</option>
                             <option value="lb">lb</option>
-                        </select>
-                        <input type="text" id="ingredient-name" name="ingredient-name" placeholder="e.g., Spaghetti">
-                        <button> Add </button>
+                        </select> <input type="text" id="ingredient-name" name="ingredient-name" placeholder="e.g., Spaghetti">
+                        <button type="button"> Add </button>
                     </div>
                     <div id="ingredient-list">
                         <!-- List of added ingredients will be displayed here -->
@@ -220,18 +226,17 @@ require_once 'be-logic\protected_page.php';
                             <li>List ingredients in the order they will be used</li>
                         </ul>
                     </div>
-                </div>
-                <div class="navigation-buttons"> 
-                    <button class="secondary-button" type="button">Back: Basic Info</button>
-                    <button>Next: Instructions</button>
+                    <div class="navigation-buttons">
+                        <button class="secondary-button" type="button" onclick="openTap('tap-basic-info','tap-header-basic-info')">Back: Basic Info</button>
+                        <button type="button" onclick="openTap('tap-instructions', 'tap-header-instructions')">Next: Instructions</button>
+                    </div>
                 </div>
 
-                <div id="instructions" class="section">
+                <div id="tap-instructions" class="tap">
                     <h3>Instructions</h3>
                     <p>Provide step-by-step instructions for your recipe</p>
-                    <div class="input-group">
-                        <textarea id="instruction-step" name="instruction-step" placeholder="e.g., Boil water in a large pot."></textarea>
-                        <button> Add Step</button>
+                    <div class="input-line"> <textarea id="instruction-step" name="instruction-step" placeholder="e.g., Boil water in a large pot."></textarea>
+                        <button type="button"> Add Step</button>
                     </div>
                     <div id="instruction-list">
                         <!-- List of added instructions will be displayed here -->
@@ -245,13 +250,13 @@ require_once 'be-logic\protected_page.php';
                             <li>Mention visual cues (e.g., "until golden brown")</li>
                         </ul>
                     </div>
-                </div>
-                <div class="navigation-buttons"> 
-                    <button class="secondary-button" type="button">Back: Ingredients</button>
-                    <button>Next: Media & Publish</button>
+                    <div class="navigation-buttons">
+                        <button class="secondary-button" type="button" onclick="openTap('tap-ingredients', 'tap-header-ingredients')">Back: Ingredients</button>
+                        <button type="button" onclick="openTap('tap-media-and-publish', 'tap-header-media-and-publish')">Next: Media & Publish</button>
+                    </div>
                 </div>
 
-                <div id="media" class="section">
+                <div id="tap-media-and-publish" class="tap">
                     <h3>Media Upload</h3>
                     <p>Upload a image of your finished dish</p>
                     <div class="input-group">
@@ -268,13 +273,12 @@ require_once 'be-logic\protected_page.php';
                         </ul>
 
                     </div>
-                </div>
-                <div class="navigation-buttons"> 
-                    <button class="secondary-button" type="button">Back: Instructions</button>
-                    <button type="submit">Publish Recipe</button>
+                    <div class="navigation-buttons">
+                        <button type="button" onclick="openTap('tap-instructions', 'tap-header-instructions')" class="secondary-button">Back: Instructions</button>
+                        <button type="submit">Publish Recipe</button>
+                    </div>
                 </div>
             </form>
-
         </div>
     </main>
     <footer>

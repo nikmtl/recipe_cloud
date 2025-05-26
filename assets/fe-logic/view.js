@@ -77,3 +77,34 @@ function handleOutsideClick(event) {
         }
     }
 }
+
+
+/* logic for the tap view */
+function openTap(tapId, headerId) {
+    const tap = document.querySelector(`#${tapId}`);
+    const otherTaps = document.querySelectorAll('.tap');
+
+    const header = document.querySelector(`#${headerId}`);
+    const otherHeaders = document.querySelectorAll('.tap-header');
+
+    header.classList.add('active-tap');
+    otherHeaders.forEach(otherHeader => {
+        if (otherHeader.id !== headerId) {
+            otherHeader.classList.remove('active-tap');
+        }
+    });
+    
+    if (tap) {
+        tap.style.display = 'block';
+        contentOverlay.style.display = 'block';
+        otherTaps.forEach(otherTap => {
+            if (otherTap.id !== tapId) {
+                otherTap.style.display = 'none';
+            }
+        });
+
+    } else {
+        console.error(`Tap with ID ${tapId} not found.`);
+    }
+    
+}
