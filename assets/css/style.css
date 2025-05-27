@@ -24,7 +24,8 @@
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     height: 100%;
 }
 
@@ -167,7 +168,7 @@ form button {
     width: 100%;
 }
 
-.input-line{
+.input-line {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -178,7 +179,7 @@ form button {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    width:  100%;
+    width: 100%;
 }
 
 .input-group label {
@@ -193,7 +194,7 @@ form button {
     gap: 0.25rem;
 }
 
-.input-subgroup select{
+.input-subgroup select {
     width: fit-content;
 }
 
@@ -206,6 +207,9 @@ main {
     justify-content: center;
     align-items: center;
     flex: 1 0 auto;
+    position: relative;
+    z-index: 1;
+    /* Lower z-index than header and mobile nav */
 }
 
 main div {
@@ -225,8 +229,16 @@ main div div {
 }
 
 @media (max-width: 700px) {
-    * {
+
+    html,
+    body {
         overflow-x: hidden;
+    }
+
+    /* Ensure mobile nav isn't affected by overflow hidden */
+    .mobile-nav,
+    .mobile-nav-background {
+        overflow: visible !important;
     }
 
     .desktop-only {
@@ -241,6 +253,9 @@ main div div {
         gap: 0;
     }
 
+    #hamburger-icon:focus {
+        border: none;
+    }
 
 }
 
@@ -248,7 +263,8 @@ main div div {
 
 /*header styles*/
 header {
-    z-index: 100;
+    z-index: 95;
+    /* High z-index but lower than mobile-nav */
     position: relative;
     display: flex;
     justify-content: center;
@@ -301,8 +317,12 @@ header form {
 @media (max-width: 700px) {
     .mobile-nav {
         z-index: 100;
+        /* Keep highest z-index */
         display: none;
         position: absolute;
+        top: 57px;
+        /* Position it right below the header */
+        left: 0;
         background-color: var(--background-color);
         width: 100vw;
         box-sizing: border-box;
@@ -312,6 +332,8 @@ header form {
         border-bottom: 1px solid var(--border-color);
         gap: 0.5rem;
         padding: 1rem 16px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        /* Add shadow for better visibility */
     }
 
     .mobile-nav button {
@@ -336,7 +358,8 @@ header form {
         height: 100vh;
         /* Use viewport height to cover the entire screen */
         background-color: rgba(0, 0, 0, 0.5);
-        z-index: 50;
+        z-index: 90;
+        /* Higher than header but lower than mobile-nav */
         display: none;
         justify-content: center;
         align-items: center;
@@ -470,9 +493,9 @@ footer div div {
     font-size: 0.875rem;
 }
 
-.section-taps .active-tap{
+.section-taps .active-tap {
     color: var(--text-color);
     background-color: var(--background-color) !important;
-    border-radius: calc(0.5rem  - 6px);
+    border-radius: calc(0.5rem - 6px);
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
 }

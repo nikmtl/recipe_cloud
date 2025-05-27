@@ -5,9 +5,23 @@ It includes validation for the form inputs based on database constraints
 and provides frontend user feedback for invalid inputs.
 */
 
-// Open the first tab by default
+// Open the first tab by default without showing overlay
 window.addEventListener('load', function() {
-  openTap('tap-basic-info','tap-header-basic-info');
+  // Initialize first tab without showing the overlay
+  const tap = document.querySelector('#tap-basic-info');
+  const header = document.querySelector('#tap-header-basic-info');
+  
+  if (tap && header) {
+    header.classList.add('active-tap');
+    tap.style.display = 'block';
+    
+    // Hide all other taps
+    document.querySelectorAll('.tap').forEach(otherTap => {
+      if (otherTap.id !== 'tap-basic-info') {
+        otherTap.style.display = 'none';
+      }
+    });
+  }
 });
 
 // Recipe form validation

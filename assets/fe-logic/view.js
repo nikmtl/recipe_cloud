@@ -40,6 +40,7 @@ function closeMobileMenu() {
         hamburgerIcon.innerHTML = hamburgerSVG;
         contentOverlay.style.display = 'none';
         removeMenuEventListeners();
+        document.body.style.overflow = ''; // Restore page scrolling when menu is closed
     }
 }
 
@@ -50,6 +51,7 @@ function openMobileMenu() {
         hamburgerIcon.innerHTML = closeSVG;
         contentOverlay.style.display = 'block';
         addMenuEventListeners();
+        document.body.style.overflow = 'hidden'; // Prevent page scrolling when menu is open
     }
 }
 
@@ -96,7 +98,6 @@ function openTap(tapId, headerId) {
     
     if (tap) {
         tap.style.display = 'block';
-        contentOverlay.style.display = 'block';
         otherTaps.forEach(otherTap => {
             if (otherTap.id !== tapId) {
                 otherTap.style.display = 'none';
