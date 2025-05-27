@@ -1,0 +1,91 @@
+/* Image upload component styles */
+.image-upload-container {
+    border: 2px dashed var(--border-color);
+    border-radius: 0.5rem;
+    padding: 2rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.image-upload-container.highlight {
+    border-color: var(--primary-color);
+    background-color: var(--hover-color);
+}
+
+.image-upload-container svg {
+    color: var(--secondary-text-color);
+    margin-bottom: 0.5rem;
+}
+
+.image-upload-container p {
+    margin-bottom: 0.5rem !important;
+    font-weight: 500;
+}
+
+.image-upload-container .upload-info {
+    color: var(--secondary-text-color);
+    font-size: 0.875rem;
+}
+
+.hidden-file-input {
+    display: none;
+}
+
+.choose-file-btn {
+    background-color: var(--foreground-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+}
+
+.choose-file-btn:hover {
+    background-color: var(--hover-color);
+}
+
+/* Preview container for the selected image */
+.image-preview-container {
+    margin-top: 1rem;
+    width: 100%;
+    display: none; /* Hidden by default */
+    position: relative;
+}
+
+.image-preview-container img {
+    max-width: 100%;
+    max-height: 250px;
+    border-radius: 0.5rem;
+    object-fit: cover;
+}
+
+/* Remove button for the image */
+.remove-image-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #ff4d4d;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.remove-image-btn:hover {
+    background-color: rgba(255, 255, 255, 1);
+    color: #ff0000;
+}

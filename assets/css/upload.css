@@ -1,3 +1,4 @@
+/* Styles for the upload page title and subtitle */
 .upload-container{
     max-width: 56rem;
     padding: 4rem 1rem;
@@ -22,6 +23,104 @@
     margin-bottom: 1.5rem;
     color: var(--secondary-text-color);
 }
+/* Styles for the upload page title and subtitle end*/
+
+/* Specific styles for the upload form */
+/*chage form border to be handeld by the upload-tap-body class to enable the naviagtion buttons to be outside the form*/
+.upload-form{
+    border: none;
+    padding: 0;
+}
+
+.upload-tap-body{
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;    
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* styles for the title inside the upload form */
+.upload-tap-body h3{
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.upload-tap-body p{
+    color: var(--secondary-text-color);
+    font-size: 0.875rem;
+    margin-top: 6px;
+}
+
+/* styles for the upload input inputs */
+.upload-input-input{
+    gap: 10px;
+}
+
+.upload-input-input button{
+    width: fit-content;
+}
+
+#ingredient-amount{
+    width: 90px;
+}
+
+#ingredient-unit{
+    width: fit-content;
+}
+
+#instruction-step-input textarea{
+    resize: none;
+}
+
+#instruction-step-input button{
+    height: 100px;
+    width: 150px;
+}
 
 
 
+/*styles for the tips section inside the upload form */
+.tips {
+    border-radius: calc(0.5rem - 2px);
+    padding: 1rem;
+    background-color: var(--foreground-color);
+}
+
+.tips h4 {
+    font-size: inherit;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.tips ul{
+    list-style: inside;
+}
+
+.tips ul li {
+    color: var(--secondary-text-color);
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+/* styles for the navigation buttons at the bottom of the upload form */
+.navigation-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.navigation-buttons:has(button:only-child) {
+    justify-content: flex-end;
+}
+
+.navigation-buttons button{
+    width: fit-content;
+}
+
+
+/* Specific styles for the upload form end*/
