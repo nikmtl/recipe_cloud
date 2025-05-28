@@ -1,6 +1,11 @@
 <?php
 require_once __DIR__ . '/db.php';
 
+// Initialize session if not already started
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 // Process actions
 if (isset($_POST['action']) && $_POST['action'] === 'register') {
     registerUser($pdo);
@@ -74,8 +79,7 @@ function registerUser($pdo) {
     
     try {
         if ($stmt->execute([$username, $hashedPassword, $email])) {
-            // Start session and set user ID
-            session_start();
+            // Set user ID in session (session already started at top)
             $_SESSION['username'] = $username;
             header('Location: ../profile.php?u=' . $_SESSION["username"]);
             exit;
@@ -128,8 +132,7 @@ function loginUser($pdo) {
         header('Location: ../login.php?' . $errorQuery);
         exit;
     } else {
-        // Start session and set user ID
-        session_start();
+        // Set user ID in session (session already started at top)
         $_SESSION['username'] = $username;
         header('Location: ../profile.php?u=' . $_SESSION["username"]);
         exit;
@@ -137,7 +140,7 @@ function loginUser($pdo) {
 }
 
 function logoutUser() {
-    session_start();
+    // Session already started at top
     session_destroy();
     header('Location: ../index.php');
     exit;

@@ -7,21 +7,8 @@ and provides frontend user feedback for invalid inputs.
 
 // Open the first tab by default without showing overlay
 window.addEventListener('load', function() {
-  // Initialize first tab without showing the overlay
-  const tap = document.querySelector('#tap-basic-info');
-  const header = document.querySelector('#tap-header-basic-info');
-  
-  if (tap && header) {
-    header.classList.add('active-tap');
-    tap.style.display = 'block';
-    
-    // Hide all other taps
-    document.querySelectorAll('.tap').forEach(otherTap => {
-      if (otherTap.id !== 'tap-basic-info') {
-        otherTap.style.display = 'none';
-      }
-    });
-  }
+  openTap('tap-basic-info','tap-header-basic-info');
+  console.log("Recipe upload form loaded successfully.");
 });
 
 // Recipe form validation
