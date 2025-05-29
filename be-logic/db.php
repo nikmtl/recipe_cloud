@@ -35,9 +35,14 @@ function initializeTables($pdo)
 {
     // Create users table if it doesn't exist
     $sql = "CREATE TABLE IF NOT EXISTS users (
+        first_name VARCHAR(50) NOT NULL,
+        last_name VARCHAR(50) NOT NULL,
         username VARCHAR(20) PRIMARY KEY,
         email VARCHAR(50) NOT NULL UNIQUE,
         password_hash VARCHAR(255) NOT NULL
+        bio TEXT,
+        profile_image VARCHAR(255),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     )";
     $pdo->exec($sql);
 
@@ -100,15 +105,3 @@ function initializeTables($pdo)
     )";
     $pdo->exec($sql);
 }
-
-/*
-Issue	Status	Recommendation
-SQL Injection	Safe	Use prepared statements
-Password Hashing	Safe	Use password_hash()
-Input Validation	Missing	Validate/sanitize all input
-Duplicate Check	Missing	Check username/email before insert
-CSRF Protection	Missing	Add CSRF tokens
-XSS Protection	Missing	Escape output
-Error Handling	Weak	Log errors, show generic messages
-Session Security	Basic	Regenerate session ID, use user ID
-*/
