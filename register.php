@@ -1,4 +1,11 @@
-<?php
+<!-- register.php 
+    * This file is the registration page for new users to create an account.
+    * It includes validation messages and error handling.
+    * After a short fronted validation in auth.js, this form submits to the auth.php formhandler for processing and registarion and session management logic
+    * Input validation is done in auth.js to prevent the ugly default browser error messages. (e.g.when using the required attribute) 
+-->
+
+<?php // load header
 include_once 'assets/includes/header.php';
 ?>
 <main>
@@ -17,7 +24,6 @@ include_once 'assets/includes/header.php';
             <div class="input-group">
                 <label for="register-username">Username</label>
                 <div> <input type="text" id="register-username" name="register-username" placeholder="JohnDoe" autocomplete="username">
-                    <!--required is checked by js to prevent the ugly default browser error message-->
                     <p class="error-message" id="register-username-errormsg">
                         <?php if (isset($_GET['errors']) && isset($_GET['errors']['username'])) {
                             echo htmlspecialchars($_GET['errors']['username']);
@@ -28,7 +34,6 @@ include_once 'assets/includes/header.php';
             <div class="input-group">
                 <label for="register-email">Email</label>
                 <div> <input type="text" id="register-email" name="register-email" placeholder="name@example.com" autocomplete="email">
-                    <!--required and email formatting is checked by js to prevent the ugly default browser error message-->
                     <p class="error-message" id="register-email-errormsg">
                         <?php if (isset($_GET['errors']) && isset($_GET['errors']['email'])) {
                             echo htmlspecialchars($_GET['errors']['email']);
@@ -39,7 +44,6 @@ include_once 'assets/includes/header.php';
             <div class="input-group">
                 <label for="register-password">Password</label>
                 <div> <input type="password" id="register-password" name="register-password" autocomplete="new-password">
-                    <!--required is checked by js to prevent the ugly default browser error message-->
                     <p class="error-message" id="register-password-errormsg">
                         <?php if (isset($_GET['errors']) && isset($_GET['errors']['password'])) {
                             echo htmlspecialchars($_GET['errors']['password']);
@@ -50,7 +54,6 @@ include_once 'assets/includes/header.php';
             <div class="input-group">
                 <label for="register-password-confirm">Confirm Password</label>
                 <div id="register-password-confirm-container"> <input type="password" id="register-password-confirm" name="register-password-confirm" autocomplete="new-password">
-                    <!--required is checked by js to prevent the ugly default browser error message-->
                     <p class="error-message" id="register-password-confirm-errormsg">
                         <?php if (isset($_GET['errors']) && isset($_GET['errors']['password_confirm'])) {
                             echo htmlspecialchars($_GET['errors']['password_confirm']);
@@ -65,6 +68,6 @@ include_once 'assets/includes/header.php';
     </div>
 </main>
 
-<?php
+<?php // load footer
 include_once 'assets/includes/footer.php';
 ?>

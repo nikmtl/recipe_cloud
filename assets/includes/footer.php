@@ -1,3 +1,11 @@
+ <!--footer.php
+    * This file contains the footer section of the website.
+    * It includes links to the home page, recipes, upload page, and legal pages.
+    * This is used across all pages of the site.
+    * To use this: include this file at the end of your PHP document to display the footer.
+ -->
+ 
+ <!-- footer -->
  <footer>
      <div>
          <div class="footer-logo-container">
@@ -16,7 +24,7 @@
              </div>
          </div>
          <div class="footer-links-container">
-             <h2>Legal (add if site goes live)</h2>
+             <h2>Legal (add if site goes live)</h2> <!-- This section would be legally required if the site goes live. For this example, it's not implemented. -->
              <div>
                  <a href="">Privacy Policy</a>
                  <a href="">Terms of Service</a>
@@ -28,7 +36,7 @@
              <h2>Contact</h2>
              <div>
                  <a href="https://github.com/Edamame04/recipe_cloud" target="_blank">GitHub</a>
-                 <a href="https://github.com/Edamame04/recipe_cloud/issues" target="_blank">Report a Bug</a>
+                 <a href="https://github.com/Edamame04/recipe_cloud/issues" target="_blank">Report a Bug</a> <!-- Link to issues page for bug reports -->
              </div>
          </div>
      </div>

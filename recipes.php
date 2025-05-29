@@ -1,10 +1,11 @@
-<?php
+
+<?php //load header
 include_once 'assets/includes/header.php';
 ?>
 <main>
 
 </main>
 
-<?php
+<?php // load footer
 include_once 'assets/includes/footer.php';
 ?>

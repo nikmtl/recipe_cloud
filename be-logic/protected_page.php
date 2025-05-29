@@ -1,9 +1,12 @@
 <!-- protected_page.php 
-* This file handles user authentication and session management
-    add require_once 'protected_page.php '; to protected pages
+    * This file checks if the user is logged in and redirects to the login page if not.
+    * This is just for simple protected pages. For pages that require a spesific account use extra logic.
+    * To use this: include this file at the start of your PHP document to protect the page.
 -->
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 if (!isset($_SESSION['username'])) {
     header('Location: login.php?msg=To access this page, please log in.');

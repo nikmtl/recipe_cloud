@@ -1,6 +1,13 @@
-/* This file contains the CSS styles for the home page of the application. Not including the header, footer and general styles. */
+/* index.css
+    * This file contains the CSS styles for the index/landing/home page of the application.
+    Sections in this file:
+    * 1. Hero section styles
+    * 2. Featured recipes section styles
+    * 3. Start sharing container styles
+    * 4. How to use section styles
+*/
 
-/* Hero section styles */
+/* 1. Hero section styles */
 .hero-container {
     padding-top: 2rem;
     justify-content: center;
@@ -29,18 +36,18 @@
 .hero-container div button svg {
     stroke: white;
 }
-/* Hero section styles end */
+/* Section end */
 
-/* featured recipes section styles */
+/* 2. Featured recipes section styles */
 .featured-recipes-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
 }
-/* featured recipes section styles end */
+/* Section end */
 
-/* start-sharing-container styles */
+/* 3. Start-sharing-container styles */
 .start-sharing-container {
     display: flex;
     background-color: var(--foreground-color);
@@ -86,9 +93,9 @@
         gap: 2rem;
     }
 }
-/* start-sharing-container styles end */
+/* Section end */
 
-/* How to use section styles */
+/* 4. How to use section styles */
 .how-to-container {
     padding-bottom: 2rem;
 }
@@ -141,5 +148,5 @@
         flex-direction: column;
     }
 }
-/* How to use section styles end */
+/* Section end */
 

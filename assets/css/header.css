@@ -1,0 +1,138 @@
+/* header.css 
+    * This file contains the CSS styles for the header component of the application.
+*/
+
+
+header {
+    z-index: 95;
+    /* High z-index but lower than mobile-nav */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--background-color);
+}
+
+header div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: calc(var(--max-width) - 32px);
+    width: 100vw;
+    padding: 16px;
+}
+
+header div div {
+    padding: 0;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 10px;
+}
+
+.nav-links {
+    width: fit-content;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.auth-buttons {
+    width: fit-content;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+header form {
+    border-radius: 0;
+    border: none;
+    padding: 0 !important;
+}
+
+/*responsive styles*/
+@media (max-width: 700px) {
+    .mobile-nav {
+        z-index: 100;
+        /* Keep highest z-index */
+        display: none;
+        position: absolute;
+        top: 57px;
+        /* Position it right below the header */
+        left: 0;
+        background-color: var(--background-color);
+        width: 100vw;
+        box-sizing: border-box;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 1px solid var(--border-color);
+        gap: 0.5rem;
+        padding: 1rem 16px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        /* Add shadow for better visibility */
+    }
+
+    .mobile-nav button {
+        width: 100%;
+    }
+
+    .mobile-nav a {
+        text-align: center;
+        width: 100%;
+        padding: 0.5rem 1rem;
+        font-weight: 500;
+        font-size: 0.875rem;
+        color: var(--text-color);
+    }
+
+    .mobile-nav-background {
+        position: fixed;
+        /* Ensure it covers the entire page */
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        /* Use viewport height to cover the entire screen */
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 90;
+        /* Higher than header but lower than mobile-nav */
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .mobile-nav form {
+        width: 100%;
+        border-radius: 0;
+        border: none;
+        padding: 0 !important;
+    }
+
+    /* Ensure mobile nav isn't affected by overflow hidden */
+    .mobile-nav,
+    .mobile-nav-background {
+        overflow: visible !important;
+    }
+
+    .desktop-only {
+        display: none;
+    }
+
+    .mobile-only {
+        display: block;
+    }
+
+    .large-button {
+        gap: 0;
+    }
+
+    #hamburger-icon:focus {
+        border: none;
+    }
+
+}

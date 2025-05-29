@@ -1,3 +1,8 @@
+/* image-upload.css 
+    * Styles for the image upload component
+    * This component allows users to upload images with a preview and remove option
+*/
+
 /* Image upload component styles */
 .image-upload-container {
     border: 2px dashed var(--border-color);

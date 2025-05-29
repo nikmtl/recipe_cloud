@@ -1,0 +1,71 @@
+/* button.css
+    * This file contains the CSS styles for the button component of the application.
+*/
+
+button {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    border: 1px solid var(--primary-color);
+    font-weight: 500;
+    font-size: 0.875rem;
+    padding: 8.5px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--primary-color-hover);
+    border: 1px solid var(--primary-color-hover);
+}
+
+button:focus {
+    border: 1px solid var(--primary-color-hover);
+}
+
+.secondary-button {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.secondary-button:hover {
+    background-color: var(--background-color-hover);
+    border: 1px solid var(--border-color);
+}
+
+.gost-button {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: none;
+}
+
+.gost-button:hover {
+    border: none !important;
+    background-color: var(--background-color-hover);
+}
+
+.icon-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.icon-button svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+.large-button {
+    gap: 1rem;
+    padding: 13.5px 2rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+.medium-button {
+    line-height: 1.25rem;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+}

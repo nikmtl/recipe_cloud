@@ -1,4 +1,5 @@
-<?php
+
+<?php //load header
 require_once 'be-logic\protected_page.php';
 include_once 'assets/includes/header.php';
 ?>
@@ -6,6 +7,6 @@ include_once 'assets/includes/header.php';
 
 </main>
 
-<?php
+<?php // load footer
 include_once 'assets/includes/footer.php';
 ?>

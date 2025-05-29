@@ -1,52 +1,65 @@
-<!--datenbankverbindung.php
- * Diese Datei stellt eine Verbindung zur MySQL-Datenbank her.
-    * Sie wird in anderen PHP-Dateien eingebunden, um auf die Datenbank zuzugreifen.
+<!--db.php
+    * This file handles database connection and table initialization.
+    Sections in this file:
+    * 1. Database Connection
+    * 2. Table Initialization
 -->
 <?php
 
+// This calles the start of a connection to the database and initializes the necessary tables if they do not exist.
 $pdo = initiateDatabaseConnection();
 
 
 
-function initiateDatabaseConnection()
-{
+/*1. Database Connection */
+function initiateDatabaseConnection(): PDO{
+    // Database connection parameters
+    // Adjust these parameters according to your database configuration if necessary.
+    // For example, if you are using a different database server or credentials.
     $host = 'localhost';
-    $db   = 'recipe_cloud';
+    $db   = 'recipe_cloud'; //do not forget to create the database in your MySQL server before running this script.
     $user = 'root';
     $pass = '';
     $charset = 'utf8mb4';
 
     $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-    $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
+    $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]; // Set the error mode to exception for better error handling
+    // This allows to catch and handle database errors more gracefully.
+    // This is useful for debugging and ensuring that the application can handle database errors without crashing.
 
     try {
         $pdo = new PDO($dsn, $user, $pass, $options);
-        //The PHO has the benefit that the connection is automatically closed when the script ends.
+        //The PDO has the benefit, to the method we learned in the course, that the connection is automatically closed when the script ends.
     } catch (\PDOException $e) {
         die("Datenbankverbindung fehlgeschlagen: " . $e->getMessage());
+        // If the connection fails, an error message is displayed and the script is terminated.
     }
 
     initializeTables($pdo); // Initialize tables if they don't exist
 
-    return $pdo;
+    return $pdo; // Return the PDO instance for further use 
 }
 
-function initializeTables($pdo)
-{
+
+/*2. Table Initialization*/
+// This function initializes the necessary tables in the database if they do not already exist.
+// It creates the users, recipes, instructions, ingredients, ratings, and favorites tables with appropriate columns and constraints.
+// See the db documentation for more details on the table structure and constraints.
+function initializeTables($pdo): void{
     // Create users table if it doesn't exist
     $sql = "CREATE TABLE IF NOT EXISTS users (
         first_name VARCHAR(50) NOT NULL,
         last_name VARCHAR(50) NOT NULL,
         username VARCHAR(20) PRIMARY KEY,
         email VARCHAR(50) NOT NULL UNIQUE,
-        password_hash VARCHAR(255) NOT NULL
+        password_hash VARCHAR(255) NOT NULL,
         bio TEXT,
         profile_image VARCHAR(255),
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )";
     $pdo->exec($sql);
 
-    // Create recipes table
+    // Create recipes table if it doesn't exist
     $sql = "CREATE TABLE IF NOT EXISTS recipes (
         id INT AUTO_INCREMENT PRIMARY KEY,
         user_id VARCHAR(20),
@@ -62,7 +75,7 @@ function initializeTables($pdo)
     )";
     $pdo->exec($sql);
 
-    // Create instructions table
+    // Create instructions table if it doesn't exist
     $sql = "CREATE TABLE IF NOT EXISTS instructions (
         id INT AUTO_INCREMENT PRIMARY KEY,
         instruction TEXT NOT NULL,
@@ -71,7 +84,7 @@ function initializeTables($pdo)
     )";
     $pdo->exec($sql);
 
-    // Create ingredients table
+    // Create ingredients table if it doesn't exist
     $sql = "CREATE TABLE IF NOT EXISTS ingredients (
         id INT AUTO_INCREMENT PRIMARY KEY,
         amount INT,
@@ -82,7 +95,7 @@ function initializeTables($pdo)
     )";
     $pdo->exec($sql);
 
-    // Create ratings table
+    // Create ratings table if it doesn't exist
     $sql = "CREATE TABLE IF NOT EXISTS ratings (
         id INT AUTO_INCREMENT PRIMARY KEY,
         user_id VARCHAR(20) NOT NULL,
@@ -95,7 +108,7 @@ function initializeTables($pdo)
     )";
     $pdo->exec($sql);
 
-    // Create favorites table
+    // Create favorites table if it doesn't exist
     $sql = "CREATE TABLE IF NOT EXISTS favorites (
         id INT AUTO_INCREMENT PRIMARY KEY,
         user_id VARCHAR(20) NOT NULL,

@@ -1,4 +1,7 @@
-/* Styles for the upload page title and subtitle */
+/* upload.css 
+    * This file contains the CSS styles for the upload page
+*/
+
 .upload-container{
     max-width: 56rem;
     padding: 4rem 1rem;
@@ -23,7 +26,6 @@
     margin-bottom: 1.5rem;
     color: var(--secondary-text-color);
 }
-/* Styles for the upload page title and subtitle end*/
 
 /* Specific styles for the upload form */
 /*chage form border to be handeld by the upload-tap-body class to enable the naviagtion buttons to be outside the form*/
@@ -121,6 +123,3 @@
 .navigation-buttons button{
     width: fit-content;
 }
-
-
-/* Specific styles for the upload form end*/

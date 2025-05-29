@@ -1,3 +1,19 @@
+<!-- auth.php
+    * This file handles user authentication logic including registration, login, and logout.
+    * It uses prepared statements to prevent SQL injection and validates user input.
+    * The Inputs get sanitized and validated before being processed in the backend too, to ensure security.
+    * It also checks for existing users and handles errors appropriately.
+    * It connects to the database and processes user input from forms.
+    * It also manages session data for logged-in users.
+    Sections in this file:
+    * 1. User Registration
+    * 2. User Login
+    * 3. User Logout
+
+    // TODO for the future: Add CSRF protection
+    // TODO for the future: Add XSS protection
+-->
+
 <?php
 require_once __DIR__ . '/db.php';
 
@@ -6,7 +22,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Process actions
+// Process actions based on the form submission and run the appropriate function
 if (isset($_POST['action']) && $_POST['action'] === 'register') {
     registerUser($pdo);
 } elseif (isset($_POST['action']) && $_POST['action'] === 'login') {
@@ -17,7 +33,9 @@ if (isset($_POST['action']) && $_POST['action'] === 'register') {
     echo "Invalid action.";
 }
 
-function registerUser($pdo) {
+/* 1. User Registration */
+// Function to handle user registration
+function registerUser($pdo): void {
     $errors = [];
     
     // Get and sanitize input fields
@@ -76,23 +94,24 @@ function registerUser($pdo) {
     
     // Insert user into the database
     $stmt = $pdo->prepare("INSERT INTO users (username, password_hash, email) VALUES (?, ?, ?)");
-    
     try {
-        if ($stmt->execute([$username, $hashedPassword, $email])) {
-            // Set user ID in session (session already started at top)
-            $_SESSION['username'] = $username;
-            header('Location: ../profile.php?u=' . $_SESSION["username"]);
+        if ($stmt->execute([$username, $hashedPassword, $email])) { // If insert is successful
+            $_SESSION['username'] = $username; // Set username in session
+            header('Location: ../profile.php?u=' . $_SESSION["username"]); // Redirect to profile page
             exit;
         } 
-    } catch (PDOException $e) {
+    } catch (PDOException $e) { // Catch any database errors this should not happen, but just in case
         $errors['general'] = "Error registering user. Please try again.";
         $errorQuery = http_build_query(['errors' => $errors]);
-        header('Location: ../register.php?' . $errorQuery);
+        header('Location: ../register.php?' . $errorQuery); // Redirect back to register page with error
         exit;
     }
 }
 
-function loginUser($pdo) {
+
+/* 2. User Login */
+// Function to handle user login
+function loginUser($pdo): never {
     $errors = [];
     
     // Get and sanitize input fields
@@ -114,41 +133,48 @@ function loginUser($pdo) {
         $errorQuery = http_build_query(['errors' => $errors]);
         header('Location: ../login.php?' . $errorQuery);
         exit;
-    }    // Fetch user from the database
+    }    
+    
+    // Fetch user from the database
     $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
     $stmt->execute([$username]);
     $user = $stmt->fetch();
 
+    // Check if user exists and verify password
     if (!$user) {
-        // Username not found
+        // Username not found -> set error
         $errors['username'] = "Username not found.";
         $errorQuery = http_build_query(['errors' => $errors]);
         header('Location: ../login.php?' . $errorQuery);
         exit;
     } elseif (!password_verify($password, $user['password_hash'])) {
-        // Password incorrect
+        // Password incorrect -> set error
         $errors['password'] = "Incorrect password.";
         $errorQuery = http_build_query(['errors' => $errors]);
         header('Location: ../login.php?' . $errorQuery);
         exit;
-    } else {
+    } else { // Login successful
+        // Clear any previous session data
+        session_unset(); // Unset all session variables
+        session_regenerate_id(true); // Regenerate session ID to prevent session fixation attacks
+        // This ensures that the session is secure and prevents session hijacking.
+        // This is important for security, especially after a successful login.
         // Set user ID in session (session already started at top)
-        $_SESSION['username'] = $username;
+        $_SESSION['username'] = $username; // Set username in session
+        // Redirect to profile page
         header('Location: ../profile.php?u=' . $_SESSION["username"]);
         exit;
     }
 }
 
-function logoutUser() {
-    // Session already started at top
-    session_destroy();
+/* 3. User Logout */
+// Function to handle user logout
+function logoutUser(): never {
+    session_destroy();  // Destroy the session to log out the user
+    // Redirect to index page
     header('Location: ../index.php');
     exit;
 }
-
-
-// TODO for the future: Add CSRF protection
-// TODO for the future: Add XSS protection
 
 ?>
 

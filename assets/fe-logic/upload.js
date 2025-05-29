@@ -1,9 +1,9 @@
-
 /* upload.js
-This file contains the JavaScript code for the recipe upload form.
-It includes validation for the form inputs based on database constraints
-and provides frontend user feedback for invalid inputs.
+  * This file contains the JavaScript code for the recipe upload form.
+  * It includes validation for the form inputs based on database constraints
+  * and provides frontend user feedback for invalid inputs.
 */
+//TODO: check this code for any issues and rewrite if necessary
 
 // Open the first tab by default without showing overlay
 window.addEventListener('load', function() {

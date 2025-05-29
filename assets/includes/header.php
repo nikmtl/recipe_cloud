@@ -1,5 +1,16 @@
+<!-- header.php 
+    * This file contains the header section of the website.
+    * It includes the logo, navigation links, and authentication buttons.
+    * It also includes the mobile navigation menu for smaller screens.
+    * It also handles the JS and CSS includes for different pages.
+    * This is used across all pages of the site.
+    * To use this: include this file at the start of your PHP document to display the header.
+    * The logic to open and close the mobile menu is handled in the view.js file.
+-->
+
+
 <?php
-// Start session once if not already active
+// Start session once if not already active its needed to check if the user is logged in.
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -12,7 +23,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <meta charset="UTF-8">
     <meta name="description" content="Recipe Cloud - Your go-to place for delicious recipes.">
     <meta name="keywords" content="recipes, cooking, food, share, discover">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ensures the page is responsive on mobile devices -->
     <meta name="author" content="Edamame04">
     <meta name="theme-color" content="#ffffff">
     <meta name="application-name" content="Recipe Cloud">
@@ -23,10 +34,17 @@ if (session_status() === PHP_SESSION_NONE) {
     <title>Recipe Cloud</title>
 
     <!-- load stylesheets -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/header.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
+    <link rel="stylesheet" href="assets/css/button.css">
+    <link rel="stylesheet" href="assets/css/taps.css">
+    <link rel="stylesheet" href="assets/css/form.css">
 
-    <!-- load fontend view logic -->
-    <script src="assets/fe-logic/view.js" defer></script>
+    <!-- load frontend mobile header logic -->
+    <script src="assets/fe-logic/mobile-header.js" defer></script>
+    <!-- load frontend logic for the tap views -->
+    <script src="assets/fe-logic/tap-view.js" defer></script>
 
     <!-- load Inter font from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,7 +56,7 @@ if (session_status() === PHP_SESSION_NONE) {
     $currentPage = basename($_SERVER['PHP_SELF']);
     switch ($currentPage) {
         case 'index.php':
-            echo '<link rel="stylesheet" href="assets/css/home.css">';
+            echo '<link rel="stylesheet" href="assets/css/index.css">';
             break;
         case 'upload.php':
             echo '
@@ -58,23 +76,25 @@ if (session_status() === PHP_SESSION_NONE) {
 </head>
 
 <body>
+    <!-- Header Section -->
     <header>
         <div>
+            <!-- logo -->
             <div class="logo-container" onclick="location.href='index.php'">
                 <img src="assets/img/logo.svg" alt="Recipe Cloud Logo" class="logo" width="24" height="24">
                 <h1>Recipe Cloud</h1>
             </div>
+            <!-- Navigation Links -->
             <div class="nav-links desktop-only">
                 <a href="index.php">Home</a>
                 <a href="recipes.php">Recipes</a>
                 <a href="upload.php">Upload</a>
-                <?php if (isset(
-                    $_SESSION["username"]
-                )): ?>
+                <?php if (isset($_SESSION["username"])): ?> <!-- If user is logged in, show profile link -->
                     <a href="profile.php?u=<?php echo $_SESSION['username']; ?>">My Profile</a>
                 <?php endif; ?>
             </div>
-            <?php if (isset($_SESSION["username"])): ?>
+            <!-- Authentication Buttons (Desktop) -->
+            <?php if (isset($_SESSION["username"])): ?> <!-- If user is logged in, show sign out button -->
                 <form class=" desktop-only" method="POST" action="be-logic/auth.php">
                     <input type="hidden" name="action" value="logout">
                     <button class="secondary-button icon-button" type="submit">
@@ -84,7 +104,7 @@ if (session_status() === PHP_SESSION_NONE) {
                         </svg>
                     </button>
                 </form>
-            <?php else: ?>
+            <?php else: ?> <!-- If user is not logged in, show search and sign in buttons -->
                 <div class="auth-buttons  desktop-only">
                     <button class="gost-button icon-button" onclick="location.href='recipes.php'">
                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search h-5 w-5">
@@ -102,7 +122,7 @@ if (session_status() === PHP_SESSION_NONE) {
                     <button onclick="location.href='register.php'">Register</button>
                 </div>
             <?php endif; ?>
-            <!-- Mobile Hamburger Menu Button -->
+            <!-- Mobile Hamburger Menu Button (for smaller screens) -->
             <div class="mobile-only" style="width: fit-content">
                 <button id="hamburger-icon" class="icon-button gost-button" onclick="toggleMobileMenu()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu h-6 w-6">
@@ -119,10 +139,10 @@ if (session_status() === PHP_SESSION_NONE) {
         <a href="index.php">Home</a>
         <a href="recipes.php">Recipes</a>
         <a href="upload.php">Upload</a>
-        <?php if (isset($_SESSION["username"])): ?>
+        <?php if (isset($_SESSION["username"])): ?>  <!-- If user is logged in, show profile link -->
             <a href="profile.php?u=<?php echo $_SESSION['username']; ?>">My Profile</a>
         <?php endif; ?>
-        <?php if (isset($_SESSION["username"])): ?>
+        <?php if (isset($_SESSION["username"])): ?> <!-- If user is logged in, show sign out button -->
             <form method="POST" action="be-logic/auth.php">
                 <input type="hidden" name="action" value="logout">
                 <button class="secondary-button icon-button" type="submit">
@@ -132,7 +152,7 @@ if (session_status() === PHP_SESSION_NONE) {
                     </svg>
                 </button>
             </form>
-        <?php else: ?>
+        <?php else: ?> <!-- If user is not logged in, show search and sign in buttons -->
             <button class="secondary-button icon-button" onclick="location.href='login.php'">
                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user h-4 w-4 mr-2">
                     <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
@@ -141,7 +161,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 Sign In
             </button>
             <button onclick="location.href='register.php'">Register</button>
-
         <?php endif; ?>
     </div>
-    <div class="mobile-nav-background mobile-only" id="mobile-nav-background"></div>
+    <div class="mobile-nav-background mobile-only" id="mobile-nav-background"></div> <!-- Background for mobile menu to dim the rest of the page -->
+    

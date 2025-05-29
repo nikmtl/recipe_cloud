@@ -1,0 +1,91 @@
+/* footer.css
+    * This file contains the CSS styles for the footer component of the application.
+*/
+
+footer {
+    display: flex;
+    justify-content: center;
+    background-color: var(--footer-background-color);
+    border-top: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+footer div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    max-width: calc(var(--max-width) - 32px);
+    width: 100vw;
+    padding: 2rem 16px;
+    gap: 3%;
+}
+
+footer div div {
+    display: block;
+    padding: 0;
+    width: fit-content;
+    width: 100%;
+}
+
+.footer-logo-container div {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 10px;
+    margin-bottom: 1rem;
+}
+
+.footer-logo-container p {
+    color: var(--secondary-text-color);
+    font-size: 0.875rem;
+}
+
+.footer-links-container h2 {
+    margin-bottom: 1rem;
+    font-weight: 600;
+    font-size: inherit;
+}
+
+.footer-links-container div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.footer-links-container div a {
+    font-weight: 400;
+    color: var(--secondary-text-color);
+}
+
+.footer-links-container div a:hover {
+    color: var(--text-color);
+}
+
+/*responsive styles*/
+@media (max-width: 700px) {
+    footer div {
+        flex-direction: column;
+    }
+
+    footer div div {
+        margin-bottom: 2rem;
+    }
+
+    .footer-logo-container {
+        gap: 0.5rem;
+    }
+
+    .footer-logo-container div {
+        flex-direction: row;
+    }
+
+    .footer-links-container div {
+        gap: 1rem;
+        margin-bottom: 0;
+    }
+}

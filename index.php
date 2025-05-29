@@ -1,8 +1,16 @@
-<?php
+<!-- index.php  
+    * This is the home/index/landing page of the Recipe Cloud application.
+    * It displays the hero section, featured recipes, and how-to steps.
+    * It also includes buttons to upload a recipe or browse all recipes.
+-->
+
+<?php // Load the header
 include_once 'assets/includes/header.php';
 ?>
+
 <main>
     <div>
+        <!-- Title and Welcome Message -->
         <div class="hero-container">
             <h1>Recipe Cloud</h1>
             <p>Discover, share, and rate delicious recipes from around the world</p>
@@ -19,6 +27,7 @@ include_once 'assets/includes/header.php';
                 </button>
             </div>
         </div>
+        <!-- Featured Recipes Section -->
         <div class="featured-recipes-container">
             <div class="featured-recipes-header">
                 <h2>Featured Recipes</h2>
@@ -30,6 +39,7 @@ include_once 'assets/includes/header.php';
                 ?>
             </div>
         </div>
+        <!-- Start Sharing Section -->
         <div class="start-sharing-container">
             <div class="start-sharing">
                 <h2>Share Your Culinary Creations</h2>
@@ -44,7 +54,7 @@ include_once 'assets/includes/header.php';
                 </div>
             </div>
         </div>
-
+        <!-- How it works Section -->
         <div class="how-to-container">
             <h2>How it works</h2>
             <div>
@@ -80,6 +90,6 @@ include_once 'assets/includes/header.php';
         </div>
     </div>
 </main>
-<?php
+<?php // Load the footer
 include_once 'assets/includes/footer.php';
 ?>

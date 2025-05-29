@@ -1,9 +1,14 @@
 /* auth.js
-This file contains the JavaScript code for the authentication process that checks the validity of input fields in the registration and login form.
-It sends frontend user feedback if the input is invalid and prevents the form from being submitted if the input is invalid.
-This does not include the actual authentication process, which is handled by the backend. But it prevents invalid input from being sent to the backend.
+    * This file contains the JavaScript code for validating the registration and login forms on the frontend.
+    * It sends frontend user feedback if the input is invalid and prevents the form from being submitted if the input is invalid.
+    * This does not include the actual authentication process, which is handled by the backend. But it prevents invalid input from being sent to the backend.
+    Sections in this file:
+    * 1. Registration form validation
+    * 2. Login form validation
+    * 3. Helper functions for displaying and clearing error messages
 */
 
+/*1. Registration form validation*/
 // Registration form validation dom elements
 const registerForm = document.getElementById('register-form');
 if (registerForm) {
@@ -21,36 +26,36 @@ if (registerForm) {
     // Add event listener to the registration form to validate input fields on submission
     registerForm.addEventListener('submit', function (event) {
 
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regular expression for validating email format
 
-        if (usernameField.value.length < 2 || usernameField.value.length > 20) {
+        if (usernameField.value.length < 2 || usernameField.value.length > 20) { // Check if username is between 2 and 20 characters
             displayError(usernameField, usernameError, "Username must be between 3 and 20 characters.");
             event.preventDefault();
         }
 
-        if (!emailPattern.test(emailField.value)) {
+        if (!emailPattern.test(emailField.value)) { // Validate email format using regex
             displayError(emailField, emailError, "Email must be a valid email address.");
             event.preventDefault();
         }
 
-        if (emailField.value.length > 50) {
+        if (emailField.value.length > 50) { // Check if email is shorter than 50 characters
             displayError(emailField, emailError, "Email must be shorter than 50 characters.");
             event.preventDefault();
         }
 
-        if (passwordField.value.length < 8) {
+        if (passwordField.value.length < 8) { // Check if password is longer than 8 characters
             displayError(passwordField, passwordError, "Password must be longer than 8 characters.");
             displayError(passwordField);
             event.preventDefault();
         }
 
-        if (passwordField.value.length > 32) {
+        if (passwordField.value.length > 32) { // Check if password is shorter than 32 characters
             displayError(passwordField, passwordError, "Password must be shorter than 32 characters.");
             displayError(passwordField);
             event.preventDefault();
         }
 
-        if (passwordField.value !== passwordConfirmField.value) {
+        if (passwordField.value !== passwordConfirmField.value) { // Check if password and password confirmation match
             displayError(passwordConfirmField, passwordConfirmError, "Passwords do not match.");
             event.preventDefault();
         }
@@ -67,12 +72,10 @@ if (registerForm) {
 
 
 
-
-
-
+/*2. Login form validation*/
 // Login form validation dom elements
 const loginForm = document.getElementById('login-form');
-if (loginForm) {
+if (loginForm) { 
     const loginUsernameField = document.getElementById('login-username');
     const loginUsernameError = document.getElementById('login-username-errormsg');
     const loginPasswordField = document.getElementById('login-password');
@@ -82,19 +85,19 @@ if (loginForm) {
     // With the login form, we only need to check if the fields are empty
     // Add event listener to the login form to validate input fields on submission
     loginForm.addEventListener('submit', function (event) {
-        if (loginUsernameField.value === '') {
+        if (loginUsernameField.value === '') { // Check if username field is empty
             displayError(loginUsernameField);
             event.preventDefault();
         }
 
-        if (loginPasswordField.value === '') {
+        if (loginPasswordField.value === '') { // Check if password field is empty
             displayError(loginPasswordField);
             event.preventDefault();
         }
     });
 
     // Add event listeners to clear error messages on input
-    loginInputFields.forEach(field => {
+    loginInputFields.forEach(field => { 
         field.addEventListener('input', function () {
             clearError(field, field.nextElementSibling);
         });
@@ -105,9 +108,7 @@ if (loginForm) {
 
 
 
-
-
-// Function to display error message
+/*3. Helper function to display error message */
 function displayError(inputField, messageField, message) {
     if (message) {
         messageField.textContent = message;
