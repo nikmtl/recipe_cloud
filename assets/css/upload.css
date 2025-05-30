@@ -124,8 +124,9 @@
     width: fit-content;
 }
 
-
-/* Mobile styles */
+/* mobile styles */
 @media (max-width: 700px) {
-    
+    #recipe-details-input-difficulty{
+        flex-direction: column;
+    }
 }

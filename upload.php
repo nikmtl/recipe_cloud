@@ -39,7 +39,7 @@ include_once 'assets/includes/header.php';
                         <label for="recipe-description">Description</label>
                         <textarea id="recipe-description" name="recipe-description" placeholder="Briefly describe your recipe"></textarea>
                     </div>
-                    <div class="input-line">
+                    <div class="input-line" id="recipe-details-input-difficulty">
                         <div class="input-group">
                             <label for="recipe-prep-time">Preparation Time</label>
                             <div class="input-subgroup">
