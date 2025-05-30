@@ -135,7 +135,7 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
     </header>
     <!-- Mobile Navigation Menu -->
-    <div class="mobile-nav mobile-only">
+    <div class="mobile-nav">
         <a href="index.php">Home</a>
         <a href="recipes.php">Recipes</a>
         <a href="upload.php">Upload</a>
@@ -163,5 +163,5 @@ if (session_status() === PHP_SESSION_NONE) {
             <button onclick="location.href='register.php'">Register</button>
         <?php endif; ?>
     </div>
-    <div class="mobile-nav-background mobile-only" id="mobile-nav-background"></div> <!-- Background for mobile menu to dim the rest of the page -->
+    <div class="mobile-nav-background" id="mobile-nav-background"></div> <!-- Background for mobile menu to dim the rest of the page -->
     

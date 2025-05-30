@@ -118,15 +118,7 @@ header form {
     .mobile-nav-background {
         overflow: visible !important;
     }
-
-    .desktop-only {
-        display: none;
-    }
-
-    .mobile-only {
-        display: block;
-    }
-
+    
     .large-button {
         gap: 0;
     }

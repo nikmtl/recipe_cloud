@@ -123,3 +123,9 @@
 .navigation-buttons button{
     width: fit-content;
 }
+
+
+/* Mobile styles */
+@media (max-width: 700px) {
+    
+}
