@@ -62,7 +62,6 @@ header form {
         display: none;
         position: absolute;
         top: 57px;
-        /* Position it right below the header */
         left: 0;
         background-color: var(--background-color);
         width: 100vw;
@@ -74,7 +73,6 @@ header form {
         gap: 0.5rem;
         padding: 1rem 16px;
         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        /* Add shadow for better visibility */
     }
 
     .mobile-nav button {
@@ -97,10 +95,8 @@ header form {
         left: 0;
         width: 100vw;
         height: 100vh;
-        /* Use viewport height to cover the entire screen */
         background-color: rgba(0, 0, 0, 0.5);
         z-index: 90;
-        /* Higher than header but lower than mobile-nav */
         display: none;
         justify-content: center;
         align-items: center;
@@ -118,7 +114,7 @@ header form {
     .mobile-nav-background {
         overflow: visible !important;
     }
-    
+
     .large-button {
         gap: 0;
     }

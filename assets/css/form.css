@@ -89,3 +89,10 @@ form button {
 .error-message {
     color: var(--error-border) !important;
 }
+
+/* Responsive styles */
+@media (max-width: 700px) {
+    form{
+        border: none;
+    }
+}
