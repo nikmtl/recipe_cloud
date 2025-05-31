@@ -35,7 +35,7 @@ form select:focus {
 
 form textarea {
     resize: vertical;
-    min-height: 100px;
+    min-height: 80px;
     font-family: "Inter", sans-serif;
 }
 
@@ -59,7 +59,7 @@ form button {
 .input-line {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     gap: 1rem;
 }
 

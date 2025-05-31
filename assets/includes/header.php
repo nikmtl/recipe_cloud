@@ -62,8 +62,11 @@ if (session_status() === PHP_SESSION_NONE) {
             echo '
                 <link rel="stylesheet" href="assets/css/upload.css">
                 <link rel="stylesheet" href="assets/css/image-upload.css">
-                <script src="assets/fe-logic/upload.js" defer></script>
-                <script src="assets/fe-logic/image-upload.js" defer></script>';
+                <script src="assets/fe-logic/upload/upload.js" defer></script>
+                <script src="assets/fe-logic/upload/upload-form-ingredients.js" defer></script>
+                <script src="assets/fe-logic/upload/upload-form-instructions.js" defer></script>
+                <script src="assets/fe-logic/upload/upload-form-validation.js" defer></script>
+                <script src="assets/fe-logic/upload/upload-form-image-upload.js" defer></script>';
             break;
         case 'login.php':
         case 'register.php':
@@ -106,7 +109,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 </form>
             <?php else: ?> <!-- If user is not logged in, show search and sign in buttons -->
                 <div class="auth-buttons  desktop-only">
-                    <button class="gost-button icon-button" onclick="location.href='recipes.php'">
+                    <button class="ghost-button icon-button" onclick="location.href='recipes.php'">
                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search h-5 w-5">
                             <circle cx="11" cy="11" r="8"></circle>
                             <path d="m21 21-4.3-4.3"></path>
@@ -124,7 +127,7 @@ if (session_status() === PHP_SESSION_NONE) {
             <?php endif; ?>
             <!-- Mobile Hamburger Menu Button (for smaller screens) -->
             <div class="mobile-only" style="width: fit-content">
-                <button id="hamburger-icon" class="icon-button gost-button" onclick="toggleMobileMenu()">
+                <button id="hamburger-icon" class="icon-button ghost-button" onclick="toggleMobileMenu()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu h-6 w-6">
                         <path d="M3 12h18"></path>
                         <path d="M3 6h18"></path>

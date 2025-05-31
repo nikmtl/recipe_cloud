@@ -33,13 +33,13 @@ button:focus {
     border: 1px solid var(--border-color);
 }
 
-.gost-button {
+.ghost-button {
     background-color: var(--background-color);
     color: var(--text-color);
     border: none;
 }
 
-.gost-button:hover {
+.ghost-button:hover {
     border: none !important;
     background-color: var(--background-color-hover);
 }

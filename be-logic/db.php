@@ -78,6 +78,7 @@ function initializeTables($pdo): void{
     // Create instructions table if it doesn't exist
     $sql = "CREATE TABLE IF NOT EXISTS instructions (
         id INT AUTO_INCREMENT PRIMARY KEY,
+        step_number INT NOT NULL CHECK (step_number > 0),
         instruction TEXT NOT NULL,
         recipe_id INT NOT NULL,
         FOREIGN KEY (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE

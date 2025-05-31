@@ -73,16 +73,113 @@
     width: fit-content;
 }
 
-#instruction-step-input textarea{
+#ingredient-list{
+    background-color: var(--foreground-color);
+    padding: 0 0.5rem;
+    border-radius: 0.5rem;
+}
+
+#ingredient-name-input {
+    width: -webkit-fill-available;
+}
+
+.ingredient-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.ingredient-item button {
+    border-radius: calc(0.5rem - 6px);
+    width: fit-content;
+}
+
+
+.ingredient-item button:hover {
+    background-color: rgb(252, 252, 252);
+}
+
+.ingredient-item:last-child {
+    border-bottom: none;
+}
+
+
+#instruction-step-input div textarea{
     resize: none;
 }
 
+#instruction-step-input div{
+    width: -webkit-fill-available;
+}
+
 #instruction-step-input button{
-    height: 100px;
+    height: 80px;
     width: 150px;
 }
 
+#instruction-list{
+    background-color: var(--foreground-color);
+    padding: 0 0.5rem;
+    border-radius: 0.5rem;
+}
 
+.instruction-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+.instruction-item:last-child {
+    border-bottom: none;
+}
+
+.instruction-text {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-right: 1rem;
+}
+
+.instruction-buttons {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+}
+
+.instruction-buttons button {
+    border-radius: calc(0.5rem - 6px);
+    width: fit-content;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    min-width: 32px;
+}
+
+.instruction-buttons button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--foreground-color);
+    color: var(--secondary-text-color);
+}
+
+.instruction-buttons button:disabled:hover {
+    background-color: var(--foreground-color);
+    border-color: var(--border-color);
+}
+
+.step-number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    border-radius: 100%;
+    min-width: 24px;
+    height: 24px;
+}
 
 /*styles for the tips section inside the upload form */
 .tips {

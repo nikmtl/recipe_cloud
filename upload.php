@@ -97,7 +97,6 @@ include_once 'assets/includes/header.php';
                                 <option value="drink">Drink</option>
 
                             </select>
-                            <span></span> <!-- This span is used for correcting the width of the select element bacause it dose not have an error message -->
                         </div>
 
                     </div>
@@ -128,7 +127,10 @@ include_once 'assets/includes/header.php';
                                 <option value="lb">lb</option>
                             </select>
                         </div>
-                        <input type="text" id="ingredient-name" name="ingredient-name" placeholder="e.g., Spaghetti">
+                        <div id="ingredient-name-input">
+                            <input type="text" id="ingredient-name" name="ingredient-name" placeholder="e.g., Spaghetti">
+                            <span id="ingredient-name-errormsg" class="error-message"></span>
+                        </div>
                         <button type="button" class="icon-button">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-4 w-4 mr-2">
                                 <path d="M5 12h14"></path>
@@ -138,8 +140,10 @@ include_once 'assets/includes/header.php';
                         </button>
                     </div>
                     <div id="ingredient-list">
-                        <p>No ingredients added yet</p>
                         <!-- List of added ingredients will be displayed here -->
+                    </div>
+                    <div id="ingredient-list-empty">
+                        <p>No ingredients added yet</p>
                     </div>
                     <div class="tips">
                         <h4>Tips for adding ingredients:</h4>
@@ -162,7 +166,9 @@ include_once 'assets/includes/header.php';
                         <p>Provide step-by-step instructions for your recipe</p>
                     </div>
                     <div class="input-line upload-input-input" id="instruction-step-input">
-                        <textarea id="instruction-step" name="instruction-step" placeholder="Describe this step..."></textarea>
+                        <div>
+                            <textarea id="instruction-step" name="instruction-step" placeholder="Describe this step..."></textarea>
+                        </div>
                         <button type="button" class="icon-button">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-4 w-4 mr-2">
                                 <path d="M5 12h14"></path>
@@ -170,10 +176,12 @@ include_once 'assets/includes/header.php';
                             </svg>
                             Add Step
                         </button>
-                    </div>
+                    </div>                    
                     <div id="instruction-list">
-                        <p>No instructions added yet</p>
                         <!-- List of added instructions will be displayed here -->
+                    </div>
+                    <div id="instruction-list-empty">
+                        <p>No instructions added yet</p>
                     </div>
                     <div class="tips">
                         <h4>Tips for writing instructions:</h4>
