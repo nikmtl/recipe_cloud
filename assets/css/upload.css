@@ -24,7 +24,23 @@
 
 .upload-header-subtitle{
     margin-bottom: 1.5rem;
-    color: var(--secondary-text-color);
+}
+
+/* Error messages styling */
+.error-messages {
+    background-color: var(--error-background);
+    border: 1px solid var(--error-color);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.error-messages .error-message {
+    margin: 0 0 0.5rem 0;
+}
+
+.error-messages .error-message:last-child {
+    margin-bottom: 0;
 }
 
 /* Specific styles for the upload form */

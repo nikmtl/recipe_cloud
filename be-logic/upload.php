@@ -26,38 +26,22 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 try {
     // Validate and process the recipe upload
     $result = processRecipeUpload($pdo);
-    
+
     if ($result['success']) {
-        // Redirect to recipes page or show success message
-        $_SESSION['upload_success'] = "Recipe uploaded successfully!";
+        // Redirect to recipes page 
         header('Location: ../recipes.php');
-        exit();    } else {
+        exit();
+    } else {
         // Store errors and form data in session and redirect back to upload form
-        $_SESSION['upload_errors'] = $result['errors'];
-        $_SESSION['upload_form_data'] = $_POST;
-        // Also preserve file info if there was an uploaded file
-        if (isset($_FILES['recipe-image']) && $_FILES['recipe-image']['error'] !== UPLOAD_ERR_NO_FILE) {
-            $_SESSION['upload_file_info'] = [
-                'name' => $_FILES['recipe-image']['name'],
-                'size' => $_FILES['recipe-image']['size']
-            ];
-        }
+        $_SESSION['errors'] = $result['errors'];
+        $_SESSION['upload_form_data'] = $_POST; // Preserve form data
         header('Location: ../upload.php');
         exit();
     }
-    
-} catch (Exception $e) {
-    // Handle unexpected errors
+} catch (Exception $e) {    // Handle unexpected errors
     error_log("Recipe upload error: " . $e->getMessage());
-    $_SESSION['upload_errors'] = ["An unexpected error occurred. Please try again."];
-    // Also preserve form data on unexpected errors
-    $_SESSION['upload_form_data'] = $_POST;
-    if (isset($_FILES['recipe-image']) && $_FILES['recipe-image']['error'] !== UPLOAD_ERR_NO_FILE) {
-        $_SESSION['upload_file_info'] = [
-            'name' => $_FILES['recipe-image']['name'],
-            'size' => $_FILES['recipe-image']['size']
-        ];
-    }
+    $_SESSION['errors'] = ["An unexpected error occurred. Please try again."];
+    $_SESSION['upload_form_data'] = $_POST; // Preserve form data
     header('Location: ../upload.php');
     exit();
 }
@@ -65,44 +49,43 @@ try {
 /**
  * Main function to process the recipe upload
  */
-function processRecipeUpload($pdo): array {
+function processRecipeUpload($pdo): array{
     $errors = [];
-    
+
     // Validate basic recipe information
     $basicInfo = validateBasicInfo($errors);
-    
+
     // Validate ingredients
     $ingredients = validateIngredients($errors);
-    
+
     // Validate instructions
     $instructions = validateInstructions($errors);
-    
+
     // Handle image upload
     $imagePath = handleImageUpload($errors);
-    
+
     // If validation failed, return errors
     if (!empty($errors)) {
         return ['success' => false, 'errors' => $errors];
     }
-    
+
     // Start database transaction
     $pdo->beginTransaction();
-    
+
     try {
         // Insert recipe into database
         $recipeId = insertRecipe($pdo, $basicInfo, $imagePath);
-        
+
         // Insert ingredients
         insertIngredients($pdo, $recipeId, $ingredients);
-        
+
         // Insert instructions
         insertInstructions($pdo, $recipeId, $instructions);
-        
+
         // Commit transaction
         $pdo->commit();
-        
+
         return ['success' => true, 'recipe_id' => $recipeId];
-        
     } catch (Exception $e) {
         // Rollback transaction on error
         $pdo->rollback();
@@ -114,29 +97,26 @@ function processRecipeUpload($pdo): array {
 /**
  * Validate basic recipe information
  */
-function validateBasicInfo(&$errors): array {
-    $basicInfo = [];
-      // Recipe title validation
+function validateBasicInfo(&$errors): array{
+    $basicInfo = [];    // Recipe title validation
     $title = trim(htmlspecialchars($_POST['recipe-title'] ?? ''));
     if (empty($title)) {
-        $errors[] = "Recipe title is required.";
+        $errors['title'] = "Recipe title is required.";
     } elseif (strlen($title) > 100) {
-        $errors[] = "Title must be less than 100 characters.";
+        $errors['title'] = "Title must be less than 100 characters.";
     } else {
         $basicInfo['title'] = $title;
-    }
-      // Recipe description validation
+    }    // Recipe description validation
     $description = trim(htmlspecialchars($_POST['recipe-description'] ?? ''));
     if (strlen($description) > 1000) {
-        $errors[] = "Description must be less than 1000 characters.";
+        $errors['description'] = "Description must be less than 1000 characters.";
     }
     $basicInfo['description'] = $description;
-      // Preparation time validation
+    // Preparation time validation
     $prepTime = $_POST['recipe-prep-time'] ?? '';
     $prepTimeFormat = $_POST['recipe-prep-time-format'] ?? 'minutes';
-    if (!empty($prepTime)) {
-        if (!is_numeric($prepTime) || $prepTime < 0) {
-            $errors[] = "Preparation time must be a positive number.";
+    if (!empty($prepTime)) {        if (!is_numeric($prepTime) || $prepTime < 0) {
+            $errors['prep_time'] = "Preparation time must be a positive number.";
         } else {
             // Convert to minutes if hours
             $prepTimeMinutes = ($prepTimeFormat === 'hours') ? $prepTime * 60 : $prepTime;
@@ -145,13 +125,12 @@ function validateBasicInfo(&$errors): array {
     } else {
         $basicInfo['prep_time_min'] = null;
     }
-    
+
     // Cooking time validation
     $cookTime = $_POST['recipe-cook-time'] ?? '';
     $cookTimeFormat = $_POST['recipe-cook-time-format'] ?? 'minutes';
-    if (!empty($cookTime)) {
-        if (!is_numeric($cookTime) || $cookTime < 0) {
-            $errors[] = "Cooking time must be a positive number.";
+    if (!empty($cookTime)) {        if (!is_numeric($cookTime) || $cookTime < 0) {
+            $errors['cook_time'] = "Cooking time must be a positive number.";
         } else {
             // Convert to minutes if hours
             $cookTimeMinutes = ($cookTimeFormat === 'hours') ? $cookTime * 60 : $cookTime;
@@ -159,91 +138,84 @@ function validateBasicInfo(&$errors): array {
         }
     } else {
         $basicInfo['cook_time_min'] = null;
-    }
-    
-    // Difficulty validation
+    }    // Difficulty validation
     $difficulty = $_POST['recipe-difficulty'] ?? '';
     if (empty($difficulty)) {
-        $errors[] = "Difficulty level is required.";
+        $errors['difficulty'] = "Difficulty level is required.";
     } elseif (!in_array($difficulty, ['1', '2', '3'])) {
-        $errors[] = "Invalid difficulty level.";
+        $errors['difficulty'] = "Invalid difficulty level.";
     } else {
         $basicInfo['difficulty'] = (int)$difficulty;
-    }
-      // Servings validation
+    }    // Servings validation
     $servings = $_POST['recipe-servings'] ?? '';
     if (empty($servings)) {
-        $errors[] = "Servings must be a positive number.";
+        $errors['servings'] = "Servings must be a positive number.";
     } elseif (!is_numeric($servings) || $servings < 1) {
-        $errors[] = "Servings must be a positive number.";
+        $errors['servings'] = "Servings must be a positive number.";
     } else {
         $basicInfo['servings'] = (int)$servings;
-    }
-    
-    // Category validation
+    }    // Category validation
     $category = $_POST['recipe-category'] ?? '';
     $validCategories = ['breakfast', 'appetizer', 'salad', 'soup', 'sandwich', 'main', 'side', 'snack', 'dessert', 'baking', 'sauce', 'drink'];
     if (empty($category)) {
-        $errors[] = "Recipe category is required.";
+        $errors['category'] = "Recipe category is required.";
     } elseif (!in_array($category, $validCategories)) {
-        $errors[] = "Invalid recipe category.";
+        $errors['category'] = "Invalid recipe category.";
     } else {
         $basicInfo['category'] = $category;
     }
-    
+
     return $basicInfo;
 }
 
 /**
  * Validate ingredients
  */
-function validateIngredients(&$errors): array {
+function validateIngredients(&$errors): array{
     $ingredients = [];
-    
+
     $amounts = $_POST['ingredient-amounts'] ?? [];
     $units = $_POST['ingredient-units'] ?? [];
-    $names = $_POST['ingredient-names'] ?? [];
-      // Check if ingredients exist
+    $names = $_POST['ingredient-names'] ?? [];    // Check if ingredients exist
     if (empty($names)) {
-        $errors[] = "At least one ingredient is required.";
+        $errors['ingredients'] = "At least one ingredient is required.";
         return $ingredients;
     }
-    
+
     // Validate each ingredient
     for ($i = 0; $i < count($names); $i++) {
         $name = trim(htmlspecialchars($names[$i] ?? ''));
         $amount = trim($amounts[$i] ?? '');
-        $unit = trim($units[$i] ?? '');
-          if (empty($name)) {
-            $errors[] = "Ingredient name is required.";
+        $unit = trim($units[$i] ?? '');        if (empty($name)) {
+            $errors['ingredients'] = "Ingredient name is required.";
             continue;
         }
-        
+
         if (strlen($name) > 100) {
-            $errors[] = "Ingredient name must be less than 100 characters.";
+            $errors['ingredients'] = "Ingredient name must be less than 100 characters.";
             continue;
         }
-        
+
         // Validate amount if provided
         if (!empty($amount) && (!is_numeric($amount) || $amount < 0)) {
-            $errors[] = "Amount must be a positive number.";
+            $errors['ingredients'] = "Amount must be a positive number.";
             continue;
         }
-        
+
         // Validate unit
         $validUnits = ['g', 'kg', 'ml', 'l', 'cup', 'tbsp', 'tsp', 'oz', 'lb'];
         if (!empty($unit) && !in_array($unit, $validUnits)) {
-            $errors[] = "Invalid ingredient unit: $unit";
+            $errors['ingredients'] = "Invalid ingredient unit: $unit";
             continue;
         }
-        
+
         $ingredients[] = [
             'amount' => !empty($amount) ? (int)$amount : null,
             'unit' => !empty($unit) ? $unit : null,
             'ingredient' => $name
         ];
     }
-    
+
     return $ingredients;
 }
 
@@ -252,33 +224,32 @@ function validateIngredients(&$errors): array {
  */
 function validateInstructions(&$errors): array {
     $instructions = [];
-    
-    $steps = $_POST['instruction-steps'] ?? [];
-      // Check if instructions exist
+
+    $steps = $_POST['instruction-steps'] ?? [];    // Check if instructions exist
     if (empty($steps)) {
-        $errors[] = "At least one instruction step is required.";
+        $errors['instructions'] = "At least one instruction step is required.";
         return $instructions;
     }
-    
+
     // Validate each instruction
     foreach ($steps as $index => $step) {
         $step = trim(htmlspecialchars($step));
-          if (empty($step)) {
-            $errors[] = "Instruction step is required.";
+        if (empty($step)) {
+            $errors['instructions'] = "Instruction step is required.";
             continue;
         }
-        
+
         if (strlen($step) > 1000) {
-            $errors[] = "Instruction step must be less than 1000 characters.";
+            $errors['instructions'] = "Instruction step must be less than 1000 characters.";
             continue;
         }
-        
+
         $instructions[] = [
             'step_number' => $index + 1,
             'instruction' => $step
         ];
     }
-    
+
     return $instructions;
 }
 
@@ -290,52 +261,49 @@ function handleImageUpload(&$errors): ?string {
     if (!isset($_FILES['recipe-image']) || $_FILES['recipe-image']['error'] === UPLOAD_ERR_NO_FILE) {
         return null; // No image uploaded, which is okay
     }
-    
-    $file = $_FILES['recipe-image'];
-      // Check for upload errors
+
+    $file = $_FILES['recipe-image'];    // Check for upload errors
     if ($file['error'] !== UPLOAD_ERR_OK) {
-        $errors[] = "Error uploading image file.";
+        $errors['image'] = "Error uploading image file.";
         return null;
     }
-    
+
     // Validate file size (10MB max)
     $maxSize = 10 * 1024 * 1024; // 10MB in bytes
     if ($file['size'] > $maxSize) {
-        $errors[] = "Image file size must be less than 10MB.";
+        $errors['image'] = "Image file size must be less than 10MB.";
         return null;
     }
-    
+
     // Validate file type
     $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
     $finfo = finfo_open(FILEINFO_MIME_TYPE);
     $mimeType = finfo_file($finfo, $file['tmp_name']);
     finfo_close($finfo);
-    
+
     if (!in_array($mimeType, $allowedTypes)) {
-        $errors[] = "Invalid image format. Only JPG, PNG and WEBP are allowed.";
+        $errors['image'] = "Invalid image format. Only JPG, PNG and WEBP are allowed.";
         return null;
-    }
-    
-    // Create uploads directory if it doesn't exist
+    }    // Create uploads directory if it doesn't exist
     $uploadDir = __DIR__ . '/../uploads/recipes/';
     if (!is_dir($uploadDir)) {
         if (!mkdir($uploadDir, 0755, true)) {
-            $errors[] = "Failed to create upload directory.";
+            $errors['image'] = "Failed to create upload directory.";
             return null;
         }
     }
-    
+
     // Generate unique filename
     $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
     $filename = uniqid('recipe_', true) . '.' . $extension;
     $filepath = $uploadDir . $filename;
-    
+
     // Move uploaded file
     if (!move_uploaded_file($file['tmp_name'], $filepath)) {
-        $errors[] = "Failed to save uploaded image.";
+        $errors['image'] = "Failed to save uploaded image.";
         return null;
     }
-    
+
     // Return relative path for database storage
     return 'uploads/recipes/' . $filename;
 }
@@ -343,10 +311,11 @@ function handleImageUpload(&$errors): ?string {
 /**
  * Insert recipe into database
  */
-function insertRecipe($pdo, $basicInfo, $imagePath): int {
+function insertRecipe($pdo, $basicInfo, $imagePath): int
+{
     $sql = "INSERT INTO recipes (user_id, title, description, prep_time_min, cook_time_min, difficulty, servings, category, image_path) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    
+
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
         $_SESSION['username'],
@@ -359,17 +328,18 @@ function insertRecipe($pdo, $basicInfo, $imagePath): int {
         $basicInfo['category'],
         $imagePath
     ]);
-    
+
     return $pdo->lastInsertId();
 }
 
 /**
  * Insert ingredients into database
  */
-function insertIngredients($pdo, $recipeId, $ingredients): void {
+function insertIngredients($pdo, $recipeId, $ingredients): void
+{
     $sql = "INSERT INTO ingredients (amount, unit, ingredient, recipe_id) VALUES (?, ?, ?, ?)";
     $stmt = $pdo->prepare($sql);
-    
+
     foreach ($ingredients as $ingredient) {
         $stmt->execute([
             $ingredient['amount'],
@@ -383,10 +353,11 @@ function insertIngredients($pdo, $recipeId, $ingredients): void {
 /**
  * Insert instructions into database
  */
-function insertInstructions($pdo, $recipeId, $instructions): void {
+function insertInstructions($pdo, $recipeId, $instructions): void
+{
     $sql = "INSERT INTO instructions (step_number, instruction, recipe_id) VALUES (?, ?, ?)";
     $stmt = $pdo->prepare($sql);
-    
+
     foreach ($instructions as $instruction) {
         $stmt->execute([
             $instruction['step_number'],
@@ -395,4 +366,3 @@ function insertInstructions($pdo, $recipeId, $instructions): void {
         ]);
     }
 }
-?>
