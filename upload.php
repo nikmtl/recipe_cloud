@@ -9,33 +9,33 @@
 <?php // load header 
 require_once 'be-logic\protected_page.php'; // Ensure the user is logged in before accessing this page
 include_once 'assets/includes/header.php';
+
+
+// Get preserved form data if it exists (this is used to restore the form data after a failed submission)
+$formData = $_SESSION['upload_form_data'] ?? [];
+
+// Clear the preserved data after using it
+unset($_SESSION['upload_form_data']);
+
+// Helper function to get form value
+function getFormValue($key, $default = ''): string{
+    global $formData;
+    return htmlspecialchars($formData[$key] ?? $default);
+}
+
+// Helper function to check if option is selected
+function isSelected($key, $value): string{
+    global $formData;
+    return isset($formData[$key]) && $formData[$key] === $value ? 'selected' : '';
+}
 ?>
 <main>
     <div class="upload-container">
         <div class="upload-header">
             <img src="assets/img/logo.svg" alt="Recipe Cloud Logo" width="24" height="24">
             <h1>Upload New Recipe</h1>
-        </div>        <p class="upload-header-subtitle">Share your culinary masterpiece with the world</p>
-
-        <?php
-        // Display success message
-        if (isset($_SESSION['upload_success'])) {
-            echo '<div class="alert alert-success">' . htmlspecialchars($_SESSION['upload_success']) . '</div>';
-            unset($_SESSION['upload_success']);
-        }
-        
-        // Display error messages
-        if (isset($_SESSION['upload_errors'])) {
-            echo '<div class="alert alert-error">';
-            echo '<ul>';
-            foreach ($_SESSION['upload_errors'] as $error) {
-                echo '<li>' . htmlspecialchars($error) . '</li>';
-            }
-            echo '</ul>';
-            echo '</div>';
-            unset($_SESSION['upload_errors']);
-        }
-        ?>
+        </div>
+        <p class="upload-header-subtitle">Share your culinary masterpiece with the world</p>
 
         <div class="section-taps">
             <button id="tap-header-basic-info" class="tap-header" onclick="openTap('tap-basic-info','tap-header-basic-info')">Basic Info</button>
@@ -52,69 +52,61 @@ include_once 'assets/includes/header.php';
                     </div>
                     <div class="input-group">
                         <label for="recipe-title">Recipe Title</label>
-                        <input type="text" id="recipe-title" name="recipe-title" placeholder="e.g., Spaghetti Bolognese">
+                        <input type="text" id="recipe-title" name="recipe-title" placeholder="e.g., Spaghetti Bolognese" value="<?php echo getFormValue('recipe-title'); ?>">
                     </div>
                     <div class="input-group">
                         <label for="recipe-description">Description</label>
-                        <textarea id="recipe-description" name="recipe-description" placeholder="Briefly describe your recipe"></textarea>
+                        <textarea id="recipe-description" name="recipe-description" placeholder="Briefly describe your recipe"><?php echo getFormValue('recipe-description'); ?></textarea>
                     </div>
                     <div class="input-line" id="recipe-details-input-difficulty">
                         <div class="input-group">
                             <label for="recipe-prep-time">Preparation Time</label>
                             <div class="input-subgroup">
-                                <input type="number" id="recipe-prep-time" name="recipe-prep-time" min="0">
+                                <input type="number" id="recipe-prep-time" name="recipe-prep-time" min="0" value="<?php echo getFormValue('recipe-prep-time'); ?>">
                                 <select name="recipe-prep-time-format">
-                                    <option value="minutes">Minutes</option>
-                                    <option value="hours">Hours</option>
+                                    <option value="minutes" <?php echo isSelected('recipe-prep-time-format', 'minutes'); ?>>Minutes</option>
+                                    <option value="hours" <?php echo isSelected('recipe-prep-time-format', 'hours'); ?>>Hours</option>
                                 </select>
                             </div>
                         </div>
                         <div class="input-group">
                             <label for="recipe-cook-time">Cooking Time</label>
                             <div class="input-subgroup">
-                                <input type="number" id="recipe-cook-time" name="recipe-cook-time" min="0">
+                                <input type="number" id="recipe-cook-time" name="recipe-cook-time" min="0" value="<?php echo getFormValue('recipe-cook-time'); ?>">
                                 <select name="recipe-cook-time-format">
-                                    <option value="minutes">Minutes</option>
-                                    <option value="hours">Hours</option>
+                                    <option value="minutes" <?php echo isSelected('recipe-cook-time-format', 'minutes'); ?>>Minutes</option>
+                                    <option value="hours" <?php echo isSelected('recipe-cook-time-format', 'hours'); ?>>Hours</option>
                                 </select>
                             </div>
                         </div>
                         <div class="input-group">
                             <label for="recipe-difficulty">Difficulty Level</label>
                             <select id="recipe-difficulty" name="recipe-difficulty">
-                                <option value="1">Easy</option>
-                                <option value="2">Medium</option>
-                                <option value="3">Hard</option>
+                                <option value="1" <?php echo isSelected('recipe-difficulty', '1'); ?>>Easy</option>
+                                <option value="2" <?php echo isSelected('recipe-difficulty', '2'); ?>>Medium</option>
+                                <option value="3" <?php echo isSelected('recipe-difficulty', '3'); ?>>Hard</option>
                             </select>
                         </div>
                     </div>
                     <div class="input-line">
                         <div class="input-group">
                             <label for="recipe-servings">Servings</label>
-                            <input type="number" id="recipe-servings" name="recipe-servings" min="1">
+                            <input type="number" id="recipe-servings" name="recipe-servings" min="1" value="<?php echo getFormValue('recipe-servings'); ?>">
                         </div>
                         <div class="input-group">
-                            <label for="recipe-category">Category</label>
-                            <select id="recipe-category" name="recipe-category">
-                                <option value="breakfast">Breakfast</option>
-
-                                <option value="appetizer">Appetizer</option>
-                                <option value="salad">Salad and Veggies</option>
-                                <option value="soup">Soup</option>
-                                <option value="sandwich">Sandwich</option>
-
-                                <option value="main" selected>Main Course</option>
-                                <option value="side">Side Dish</option>
-
-                                <option value="snack">Snack and Dips</option>
-
-                                <option value="dessert">Dessert</option>
-                                <option value="baking">Baking</option>
-
-                                <option value="sauce">Sauce</option>
-
-                                <option value="drink">Drink</option>
-
+                            <label for="recipe-category">Category</label> <select id="recipe-category" name="recipe-category">
+                                <option value="breakfast" <?php echo isSelected('recipe-category', 'breakfast'); ?>>Breakfast</option>
+                                <option value="appetizer" <?php echo isSelected('recipe-category', 'appetizer'); ?>>Appetizer</option>
+                                <option value="salad" <?php echo isSelected('recipe-category', 'salad'); ?>>Salad and Veggies</option>
+                                <option value="soup" <?php echo isSelected('recipe-category', 'soup'); ?>>Soup</option>
+                                <option value="sandwich" <?php echo isSelected('recipe-category', 'sandwich'); ?>>Sandwich</option>
+                                <option value="main" <?php echo isSelected('recipe-category', 'main') ?: (!empty($formData) ? '' : 'selected'); ?>>Main Course</option>
+                                <option value="side" <?php echo isSelected('recipe-category', 'side'); ?>>Side Dish</option>
+                                <option value="snack" <?php echo isSelected('recipe-category', 'snack'); ?>>Snack and Dips</option>
+                                <option value="dessert" <?php echo isSelected('recipe-category', 'dessert'); ?>>Dessert</option>
+                                <option value="baking" <?php echo isSelected('recipe-category', 'baking'); ?>>Baking</option>
+                                <option value="sauce" <?php echo isSelected('recipe-category', 'sauce'); ?>>Sauce</option>
+                                <option value="drink" <?php echo isSelected('recipe-category', 'drink'); ?>>Drink</option>
                             </select>
                         </div>
 
@@ -195,7 +187,7 @@ include_once 'assets/includes/header.php';
                             </svg>
                             Add Step
                         </button>
-                    </div>                    
+                    </div>
                     <div id="instruction-list">
                         <!-- List of added instructions will be displayed here -->
                     </div>
@@ -266,6 +258,61 @@ include_once 'assets/includes/header.php';
         </form>
     </div>
 </main>
+
+<script>
+    // Restore ingredients and instructions from preserved form data
+    document.addEventListener('DOMContentLoaded', function() {
+        <?php if (!empty($formData)): ?>
+            // Restore ingredients
+            <?php if (isset($formData['ingredient-names']) && is_array($formData['ingredient-names'])): ?>
+                const ingredientAmounts = <?php echo json_encode($formData['ingredient-amounts'] ?? []); ?>;
+                const ingredientUnits = <?php echo json_encode($formData['ingredient-units'] ?? []); ?>;
+                const ingredientNames = <?php echo json_encode($formData['ingredient-names']); ?>;
+
+                // Add each ingredient to the list
+                for (let i = 0; i < ingredientNames.length; i++) {
+                    if (ingredientNames[i]) {
+                        // Set the form fields
+                        document.getElementById('ingredient-amount').value = ingredientAmounts[i] || '';
+                        document.getElementById('ingredient-unit').value = ingredientUnits[i] || 'g';
+                        document.getElementById('ingredient-name').value = ingredientNames[i];
+
+                        // Trigger the add ingredient function
+                        if (typeof addIngredient === 'function') {
+                            addIngredient();
+                        }
+                    }
+                }
+
+                // Clear the input fields after restoration
+                document.getElementById('ingredient-amount').value = '';
+                document.getElementById('ingredient-name').value = '';
+            <?php endif; ?>
+
+            // Restore instructions
+            <?php if (isset($formData['instruction-steps']) && is_array($formData['instruction-steps'])): ?>
+                const instructionSteps = <?php echo json_encode($formData['instruction-steps']); ?>;
+
+                // Add each instruction to the list
+                for (let i = 0; i < instructionSteps.length; i++) {
+                    if (instructionSteps[i]) {
+                        // Set the instruction field
+                        document.getElementById('instruction-step').value = instructionSteps[i];
+
+                        // Trigger the add instruction function
+                        if (typeof addInstruction === 'function') {
+                            addInstruction();
+                        }
+                    }
+                }
+
+                // Clear the input field after restoration
+                document.getElementById('instruction-step').value = '';
+            <?php endif; ?>
+        <?php endif; ?>
+    });
+</script>
+
 <?php // load footer
 include_once 'assets/includes/footer.php';
 ?>

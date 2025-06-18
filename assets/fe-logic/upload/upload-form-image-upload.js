@@ -2,7 +2,6 @@
     * This file contains the JavaScript code for handling image uploads in the frontend.
     * It allows users to drag and drop images, select images from their device, and preview the selected image.
 */
-//TODO: check if this file should be rewritten 
 
 //Frontend Image upload functionality
 document.addEventListener('DOMContentLoaded', function() {

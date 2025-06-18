@@ -14,17 +14,8 @@
  */
 
 require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/protected_page.php';
 
-// Initialize session if not already started
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-// Check if user is logged in
-if (!isset($_SESSION['username'])) {
-    header('Location: ../login.php');
-    exit();
-}
 
 // Check if form was submitted via POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -40,10 +31,17 @@ try {
         // Redirect to recipes page or show success message
         $_SESSION['upload_success'] = "Recipe uploaded successfully!";
         header('Location: ../recipes.php');
-        exit();
-    } else {
-        // Store errors in session and redirect back to upload form
+        exit();    } else {
+        // Store errors and form data in session and redirect back to upload form
         $_SESSION['upload_errors'] = $result['errors'];
+        $_SESSION['upload_form_data'] = $_POST;
+        // Also preserve file info if there was an uploaded file
+        if (isset($_FILES['recipe-image']) && $_FILES['recipe-image']['error'] !== UPLOAD_ERR_NO_FILE) {
+            $_SESSION['upload_file_info'] = [
+                'name' => $_FILES['recipe-image']['name'],
+                'size' => $_FILES['recipe-image']['size']
+            ];
+        }
         header('Location: ../upload.php');
         exit();
     }
@@ -52,6 +50,14 @@ try {
     // Handle unexpected errors
     error_log("Recipe upload error: " . $e->getMessage());
     $_SESSION['upload_errors'] = ["An unexpected error occurred. Please try again."];
+    // Also preserve form data on unexpected errors
+    $_SESSION['upload_form_data'] = $_POST;
+    if (isset($_FILES['recipe-image']) && $_FILES['recipe-image']['error'] !== UPLOAD_ERR_NO_FILE) {
+        $_SESSION['upload_file_info'] = [
+            'name' => $_FILES['recipe-image']['name'],
+            'size' => $_FILES['recipe-image']['size']
+        ];
+    }
     header('Location: ../upload.php');
     exit();
 }
@@ -110,25 +116,22 @@ function processRecipeUpload($pdo): array {
  */
 function validateBasicInfo(&$errors): array {
     $basicInfo = [];
-    
-    // Recipe title validation
+      // Recipe title validation
     $title = trim(htmlspecialchars($_POST['recipe-title'] ?? ''));
     if (empty($title)) {
         $errors[] = "Recipe title is required.";
     } elseif (strlen($title) > 100) {
-        $errors[] = "Recipe title must be less than 100 characters.";
+        $errors[] = "Title must be less than 100 characters.";
     } else {
         $basicInfo['title'] = $title;
     }
-    
-    // Recipe description validation
+      // Recipe description validation
     $description = trim(htmlspecialchars($_POST['recipe-description'] ?? ''));
     if (strlen($description) > 1000) {
-        $errors[] = "Recipe description must be less than 1000 characters.";
+        $errors[] = "Description must be less than 1000 characters.";
     }
     $basicInfo['description'] = $description;
-    
-    // Preparation time validation
+      // Preparation time validation
     $prepTime = $_POST['recipe-prep-time'] ?? '';
     $prepTimeFormat = $_POST['recipe-prep-time-format'] ?? 'minutes';
     if (!empty($prepTime)) {
@@ -167,11 +170,10 @@ function validateBasicInfo(&$errors): array {
     } else {
         $basicInfo['difficulty'] = (int)$difficulty;
     }
-    
-    // Servings validation
+      // Servings validation
     $servings = $_POST['recipe-servings'] ?? '';
     if (empty($servings)) {
-        $errors[] = "Number of servings is required.";
+        $errors[] = "Servings must be a positive number.";
     } elseif (!is_numeric($servings) || $servings < 1) {
         $errors[] = "Servings must be a positive number.";
     } else {
@@ -201,8 +203,7 @@ function validateIngredients(&$errors): array {
     $amounts = $_POST['ingredient-amounts'] ?? [];
     $units = $_POST['ingredient-units'] ?? [];
     $names = $_POST['ingredient-names'] ?? [];
-    
-    // Check if ingredients exist
+      // Check if ingredients exist
     if (empty($names)) {
         $errors[] = "At least one ingredient is required.";
         return $ingredients;
@@ -213,9 +214,8 @@ function validateIngredients(&$errors): array {
         $name = trim(htmlspecialchars($names[$i] ?? ''));
         $amount = trim($amounts[$i] ?? '');
         $unit = trim($units[$i] ?? '');
-        
-        if (empty($name)) {
-            $errors[] = "Ingredient name cannot be empty.";
+          if (empty($name)) {
+            $errors[] = "Ingredient name is required.";
             continue;
         }
         
@@ -226,7 +226,7 @@ function validateIngredients(&$errors): array {
         
         // Validate amount if provided
         if (!empty($amount) && (!is_numeric($amount) || $amount < 0)) {
-            $errors[] = "Ingredient amount must be a positive number.";
+            $errors[] = "Amount must be a positive number.";
             continue;
         }
         
@@ -254,8 +254,7 @@ function validateInstructions(&$errors): array {
     $instructions = [];
     
     $steps = $_POST['instruction-steps'] ?? [];
-    
-    // Check if instructions exist
+      // Check if instructions exist
     if (empty($steps)) {
         $errors[] = "At least one instruction step is required.";
         return $instructions;
@@ -264,9 +263,8 @@ function validateInstructions(&$errors): array {
     // Validate each instruction
     foreach ($steps as $index => $step) {
         $step = trim(htmlspecialchars($step));
-        
-        if (empty($step)) {
-            $errors[] = "Instruction step cannot be empty.";
+          if (empty($step)) {
+            $errors[] = "Instruction step is required.";
             continue;
         }
         
@@ -294,8 +292,7 @@ function handleImageUpload(&$errors): ?string {
     }
     
     $file = $_FILES['recipe-image'];
-    
-    // Check for upload errors
+      // Check for upload errors
     if ($file['error'] !== UPLOAD_ERR_OK) {
         $errors[] = "Error uploading image file.";
         return null;
@@ -315,7 +312,7 @@ function handleImageUpload(&$errors): ?string {
     finfo_close($finfo);
     
     if (!in_array($mimeType, $allowedTypes)) {
-        $errors[] = "Invalid image format. Only JPG, PNG, and WEBP are allowed.";
+        $errors[] = "Invalid image format. Only JPG, PNG and WEBP are allowed.";
         return null;
     }
     

@@ -5,6 +5,7 @@
     * It also checks for existing users and handles errors appropriately.
     * It connects to the database and processes user input from forms.
     * It also manages session data for logged-in users.
+    * ERROR HANDLING: Errors are stored in session variables instead of URL parameters for better security and cleaner URLs.
     Sections in this file:
     * 1. User Registration
     * 2. User Login
@@ -81,11 +82,10 @@ function registerUser($pdo): void {
     } elseif (strlen($password) > 32) {
         $errors['password'] = "Password must be shorter than 32 characters.";
     }
-    
-    // If there are errors, redirect back to register page with errors
+      // If there are errors, store them in session and redirect back to register page
     if (!empty($errors)) {
-        $errorQuery = http_build_query(['errors' => $errors]);
-        header('Location: ../register.php?' . $errorQuery);
+        $_SESSION['errors'] = $errors;
+        header('Location: ../register.php');
         exit;
     }
     
@@ -96,14 +96,17 @@ function registerUser($pdo): void {
     $stmt = $pdo->prepare("INSERT INTO users (username, password_hash, email) VALUES (?, ?, ?)");
     try {
         if ($stmt->execute([$username, $hashedPassword, $email])) { // If insert is successful
+            // Clear any previous errors from session
+            if (isset($_SESSION['errors'])) {
+                unset($_SESSION['errors']);
+            }
             $_SESSION['username'] = $username; // Set username in session
             header('Location: ../profile.php?u=' . $_SESSION["username"]); // Redirect to profile page
             exit;
-        } 
-    } catch (PDOException $e) { // Catch any database errors this should not happen, but just in case
+        }    } catch (PDOException $e) { // Catch any database errors this should not happen, but just in case
         $errors['general'] = "Error registering user. Please try again.";
-        $errorQuery = http_build_query(['errors' => $errors]);
-        header('Location: ../register.php?' . $errorQuery); // Redirect back to register page with error
+        $_SESSION['errors'] = $errors;
+        header('Location: ../register.php'); // Redirect back to register page with error
         exit;
     }
 }
@@ -127,34 +130,31 @@ function loginUser($pdo): never {
     if (empty($password)) {
         $errors['password'] = "Password is required.";
     }
-    
-    // If there are errors, redirect back to login page with errors
+      // If there are errors, store them in session and redirect back to login page
     if (!empty($errors)) {
-        $errorQuery = http_build_query(['errors' => $errors]);
-        header('Location: ../login.php?' . $errorQuery);
+        $_SESSION['errors'] = $errors;
+        header('Location: ../login.php');
         exit;
-    }    
+    }
     
     // Fetch user from the database
     $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
     $stmt->execute([$username]);
-    $user = $stmt->fetch();
-
-    // Check if user exists and verify password
+    $user = $stmt->fetch();    // Check if user exists and verify password
     if (!$user) {
         // Username not found -> set error
         $errors['username'] = "Username not found.";
-        $errorQuery = http_build_query(['errors' => $errors]);
-        header('Location: ../login.php?' . $errorQuery);
+        $_SESSION['errors'] = $errors;
+        header('Location: ../login.php');
         exit;
     } elseif (!password_verify($password, $user['password_hash'])) {
         // Password incorrect -> set error
         $errors['password'] = "Incorrect password.";
-        $errorQuery = http_build_query(['errors' => $errors]);
-        header('Location: ../login.php?' . $errorQuery);
+        $_SESSION['errors'] = $errors;
+        header('Location: ../login.php');
         exit;
     } else { // Login successful
-        // Clear any previous session data
+        // Clear any previous session data including errors
         session_unset(); // Unset all session variables
         session_regenerate_id(true); // Regenerate session ID to prevent session fixation attacks
         // This ensures that the session is secure and prevents session hijacking.

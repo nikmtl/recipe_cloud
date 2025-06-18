@@ -3,7 +3,7 @@
     * It checks if the required fields are filled and if the image is selected before allowing submission.
 */
 
-const uploadForm = document.querySelector('.upload-form');
+//const uploadForm = document.querySelector('.upload-form');
 
 // Get references to form elements for validation
 const titleField = document.getElementById('recipe-title');

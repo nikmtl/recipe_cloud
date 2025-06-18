@@ -7,6 +7,17 @@
 
 <?php // load header
 include_once 'assets/includes/header.php';
+
+// Start session to read error messages
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Get errors from session and then clear them
+$errors = $_SESSION['errors'] ?? [];
+if (isset($_SESSION['errors'])) {
+    unset($_SESSION['errors']);
+}
 ?>
 <main>
     <div class="auth-container">
@@ -19,10 +30,9 @@ include_once 'assets/includes/header.php';
             echo '<p>' . htmlspecialchars($_GET['msg']) . '</p>';
         } else {
             echo '<p>Enter your credentials to access your account</p>';
-        }
-        // Display any general errors from backend validation
-        if (isset($_GET['errors']) && isset($_GET['errors']['general'])) {
-            echo '<p class="error-message">' . htmlspecialchars($_GET['errors']['general']) . '</p>';
+        }        // Display any general errors from backend validation
+        if (isset($errors['general'])) {
+            echo '<p class="error-message">' . htmlspecialchars($errors['general']) . '</p>';
         }
         ?>
         <form id="login-form" method="POST" action="be-logic/auth.php">
@@ -32,8 +42,8 @@ include_once 'assets/includes/header.php';
                 <div>
                     <input type="text" id="login-username" name="login-username" autocomplete="username" placeholder="JohnDoe">
                     <p class="error-message" id="login-username-errormsg">
-                        <?php if (isset($_GET['errors']) && isset($_GET['errors']['username'])) {
-                            echo htmlspecialchars($_GET['errors']['username']);
+                        <?php if (isset($errors['username'])) {
+                            echo htmlspecialchars($errors['username']);
                         } ?>
                     </p>
                 </div>
@@ -43,8 +53,8 @@ include_once 'assets/includes/header.php';
                 <div>
                     <input type="password" id="login-password" name="login-password" autocomplete="current-password">
                     <p class="error-message" id="login-password-errormsg">
-                        <?php if (isset($_GET['errors']) && isset($_GET['errors']['password'])) {
-                            echo htmlspecialchars($_GET['errors']['password']);
+                        <?php if (isset($errors['password'])) {
+                            echo htmlspecialchars($errors['password']);
                         } ?>
                     </p>
                 </div>
