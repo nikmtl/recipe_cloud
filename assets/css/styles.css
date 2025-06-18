@@ -15,6 +15,10 @@
     --footer-background-color: #f4f4f566;
     --icon-background: #18181b1a;
     --error-border: #ec0c0c;
+    --success-color: #22c55e;
+    --success-background: #f0fdf4;
+    --error-color: #ef4444;
+    --error-background: #fef2f2;
     --max-width: 1400px;
 }
 
@@ -89,4 +93,92 @@ main div div {
     .mobile-only {
         display: block;
     }
+}
+
+/*alert message styles*/
+.alert {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid;
+}
+
+.alert ul {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.alert li {
+    margin-bottom: 0.5rem;
+}
+
+.alert li:last-child {
+    margin-bottom: 0;
+}
+
+.alert-success {
+    background-color: var(--success-background);
+    border-color: var(--success-color);
+    color: var(--success-color);
+}
+
+.alert-error {
+    background-color: var(--error-background);
+    border-color: var(--error-color);
+    color: var(--error-color);
+}
+
+/* recipes page styles */
+.recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.recipe-card {
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background-color: var(--background-color);
+    transition: box-shadow 0.2s ease;
+}
+
+.recipe-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.recipe-card h3 {
+    padding: 1rem 1rem 0.5rem;
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.recipe-card p {
+    padding: 0 1rem 0.5rem;
+    margin: 0;
+    color: var(--secondary-text-color);
+    font-size: 0.875rem;
+}
+
+.recipe-meta {
+    padding: 0.5rem 1rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.recipe-meta span {
+    background-color: var(--foreground-color);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--secondary-text-color);
 }

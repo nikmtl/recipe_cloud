@@ -15,8 +15,27 @@ include_once 'assets/includes/header.php';
         <div class="upload-header">
             <img src="assets/img/logo.svg" alt="Recipe Cloud Logo" width="24" height="24">
             <h1>Upload New Recipe</h1>
-        </div>
-        <p class="upload-header-subtitle">Share your culinary masterpiece with the world</p>
+        </div>        <p class="upload-header-subtitle">Share your culinary masterpiece with the world</p>
+
+        <?php
+        // Display success message
+        if (isset($_SESSION['upload_success'])) {
+            echo '<div class="alert alert-success">' . htmlspecialchars($_SESSION['upload_success']) . '</div>';
+            unset($_SESSION['upload_success']);
+        }
+        
+        // Display error messages
+        if (isset($_SESSION['upload_errors'])) {
+            echo '<div class="alert alert-error">';
+            echo '<ul>';
+            foreach ($_SESSION['upload_errors'] as $error) {
+                echo '<li>' . htmlspecialchars($error) . '</li>';
+            }
+            echo '</ul>';
+            echo '</div>';
+            unset($_SESSION['upload_errors']);
+        }
+        ?>
 
         <div class="section-taps">
             <button id="tap-header-basic-info" class="tap-header" onclick="openTap('tap-basic-info','tap-header-basic-info')">Basic Info</button>
@@ -84,7 +103,7 @@ include_once 'assets/includes/header.php';
                                 <option value="soup">Soup</option>
                                 <option value="sandwich">Sandwich</option>
 
-                                <option value="main">Main Course</option>
+                                <option value="main" selected>Main Course</option>
                                 <option value="side">Side Dish</option>
 
                                 <option value="snack">Snack and Dips</option>

@@ -11,6 +11,8 @@ window.addEventListener('load', function () {
 document.addEventListener('DOMContentLoaded', function() {
   // Initialize ingredients display on page load
   updateIngredientsDisplay();
+  // Initialize instructions display on page load
+  updateInstructionsDisplay();
 
   // Use event delegation for the add ingredient button
   document.addEventListener('click', function(event) {

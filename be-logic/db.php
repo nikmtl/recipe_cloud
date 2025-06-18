@@ -66,10 +66,9 @@ function initializeTables($pdo): void{
         title VARCHAR(100) NOT NULL,
         description TEXT,
         prep_time_min INT,
-        cook_time_min INT,
-        difficulty INT CHECK (difficulty >= 1 AND difficulty <= 3),
+        cook_time_min INT,        difficulty INT CHECK (difficulty >= 1 AND difficulty <= 3),
         servings INT CHECK (servings > 0),
-        category INT CHECK (category = 'breakfast' OR category = 'appetizer' OR category = 'salad' OR category = 'soup' OR category = 'sandwich' OR category = 'main' OR category = 'side' OR category = 'snack' OR category = 'dessert' OR category = 'baking' OR category = 'sauce' OR category = 'drink'),
+        category VARCHAR(20) CHECK (category IN ('breakfast', 'appetizer', 'salad', 'soup', 'sandwich', 'main', 'side', 'snack', 'dessert', 'baking', 'sauce', 'drink')),
         image_path VARCHAR(255),
         FOREIGN KEY (user_id) REFERENCES users(username) ON DELETE SET NULL
     )";
