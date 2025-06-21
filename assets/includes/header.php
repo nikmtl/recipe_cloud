@@ -90,6 +90,10 @@ if (session_status() === PHP_SESSION_NONE) {
                 <script src="assets/fe-logic/profile.js" defer></script>
                 <link rel="stylesheet" href="assets/css/profile.css">';
             break;
+        case 'settings.php':
+            echo '
+                <link rel="stylesheet" href="assets/css/settings.css">';
+            break;
     }
     ?>
 </head>

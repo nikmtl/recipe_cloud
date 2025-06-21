@@ -18,6 +18,7 @@
     --icon-background: #18181b1a;
     --error-border: #ec0c0c;
     --error-color: #ef4444;
+    --error-background: #ec0c0c1c;
     --success-color: #0d5a29;
     --warning-color: var(--error-color);
     --max-width: 1400px;
