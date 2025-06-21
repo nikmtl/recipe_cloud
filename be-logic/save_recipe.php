@@ -1,9 +1,8 @@
-<!-- save_recipe.php 
+<?php
+/* save_recipe.php
     * This file handles saving and unsaving recipes to/from the favorites table
     * It checks if the user is logged in and processes the request accordingly
--->
-
-<?php
+*/
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/protected_page.php'; // Include session management
 

@@ -1,10 +1,11 @@
-<!-- delete_recipe.php
+<?php
+/* delete_recipe.php
     * This file handles the deletion of a recipe.
     * It checks if the user is logged in and if they have permission to delete the recipe.
     * If the checks pass, it deletes the associated image file and then deletes the recipe from the database.
--->
+*/
 
-<?php
+
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/protected_page.php';
 

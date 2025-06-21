@@ -1,10 +1,10 @@
-<!-- delete_review.php
+<?php
+/* delete_review.php
     * This file handles the deletion of user reviews for recipes.
     * It checks if the user is logged in and has permission to delete the review.
     * After successful deletion, it redirects the user back to the recipe page.
--->
+*/
 
-<?php
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/protected_page.php';
 

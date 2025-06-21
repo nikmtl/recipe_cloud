@@ -1,11 +1,11 @@
-<!-- submit_review.php 
+<?php
+/* submit_review.php
     * This file handles the submission of user reviews for recipes.
     * It checks if the user is logged in and has permission to submit a review.
     * It validates the input data, checks if the user has already rated the recipe, and either updates or inserts the rating.
     * After successful submission, it redirects the user back to the recipe page.
--->
+*/
 
-<?php
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/protected_page.php';
 

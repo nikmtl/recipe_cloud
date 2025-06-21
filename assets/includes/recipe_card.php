@@ -1,11 +1,11 @@
-<!-- recipe_card.php 
+<?php
+/* recipe_card.php 
     * This file contains the HTML structure for displaying a recipe card.
     * It includes the recipe image, title, rating, description, author, and time details.
     * To use this: include this file in your PHP document where you want to display a recipe card. Make sure the `$recipe` array with the necessary data exists.
--->
+*/
 
 
-<?php
 // Add CSS file for recipe card styling
 echo '<link rel="stylesheet" href="assets/css/recipe_card.css">';
 ?>

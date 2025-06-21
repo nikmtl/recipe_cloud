@@ -1,15 +1,15 @@
 <?php
-/**edit_recipe.php
- * This file handles the recipe edit form submission.
- * It validates all inputs, handles file uploads, and updates the recipe in the database.
- * 
- * Processing includes:
- * - Form validation for all recipe fields
- * - Image file upload and validation (optional)
- * - Recipe update in database
- * - Ingredients replacement
- * - Instructions replacement
- * - Error handling and user feedback
+/*edit_recipe.php
+    * This file handles the recipe edit form submission.
+    * It validates all inputs, handles file uploads, and updates the recipe in the database.
+
+    * Processing includes:
+    - Form validation for all recipe fields
+    - Image file upload and validation (optional)
+    - Recipe update in database
+    - Ingredients replacement
+    - Instructions replacement
+    - Error handling and user feedback
  */
 
 require_once __DIR__ . '/db.php';

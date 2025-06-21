@@ -1,4 +1,5 @@
-<!-- auth.php
+<?php
+/*auth.php
     * This file handles user authentication logic including registration, login, and logout.
     * It uses prepared statements to prevent SQL injection and validates user input.
     * The Inputs get sanitized and validated before being processed in the backend too, to ensure security.
@@ -13,9 +14,9 @@
 
     // TODO for the future: Add CSRF protection
     // TODO for the future: Add XSS protection
--->
+*/
 
-<?php
+// Include database connection file
 require_once __DIR__ . '/db.php';
 
 // Initialize session if not already started

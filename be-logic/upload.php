@@ -1,5 +1,5 @@
-<!--
-    * upload.php
+<?php
+/* upload.php
     * This file handles the recipe upload form submission.
     * It validates all inputs, handles file uploads, and creates the recipe in the database.
 
@@ -10,10 +10,8 @@
     - Ingredients insertion
     - Instructions insertion
     - Error handling and user feedback
--->
+*/
 
-
-<?php
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/protected_page.php';
 

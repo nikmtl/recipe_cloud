@@ -1,9 +1,10 @@
-<!-- protected_page.php 
+<?php
+/* protected_page.php
     * This file checks if the user is logged in and redirects to the login page if not.
     * This is just for simple protected pages. For pages that require a spesific account use extra logic.
     * To use this: include this file at the start of your PHP document to protect the page.
--->
-<?php
+*/
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
