@@ -105,19 +105,48 @@ include_once 'assets/includes/header.php'; //load header
                     default:
                         $order_by = " ORDER BY r.id DESC";
                         break;
+                }                  // Get total count for pagination
+                // We need to count distinct recipes, not grouped results
+                $count_base_query = "
+                    FROM recipes r 
+                    LEFT JOIN users u ON r.user_id = u.username 
+                    LEFT JOIN ratings rt ON r.id = rt.recipe_id
+                    WHERE 1=1
+                ";
+                
+                $count_params = [];
+                
+                // Add search condition to count query
+                if (!empty($search)) {
+                    $count_base_query .= " AND (r.title LIKE ? OR r.description LIKE ? OR u.username LIKE ?)";
+                    $search_param = "%$search%";
+                    $count_params[] = $search_param;
+                    $count_params[] = $search_param;
+                    $count_params[] = $search_param;
                 }
 
-                // Get total count for pagination
-                $count_query = "SELECT COUNT(*) as total " . $base_query;
+                // Add category condition to count query
+                if (!empty($category)) {
+                    $count_base_query .= " AND r.category = ?";
+                    $count_params[] = $category;
+                }
+                
                 if ($sort === 'highest_rated') {
-                    $count_query = "SELECT COUNT(*) as total FROM (" .
-                        "SELECT r.id " . $base_query . $order_by .
-                        ") as filtered_recipes";
+                    // For highest rated, count only recipes that have ratings
+                    $count_query = "SELECT COUNT(DISTINCT r.id) as total " . $count_base_query . " AND rt.rating IS NOT NULL";
+                } else {
+                    // For other sorts, count all recipes
+                    $count_query = "SELECT COUNT(DISTINCT r.id) as total " . $count_base_query;
                 }
-
+                
                 $count_stmt = $pdo->prepare($count_query);
-                $count_stmt->execute($params);
+                $count_stmt->execute($count_params);
                 $total_recipes = $count_stmt->fetch(PDO::FETCH_ASSOC)['total'];
+                
+                // Debug: Let's see what's happening
+                error_log("Count Query: " . $count_query);
+                error_log("Total recipes found: " . $total_recipes);
+                error_log("Sort type: " . $sort);
                 // Get recipes with limit and offset
                 $recipes_query = "
                     SELECT r.*, u.username, 
@@ -140,30 +169,35 @@ include_once 'assets/includes/header.php'; //load header
                     }
                 } else {
                     echo '<p>No recipes found.</p>';
-                }
-            } catch (PDOException $e) {
+                }            } catch (PDOException $e) {
                 echo '<p>Error loading recipes. Please try again later.</p>';
                 error_log("Database error in recipes.php: " . $e->getMessage());
+                // Initialize total_recipes to 0 in case of error
+                $total_recipes = 0;
             }
             ?>
-        </div>
-
-        <?php
+        </div>        <?php
+        // Debug information
+        echo "<!-- Debug Info: ";
+        echo "Total recipes: " . (isset($total_recipes) ? $total_recipes : 'not set') . ", ";
+        echo "Offset: $offset, ";
+        echo "Limit: $limit, ";
+        echo "Sort: $sort, ";
+        echo "Show button: " . (isset($total_recipes) && $total_recipes > ($offset + $limit) ? 'yes' : 'no');
+        echo " -->";
+        
         // Show "Load More" button if there are more recipes
         if (isset($total_recipes) && $total_recipes > ($offset + $limit)) {
             $next_offset = $offset + $limit;
             $current_params = $_GET;
             $current_params['offset'] = $next_offset;
             $load_more_url = 'recipes.php?' . http_build_query($current_params);
-
+            
             echo '<div class="load-more-container" style="text-align: center; margin-top: 2rem;">';
             echo '<a href="' . htmlspecialchars($load_more_url) . '" class="secondary-button medium-button">Load More Recipes</a>';
             echo '</div>';
         }
         ?>
-    </div>
-
-
     </div>
 </main>
 <?php // load footer
