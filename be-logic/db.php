@@ -1,10 +1,10 @@
-<!--db.php
-    * This file handles database connection and table initialization.
-    Sections in this file:
-    * 1. Database Connection
-    * 2. Table Initialization
--->
 <?php
+/*db.php
+ * This file handles database connection and table initialization.
+ * Sections in this file:
+ * 1. Database Connection
+ * 2. Table Initialization
+ */
 
 // This calles the start of a connection to the database and initializes the necessary tables if they do not exist.
 $pdo = initiateDatabaseConnection();

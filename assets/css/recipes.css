@@ -51,6 +51,20 @@ main {
     gap: 1.5rem;
 }
 
+.load-more-container {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+#load-more-btn {
+    transition: opacity 0.3s ease;
+}
+
+#load-more-btn:disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
 @media (max-width: 700px) {
     .search-form form {
         flex-direction: column;

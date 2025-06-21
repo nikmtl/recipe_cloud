@@ -82,7 +82,8 @@ if (session_status() === PHP_SESSION_NONE) {
             break;
         case 'recipes.php':
             echo '
-                <link rel="stylesheet" href="assets/css/recipes.css">';
+                <link rel="stylesheet" href="assets/css/recipes.css">
+                <script src="assets/fe-logic/load-more-recipes.js" defer></script>';
             break;
     }
     ?>

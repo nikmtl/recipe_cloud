@@ -138,15 +138,9 @@ include_once 'assets/includes/header.php'; //load header
                     // For other sorts, count all recipes
                     $count_query = "SELECT COUNT(DISTINCT r.id) as total " . $count_base_query;
                 }
-                
-                $count_stmt = $pdo->prepare($count_query);
+                  $count_stmt = $pdo->prepare($count_query);
                 $count_stmt->execute($count_params);
                 $total_recipes = $count_stmt->fetch(PDO::FETCH_ASSOC)['total'];
-                
-                // Debug: Let's see what's happening
-                error_log("Count Query: " . $count_query);
-                error_log("Total recipes found: " . $total_recipes);
-                error_log("Sort type: " . $sort);
                 // Get recipes with limit and offset
                 $recipes_query = "
                     SELECT r.*, u.username, 
@@ -177,24 +171,14 @@ include_once 'assets/includes/header.php'; //load header
             }
             ?>
         </div>        <?php
-        // Debug information
-        echo "<!-- Debug Info: ";
-        echo "Total recipes: " . (isset($total_recipes) ? $total_recipes : 'not set') . ", ";
-        echo "Offset: $offset, ";
-        echo "Limit: $limit, ";
-        echo "Sort: $sort, ";
-        echo "Show button: " . (isset($total_recipes) && $total_recipes > ($offset + $limit) ? 'yes' : 'no');
-        echo " -->";
-        
         // Show "Load More" button if there are more recipes
         if (isset($total_recipes) && $total_recipes > ($offset + $limit)) {
             $next_offset = $offset + $limit;
             $current_params = $_GET;
             $current_params['offset'] = $next_offset;
-            $load_more_url = 'recipes.php?' . http_build_query($current_params);
             
             echo '<div class="load-more-container" style="text-align: center; margin-top: 2rem;">';
-            echo '<a href="' . htmlspecialchars($load_more_url) . '" class="secondary-button medium-button">Load More Recipes</a>';
+            echo '<button id="load-more-btn" class="secondary-button medium-button" type="button">Load More Recipes</button>';
             echo '</div>';
         }
         ?>
