@@ -2,6 +2,7 @@
     * This is the home/index/landing page of the Recipe Cloud application.
     * It displays the hero section, featured recipes, and how-to steps.
     * It also includes buttons to upload a recipe or browse all recipes.
+    TODO: Fetch featured recipes from the database and display them in the featured recipes section.
 -->
 
 <?php // Load the header

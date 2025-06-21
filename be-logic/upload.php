@@ -1,18 +1,19 @@
-<?php
-/**
- * upload.php
- * This file handles the recipe upload form submission.
- * It validates all inputs, handles file uploads, and creates the recipe in the database.
- * 
- * Processing includes:
- * - Form validation for all recipe fields
- * - Image file upload and validation
- * - Recipe creation in database
- * - Ingredients insertion
- * - Instructions insertion
- * - Error handling and user feedback
- */
+<!--
+    * upload.php
+    * This file handles the recipe upload form submission.
+    * It validates all inputs, handles file uploads, and creates the recipe in the database.
 
+    Processing includes:
+    - Form validation for all recipe fields
+    - Image file upload and validation
+    - Recipe creation in database
+    - Ingredients insertion
+    - Instructions insertion
+    - Error handling and user feedback
+-->
+
+
+<?php
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/protected_page.php';
 
