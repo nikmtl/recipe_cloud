@@ -2,6 +2,7 @@
     * This file contains the CSS styles for the button component of the application.
 */
 
+.primary-button,
 button {
     background-color: var(--primary-color);
     color: var(--background-color);
@@ -13,15 +14,18 @@ button {
     cursor: pointer;
 }
 
+.primary-button:hover,
 button:hover {
     background-color: var(--primary-color-hover);
     border: 1px solid var(--primary-color-hover);
 }
 
+.primary-button:focus,
 button:focus {
     border: 1px solid var(--primary-color-hover);
 }
 
+.primary-button:disabled,
 button:disabled {
     border-color: var(--disabled-color);
     background-color: var(--disabled-color);

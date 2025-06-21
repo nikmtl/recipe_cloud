@@ -1,0 +1,62 @@
+/* recipes.css
+    * CSS styles for the recipes page 
+*/
+
+main {
+    align-items: flex-start;
+}
+
+.recipes-container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.recipes-container h1 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.recipes-container p {
+    color: var(--secondary-text-color);
+    margin-bottom: 2rem;
+}
+
+.search-form {
+    margin-bottom: 2rem;
+}
+
+.search-form form {
+    padding: 0rem;
+    border: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.search-form form select,
+.search-form form input[type="submit"] {
+    width: fit-content;
+}
+
+.select-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.recipes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+@media (max-width: 700px) {
+    .search-form form {
+        flex-direction: column;
+    }
+
+    .select-container input{
+        width: -webkit-fill-available !important;
+    }
+}
