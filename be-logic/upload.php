@@ -193,24 +193,35 @@ function validateIngredients(&$errors): array{
         if (strlen($name) > 100) {
             $errors['ingredients'] = "Ingredient name must be less than 100 characters.";
             continue;
+        }        // Validate amount if provided
+        $hasValidAmount = false;
+        $finalAmount = null;
+        if (!empty($amount)) {
+            if (!is_numeric($amount) || $amount < 0) {
+                $errors['ingredients'] = "Amount must be a positive number.";
+                continue;
+            }
+            $hasValidAmount = true;
+            $finalAmount = (int)$amount;
         }
 
-        // Validate amount if provided
-        if (!empty($amount) && (!is_numeric($amount) || $amount < 0)) {
-            $errors['ingredients'] = "Amount must be a positive number.";
-            continue;
-        }
-
-        // Validate unit
-        $validUnits = ['g', 'kg', 'ml', 'l', 'cup', 'tbsp', 'tsp', 'oz', 'lb'];
-        if (!empty($unit) && !in_array($unit, $validUnits)) {
-            $errors['ingredients'] = "Invalid ingredient unit: $unit";
-            continue;
+        // Validate unit - only if there's a valid amount
+        $finalUnit = null;
+        if (!empty($unit)) {
+            $validUnits = ['g', 'kg', 'ml', 'l', 'cup', 'tbsp', 'tsp', 'oz', 'lb'];
+            if (!in_array($unit, $validUnits)) {
+                $errors['ingredients'] = "Invalid ingredient unit: $unit";
+                continue;
+            }
+            // Only store unit if there's a valid amount
+            if ($hasValidAmount) {
+                $finalUnit = $unit;
+            }
         }
 
         $ingredients[] = [
-            'amount' => !empty($amount) ? (int)$amount : null,
-            'unit' => !empty($unit) ? $unit : null,
+            'amount' => $finalAmount,
+            'unit' => $finalUnit,
             'ingredient' => $name
         ];
     }
