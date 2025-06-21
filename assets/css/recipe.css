@@ -443,3 +443,268 @@
         flex-direction: column;
     }
 }
+
+/* Print Styles for Clean Recipe Printing */
+@media print {
+    /* Hide non-essential elements */
+    .backnav,
+    .social-share-buttons,
+    .recipe-actions-save,
+    .recipe-actions-edit,
+    #review-form,
+    .section-taps,
+    header,
+    footer,
+    #recipe-quick-info-and-actions,
+    #reviews-list,
+    .serving-controls,
+    .servings-adjuster .serving-controls {
+        display: none !important;
+    }
+
+    /* Show all tab content */
+    .tap {
+        display: block !important;
+    }
+
+    /* Reset page margins and background */
+    @page {
+        margin: 0.5in;
+        size: letter;
+    }
+
+    html,
+    body {
+        font-size: 12pt;
+        line-height: 1.4;
+        color: black !important;
+        background: white !important;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Recipe container adjustments */
+    .recipe-container {
+        max-width: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .recipe-content {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    /* Add Recipe Cloud logo at the top */
+    .recipe-container::before {
+        content: "";
+        display: block !important;
+        width: 150px;
+        height: 40px;
+        background-image: url('assets/img/logo.svg');
+        background-repeat: no-repeat;
+        background-size: contain;
+        margin-bottom: 1rem;
+    }
+
+    /* Recipe image */
+    .recipe-image-header {
+        height: 200px;
+        margin-bottom: 1rem;
+        page-break-inside: avoid;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 0.5rem;
+    }
+
+    .recipe-image-header img {
+        position: static;
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    /* Recipe header */
+    .recipe-details h1 {
+        font-size: 24pt;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        page-break-after: avoid;
+    }
+
+    .recipe-description {
+        font-size: 11pt;
+        margin-bottom: 1rem;
+        color: #666 !important;
+    }
+
+    .recipe-meta {
+        font-size: 10pt;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .recipe-meta div {
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    .recipe-meta svg {
+        width: 12pt;
+        height: 12pt;
+    }
+
+    /* Badges */
+    .badge {
+        font-size: 9pt;
+        padding: 2px 6px;
+        border-radius: 3px;
+        border: 1px solid #ccc;
+        background: white;
+        color: black;
+    }
+
+    /* Instructions section */
+    #tap-instructions {
+        margin-bottom: 2rem;
+    }
+
+    #tap-instructions::before {
+        content: "Instructions";
+        display: block !important;
+        font-size: 18pt;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: black !important;
+    }
+
+    .instructions-list {
+        margin-bottom: 1rem;
+    }
+
+    .instructions-list div {
+        page-break-inside: avoid;
+        margin-bottom: 0.75rem;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .instruction-number {
+        min-width: 20pt;
+        height: 20pt;
+        font-size: 10pt;
+        font-weight: bold;
+        background-color: black !important;
+        color: white !important;
+        border-radius: 100%;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+    }
+
+    .instructions-list p {
+        font-size: 11pt;
+        line-height: 1.3;
+        margin: 0;
+        color: black !important;
+    }
+
+    /* Ingredients section */
+    #tap-ingredients {
+        margin-bottom: 2rem;
+    }
+
+    #tap-ingredients::before {
+        content: "Ingredients";
+        display: block !important;
+        font-size: 18pt;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: black !important;
+    }
+
+    .ingredients-list {
+        border: 1px solid #ccc;
+        padding: 1rem;
+        page-break-inside: avoid;
+        margin-bottom: 1rem;
+        border-radius: 0.5rem;
+    }
+
+    .ingredients-list h4 {
+        font-size: 14pt;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
+
+    .ingredients-list ul {
+        font-size: 11pt;
+        line-height: 1.3;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .ingredients-list li {
+        margin-bottom: 0.25rem;
+        page-break-inside: avoid;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .indicator {
+        width: 4pt;
+        height: 4pt;
+        background-color: black !important;
+        border-radius: 100%;
+        flex-shrink: 0;
+    }
+
+    .ingredient-amount,
+    .ingredient-unit,
+    .ingredient-name {
+        color: black !important;
+    }
+
+    /* Add footer with Recipe Cloud branding */
+    .recipe-container::after {
+        content: "Recipe from Recipe Cloud";
+        display: block !important;
+        text-align: center;
+        font-size: 9pt;
+        color: #666 !important;
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 1px solid #ccc;
+    }
+
+    /* Force black text and white background */
+    * {
+        color: black !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    /* Preserve important background colors */
+    .instruction-number {
+        background-color: black !important;
+        color: white !important;
+    }
+
+    .indicator {
+        background-color: black !important;
+    }
+
+    /* Page breaks */
+    h1 {
+        page-break-after: avoid;
+    }
+
+    .ingredients-list,
+    .instructions-list {
+        page-break-inside: avoid;
+    }
+}
