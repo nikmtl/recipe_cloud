@@ -51,13 +51,14 @@ include_once 'assets/includes/header.php'; // Load the header
                         LIMIT 4
                     ");
                     $stmt->execute();
-                    $featured_recipes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                    // Fill with additional recipes if less than 4 featured recipes found
+                    $featured_recipes = $stmt->fetchAll(PDO::FETCH_ASSOC);                    // Fill with additional recipes if less than 4 featured recipes found
                     if (count($featured_recipes) < 4) {
                         $featured_ids = array_column($featured_recipes, 'id');
-                        $placeholders = str_repeat('?,', count($featured_ids) - 1) . '?';
-                        $excluded_condition = count($featured_ids) > 0 ? "AND r.id NOT IN ($placeholders)" : "";
+                        $excluded_condition = "";
+                        if (count($featured_ids) > 0) {
+                            $placeholders = str_repeat('?,', count($featured_ids) - 1) . '?';
+                            $excluded_condition = "AND r.id NOT IN ($placeholders)";
+                        }
                         
                         $stmt = $pdo->prepare("
                             SELECT r.*, u.username, 
