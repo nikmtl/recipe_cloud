@@ -22,6 +22,12 @@ button:focus {
     border: 1px solid var(--primary-color-hover);
 }
 
+button:disabled {
+    border-color: var(--disabled-color);
+    background-color: var(--disabled-color);
+    cursor: not-allowed;
+}
+
 .secondary-button {
     background-color: var(--background-color);
     color: var(--text-color);
@@ -31,6 +37,15 @@ button:focus {
 .secondary-button:hover {
     background-color: var(--background-color-hover);
     border: 1px solid var(--border-color);
+}
+
+.warning-button {
+    border-color: var(--warning-color);
+}
+
+.warning-button:hover {
+    background-color: var(--warning-color);
+    color: var(--background-color);
 }
 
 .ghost-button {
