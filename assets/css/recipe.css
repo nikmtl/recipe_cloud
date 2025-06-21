@@ -435,3 +435,11 @@
 .imitate-secondary-button:focus {
     border: 1px solid var(--primary-color-hover);
 }
+
+
+/* Responsive Styles */
+@media (max-width: 700px) {
+    .recipe-content {
+        flex-direction: column;
+    }
+}
