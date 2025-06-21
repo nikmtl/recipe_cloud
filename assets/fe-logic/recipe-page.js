@@ -101,33 +101,42 @@ document.addEventListener('DOMContentLoaded', function () { // Ensure the DOM is
     const ingredientsList = document.getElementById('ingredients-list');
     const originalServingsElement = document.getElementById('original-servings');
     // Check if all required elements exist before proceeding
-    if (servingsInput && decreaseBtn && increaseBtn && ingredientsList && originalServingsElement) {
-        const originalServings = originalServingsElement.value; function updateIngredients() {
+    if (servingsInput && decreaseBtn && increaseBtn && ingredientsList && originalServingsElement) {        const originalServings = originalServingsElement.value; 
+        
+        function updateIngredients() {
             const currentServings = parseInt(servingsInput.value);
             const ratio = currentServings / originalServings;
 
             const ingredientItems = ingredientsList.querySelectorAll('li');
 
             ingredientItems.forEach(item => {
-                const originalAmount = parseFloat(item.dataset.originalAmount);
+                const originalAmountStr = item.dataset.originalAmount;
+                
+                // Only perform calculation if ingredient has a valid amount
+                if (originalAmountStr && originalAmountStr.trim() !== '' && !isNaN(parseFloat(originalAmountStr))) {
+                    const originalAmount = parseFloat(originalAmountStr);
+                    let newAmount = originalAmount * ratio;
 
-                let newAmount = originalAmount * ratio;
+                    // Format the amount nicely
+                    if (newAmount < 1 && newAmount > 0) {
+                        // Convert to fraction for small amounts
+                        newAmount = formatAsFraction(newAmount);
+                    } else if (newAmount % 1 === 0) {
+                        // Whole number
+                        newAmount = Math.round(newAmount).toString();
+                    } else {
+                        // Decimal, round to 2 places
+                        newAmount = newAmount.toFixed(2);
+                        // Remove trailing zeros
+                        newAmount = parseFloat(newAmount).toString();
+                    }
 
-                // Format the amount nicely
-                if (newAmount < 1 && newAmount > 0) {
-                    // Convert to fraction for small amounts
-                    newAmount = formatAsFraction(newAmount);
-                } else if (newAmount % 1 === 0) {
-                    // Whole number
-                    newAmount = Math.round(newAmount).toString();
-                } else {
-                    // Decimal, round to 2 places
-                    newAmount = newAmount.toFixed(2);
-                    // Remove trailing zeros
-                    newAmount = parseFloat(newAmount).toString();
+                    const amountElement = item.querySelector('.ingredient-amount');
+                    if (amountElement) {
+                        amountElement.textContent = newAmount;
+                    }
                 }
-
-                item.querySelector('.ingredient-amount').textContent = newAmount;
+                // If no valid amount, skip calculation - ingredient will display as-is
             });
         }
 

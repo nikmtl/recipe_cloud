@@ -19,7 +19,8 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
 $recipe_id = (int)$_GET['id'];
 
 // Fetch recipe details with user information
-try {    $stmt = $pdo->prepare("
+try {
+    $stmt = $pdo->prepare("
         SELECT r.*, u.username
         FROM recipes r 
         LEFT JOIN users u ON r.user_id = u.username 
@@ -27,12 +28,12 @@ try {    $stmt = $pdo->prepare("
     ");
     $stmt->execute([$recipe_id]);
     $recipe = $stmt->fetch(PDO::FETCH_ASSOC);
-    
+
     if (!$recipe) {
         header('Location: recipes.php');
         exit();
     }
-    
+
     $recipe['total_time_min'] = (int)$recipe['prep_time_min'] + (int)$recipe['cook_time_min'];
 
     // Fetch ingredients
@@ -165,13 +166,16 @@ include_once 'assets/includes/header.php'; //load header
                                             <button type="button" id="increase-servings" class="serving-btn">+</button>
                                         </div>
                                     </div>
-                                </div>
-                                <ul id="ingredients-list">
+                                </div>                                <ul id="ingredients-list">
                                     <?php foreach ($ingredients as $ingredient): ?>
-                                        <li data-original-amount="<?php echo htmlspecialchars($ingredient['amount']); ?>" data-unit="<?php echo htmlspecialchars($ingredient['unit']); ?>" data-ingredient="<?php echo htmlspecialchars($ingredient['ingredient']); ?>">
+                                        <li data-original-amount="<?php echo htmlspecialchars($ingredient['amount'] ?? ''); ?>" data-unit="<?php echo htmlspecialchars($ingredient['unit'] ?? ''); ?>" data-ingredient="<?php echo htmlspecialchars($ingredient['ingredient']); ?>">
                                             <span class="indicator"></span>
-                                            <span class="ingredient-amount"><?php echo htmlspecialchars($ingredient['amount']); ?></span>
-                                            <span class="ingredient-unit"><?php echo htmlspecialchars($ingredient['unit']); ?></span>
+                                            <?php if (!empty($ingredient['amount'])): ?>
+                                                <span class="ingredient-amount"><?php echo htmlspecialchars($ingredient['amount']); ?></span>
+                                            <?php endif; ?>
+                                            <?php if (!empty($ingredient['unit'])): ?>
+                                                <span class="ingredient-unit"><?php echo htmlspecialchars($ingredient['unit']); ?></span>
+                                            <?php endif; ?>
                                             <span class="ingredient-name"><?php echo htmlspecialchars($ingredient['ingredient']); ?></span>
                                         </li>
                                     <?php endforeach; ?>
@@ -244,29 +248,29 @@ include_once 'assets/includes/header.php'; //load header
                                                                 <span style="color: <?php echo $i <= $review['rating'] ? '#ffd700' : '#ddd'; ?>;">★</span>
                                                             <?php endfor; ?>
                                                         </div>
-                                                        <small><?php 
-                                                            $created = strtotime($review['created_at']);
-                                                            $now = time();
-                                                            $diff = $now - $created;
-                                                            
-                                                            if ($diff < 60) {
-                                                                echo "just now";
-                                                            } elseif ($diff < 3600) {
-                                                                $mins = floor($diff / 60);
-                                                                echo $mins . " minute" . ($mins > 1 ? "s" : "") . " ago";
-                                                            } elseif ($diff < 86400) {
-                                                                $hours = floor($diff / 3600);
-                                                                echo $hours . " hour" . ($hours > 1 ? "s" : "") . " ago";
-                                                            } elseif ($diff < 604800) {
-                                                                $days = floor($diff / 86400);
-                                                                echo $days . " day" . ($days > 1 ? "s" : "") . " ago";
-                                                            } elseif ($diff < 2592000) {
-                                                                $weeks = floor($diff / 604800);
-                                                                echo $weeks . " week" . ($weeks > 1 ? "s" : "") . " ago";
-                                                            } else {
-                                                                echo date('M j, Y', $created);
-                                                            }
-                                                        ?></small>
+                                                        <small><?php
+                                                                $created = strtotime($review['created_at']);
+                                                                $now = time();
+                                                                $diff = $now - $created;
+
+                                                                if ($diff < 60) {
+                                                                    echo "just now";
+                                                                } elseif ($diff < 3600) {
+                                                                    $mins = floor($diff / 60);
+                                                                    echo $mins . " minute" . ($mins > 1 ? "s" : "") . " ago";
+                                                                } elseif ($diff < 86400) {
+                                                                    $hours = floor($diff / 3600);
+                                                                    echo $hours . " hour" . ($hours > 1 ? "s" : "") . " ago";
+                                                                } elseif ($diff < 604800) {
+                                                                    $days = floor($diff / 86400);
+                                                                    echo $days . " day" . ($days > 1 ? "s" : "") . " ago";
+                                                                } elseif ($diff < 2592000) {
+                                                                    $weeks = floor($diff / 604800);
+                                                                    echo $weeks . " week" . ($weeks > 1 ? "s" : "") . " ago";
+                                                                } else {
+                                                                    echo date('M j, Y', $created);
+                                                                }
+                                                                ?></small>
                                                     </div>
                                                 </div>
                                                 <p class="review-comment"><?php echo nl2br(htmlspecialchars($review['comment_text'])); ?></p>
