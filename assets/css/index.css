@@ -45,6 +45,23 @@
     align-items: center;
     margin-bottom: 2rem;
 }
+
+.featured-recipes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+@media (max-width: 768px) {
+    .featured-recipes {
+        grid-template-columns: 1fr;
+    }
+    
+    .recipe-card-content {
+        padding: 16px;
+    }
+}
 /* Section end */
 
 /* 3. Start-sharing-container styles */

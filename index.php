@@ -1,12 +1,13 @@
 <!-- index.php  
     * This is the home/index/landing page of the Recipe Cloud application.
     * It displays the hero section, featured recipes, and how-to steps.
+    * The featured recipes are fetched from the database and displayed in a grid format.
     * It also includes buttons to upload a recipe or browse all recipes.
-    TODO: Fetch featured recipes from the database and display them in the featured recipes section.
 -->
 
-<?php // Load the header
-include_once 'assets/includes/header.php';
+<?php
+require_once 'be-logic/db.php'; // Load database connection
+include_once 'assets/includes/header.php'; // Load the header
 ?>
 
 <main>
@@ -35,8 +36,64 @@ include_once 'assets/includes/header.php';
                 <a href="recipes.php">View all</a>
             </div>
             <div class="featured-recipes">
-                <?php
-                //TODO Fetch featured recipes from the database
+                <?php                // Fetch featured recipes (top 4 best rated recipes)
+                try {
+                    $stmt = $pdo->prepare("
+                        SELECT r.*, u.username, 
+                               AVG(rt.rating) as avg_rating, 
+                               COUNT(rt.rating) as rating_count
+                        FROM recipes r 
+                        LEFT JOIN users u ON r.user_id = u.username 
+                        LEFT JOIN ratings rt ON r.id = rt.recipe_id
+                        GROUP BY r.id
+                        HAVING rating_count > 0
+                        ORDER BY avg_rating DESC, rating_count DESC
+                        LIMIT 4
+                    ");
+                    $stmt->execute();
+                    $featured_recipes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                    // Fill with additional recipes if less than 4 featured recipes found
+                    if (count($featured_recipes) < 4) {
+                        $featured_ids = array_column($featured_recipes, 'id');
+                        $placeholders = str_repeat('?,', count($featured_ids) - 1) . '?';
+                        $excluded_condition = count($featured_ids) > 0 ? "AND r.id NOT IN ($placeholders)" : "";
+                        
+                        $stmt = $pdo->prepare("
+                            SELECT r.*, u.username, 
+                                   COALESCE(AVG(rt.rating), 0) as avg_rating, 
+                                   COALESCE(COUNT(rt.rating), 0) as rating_count
+                            FROM recipes r 
+                            LEFT JOIN users u ON r.user_id = u.username 
+                            LEFT JOIN ratings rt ON r.id = rt.recipe_id
+                            WHERE 1=1 $excluded_condition
+                            GROUP BY r.id
+                            ORDER BY r.id DESC
+                            LIMIT " . (4 - count($featured_recipes))
+                        );
+                        if (count($featured_ids) > 0) {
+                            $stmt->execute($featured_ids);
+                        } else {
+                            $stmt->execute();
+                        }
+                        $additional_recipes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        $featured_recipes = array_merge($featured_recipes, $additional_recipes);
+                    }
+
+                    // Display featured recipes
+                    foreach ($featured_recipes as $recipe){
+                        $total_time = (int)$recipe['prep_time_min'] + (int)$recipe['cook_time_min'];
+                        $description = $recipe['description'] ? htmlspecialchars(substr($recipe['description'], 0, 60)) : 'Classic recipe with delicious ingredients';
+                        include 'assets/includes/recipe_card.php';
+                    }
+
+                    if (empty($featured_recipes)) {
+                        echo '<p>No recipes available yet. <a href="upload.php">Upload the first recipe!</a></p>';
+                    }
+                } catch (PDOException $e) {
+                    echo '<p>Error loading featured recipes. Please try again later.</p>';
+                    error_log("Database error: " . $e->getMessage());
+                }
                 ?>
             </div>
         </div>
