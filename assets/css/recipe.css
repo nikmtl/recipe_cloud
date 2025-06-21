@@ -1,9 +1,20 @@
 /* Backnav */
+.backnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 2rem 0px 1rem 0px;
+}
+
 .back-button {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    margin: 2rem 0px 1rem 0px;
+}
+
+.success-message {
+    color: var(--success-color);
+    font-size: 14px;
 }
 
 /* Image */

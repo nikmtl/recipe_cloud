@@ -1,6 +1,9 @@
 /* upload.css 
     * This file contains the CSS styles for the upload page
 */
+.back-button {
+    margin-bottom: 2rem;
+}
 
 .upload-container{
     max-width: 56rem;
@@ -235,6 +238,24 @@
 
 .navigation-buttons button{
     width: fit-content;
+}
+
+/* Current image display in edit recipe */
+.current-image {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: var(--foreground-color);
+    border-radius: 0.5rem;
+}
+
+.current-image h4 {
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.current-image img {
+    border-radius: 0.375rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 /* mobile styles */

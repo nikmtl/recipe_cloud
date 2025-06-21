@@ -94,15 +94,25 @@ include_once 'assets/includes/header.php'; //load header
 
 <main>
     <div class="recipe-container">
-        <a class="back-button" href="recipes.php"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left mr-2 h-4 w-4" __v0_r="0,3543,3557">
-                <path d="m12 19-7-7 7-7"></path>
-                <path d="M19 12H5"></path>
-            </svg>Back to Recipes</a>        
-            <div>
+        <div class="backnav">
+            <a class="back-button" href="recipes.php"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left mr-2 h-4 w-4" __v0_r="0,3543,3557">
+                    <path d="m12 19-7-7 7-7"></path>
+                    <path d="M19 12H5"></path>
+                </svg>Back to Recipes
+            </a>
+            <?php
+            // Display success message if it exists
+            if (isset($_SESSION['success'])) {
+                echo '<p class="success-message">' . htmlspecialchars($_SESSION['success']) . '</p>';
+                unset($_SESSION['success']);
+            }
+            ?>
+        </div>
+        <div>
             <?php if (!empty($recipe['image_path'])): ?>
-            <div class="recipe-image-header">
-                <img src="<?php echo htmlspecialchars($recipe['image_path']); ?>" alt="<?php echo htmlspecialchars($recipe['title']); ?>" class="recipe-image">
-            </div>
+                <div class="recipe-image-header">
+                    <img src="<?php echo htmlspecialchars($recipe['image_path']); ?>" alt="<?php echo htmlspecialchars($recipe['title']); ?>" class="recipe-image">
+                </div>
             <?php endif; ?>
             <div class="recipe-content">
                 <div class="recipe-details">
@@ -168,7 +178,8 @@ include_once 'assets/includes/header.php'; //load header
                                             <button type="button" id="increase-servings" class="serving-btn">+</button>
                                         </div>
                                     </div>
-                                </div>                                <ul id="ingredients-list">
+                                </div>
+                                <ul id="ingredients-list">
                                     <?php foreach ($ingredients as $ingredient): ?>
                                         <li data-original-amount="<?php echo htmlspecialchars($ingredient['amount'] ?? ''); ?>" data-unit="<?php echo htmlspecialchars($ingredient['unit'] ?? ''); ?>" data-ingredient="<?php echo htmlspecialchars($ingredient['ingredient']); ?>">
                                             <span class="indicator"></span>

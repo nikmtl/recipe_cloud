@@ -113,3 +113,10 @@ function updateIngredientsDisplay() {
     ingredientListEmptyMsg.style.display = 'none';
   }
 }
+
+// Helper function to clear all ingredients (for edit recipe functionality)
+function clearIngredients() {
+  const ingredientList = document.getElementById('ingredient-list');
+  ingredientList.innerHTML = '';
+  updateIngredientsDisplay();
+}

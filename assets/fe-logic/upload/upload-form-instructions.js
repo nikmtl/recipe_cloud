@@ -182,3 +182,10 @@ function clearError(inputField, messageField) {
     inputField.classList.remove('error');
   }
 }
+
+// Helper function to clear all instructions (for edit recipe functionality)
+function clearInstructions() {
+  const instructionList = document.getElementById('instruction-list');
+  instructionList.innerHTML = '';
+  updateInstructionsDisplay();
+}

@@ -59,6 +59,7 @@ if (session_status() === PHP_SESSION_NONE) {
             echo '<link rel="stylesheet" href="assets/css/index.css">';
             break;
         case 'upload.php':
+        case 'edit_recipe.php':
             echo '
                 <link rel="stylesheet" href="assets/css/upload.css">
                 <link rel="stylesheet" href="assets/css/image-upload.css">
@@ -147,7 +148,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <a href="index.php">Home</a>
         <a href="recipes.php">Recipes</a>
         <a href="upload.php">Upload</a>
-        <?php if (isset($_SESSION["username"])): ?>  <!-- If user is logged in, show profile link -->
+        <?php if (isset($_SESSION["username"])): ?> <!-- If user is logged in, show profile link -->
             <a href="profile.php?u=<?php echo $_SESSION['username']; ?>">My Profile</a>
         <?php endif; ?>
         <?php if (isset($_SESSION["username"])): ?> <!-- If user is logged in, show sign out button -->
@@ -172,4 +173,3 @@ if (session_status() === PHP_SESSION_NONE) {
         <?php endif; ?>
     </div>
     <div class="mobile-nav-background" id="mobile-nav-background"></div> <!-- Background for mobile menu to dim the rest of the page -->
-    
