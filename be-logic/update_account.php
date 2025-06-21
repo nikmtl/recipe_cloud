@@ -1,8 +1,7 @@
 <?php
-/*
- * update_account.php
- * Handles updating user account information
- */
+/*update_account.php
+    * Handles updating user account information
+*/
 
 require_once 'protected_page.php';
 require_once 'db.php';

@@ -1,3 +1,7 @@
+/* profile.css 
+    * Styles for user profile pages
+*/
+
 main {
     display: flex;
     flex-direction: column;

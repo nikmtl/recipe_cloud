@@ -1,8 +1,8 @@
 <?php
 /* get_user_profile.php
- * This file fetches user profile information including statistics
- * Returns user data: first name, last name, username, joined date, recipe count, favorites count, and how many times their recipes were favorited
- */
+    * This file fetches user profile information including statistics
+    * Returns user data: first name, last name, username, joined date, recipe count, favorites count, and how many times their recipes were favorited
+*/
 
 require_once 'db.php';
 

@@ -1,8 +1,7 @@
 <?php
-/*
- * delete_account.php
- * Handles permanently deleting user account and all associated data
- */
+/*delete_account.php
+    * Handles permanently deleting user account and all associated data
+*/
 
 require_once 'protected_page.php';
 require_once 'db.php';
