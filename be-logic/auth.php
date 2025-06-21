@@ -44,12 +44,13 @@ function registerUser($pdo): void {
     $username = trim(htmlspecialchars($_POST['register-username'] ?? ''));
     $password = $_POST['register-password'] ?? '';
     $email = trim(htmlspecialchars($_POST['register-email'] ?? ''));
-    
-    // Validate username
+      // Validate username
     if (empty($username)) {
         $errors['username'] = "Username is required.";
     } elseif (strlen($username) < 2 || strlen($username) > 20) {
         $errors['username'] = "Username must be between 3 and 20 characters.";
+    } elseif (in_array(strtolower($username), ['admin', 'administrator', 'recipe cloud', 'recipecloud', 'root', 'system'])) {
+        $errors['username'] = "This username is not allowed.";
     }
     
     // Check if username already exists
