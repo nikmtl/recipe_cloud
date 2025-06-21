@@ -48,13 +48,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recipe_id'])) {
             $stmt = $pdo->prepare('DELETE FROM recipes WHERE id = ?');
             $stmt->execute([$recipeId]);
             // Redirect to the user's profile page after deletion
-            header('Location: ../profile.php?u=' . $user_id);
+            header('Location: ../profile.php');
         } catch (PDOException $e) {
             error_log("Database error: " . $e->getMessage());
             header('Location: ../recipe.php?id=' . $recipeId);
             exit();
         }    }
 } else {
-    header('Location: ../profile.php?u=' . $_SESSION['username']);
+    header('Location: ../profile.php?');
     exit();
 }

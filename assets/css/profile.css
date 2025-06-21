@@ -1,0 +1,102 @@
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px;
+}
+
+.profile-container{
+    max-width: 1100px;
+}
+
+.profile-information {
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background-color: var(--background-color);
+    margin-bottom: 1rem;
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.profile-header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 2rem;
+}
+
+.username{
+    color: var(--secondary-text-color);
+}
+
+.no-name{
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    color: var(--text-color) !important;
+    line-height: 2rem;
+}
+
+.joined-date {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: var(--secondary-text-color);
+}
+
+.profile-bio p{
+    margin-top: .75rem;
+    color: var(--secondary-text-color);
+}
+
+.profile-stats {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.profile-stats div {
+    text-align: center;
+}
+
+.profile-stats p {
+    color: var(--secondary-text-color);
+}
+
+/* Recipes grid */
+.recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.no-recipes {
+    text-align: center;
+    color: var(--secondary-text-color);
+    padding: 2rem;
+    font-style: italic;
+}
+
+.no-recipes a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.no-recipes a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 700px) {
+    .recipes-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}

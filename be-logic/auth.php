@@ -102,7 +102,7 @@ function registerUser($pdo): void {
                 unset($_SESSION['errors']);
             }
             $_SESSION['username'] = $username; // Set username in session
-            header('Location: ../profile.php?u=' . $_SESSION["username"]); // Redirect to profile page
+            header('Location: ../profile.php'); // Redirect to profile page
             exit;
         }    } catch (PDOException $e) { // Catch any database errors this should not happen, but just in case
         $errors['general'] = "Error registering user. Please try again.";
@@ -163,7 +163,7 @@ function loginUser($pdo): never {
         // Set user ID in session (session already started at top)
         $_SESSION['username'] = $username; // Set username in session
         // Redirect to profile page
-        header('Location: ../profile.php?u=' . $_SESSION["username"]);
+        header('Location: ../profile.php');
         exit;
     }
 }

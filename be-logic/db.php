@@ -46,7 +46,7 @@ function initiateDatabaseConnection(): PDO{
 // It creates the users, recipes, instructions, ingredients, ratings, and favorites tables with appropriate columns and constraints.
 // See the db documentation for more details on the table structure and constraints.
 function initializeTables($pdo): void{
-    // Create users table if it doesn't exist
+    // Create users table if it doesn't exist //The Profile image is not used at the moment, but it is a good idea to have it in case i want to implement user profile images in the future.
     $sql = "CREATE TABLE IF NOT EXISTS users (
         first_name VARCHAR(50) NOT NULL,
         last_name VARCHAR(50) NOT NULL,

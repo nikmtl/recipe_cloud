@@ -85,6 +85,11 @@ if (session_status() === PHP_SESSION_NONE) {
                 <link rel="stylesheet" href="assets/css/recipes.css">
                 <script src="assets/fe-logic/load-more-recipes.js" defer></script>';
             break;
+        case 'profile.php':
+            echo '
+                <script src="assets/fe-logic/profile.js" defer></script>
+                <link rel="stylesheet" href="assets/css/profile.css">';
+            break;
     }
     ?>
 </head>
@@ -104,7 +109,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 <a href="recipes.php">Recipes</a>
                 <a href="upload.php">Upload</a>
                 <?php if (isset($_SESSION["username"])): ?> <!-- If user is logged in, show profile link -->
-                    <a href="profile.php?u=<?php echo $_SESSION['username']; ?>">My Profile</a>
+                    <a href="profile.php">My Profile</a>
                 <?php endif; ?>
             </div>
             <!-- Authentication Buttons (Desktop) -->
@@ -154,7 +159,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <a href="recipes.php">Recipes</a>
         <a href="upload.php">Upload</a>
         <?php if (isset($_SESSION["username"])): ?> <!-- If user is logged in, show profile link -->
-            <a href="profile.php?u=<?php echo $_SESSION['username']; ?>">My Profile</a>
+            <a href="profile.php?>">My Profile</a>
         <?php endif; ?>
         <?php if (isset($_SESSION["username"])): ?> <!-- If user is logged in, show sign out button -->
             <form method="POST" action="be-logic/auth.php">
