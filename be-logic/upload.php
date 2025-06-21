@@ -25,11 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 try {
     // Validate and process the recipe upload
-    $result = processRecipeUpload($pdo);
-
+    $result = processRecipeUpload($pdo);    
     if ($result['success']) {
-        // Redirect to recipes page 
-        header('Location: ../recipes.php');
+        // Redirect to the newly created recipe page
+        header('Location: ../recipe.php?id=' . $result['recipe_id']);
         exit();
     } else {
         // Store errors and form data in session and redirect back to upload form
