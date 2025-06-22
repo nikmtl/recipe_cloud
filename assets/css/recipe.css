@@ -494,24 +494,21 @@
     .recipe-content {
         flex-direction: column;
         gap: 1rem;
-    }
-
-    /* Add Recipe Cloud logo at the top */
+    }    /* Add Recipe Cloud logo at the top */
     .recipe-container::before {
         content: "";
         display: block !important;
         width: 150px;
         height: 40px;
-        background-image: url('assets/img/logo.svg');
+        background-image: url('../img/logo.svg');
         background-repeat: no-repeat;
         background-size: contain;
-        margin-bottom: 1rem;
-    }
-
-    /* Recipe image */
+        margin-bottom: 0.5rem;
+    }/* Recipe image */
     .recipe-image-header {
         height: 200px;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
+        margin-top: 0;
         page-break-inside: avoid;
         width: 100%;
         overflow: hidden;
@@ -582,10 +579,7 @@
 
     .instructions-list {
         margin-bottom: 1rem;
-    }
-
-    .instructions-list div {
-        page-break-inside: avoid;
+    }    .instructions-list div {
         margin-bottom: 0.75rem;
         align-items: flex-start;
         gap: 1rem;
@@ -622,12 +616,9 @@
         font-weight: bold;
         margin-bottom: 1rem;
         color: black !important;
-    }
-
-    .ingredients-list {
+    }    .ingredients-list {
         border: none;
         padding: 0;
-        page-break-inside: avoid;
         margin-bottom: 1rem;
     }
 
@@ -655,11 +646,8 @@
         list-style: none;
         padding: 0;
         margin: 0;
-    }
-
-    .ingredients-list li {
+    }    .ingredients-list li {
         margin-bottom: 0.25rem;
-        page-break-inside: avoid;
         align-items: center;
         gap: 0.5rem;
     }
@@ -706,15 +694,8 @@
 
     .indicator {
         background-color: black !important;
-    }
-
-    /* Page breaks */
+    }    /* Page breaks */
     h1 {
         page-break-after: avoid;
-    }
-
-    .ingredients-list,
-    .instructions-list {
-        page-break-inside: avoid;
     }
 }
