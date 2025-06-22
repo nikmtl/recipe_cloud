@@ -7,6 +7,9 @@ uploads/**/*
 !uploads/
 !uploads/recipes/
 uploads/recipes/*
+# Keep standard recipe images
+!uploads/recipes/standard/
+!uploads/recipes/standard/*
 
 # Ignore system files
 .DS_Store
