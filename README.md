@@ -51,7 +51,7 @@ The project serves to gain practical experience with **PHP** and **SQL** and dee
 
 ---
 
-## � Requirements
+## 🚥 Requirements
 
 - **PHP:** 8.0 or higher
 - **MySQL:** 5.7 or higher
@@ -60,7 +60,7 @@ The project serves to gain practical experience with **PHP** and **SQL** and dee
 
 ---
 
-## �🔧 Local Setup
+## 🔧 Local Setup
 
 1. Clone the project:
    ```bash
