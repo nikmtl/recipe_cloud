@@ -79,12 +79,18 @@ include_once 'assets/includes/header.php'; // Load the header
                         }
                         $additional_recipes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         $featured_recipes = array_merge($featured_recipes, $additional_recipes);
-                    }
-
-                    // Display featured recipes
+                    }                    // Display featured recipes
                     foreach ($featured_recipes as $recipe){
                         $total_time = (int)$recipe['prep_time_min'] + (int)$recipe['cook_time_min'];
-                        $description = $recipe['description'] ? htmlspecialchars(substr($recipe['description'], 0, 60)) : 'Classic recipe with delicious ingredients';
+                        if ($recipe['description']) {
+                            $full_description = $recipe['description'];
+                            $description = htmlspecialchars(substr($full_description, 0, 60));
+                            if (strlen($full_description) > 60) {
+                                $description .= '...';
+                            }
+                        } else {
+                            $description = 'Classic recipe with delicious ingredients';
+                        }
                         include 'assets/includes/recipe_card.php';
                     }
 

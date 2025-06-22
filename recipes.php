@@ -158,12 +158,20 @@ include_once 'assets/includes/header.php'; //load header
                 if (!empty($recipes)) {
                     foreach ($recipes as $recipe) {
                         $total_time = (int)$recipe['prep_time_min'] + (int)$recipe['cook_time_min'];
-                        $description = $recipe['description'] ? htmlspecialchars(substr($recipe['description'], 0, 60)) : 'Classic recipe with delicious ingredients';
+                        if ($recipe['description']) {
+                            $full_description = $recipe['description'];
+                            $description = htmlspecialchars(substr($full_description, 0, 60));
+                            if (strlen($full_description) > 60) {
+                                $description .= '...';
+                            }
+                        } else {
+                            $description = 'Classic recipe with delicious ingredients';
+                        }
                         include 'assets/includes/recipe_card.php';
                     }
                 } else {
                     echo '<p>No recipes found.</p>';
-                }            } catch (PDOException $e) {
+                }} catch (PDOException $e) {
                 echo '<p>Error loading recipes. Please try again later.</p>';
                 error_log("Database error in recipes.php: " . $e->getMessage());
                 // Initialize total_recipes to 0 in case of error

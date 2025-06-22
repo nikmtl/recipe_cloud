@@ -110,7 +110,15 @@ try {
                 if (!empty($userRecipes)) {
                     foreach ($userRecipes as $recipe) {
                         $total_time = (int)$recipe['prep_time_min'] + (int)$recipe['cook_time_min'];
-                        $description = $recipe['description'] ? htmlspecialchars(substr($recipe['description'], 0, 60)) : 'Classic recipe with delicious ingredients';
+                        if ($recipe['description']) {
+                            $full_description = $recipe['description'];
+                            $description = htmlspecialchars(substr($full_description, 0, 60));
+                            if (strlen($full_description) > 60) {
+                                $description .= '...';
+                            }
+                        } else {
+                            $description = 'Classic recipe with delicious ingredients';
+                        }
                         include 'assets/includes/recipe_card.php';
                     }
                 }
@@ -123,13 +131,20 @@ try {
             <?php endif; ?>
         </div>
 
-        <div id="tap-favorites" class="tap">
-            <div class="recipes-grid">
+        <div id="tap-favorites" class="tap">            <div class="recipes-grid">
                 <?php
                 if (!empty($favoriteRecipes)) {
                     foreach ($favoriteRecipes as $recipe) {
                         $total_time = (int)$recipe['prep_time_min'] + (int)$recipe['cook_time_min'];
-                        $description = $recipe['description'] ? htmlspecialchars(substr($recipe['description'], 0, 60)) : 'Classic recipe with delicious ingredients';
+                        if ($recipe['description']) {
+                            $full_description = $recipe['description'];
+                            $description = htmlspecialchars(substr($full_description, 0, 60));
+                            if (strlen($full_description) > 60) {
+                                $description .= '...';
+                            }
+                        } else {
+                            $description = 'Classic recipe with delicious ingredients';
+                        }
                         include 'assets/includes/recipe_card.php';
                     }
                 }
