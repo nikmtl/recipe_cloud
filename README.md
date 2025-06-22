@@ -14,14 +14,14 @@ The project serves to gain practical experience with **PHP** and **SQL** and dee
 - Detailed recipe display (including ingredients, preparation, images)
 
 ### For Registered Users:
-- User Profile and stats
-- Create, edit and delete Recipes
-- Rate and Comment other people's Recipes
-- Favorite List to remember Recipes
+- User profile and stats
+- Create, edit and delete recipes
+- Rate and comment on other people's recipes
+- Favorites list to remember recipes
 
 ---
 
-## 🧰 Tech-Stack
+## 🧰 Tech Stack
 
 - **Frontend:** HTML, CSS, JavaScript (AJAX within recipe search)
 - **Backend:** PHP 8+ (Form processing, Sessions)
@@ -49,6 +49,12 @@ The project serves to gain practical experience with **PHP** and **SQL** and dee
 **favorites:**
 `id *(PK)*`, `user_id *(FK)*`, `recipe_id *(FK)*`
 
+## 🗄️ Entity-Relationship Model
+
+![Entity-Relationship Diagram](https://imgur.com/7tcUrFf)
+
+The diagram illustrates the relationships between the database entities including users, recipes, ingredients, instructions, ratings, and favorites.
+
 ---
 
 ## 🚥 Requirements
@@ -60,14 +66,14 @@ The project serves to gain practical experience with **PHP** and **SQL** and dee
 
 ---
 
-## 🔧 Local Setup
+## 🔧 Local Setup 
 
 1. Clone the project:
    ```bash
    git clone https://github.com/Edamame04/recipe_cloud
    ```
 
-2. Create MySQL-Database, e. G. `recipe_cloud`
+2. Create MySQL database, e.g., `recipe_cloud`
 
 3. Configure database connection in `be-logic/db.php`:
 
@@ -78,13 +84,23 @@ The project serves to gain practical experience with **PHP** and **SQL** and dee
    $pass = '';
    ```
 
-4. Open project in local Webserver (e. G. mit XAMPP):
+4. The database tables and structure are created automatically on the first visit
+
+5. Open project in local web server (e.g., with XAMPP):
 
    ```
-   http://localhost/recipe_cloud/
+   Put the 'recipe_cloud' folder within the 'htdocs' folder in XAMPP
+   Then open: http://localhost/recipe_cloud/
    ```
 
-In the future this project will be hosted so that users can share recipes around the world
+6. Load dummy recipes (optional):
+
+   ```
+   Visit: http://localhost/recipe_cloud/be-logic/load_standard_data.php 
+   ```
+
+> **Note:** In the future, this project will be hosted online so users worldwide can share recipes and culinary experiences with each other.
+
 ---
 
 ## 📁 Current Project Structure
@@ -96,7 +112,7 @@ recipe_cloud/
 ├── login.php              # User login page
 ├── register.php           # User registration page
 ├── profile.php            # User profile page
-├── recipes.php            # Recipe overview page
+├── recipes.php            # Recipe overview and search page
 ├── recipe.php             # Individual recipe display
 ├── upload.php             # Recipe upload page
 ├── edit_recipe.php        # Recipe editing page
@@ -125,26 +141,26 @@ recipe_cloud/
 │       ├── footer.php
 │       └── recipe_card.php
 │
-├── be-logic/              # Backend PHP logic
-│   ├── db.php             # Database connection
-│   ├── auth.php           # Authentication handling
-│   ├── upload.php         # Recipe upload processing
-│   ├── edit_recipe.php    # Recipe editing logic
-│   ├── save_recipe.php    # Recipe saving
-│   ├── delete_recipe.php  # Recipe deletion
-│   ├── submit_review.php  # Review submission
-│   ├── delete_review.php  # Review deletion
-│   ├── get_user_profile.php
-│   ├── update_account.php
-│   ├── delete_account.php
-│   ├── load_more_recipes.php
-│   └── protected_page.php
+├── be-logic/                 # Backend PHP logic
+│   ├── db.php                # Database connection
+│   ├── auth.php              # Authentication handling 
+│   ├── upload.php            # Recipe upload processing
+│   ├── edit_recipe.php       # Recipe editing logic
+│   ├── save_recipe.php       # Recipe saving
+│   ├── delete_recipe.php     # Recipe deletion
+│   ├── submit_review.php     # Review submission
+│   ├── delete_review.php     # Review deletion
+│   ├── get_user_profile.php  # User profile loading
+│   ├── update_account.php    # User profile editing
+│   ├── delete_account.php    # Account and data deletion
+│   ├── load_more_recipes.php # AJAX dynamic recipe loading
+│   └── protected_page.php    
 │
-├── uploads/               # User uploaded files
-│   └── recipes/           # Recipe images
-│
-├── docs/                  # Documentation
-│   └── erm.drawio         # Entity Relationship Model
+├── uploads/                  # User uploaded files
+│   └── recipes/              # Recipe images
+│       └── standard/         # Images for standard recipes
+├── docs/                     # Documentation
+│   └── erm.drawio            # Entity Relationship Model
 │
 └── README.md
 ```
