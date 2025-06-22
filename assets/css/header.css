@@ -5,7 +5,6 @@
 
 header {
     z-index: 95;
-    /* High z-index but lower than mobile-nav */
     position: relative;
     display: flex;
     justify-content: center;
@@ -62,7 +61,6 @@ header form {
 @media (max-width: 700px) {
     .mobile-nav {
         z-index: 100;
-        /* Keep highest z-index */
         display: none;
         position: absolute;
         top: 57px;
@@ -94,7 +92,6 @@ header form {
 
     .mobile-nav-background {
         position: fixed;
-        /* Ensure it covers the entire page */
         top: 0;
         left: 0;
         width: 100vw;
@@ -113,7 +110,6 @@ header form {
         padding: 0 !important;
     }
 
-    /* Ensure mobile nav isn't affected by overflow hidden */
     .mobile-nav,
     .mobile-nav-background {
         overflow: visible !important;

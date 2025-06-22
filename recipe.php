@@ -2,7 +2,6 @@
     * This file is the recipe page for displaying individual recipes.
     * It includes all the necessary information about the recipe, such as ingredients, instructions, and user reviews.
     * The page also handles user interactions, such as submitting reviews and saving recipes.
-    //TODO for the future: Add a limit of reviews for the recipe, or change that it doesn't load all reviews at once.
 -->
 
 <?php // Get all the necessary data for the recipe page from the database

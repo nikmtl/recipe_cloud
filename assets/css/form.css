@@ -1,5 +1,8 @@
 /* form.css
-    * This file contains the CSS styles for the form component of the application.
+    * This file contains the CSS styles for the standard form component of the application.
+    * It includes styles for form layout, input fields, buttons, and error messages.
+    * The form is designed to be responsive and user-friendly, with appropriate spacing and focus state
+    * Some forms may include additional styles for specific input types or validation states.
 */
 
 
@@ -30,7 +33,7 @@ form select:focus {
 }
 
 form select:focus {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2318181B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2318181B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); /* SVG for down arrow */
 }
 
 form textarea {
@@ -41,7 +44,7 @@ form textarea {
 
 form select {
     appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); /* SVG for down arrow */
     background-repeat: no-repeat;
     background-position: right 1rem center;
     background-size: 1rem;

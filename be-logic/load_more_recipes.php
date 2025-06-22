@@ -1,7 +1,7 @@
 <?php
 /*load_more_recipes.php 
     * This file handles the AJAX request to load more recipes based on search, sort, and category filters.
-    * It returns a JSON response with the recipes and pagination information.
+    * It returns a JSON response with the recipes and pagination information the response is handled in the frontend in load-more-recipes.js.
     * This uses the AJAX request method to fetch more recipes without reloading the page.
 */
 require_once 'db.php';

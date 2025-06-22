@@ -1,5 +1,8 @@
 /* button.css
     * This file contains the CSS styles for the button component of the application.
+    * There are various button styles defined, including primary, secondary, warning, ghost, and icon buttons.
+    * Each button style has its own hover and focus states, as well as styles for disabled states.
+    * The buttons are designed to be responsive and accessible, with appropriate colors and sizes.
 */
 
 .primary-button,

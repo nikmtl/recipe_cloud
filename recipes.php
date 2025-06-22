@@ -1,3 +1,9 @@
+<!-- recipes.php
+    * Displays all recipes with search and sort functionality
+    * It allows users to search by title, description, or username, and filter by category
+    * It also supports pagination with a "Load More" button
+    * The recipes are displayed in a grid format with cards showing title, image, description, and ratings
+-->
 <?php
 require_once 'be-logic/db.php';
 include_once 'assets/includes/header.php'; //load header

@@ -75,13 +75,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
       function handleFiles(files) {
         const file = files[0];
-        // Check if file is an image
+        // Check if file is an image in the frontend
         if (!file.type.match('image.*')) {
             alert('Please select an image file (PNG, JPG, or WEBP)');
             return;
         }
         
-        // Check file size (10MB max)
+        // Check file size (10MB max) in the frontend
         if (file.size > 10 * 1024 * 1024) {
             alert('File size exceeds 10MB limit');
             return;

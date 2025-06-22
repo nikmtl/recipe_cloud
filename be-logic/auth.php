@@ -11,9 +11,6 @@
     * 1. User Registration
     * 2. User Login
     * 3. User Logout
-
-    // TODO for the future: Add CSRF protection
-    // TODO for the future: Add XSS protection
 */
 
 // Include database connection file
@@ -177,6 +174,5 @@ function logoutUser(): never {
     header('Location: ../index.php');
     exit;
 }
-
 ?>
 
