@@ -1,13 +1,4 @@
-# <img src="http- U### For Registered Users:
-- User registration & login 2. Create a4. Access the project in your local web server (e.g., with XAMPP):MySQL database, e.g., `recipe_cloud`, and optionally import `recipe_cloud.sql`with password hashing & PHP sessions)
-- Personal user profile
-- Create, edit, and delete recipes
-- Rate and comment on other users' recipes
-- Favorites list or "bookmark" functiongistration & login (with password hashing & 2. Create a4. Access the project in your local web server (e.g., with XAMPP):MySQL database, e.g., `recipe_cloud`, and optionally import `recipe_cloud.sql`HP sessions)
-- Personal user profile
-- Create, edit, and delete recipes
-- Rate and comment on other users' recipes
-- Favorites list or "bookmark" functionithub.com/Edamame04/recipe_cloud/blob/main/assets/img/logo_with_bg.svg" alt="logo" width="30"/> Recipe Cloud – Your Digital Recipe Cloud
+# <img src="https://github.com/Edamame04/recipe_cloud/blob/main/assets/img/logo_with_bg.svg" alt="logo" width="30"/> Recipe Cloud 
 
 **Recipe Cloud** is a web application for managing and sharing recipes. Users can create, save, search, and rate recipes – all centrally in one place. The application was developed as part of the *Web Engineering 2* module and is based on PHP, HTML, CSS, JavaScript, and MySQL.
 
@@ -23,22 +14,16 @@ The project serves to gain practical experience with **PHP** and **SQL** and dee
 - Detailed recipe display (including ingredients, preparation, images)
 
 ### For Registered Users:
-- Benutzerregistrierung & Login (mit Passwort-Hashing & PHP-Sessions)
-- Eigenes Benutzerprofil
-- Rezepte erstellen, bearbeiten und löschen
-- Rezepte von anderen Nutzern bewerten und kommentieren
-- Favoritenliste oder „Merken“-Funktion 
-
-### Optional/Expandable:
-- Image upload for recipes
-- Recipe categories & tags
-- Admin area for moderation
+- User Profile and stats
+- Create, edit and delete Recipes
+- Rate and Comment other people's Recipes
+- Favorite List to remember Recipes
 
 ---
 
 ## 🧰 Tech-Stack
 
-- **Frontend:** HTML, CSS, JavaScript
+- **Frontend:** HTML, CSS, JavaScript (AJAX within recipe search)
 - **Backend:** PHP 8+ (Form processing, Sessions)
 - **Database:** MySQL
 
@@ -47,13 +32,13 @@ The project serves to gain practical experience with **PHP** and **SQL** and dee
 ## 🗃️ Database Schema
 
 **users:**  
-`username*(PK)*`, `email`, `password_hash`
+`first_name`, `last_name`, `username*(PK)*`, `email`, `password_hash`, `bio`, `profile_image`, `created_at`
 
 **recipes:**  
-`id *(PK)*`, `user_id *(FK)*`, `title`, `description`, `prep_time`, `cook_time`, `difficulty`,  `servings`, `category`, `image_path`
+`id *(PK)*`, `user_id *(FK)*`, `title`, `description`, `prep_time_min`, `cook_time_min`, `difficulty`, `servings`, `category`, `image_path`
 
-**instructions**
-`id *(PK)*`, `instruction`, `recipe_id *(FK)*`
+**instructions:**
+`id *(PK)*`, `step_number`, `instruction`, `recipe_id *(FK)*`
 
 **ingredients:**
 `id *(PK)*`, `amount`, `unit`, `ingredient`, `recipe_id *(FK)*`
@@ -66,14 +51,23 @@ The project serves to gain practical experience with **PHP** and **SQL** and dee
 
 ---
 
-## 🔧 Local Setup
+## � Requirements
+
+- **PHP:** 8.0 or higher
+- **MySQL:** 5.7 or higher
+- **Web Server:** Apache/Nginx (XAMPP, WAMP, or LAMP)
+- **Browser:** Modern web browser with JavaScript enabled
+
+---
+
+## �🔧 Local Setup
 
 1. Clone the project:
    ```bash
    git clone https://github.com/Edamame04/recipe_cloud
    ```
 
-2. MySQL-Datenbank anlegen, z. B. `recipe_cloud`, und ggf. `recipe_cloud.sql` importieren
+2. Create MySQL-Database, e. G. `recipe_cloud`
 
 3. Configure database connection in `be-logic/db.php`:
 
@@ -84,12 +78,13 @@ The project serves to gain practical experience with **PHP** and **SQL** and dee
    $pass = '';
    ```
 
-4. Projekt im lokalen Webserver (z. B. mit XAMPP) aufrufen:
+4. Open project in local Webserver (e. G. mit XAMPP):
 
    ```
    http://localhost/recipe_cloud/
    ```
 
+In the future this project will be hosted so that users can share recipes around the world
 ---
 
 ## 📁 Current Project Structure
@@ -156,7 +151,51 @@ recipe_cloud/
 
 ---
 
-## 🖼️ Screenshots
+## 🛠️ Development
 
-> Screenshots will be added here
+### Database Structure
+The application uses a well-structured MySQL database with proper foreign key relationships and constraints. All tables are automatically created when the application first runs.
+
+### Security Features
+- Password hashing using PHP's `password_hash()`
+- SQL injection prevention using PDO prepared statements
+- Session-based authentication
+- Input validation and sanitization
+- Protected routes for authenticated users
+
+### Code Organization
+- **Frontend**: Vanilla JavaScript for dynamic interactions
+- **Backend**: Pure PHP with no frameworks for educational purposes
+- **Database**: MySQL with PDO for secure database operations
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+---
+
+## 📝 License
+
+This project is created for educational purposes as part of the *Web Engineering 2* module. Feel free to use and modify for learning purposes.
+
+---
+
+## 🔮 Future Enhancements
+
+- [ ] Mobile app development
+- [ ] Multi-language support
+
+---
+
+## 📧 Contact
+
+For questions or suggestions regarding this project, please open an issue on GitHub.
+
+**Happy Cooking! 👨‍🍳👩‍🍳**
 
