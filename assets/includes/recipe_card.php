@@ -41,7 +41,7 @@ echo '<link rel="stylesheet" href="assets/css/recipe_card.css">';
                     <circle cx="12" cy="12" r="10" />
                     <polyline points="12,6 12,12 16,14" />
                 </svg>
-                <span><?= $total_time ?> mins prep</span>
+                <span><?= $recipe['prep_time_min'] ?> mins prep</span>
             </div>
             <div class="recipe-cook-time">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -51,7 +51,21 @@ echo '<link rel="stylesheet" href="assets/css/recipe_card.css">';
                 <span><?= $recipe['cook_time_min'] ?> mins cook</span>
             </div>
             <div class="recipe-difficulty">
-                <span class="difficulty-label">Medium</span>
+                <span class="difficulty-label">
+                    <?php
+                    switch ($recipe['difficulty']) {
+                        case '1':
+                            echo 'Easy';
+                            break;
+                        case '2':
+                            echo 'Medium';
+                            break;
+                        case '3':
+                            echo 'Hard';
+                            break;
+                    }
+                    ?>
+                </span>
             </div>
         </div>
         <div class="recipe-action">
