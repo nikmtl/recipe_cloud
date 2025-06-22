@@ -51,7 +51,7 @@ The project serves to gain practical experience with **PHP** and **SQL** and dee
 
 ## 🗄️ Entity-Relationship Model
 
-![Entity-Relationship Diagram](https://imgur.com/7tcUrFf)
+![Entity-Relationship Diagram](https://github.com/Edamame04/recipe_cloud/blob/main/docs/erm.png)
 
 The diagram illustrates the relationships between the database entities including users, recipes, ingredients, instructions, ratings, and favorites.
 
@@ -183,16 +183,6 @@ The application uses a well-structured MySQL database with proper foreign key re
 - **Frontend**: Vanilla JavaScript for dynamic interactions
 - **Backend**: Pure PHP with no frameworks for educational purposes
 - **Database**: MySQL with PDO for secure database operations
-
----
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
 
 ---
 
