@@ -51,7 +51,11 @@ The project serves to gain practical experience with **PHP** and **SQL** and dee
 
 ## 🗄️ Entity-Relationship Model
 
+<div style="background-color: white; padding: 20px; border-radius: 8px; display: inline-block;">
+
 ![Entity-Relationship Diagram](https://github.com/Edamame04/recipe_cloud/blob/main/docs/erm.png)
+
+</div>
 
 The diagram illustrates the relationships between the database entities including users, recipes, ingredients, instructions, ratings, and favorites.
 
