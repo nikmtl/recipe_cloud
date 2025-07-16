@@ -57,52 +57,6 @@ The diagram illustrates the relationships between the database entities includin
 
 ---
 
-## 🚥 Requirements
-
-- **PHP:** 8.0 or higher
-- **MySQL:** 5.7 or higher
-- **Web Server:** Apache/Nginx (XAMPP, WAMP, or LAMP)
-- **Browser:** Modern web browser with JavaScript enabled
-
----
-
-## 🔧 Local Setup 
-
-1. Clone the project:
-   ```bash
-   git clone https://github.com/Edamame04/recipe_cloud
-   ```
-
-2. Create MySQL database, e.g., `recipe_cloud`
-
-3. Configure database connection in `be-logic/db.php`:
-
-   ```php
-   $host = 'localhost';
-   $db   = 'recipe_cloud';
-   $user = 'root';
-   $pass = '';
-   ```
-
-4. The database tables and structure are created automatically on the first visit
-
-5. Open project in local web server (e.g., with XAMPP):
-
-   ```
-   Put the 'recipe_cloud' folder within the 'htdocs' folder in XAMPP
-   Then open: http://localhost/recipe_cloud/
-   ```
-
-6. Load dummy recipes (optional):
-
-   ```
-   Visit: http://localhost/recipe_cloud/be-logic/load_standard_data.php 
-   ```
-
-> **Note:** In the future, this project will be hosted online so users worldwide can share recipes and culinary experiences with each other.
-
----
-
 ## 📁 Current Project Structure
 
 ```
@@ -183,13 +137,48 @@ The application uses a well-structured MySQL database with proper foreign key re
 - **Frontend**: Vanilla JavaScript for dynamic interactions
 - **Backend**: Pure PHP with no frameworks for educational purposes
 - **Database**: MySQL with PDO for secure database operations
-
 ---
 
-## 📝 License
+## 🔧 Local Setup 
+> **Note:** This project is hosted online so users worldwide can share recipes and culinary experiences with each other. For testing you can still set Recipe Cloud up on your local device.
 
-This project is created for educational purposes as part of the *Web Engineering 2* module. Feel free to use and modify for learning purposes.
+# 🚥 Requirements
 
+- **PHP:** 8.0 or higher
+- **MySQL:** 5.7 or higher
+- **Web Server:** Apache/Nginx (XAMPP, WAMP, or LAMP)
+- **Browser:** Modern web browser with JavaScript enabled
+
+1. Clone the project:
+   ```bash
+   git clone https://github.com/Edamame04/recipe_cloud
+   ```
+
+2. Create MySQL database, e.g., `recipe_cloud`
+
+3. Configure database connection in `be-logic/db.php`:
+
+   ```php
+   $host = 'localhost';
+   $db   = 'recipe_cloud';
+   $user = 'root';
+   $pass = '';
+   ```
+
+4. The database tables and structure are created automatically on the first visit
+
+5. Open project in local web server (e.g., with XAMPP):
+
+   ```
+   Put the 'recipe_cloud' folder within the 'htdocs' folder in XAMPP
+   Then open: http://localhost/recipe_cloud/
+   ```
+
+6. Load dummy recipes (optional):
+
+   ```
+   Visit: http://localhost/recipe_cloud/be-logic/load_standard_data.php 
+   ```
 ---
 
 ## 🔮 Future Enhancements
