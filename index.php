@@ -1,11 +1,10 @@
-<!-- index.php  
+<?php
+/* index.php  
     * This is the home/index/landing page of the Recipe Cloud application.
     * It displays the hero section, featured recipes, and how-to steps.
     * The featured recipes are fetched from the database and displayed in a grid format.
     * It also includes buttons to upload a recipe or browse all recipes.
--->
-
-<?php
+*/
 require_once 'be-logic/db.php'; // Load database connection
 include_once 'assets/includes/header.php'; // Load the header
 ?>
