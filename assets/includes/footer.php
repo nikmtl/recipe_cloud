@@ -26,10 +26,10 @@
          <div class="footer-links-container">
              <h2>Legal (add if site goes live)</h2> <!-- This section would be legally required if the site goes live. For this example, it's not implemented. -->
              <div>
-                 <a href="">Privacy Policy</a>
-                 <a href="">Terms of Service</a>
+                 <a href="mtzel.com/imprint">Imprint</a>
+                 <a href="">Privacy Policy and ToS</a>
                  <a href="">Cookie Preferences</a>
-                 <a href="">Contact Us</a>
+                 <a href="mailto:contact@mtzel.com">Contact Us</a>
              </div>
          </div>
          <div class="footer-links-container">
