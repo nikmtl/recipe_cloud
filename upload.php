@@ -8,7 +8,7 @@
 */
 
 // load header 
-require_once 'be-logic\protected_page.php'; // Ensure the user is logged in before accessing this page
+require_once 'be-logic/protected_page.php'; // Ensure the user is logged in before accessing this page
 include_once 'assets/includes/header.php';
 
 // Get errors from session and then clear them
