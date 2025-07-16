@@ -18,8 +18,8 @@ function initiateDatabaseConnection(): PDO{
     // For example, if you are using a different database server or credentials.
     $host = 'localhost';
     $db   = 'recipe_cloud'; //do not forget to create the database in your MySQL server before running this script.
-    $user = 'root';
-    $pass = '';
+    $user = 'recipe_user';
+    $pass = 'changeme';
     $charset = 'utf8mb4';
 
     $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
