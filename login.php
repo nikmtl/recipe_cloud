@@ -1,11 +1,10 @@
-<!-- login.php 
+<?php // load header
+/* login.php 
     * This file contains the login form for users to sign in to their accounts.
     * It includes validation messages and error handling.
     * After a short fronted validation in auth.js, this form submits to the auth.php formhandler for processing and login and session management logic
     * Input validation is done in auth.js to prevent the ugly default browser error messages. (e.g.when using the required attribute) 
--->
-
-<?php // load header
+*/
 include_once 'assets/includes/header.php';
 
 // Start session to read error messages
