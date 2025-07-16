@@ -7,8 +7,8 @@
 */
 
 //load header
-require_once 'be-logic\protected_page.php';
-require_once 'be-logic\get_user_profile.php';
+require_once 'be-logic/protected_page.php';
+require_once 'be-logic/get_user_profile.php';
 include_once 'assets/includes/header.php';
 
 // Fetch user information

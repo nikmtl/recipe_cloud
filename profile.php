@@ -5,9 +5,9 @@
     * It also shows the the users recipes and favorites.
     * It also shows how many times their recipes were favorited by others. This is useful for users to see how popular their recipes are and gives the user a sense of accomplishment.
 */
-require_once 'be-logic\protected_page.php';
-require_once 'be-logic\get_user_profile.php';
-require_once 'be-logic\db.php';
+require_once 'be-logic/protected_page.php';
+require_once 'be-logic/get_user_profile.php';
+require_once 'be-logic/db.php';
 include_once 'assets/includes/header.php';
 
 // Fetch user information

@@ -7,8 +7,8 @@
     * After validation, this form submits to the edit_recipe.php handler for processing.
 */
 // Load dependencies
-require_once 'be-logic\protected_page.php'; // Ensure the user is logged in
-require_once 'be-logic\db.php';
+require_once 'be-logic/protected_page.php'; // Ensure the user is logged in
+require_once 'be-logic/db.php';
 
 // Check if recipe ID is provided
 if (!isset($_GET['id']) || empty($_GET['id'])) {
