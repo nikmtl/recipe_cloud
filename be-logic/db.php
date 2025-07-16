@@ -16,10 +16,10 @@ function initiateDatabaseConnection(): PDO{
     // Database connection parameters
     // Adjust these parameters according to your database configuration if necessary.
     // For example, if you are using a different database server or credentials.
-    $host = 'localhost';
+    $host = 'db'; //change this to localhost if u run this local, change this to the docker name of your db if you use docker
     $db   = 'recipe_cloud'; //do not forget to create the database in your MySQL server before running this script.
-    $user = 'recipe_user';
-    $pass = 'changeme';
+    $user = 'recipe_user'; //change this to a db user or use the root user 
+    $pass = 'changeme'; //this is often empty on new db
     $charset = 'utf8mb4';
 
     $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
