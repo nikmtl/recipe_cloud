@@ -1,10 +1,9 @@
-<!-- recipe.php
+<?php // Get all the necessary data for the recipe page from the database
+/* recipe.php
     * This file is the recipe page for displaying individual recipes.
     * It includes all the necessary information about the recipe, such as ingredients, instructions, and user reviews.
-    * The page also handles user interactions, such as submitting reviews and saving recipes.
--->
-
-<?php // Get all the necessary data for the recipe page from the database
+    * The page also handles user interactions, such as submitting reviews and saving recipes. 
+*/
 require_once 'be-logic/db.php';
 if (!isset($_SESSION)) {
     session_start();
