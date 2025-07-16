@@ -38,7 +38,7 @@ function initiateDatabaseConnection(): PDO{
         $pdo = new PDO($dsn, $user, $pass, $options);
         //The PDO has the benefit, to the method we learned in the course, that the connection is automatically closed when the script ends.
     } catch (\PDOException $e) {
-        die("Datenbankverbindung fehlgeschlagen: " . $e->getMessage());
+        die("Database connection failed: " . $e->getMessage());
         // If the connection fails, an error message is displayed and the script is terminated.
     }
 
