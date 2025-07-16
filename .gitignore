@@ -41,3 +41,6 @@ access.log
 .env.local
 .env.production
 config.local.php
+
+# Ignore database configuration
+be-logic/db_config.php

@@ -13,14 +13,21 @@ $pdo = initiateDatabaseConnection();
 
 /*1. Database Connection */
 function initiateDatabaseConnection(): PDO{
-    // Database connection parameters
-    // Adjust these parameters according to your database configuration if necessary.
-    // For example, if you are using a different database server or credentials.
-    $host = 'db'; //change this to localhost if u run this local, change this to the docker name of your db if you use docker
-    $db   = 'recipe_cloud'; //do not forget to create the database in your MySQL server before running this script.
-    $user = 'recipe_user'; //change this to a db user or use the root user 
-    $pass = 'changeme'; //this is often empty on new db
-    $charset = 'utf8mb4';
+    // Load database configuration from external file
+    $configFile = __DIR__ . '/db_config.php';
+    
+    if (!file_exists($configFile)) {
+        die("Database configuration file not found. Please copy db_config.php.template to db_config.php and configure your database settings.");
+    }
+    
+    $config = require $configFile;
+    
+    // Extract database connection parameters from config
+    $host = $config['host'];
+    $db = $config['database'];
+    $user = $config['username'];
+    $pass = $config['password'];
+    $charset = $config['charset'];
 
     $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
     $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]; // Set the error mode to exception for better error handling

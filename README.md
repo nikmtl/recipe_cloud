@@ -156,14 +156,19 @@ The application uses a well-structured MySQL database with proper foreign key re
 
 2. Create MySQL database, e.g., `recipe_cloud`
 
-3. Configure database connection in `be-logic/db.php`:
-
+3. Configure database connection:
+   - Copy `be-logic/db_config.php.template` to `be-logic/db_config.php`
+   - Update the database credentials in `be-logic/db_config.php`:
    ```php
-   $host = 'localhost';
-   $db   = 'recipe_cloud';
-   $user = 'root';
-   $pass = '';
+   return [
+       'host' => 'localhost',
+       'database' => 'recipe_cloud',
+       'username' => 'root',
+       'password' => '',
+       'charset' => 'utf8mb4'
+   ];
    ```
+   - **Note:** The `db_config.php` file is ignored by Git to keep your credentials secure
 
 4. The database tables and structure are created automatically on the first visit
 
