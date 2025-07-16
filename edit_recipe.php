@@ -1,12 +1,11 @@
-<!-- edit_recipe.php 
+<?php
+/*edit_recipe.php 
     * This file allows users to edit existing recipes.
     * It includes a form with multiple steps for editing recipe details, ingredients, instructions, and media.
     * The form is pre-populated with existing recipe data.
     * Only the recipe owner can edit their recipes.
     * After validation, this form submits to the edit_recipe.php handler for processing.
--->
-
-<?php
+*/
 // Load dependencies
 require_once 'be-logic\protected_page.php'; // Ensure the user is logged in
 require_once 'be-logic\db.php';
