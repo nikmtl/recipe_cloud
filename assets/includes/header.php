@@ -1,4 +1,5 @@
-<!-- header.php 
+<?php
+/* header.php 
     * This file contains the header section of the website.
     * It includes the logo, navigation links, and authentication buttons.
     * It also includes the mobile navigation menu for smaller screens.
@@ -6,10 +7,8 @@
     * This is used across all pages of the site.
     * To use this: include this file at the start of your PHP document to display the header.
     * The logic to open and close the mobile menu is handled in the view.js file.
--->
+*/
 
-
-<?php
 // Start session once if not already active its needed to check if the user is logged in.
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
