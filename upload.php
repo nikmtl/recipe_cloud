@@ -1,12 +1,13 @@
-<!-- upload.php 
+<?php
+/* upload.php 
     * This file allows users to upload new recipes.
     * It includes a form with multiple steps for entering recipe details, ingredients, instructions, and media.
     * After a short fronted validation in upload.js, this form submits to the upload.php formhandler for processing.
     * Input validation is done in upload.js to prevent the ugly default browser error messages. (e.g.when using the required attribute) 
     * The image upload functionality is handled within image-upload.js to provide a better user experience.
--->
+*/
 
-<?php // load header 
+// load header 
 require_once 'be-logic\protected_page.php'; // Ensure the user is logged in before accessing this page
 include_once 'assets/includes/header.php';
 
