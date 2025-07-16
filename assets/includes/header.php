@@ -29,7 +29,10 @@ if (session_status() === PHP_SESSION_NONE) {
 
 
     <!-- favicon and title -->
-    <link rel="icon" href="assets/img/logo_with_bg.ico">
+    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+    <link rel="apple-touch-icon" href="assets/img/favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon.png">
     <title>Recipe Cloud</title>
 
     <!-- load stylesheets -->
