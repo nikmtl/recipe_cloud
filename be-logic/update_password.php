@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Update password
-        $stmt = $pdo->prepare("UPDATE users SET password = ? WHERE username = ?");
+        $stmt = $pdo->prepare(query: "UPDATE users SET password = ? WHERE username = ?");
         $stmt->execute([password_hash($newPassword, PASSWORD_DEFAULT), $username]);
 
         header('Location: ../settings.php?message=password_updated');
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 } else {
     // If not POST request, redirect to settings
-    header('Location: ../settings.php');
+    header('Location: ../settings.php?error=invalid_request');
     exit;
 }
 ?>
