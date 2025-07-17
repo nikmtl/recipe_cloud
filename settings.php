@@ -83,7 +83,20 @@ if (!$userProfile) {
                     Logout
                 </button>
             </form>
-            <!--TODO: add feat to get all user data and download as JSON or CSV because of legal reasons-->
+            <form action="be-logic/export_user_data.php" method="POST" id="export-form">
+                <div>
+                    <h4>Export Data</h4>
+                    <p>Download all your data associated with your account, including recipes, favorites, and settings.</p>
+                </div>
+                <button type="submit" class="icon-button secondary-button smt-bttn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" x2="9" y1="12" y2="12"></line>
+                    </svg>
+                    Export Data
+                </button>
+            </form>
             <hr>
             <form action="be-logic/delete_account.php" method="POST">
                 <div id="danger-zone">
