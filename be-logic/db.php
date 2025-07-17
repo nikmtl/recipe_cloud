@@ -53,15 +53,19 @@ function initiateDatabaseConnection(): PDO{
 // It creates the users, recipes, instructions, ingredients, ratings, and favorites tables with appropriate columns and constraints.
 // See the db documentation for more details on the table structure and constraints.
 function initializeTables($pdo): void{
+    // Call the function to clear all tables
+    // Comment this out when not testing
+    clearAllTables($pdo);
+
     // Create users table if it doesn't exist //The Profile image is not used at the moment, but it is a good idea to have it in case i want to implement user profile images in the future.
     $sql = "CREATE TABLE IF NOT EXISTS users (
-        first_name VARCHAR(50),
-        last_name VARCHAR(50),
-        username VARCHAR(20) PRIMARY KEY,
+        first_name VARCHAR(50) default NULL,
+        last_name VARCHAR(50) default NULL,
+        username VARCHAR(20) NOT NULL PRIMARY KEY,
         email VARCHAR(50) NOT NULL UNIQUE,
         password_hash VARCHAR(255) NOT NULL,
-        bio TEXT,
-        profile_image VARCHAR(255),
+        bio TEXT default NULL,
+        profile_image VARCHAR(255) default NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )";
     $pdo->exec($sql);
@@ -71,13 +75,13 @@ function initializeTables($pdo): void{
         id INT AUTO_INCREMENT PRIMARY KEY,
         user_id VARCHAR(20),
         title VARCHAR(100) NOT NULL,
-        description TEXT,
-        prep_time_min INT,
-        cook_time_min INT,        
-        difficulty INT CHECK (difficulty >= 1 AND difficulty <= 3),
-        servings INT CHECK (servings > 0),
-        category VARCHAR(20) CHECK (category IN ('breakfast', 'appetizer', 'salad', 'soup', 'sandwich', 'main', 'side', 'snack', 'dessert', 'baking', 'sauce', 'drink')),
-        image_path VARCHAR(255),
+        description TEXT default NULL,
+        prep_time_min INT default NULL,
+        cook_time_min INT default NULL,
+        difficulty INT CHECK (difficulty >= 1 AND difficulty <= 3) default 1,
+        servings INT CHECK (servings > 0) default 1,
+        category VARCHAR(20) CHECK (category IN ('breakfast', 'appetizer', 'salad', 'soup', 'sandwich', 'main', 'side', 'snack', 'dessert', 'baking', 'sauce', 'drink')) default 'main',
+        image_path VARCHAR(255) default NULL,
         FOREIGN KEY (user_id) REFERENCES users(username) ON DELETE SET NULL
     )";
     $pdo->exec($sql);
@@ -95,8 +99,8 @@ function initializeTables($pdo): void{
     // Create ingredients table if it doesn't exist
     $sql = "CREATE TABLE IF NOT EXISTS ingredients (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        amount INT,
-        unit VARCHAR(20) CHECK (unit = 'g' OR unit = 'kg' OR unit = 'ml' OR unit = 'l' OR unit = 'cup' OR unit = 'tbsp' OR unit = 'tsp' OR unit = 'oz' OR unit = 'lb'),
+        amount INT default NULL,
+        unit VARCHAR(20) CHECK (unit = 'g' OR unit = 'kg' OR unit = 'ml' OR unit = 'l' OR unit = 'cup' OR unit = 'tbsp' OR unit = 'tsp' OR unit = 'oz' OR unit = 'lb') default NULL,
         ingredient VARCHAR(100) NOT NULL,
         recipe_id INT NOT NULL,
         FOREIGN KEY (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE
@@ -109,7 +113,7 @@ function initializeTables($pdo): void{
         user_id VARCHAR(20) NOT NULL,
         recipe_id INT NOT NULL,
         rating INT NOT NULL CHECK (rating >= 1 AND rating <= 5),
-        comment_text TEXT,
+        comment_text TEXT default NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (user_id) REFERENCES users(username) ON DELETE CASCADE,
         FOREIGN KEY (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE
@@ -126,3 +130,20 @@ function initializeTables($pdo): void{
     )";
     $pdo->exec($sql);
 }
+
+// Function to clear all tables in the database for testing purposes
+// WARNING: This will delete ALL data in the database!
+    function clearAllTables($pdo): void {
+        // Disable foreign key checks to allow table truncation in any order
+        $pdo->exec("SET FOREIGN_KEY_CHECKS = 0");
+        
+        // Tables to clear - in reverse order of dependencies
+        $tables = ['favorites', 'ratings', 'ingredients', 'instructions', 'recipes', 'users'];
+        
+        foreach ($tables as $table) {
+            $pdo->exec("TRUNCATE TABLE $table");
+        }
+        
+        // Re-enable foreign key checks
+        $pdo->exec("SET FOREIGN_KEY_CHECKS = 1");
+    }
