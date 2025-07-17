@@ -9,8 +9,8 @@
     - User's ratings for recipes (recipe ID, rating, comment, date)
 */
 // Load dependencies
-require_once 'be-logic/protected_page.php'; // Ensure the user is logged in
-require_once 'be-logic/db.php';
+require_once __DIR__ . '/protected_page.php'; // Ensure the user is logged in
+require_once __DIR__ . '/db.php';
 
 // Fetch the current user's username from the session
 $currentUser = $_SESSION['username'];

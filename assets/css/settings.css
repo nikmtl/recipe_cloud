@@ -100,7 +100,27 @@ textarea {
 
 #logout-form p{
     margin: 0px;
+    font-size: 0.875rem;
 }
+
+#export-form {
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#export-form h4{
+    font-weight: 500;
+}
+
+#export-form p{
+    margin: 0px;
+    font-size: 0.875rem;
+}
+
 
 #danger-zone {
     display: inline-flex;
