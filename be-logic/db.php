@@ -59,13 +59,13 @@ function initializeTables($pdo): void{
 
     // Create users table if it doesn't exist //The Profile image is not used at the moment, but it is a good idea to have it in case i want to implement user profile images in the future.
     $sql = "CREATE TABLE IF NOT EXISTS users (
-        first_name VARCHAR(50) default NULL,
-        last_name VARCHAR(50) default NULL,
+        first_name VARCHAR(50) DEFAULT NULL,
+        last_name VARCHAR(50) DEFAULT NULL,
         username VARCHAR(20) NOT NULL PRIMARY KEY,
         email VARCHAR(50) NOT NULL UNIQUE,
         password_hash VARCHAR(255) NOT NULL,
-        bio TEXT default NULL,
-        profile_image VARCHAR(255) default NULL,
+        bio TEXT DEFAULT NULL,
+        profile_image VARCHAR(255) DEFAULT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )";
     $pdo->exec($sql);
@@ -75,13 +75,13 @@ function initializeTables($pdo): void{
         id INT AUTO_INCREMENT PRIMARY KEY,
         user_id VARCHAR(20),
         title VARCHAR(100) NOT NULL,
-        description TEXT default NULL,
-        prep_time_min INT default NULL,
-        cook_time_min INT default NULL,
-        difficulty INT CHECK (difficulty >= 1 AND difficulty <= 3) default 1,
-        servings INT CHECK (servings > 0) default 1,
-        category VARCHAR(20) CHECK (category IN ('breakfast', 'appetizer', 'salad', 'soup', 'sandwich', 'main', 'side', 'snack', 'dessert', 'baking', 'sauce', 'drink')) default 'main',
-        image_path VARCHAR(255) default NULL,
+        description TEXT DEFAULT NULL,
+        prep_time_min INT DEFAULT NULL,
+        cook_time_min INT DEFAULT NULL,
+        difficulty INT CHECK (difficulty >= 1 AND difficulty <= 3) DEFAULT 1,
+        servings INT CHECK (servings > 0) DEFAULT 1,
+        category VARCHAR(20) CHECK (category IN ('breakfast', 'appetizer', 'salad', 'soup', 'sandwich', 'main', 'side', 'snack', 'dessert', 'baking', 'sauce', 'drink')) DEFAULT 'main',
+        image_path VARCHAR(255) DEFAULT NULL,
         FOREIGN KEY (user_id) REFERENCES users(username) ON DELETE SET NULL
     )";
     $pdo->exec($sql);
@@ -99,8 +99,8 @@ function initializeTables($pdo): void{
     // Create ingredients table if it doesn't exist
     $sql = "CREATE TABLE IF NOT EXISTS ingredients (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        amount INT default NULL,
-        unit VARCHAR(20) CHECK (unit = 'g' OR unit = 'kg' OR unit = 'ml' OR unit = 'l' OR unit = 'cup' OR unit = 'tbsp' OR unit = 'tsp' OR unit = 'oz' OR unit = 'lb') default NULL,
+        amount INT DEFAULT NULL,
+        unit VARCHAR(20) CHECK (unit = 'g' OR unit = 'kg' OR unit = 'ml' OR unit = 'l' OR unit = 'cup' OR unit = 'tbsp' OR unit = 'tsp' OR unit = 'oz' OR unit = 'lb') DEFAULT NULL,
         ingredient VARCHAR(100) NOT NULL,
         recipe_id INT NOT NULL,
         FOREIGN KEY (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE
@@ -113,7 +113,7 @@ function initializeTables($pdo): void{
         user_id VARCHAR(20) NOT NULL,
         recipe_id INT NOT NULL,
         rating INT NOT NULL CHECK (rating >= 1 AND rating <= 5),
-        comment_text TEXT default NULL,
+        comment_text TEXT DEFAULT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (user_id) REFERENCES users(username) ON DELETE CASCADE,
         FOREIGN KEY (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE
