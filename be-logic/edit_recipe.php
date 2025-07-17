@@ -364,12 +364,11 @@ function handleImageUpload(&$errors, $recipe_id, $pdo): ?string
     }
 
     // Create uploads directory if it doesn't exist
-    $uploadDir = __DIR__ . '/../uploads/recipes/';
+    $uploadDir = __DIR__ . '/../../uploads/recipes/';
     if (!is_dir($uploadDir)) {
-        if (!mkdir($uploadDir, 0755, true)) {
-            $errors['image'] = "Failed to create upload directory.";
-            return null;
-        }
+        error_log("Failed to create upload directory: $uploadDir");
+        $errors['image'] = "Failed to create upload directory.";
+        return null;
     }
 
     // Generate unique filename

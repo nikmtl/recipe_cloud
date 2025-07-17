@@ -294,7 +294,7 @@ function handleImageUpload(&$errors): ?string {
         $errors['image'] = "Invalid image format. Only JPG, PNG and WEBP are allowed.";
         return null;
     }    // Create uploads directory if it doesn't exist
-    $uploadDir = __DIR__ . '/../uploads/recipes/';
+    $uploadDir = __DIR__ . '/../../uploads/recipes/';
     if (!is_dir($uploadDir)) {
         error_log("Failed to create upload directory: $uploadDir");
         $errors['image'] = "Failed to create upload directory.";
