@@ -40,20 +40,20 @@ if (!$userProfile) {
                 <div class="profile-field-group">
                     <div>
                         <label for="first_name">First Name</label>
-                        <input type="text" id="first_name" name="first_name" value="<?php echo htmlspecialchars($userProfile['first_name']); ?>" required>
+                        <input type="text" id="first_name" name="first_name" value="<?php echo htmlspecialchars($userProfile['first_name'] ?? ''); ?>" required>
                     </div>
                     <div>
                         <label for="last_name">Last Name</label>
-                        <input type="text" id="last_name" name="last_name" value="<?php echo htmlspecialchars($userProfile['last_name']); ?>" required>
+                        <input type="text" id="last_name" name="last_name" value="<?php echo htmlspecialchars($userProfile['last_name'] ?? ''); ?>" required>
                     </div>
                 </div>
                 <div>
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($userProfile['email']); ?>" required>
+                    <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($userProfile['email'] ?? ''); ?>" required>
                 </div>
                 <div>
                     <label for="bio">Bio</label>
-                    <textarea id="bio" name="bio" style="resize: none;"><?php echo htmlspecialchars($userProfile['bio']); ?></textarea>
+                    <textarea id="bio" name="bio" style="resize: none;"><?php echo htmlspecialchars($userProfile['bio'] ?? ''); ?></textarea>
                 </div>
                 <button type="submit" class="icon-button smt-bttn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
