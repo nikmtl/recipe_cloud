@@ -83,7 +83,7 @@ if (!$userProfile) {
                     Logout
                 </button>
             </form>
-            //TODO: add feat to get all user data and download as JSON or CSV because of legal reasons
+            <!--TODO: add feat to get all user data and download as JSON or CSV because of legal reasons-->
             <hr>
             <form action="be-logic/delete_account.php" method="POST">
                 <div id="danger-zone">
@@ -98,7 +98,7 @@ if (!$userProfile) {
                 <div class="delete-account">
                     <div>
                         <h4>Delete Account</h4>
-                        <p>Permanently delete your account and all associated data.</p> //TODO: add information about what data will be deleted: user data, ratings, saves, recipes will stay but will no longer be associated with the user
+                        <p>Permanently delete your account. With this action, your user data, including your profile information and settings, will be removed. However, your recipes will remain in the system but will no longer be associated with your account.</p>
                     </div>
                     <button type="submit" class="icon-button delete-button smt-bttn" onclick="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
