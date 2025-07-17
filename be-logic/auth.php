@@ -102,8 +102,10 @@ function registerUser($pdo): void {
             $_SESSION['username'] = $username; // Set username in session
             header('Location: ../profile.php'); // Redirect to profile page
             exit;
-        }    } catch (PDOException $e) { // Catch any database errors this should not happen, but just in case
-        $errors['general'] = "Error registering user. Please try again.";
+        }   
+    } catch (PDOException $e) { // Catch any database errors this should not happen, but just in case
+        error_log("Database error while registering user: " . $e->getMessage());
+        $errors['general'] = "Error registering user. Please try again later.";
         $_SESSION['errors'] = $errors;
         header('Location: ../register.php'); // Redirect back to register page with error
         exit;
