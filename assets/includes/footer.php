@@ -29,7 +29,6 @@
                  <a href="mtzel.com/imprint">Imprint</a>
                  <a href="">Privacy Policy and ToS</a>
                  <a href="">Cookie Preferences</a>
-                 <a href="mailto:contact@mtzel.com">Contact Us</a>
              </div>
          </div>
          <div class="footer-links-container">
