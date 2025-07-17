@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([$username]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if (!$user || !password_verify($currentPassword, $user['password'])) {
+        if (!$user || !password_verify($currentPassword, $user['password_hash'])) {
             header('Location: ../settings.php?error=invalid_password');
             exit;
         }
