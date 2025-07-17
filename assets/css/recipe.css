@@ -507,7 +507,7 @@
         height: 200px;
         margin-bottom: 0.5rem;
         margin-top: 0;
-        page-break-inside: avoid;
+        page-break-inside: auto;
         width: 100%;
         overflow: hidden;
         border-radius: 0.5rem;
@@ -564,6 +564,7 @@
     /* Instructions section */
     #tap-instructions {
         margin-bottom: 2rem;
+        page-break-inside: auto;
     }
 
     #tap-instructions::before {
@@ -577,10 +578,14 @@
 
     .instructions-list {
         margin-bottom: 1rem;
-    }    .instructions-list div {
+        page-break-inside: auto;
+    }
+
+    .instructions-list div {
         margin-bottom: 0.75rem;
         align-items: flex-start;
         gap: 1rem;
+        page-break-inside: auto;
     }
 
     .instruction-number {
@@ -607,6 +612,7 @@
     /* Ingredients section */
     #tap-ingredients {
         margin-bottom: 2rem;
+        page-break-inside: auto;
     }
 
     #tap-ingredients::before {
@@ -620,6 +626,7 @@
         border: none;
         padding: 0;
         margin-bottom: 1rem;
+        page-break-inside: auto;
     }
 
     .ingredients-list h4 {
@@ -646,10 +653,14 @@
         list-style: none;
         padding: 0;
         margin: 0;
-    }    .ingredients-list li {
+        page-break-inside: auto;
+    }
+
+    .ingredients-list li {
         margin-bottom: 0.25rem;
         align-items: center;
         gap: 0.5rem;
+        page-break-inside: auto;
     }
 
     .indicator {
@@ -699,5 +710,11 @@
     /* Page breaks */
     h1 {
         page-break-after: avoid;
+    }
+    
+    /* Allow page breaks within content blocks for efficient printing */
+    .recipe-content,
+    .recipe-details {
+        page-break-inside: auto;
     }
 }
