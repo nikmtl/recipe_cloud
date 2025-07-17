@@ -78,9 +78,9 @@ function initializeTables($pdo): void{
         description TEXT DEFAULT NULL,
         prep_time_min INT DEFAULT NULL,
         cook_time_min INT DEFAULT NULL,
-        difficulty INT CHECK (difficulty >= 1 AND difficulty <= 3) DEFAULT 1,
-        servings INT CHECK (servings > 0) DEFAULT 1,
-        category VARCHAR(20) CHECK (category IN ('breakfast', 'appetizer', 'salad', 'soup', 'sandwich', 'main', 'side', 'snack', 'dessert', 'baking', 'sauce', 'drink')) DEFAULT 'main',
+        difficulty INT CHECK (difficulty >= 1 AND difficulty <= 3),
+        servings INT CHECK (servings > 0),
+        category VARCHAR(20) CHECK (category IN ('breakfast', 'appetizer', 'salad', 'soup', 'sandwich', 'main', 'side', 'snack', 'dessert', 'baking', 'sauce', 'drink')),
         image_path VARCHAR(255) DEFAULT NULL,
         FOREIGN KEY (user_id) REFERENCES users(username) ON DELETE SET NULL
     )";
@@ -100,7 +100,7 @@ function initializeTables($pdo): void{
     $sql = "CREATE TABLE IF NOT EXISTS ingredients (
         id INT AUTO_INCREMENT PRIMARY KEY,
         amount INT DEFAULT NULL,
-        unit VARCHAR(20) CHECK (unit = 'g' OR unit = 'kg' OR unit = 'ml' OR unit = 'l' OR unit = 'cup' OR unit = 'tbsp' OR unit = 'tsp' OR unit = 'oz' OR unit = 'lb') DEFAULT NULL,
+        unit VARCHAR(20) CHECK (unit IS NULL OR unit = 'g' OR unit = 'kg' OR unit = 'ml' OR unit = 'l' OR unit = 'cup' OR unit = 'tbsp' OR unit = 'tsp' OR unit = 'oz' OR unit = 'lb'),
         ingredient VARCHAR(100) NOT NULL,
         recipe_id INT NOT NULL,
         FOREIGN KEY (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE
