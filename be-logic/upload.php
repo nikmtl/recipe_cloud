@@ -298,9 +298,11 @@ function handleImageUpload(&$errors): ?string {
     // Create uploads directory if it doesn't exist
     $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/uploads/recipes/';
     if (!is_dir($uploadDir)) {
-        error_log("Failed to create upload directory: $uploadDir");
-        $errors['image'] = "Failed to create upload directory.";
-        return null;
+        error_log("Failed to open upload directory: $uploadDir -> trying to create it");
+        if (!mkdir($uploadDir, 0755, true)) {
+            $errors['image'] = "Failed to create upload directory.";
+            return null;
+        }
     }
 
     // Generate unique filename
