@@ -53,26 +53,6 @@ function initiateDatabaseConnection(): PDO{
 // It creates the users, recipes, instructions, ingredients, ratings, and favorites tables with appropriate columns and constraints.
 // See the db documentation for more details on the table structure and constraints.
 function initializeTables($pdo): void{
-    // Temporarily clear all tables for testing purposes
-    // WARNING: This will delete ALL data in the database!
-    function clearAllTables($pdo): void {
-        // Disable foreign key checks to allow table truncation in any order
-        $pdo->exec("SET FOREIGN_KEY_CHECKS = 0");
-        
-        // Tables to clear - in reverse order of dependencies
-        $tables = ['favorites', 'ratings', 'ingredients', 'instructions', 'recipes', 'users'];
-        
-        foreach ($tables as $table) {
-            $pdo->exec("TRUNCATE TABLE $table");
-        }
-        
-        // Re-enable foreign key checks
-        $pdo->exec("SET FOREIGN_KEY_CHECKS = 1");
-    }
-
-    // Call the function to clear all tables
-    // Comment this out when not testing
-    clearAllTables($pdo);
     // Create users table if it doesn't exist //The Profile image is not used at the moment, but it is a good idea to have it in case i want to implement user profile images in the future.
     $sql = "CREATE TABLE IF NOT EXISTS users (
         first_name VARCHAR(50),
