@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $newPassword = $_POST['new_password'];
 
         // Validate current password
-        $stmt = $pdo->prepare("SELECT password FROM users WHERE username = ?");
+        $stmt = $pdo->prepare("SELECT password_hash FROM users WHERE username = ?");
         $stmt->execute([$username]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
