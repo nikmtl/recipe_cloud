@@ -69,15 +69,13 @@ if (!$userProfile) {
             <h2>Update Password</h2>
             <p>Change your account password</p>
             <form action="be-logic/update_password.php" method="POST">
-                <div class="profile-field-group">
-                    <div>
-                        <label for="current_password">Current Password</label>
-                        <input type="password" id="current_password" name="current_password" required>
-                    </div>
-                    <div>
-                        <label for="new_password">New Password</label>
-                        <input type="password" id="new_password" name="new_password" required>
-                    </div>
+                <div>
+                    <label for="current_password">Current Password</label>
+                    <input type="password" id="current_password" name="current_password" required>
+                </div>
+                <div>
+                    <label for="new_password">New Password</label>
+                    <input type="password" id="new_password" name="new_password" required>
                 </div>
                 <button type="submit" class="icon-button smt-bttn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
