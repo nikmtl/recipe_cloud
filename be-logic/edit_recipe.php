@@ -364,7 +364,7 @@ function handleImageUpload(&$errors, $recipe_id, $pdo): ?string
     }
 
     // Create uploads directory if it doesn't exist
-    $uploadDir = __DIR__ . '/../../uploads/recipes/';
+    $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/uploads/recipes/';
     if (!is_dir($uploadDir)) {
         error_log("Failed to create upload directory: $uploadDir");
         $errors['image'] = "Failed to create upload directory.";
