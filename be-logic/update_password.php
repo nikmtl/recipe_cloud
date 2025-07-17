@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Update password
-        $stmt = $pdo->prepare(query: "UPDATE users SET password = ? WHERE username = ?");
+        $stmt = $pdo->prepare(query: "UPDATE users SET password_hash = ? WHERE username = ?");
         $stmt->execute([password_hash($newPassword, PASSWORD_DEFAULT), $username]);
 
         header('Location: ../settings.php?message=password_updated');
