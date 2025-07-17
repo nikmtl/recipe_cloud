@@ -35,7 +35,8 @@
              <h2>Contact</h2>
              <div>
                  <a href="https://github.com/Edamame04/recipe_cloud" target="_blank">GitHub</a>
-                 <a href="https://github.com/Edamame04/recipe_cloud/issues/new" target="_blank">Report a Bug</a> <!-- Link to issues page for bug reports -->
+                 <a href="https://github.com/Edamame04/recipe_cloud/issues/new?template=bug_report.md" target="_blank">Report a Bug</a> 
+                 <a href="https://github.com/Edamame04/recipe_cloud/issues/new?template=feature_request.md" target="_blank">Request a Feature</a>
              </div>
          </div>
      </div>
