@@ -6,6 +6,7 @@
     * 1. Registration form validation
     * 2. Login form validation
     * 3. Helper functions for displaying and clearing error messages
+    * 4. Password visibility toggle
 */
 
 /*1. Registration form validation*/
@@ -64,7 +65,17 @@ if (registerForm) {
     // Add event listeners to clear error messages on input
     inputFields.forEach(field => {
         field.addEventListener('input', function () {
-            clearError(field, field.nextElementSibling);
+            let errorElement;
+            if (field.id === 'register-username') {
+                errorElement = usernameError;
+            } else if (field.id === 'register-email') {
+                errorElement = emailError;
+            } else if (field.id === 'register-password') {
+                errorElement = passwordError;
+            } else if (field.id === 'register-password-confirm') {
+                errorElement = passwordConfirmError;
+            }
+            clearError(field, errorElement);
         });
     });
 }
@@ -99,7 +110,13 @@ if (loginForm) {
     // Add event listeners to clear error messages on input
     loginInputFields.forEach(field => { 
         field.addEventListener('input', function () {
-            clearError(field, field.nextElementSibling);
+            let errorElement;
+            if (field.id === 'login-username') {
+                errorElement = loginUsernameError;
+            } else if (field.id === 'login-password') {
+                errorElement = loginPasswordError;
+            }
+            clearError(field, errorElement);
         });
     });
 }
@@ -119,4 +136,22 @@ function displayError(inputField, messageField, message) {
 function clearError(inputField, messageField) {
     messageField.textContent = '';
     inputField.classList.remove('error');
+}
+
+/*4. Password toggle functionality */
+
+function togglePasswordVisibility(passwordFieldId) {
+    const passwordField = document.getElementById(passwordFieldId);
+    const eyeIcon = passwordField.nextElementSibling.querySelector('.eye-icon');
+    const eyeOffIcon = passwordField.nextElementSibling.querySelector('.eye-off-icon');
+
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        eyeIcon.style.display = 'none';
+        eyeOffIcon.style.display = 'inline';
+    } else {
+        passwordField.type = 'password';
+        eyeIcon.style.display = 'inline';
+        eyeOffIcon.style.display = 'none';
+    }
 }
