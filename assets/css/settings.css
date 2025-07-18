@@ -83,6 +83,7 @@ textarea {
 
 .smt-bttn {
     width: fit-content;
+    min-width: fit-content;
 }
 
 #logout-form {
@@ -174,4 +175,32 @@ textarea {
 
 #delete-account-form{
     gap: 0;
+}
+
+@media (max-width: 700px) {
+    #logout-form,
+    #export-form {
+        flex-direction: column;
+    }
+
+    .smt-bttn {
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .profile-field-group {
+        flex-direction: column;
+    }
+
+    .profile-field-group div {
+        width: 100%;
+    }
+
+    .delete-account button {
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+
 }

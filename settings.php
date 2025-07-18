@@ -106,7 +106,7 @@ if (!$userProfile) {
             <form action="be-logic/export_user_data.php" method="POST" id="export-form">
                 <div>
                     <h4>Export Data</h4>
-                    <p>Download all your data associated with your account, including recipes, favorites, and settings.</p>
+                    <p>Download all your data associated with your account.</p>
                 </div>
                 <button type="submit" class="icon-button secondary-button smt-bttn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
