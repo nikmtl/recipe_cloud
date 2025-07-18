@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         // Destroy session and redirect to home page
         session_destroy();
-        header('Location: ../index?message=account_deleted');
+        header('Location: ../');
         exit;
         
     } catch (PDOException $e) {

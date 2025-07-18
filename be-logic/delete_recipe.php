@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recipe_id'])) {
         $recipeData = $stmt->fetch(PDO::FETCH_ASSOC);
         
         if (!$recipeData) {
-            header('Location: ../index');
+            header('Location: ../');
             exit();
         }
         
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recipe_id'])) {
         $imagePath = $recipeData['image_path'];
     } catch (PDOException $e) {
         error_log("Database error: " . $e->getMessage());
-        header('Location: ../index');
+        header('Location: ../');
         exit();
     }
     if ($recipeId && $recipeOwner == $user_id) {

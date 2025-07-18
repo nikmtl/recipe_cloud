@@ -173,7 +173,7 @@ function loginUser($pdo): never {
 function logoutUser(): never {
     session_destroy();  // Destroy the session to log out the user
     // Redirect to index page
-    header('Location: ../index');
+    header('Location: ../');
     exit;
 }
 ?>

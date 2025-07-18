@@ -10,7 +10,7 @@ if (!isset($_SESSION)) {
 }
 // Check if recipe ID is provided
 if (!isset($_GET['id']) || empty($_GET['id'])) {
-    header('Location: index');
+    header('Location: /');
     exit();
 }
 

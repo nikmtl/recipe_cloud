@@ -105,13 +105,13 @@ if (session_status() === PHP_SESSION_NONE) {
     <header>
         <div>
             <!-- logo -->
-            <div class="logo-container" onclick="location.href='index'">
+            <div class="logo-container" onclick="location.href='/'">
                 <img src="assets/img/logo.svg" alt="Recipe Cloud Logo" class="logo" width="24" height="24">
                 <h1>Recipe Cloud</h1>
             </div>
             <!-- Navigation Links -->
             <div class="nav-links desktop-only">
-                <a href="index">Home</a>
+                <a href="/">Home</a>
                 <a href="recipes">Recipes</a>
                 <a href="upload">Upload</a>
                 <?php if (isset($_SESSION["username"])): ?> <!-- If user is logged in, show profile link -->
@@ -163,7 +163,7 @@ if (session_status() === PHP_SESSION_NONE) {
     </header>
     <!-- Mobile Navigation Menu -->
     <div class="mobile-nav">
-        <a href="index">Home</a>
+        <a href="/">Home</a>
         <a href="recipes">Recipes</a>
         <a href="upload">Upload</a>
         <?php if (isset($_SESSION["username"])): ?> <!-- If user is logged in, show profile link -->
