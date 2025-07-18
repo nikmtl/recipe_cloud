@@ -122,11 +122,12 @@ if (session_status() === PHP_SESSION_NONE) {
             <?php if (isset($_SESSION["username"])): ?> <!-- If user is logged in, show sign out button -->
                 <form class=" desktop-only" method="POST" action="be-logic/auth.php">
                     <input type="hidden" name="action" value="logout">
-                    <button class="secondary-button icon-button" type="submit">
-                        Sign Out
+                    <button class="secondary-button icon-button" type="submit"> 
                         <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24">
                             <path d="m24,12s0,.002,0,.003c-.002.673-.266,1.304-.746,1.776l-4.142,4.077c-.097.096-.224.144-.351.144-.129,0-.258-.05-.356-.149-.193-.196-.191-.513.006-.707l4.142-4.077c.164-.162.281-.356.356-.566H6.5c-.276,0-.5-.224-.5-.5s.224-.5.5-.5h16.41c-.075-.213-.192-.409-.358-.572l-4.141-4.072c-.197-.193-.2-.51-.006-.707.193-.198.51-.2.707-.006l4.141,4.072c.481.474.747,1.106.747,1.782,0,0,0,.001,0,.002,0,0,0,0,0,0Zm-12.5,3c-.276,0-.5.224-.5.5v4c0,1.93-1.57,3.5-3.5,3.5h-3c-1.93,0-3.5-1.57-3.5-3.5V4.5c0-1.93,1.57-3.5,3.5-3.5h3c1.93,0,3.5,1.57,3.5,3.5v4c0,.276.224.5.5.5s.5-.224.5-.5v-4c0-2.481-2.019-4.5-4.5-4.5h-3C2.019,0,0,2.019,0,4.5v15c0,2.481,2.019,4.5,4.5,4.5h3c2.481,0,4.5-2.019,4.5-4.5v-4c0-.276-.224-.5-.5-.5Z" />
                         </svg>
+                        Sign Out
+                       
                     </button>
                 </form>
             <?php else: ?> <!-- If user is not logged in, show search and sign in buttons -->
