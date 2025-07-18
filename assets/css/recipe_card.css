@@ -16,6 +16,18 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+.recipe-card-quick-favorite{
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
 .recipe-card-image {
     width: 100%;
     height: 200px;
