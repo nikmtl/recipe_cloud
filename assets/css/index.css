@@ -165,5 +165,28 @@
         flex-direction: column;
     }
 }
+
+@media(max-width: 440px) {
+    .hero-container h1 {
+        font-size: 1.875rem;
+    }
+
+    .hero-container p {
+        font-size: 1rem;
+    }
+
+    .hero-container button {
+        padding: 13.5px 1rem;
+        font-size: 0.8rem;
+    }
+
+}
+
+@media (max-width: 360px) {
+    .hero-container button {
+        padding: 13.5px 0.5rem;
+    }
+}
+
 /* Section end */
 
