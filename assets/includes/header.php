@@ -33,7 +33,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 
     <!-- favicon and title -->
-    <link rel="icon" type="image/x-icon" sizes="any" href="assets/img/favicon.ico">
+    <link rel="icon" type="image/x-icon" sizes="any" href="/assets/img/favicon.ico" data-base-href="/assets/img/favicon">
     <title>Recipe Cloud</title>
 
     <!-- load stylesheets -->
