@@ -88,6 +88,8 @@ recipe_cloud/
 │   │   │   └── ...
 │   │   └── ...
 │   ├── img/               # Images and logos
+│   │   ├── favicon.png
+│   │   ├── favicon.svg
 │   │   ├── logo.svg
 │   │   └── logo_with_bg.svg
 │   └── includes/          # Reusable PHP components
@@ -97,6 +99,8 @@ recipe_cloud/
 │
 ├── be-logic/                 # Backend PHP logic
 │   ├── db.php                # Database connection
+│   ├── db_config.php         # Database configuration
+│   ├── db_config.php.template # Database config template
 │   ├── auth.php              # Authentication handling 
 │   ├── upload.php            # Recipe upload processing
 │   ├── edit_recipe.php       # Recipe editing logic
@@ -106,15 +110,16 @@ recipe_cloud/
 │   ├── delete_review.php     # Review deletion
 │   ├── get_user_profile.php  # User profile loading
 │   ├── update_account.php    # User profile editing
+│   ├── update_password.php   # Password update handling
 │   ├── delete_account.php    # Account and data deletion
+│   ├── export_user_data.php  # User data export
 │   ├── load_more_recipes.php # AJAX dynamic recipe loading
-│   └── protected_page.php    
+│   ├── load_standard_data.php # Load demo recipes
+│   └── protected_page.php    # Protected route handler
 │
-├── uploads/                  # User uploaded files
-│   └── recipes/              # Recipe images
-│       └── standard/         # Images for standard recipes
 ├── docs/                     # Documentation
-│   └── erm.drawio            # Entity Relationship Model
+│   ├── erm.drawio            # Entity Relationship Model (editable)
+│   └── erm.png               # Entity Relationship Diagram (image)
 │
 └── README.md
 ```
