@@ -135,6 +135,10 @@ textarea {
     margin-bottom: 1rem;
 }
 
+#danger-zone svg {
+    min-width: 20px;
+}
+
 .delete-account{
     display: flex;
     border: 1px solid var(--error-border);
