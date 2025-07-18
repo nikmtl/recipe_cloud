@@ -104,3 +104,15 @@ main {
         gap: 1rem;
     }
 }
+
+@media (max-width: 500px) {
+    .profile-stats p{
+        font-size: 0.875rem;
+    }
+}
+
+@media (max-width: 350px) {
+    .profile-stats p{
+        font-size: 0.75rem;
+    }
+}
