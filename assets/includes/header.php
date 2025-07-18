@@ -26,13 +26,14 @@ if (session_status() === PHP_SESSION_NONE) {
     <meta name="author" content="Edamame04">
     <meta name="theme-color" content="#ffffff">
     <meta name="application-name" content="Recipe Cloud">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Recipe Cloud">
 
 
     <!-- favicon and title -->
-    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
-    <link rel="apple-touch-icon" href="assets/img/favicon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon.png">
+    <link rel="icon" type="image/x-icon" sizes="any" href="assets/img/favicon.ico">
     <title>Recipe Cloud</title>
 
     <!-- load stylesheets -->
