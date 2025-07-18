@@ -9,7 +9,7 @@
 // Add CSS file for recipe card styling
 echo '<link rel="stylesheet" href="assets/css/recipe_card.css">';
 ?>
-<div class="recipe-card" onclick="location.href='recipe.php?id=<?= $recipe['id'] ?>'">
+<div class="recipe-card" onclick="location.href='recipe?id=<?= $recipe['id'] ?>'">
     <div class="recipe-card-image">
         <?php if ($recipe['image_path']): ?>
             <img src="<?= htmlspecialchars($recipe['image_path']) ?>" alt="<?= htmlspecialchars($recipe['title']) ?>">

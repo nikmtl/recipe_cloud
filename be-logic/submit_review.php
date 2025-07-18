@@ -11,13 +11,13 @@ require_once __DIR__ . '/protected_page.php';
 
 // Check if form was submitted via POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: ../recipes.php');
+    header('Location: ../recipes');
     exit();
 }
 
 // Validate required fields
 if (!isset($_POST['recipe_id']) || !isset($_POST['rating'])) {
-    header('Location: ../recipes.php');
+    header('Location: ../recipes');
     exit();
 }
 
@@ -28,7 +28,7 @@ $user_id = $_SESSION['username'];
 
 // Validate rating (1-5 stars)
 if ($rating < 1 || $rating > 5 || !is_numeric($rating)) {
-    header('Location: ../recipe.php?id=' . $recipe_id);
+    header('Location: ../recipe?id=' . $recipe_id);
     exit();
 }
 
@@ -47,12 +47,12 @@ try {
         $stmt = $pdo->prepare("INSERT INTO ratings (user_id, recipe_id, rating, comment_text) VALUES (?, ?, ?, ?)");
         $stmt->execute([$user_id, $recipe_id, $rating, $comment]);
     }    // Redirect back to recipe page with success message
-    header('Location: ../recipe.php?id=' . $recipe_id);
+    header('Location: ../recipe?id=' . $recipe_id);
     exit();
 
 } catch (PDOException $e) {
     error_log("Database error in submit_review.php: " . $e->getMessage());
-    header('Location: ../recipe.php?id=' . $recipe_id);
+    header('Location: ../recipe?id=' . $recipe_id);
     exit();
 }
 ?>

@@ -10,7 +10,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 if (!isset($_SESSION['username'])) {
-    header('Location: login.php?msg=To access this page, please log in.');
+    header('Location: login?msg=To access this page, please log in.');
     exit;
 }
 

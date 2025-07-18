@@ -16,14 +16,14 @@ include_once 'assets/includes/header.php'; // Load the header
             <h1>Recipe Cloud</h1>
             <p>Discover, share, and rate delicious recipes from around the world</p>
             <div>
-                <button class="icon-button large-button" onclick="location.href='upload.php'">
+                <button class="icon-button large-button" onclick="location.href='upload'">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M5 12h14"></path>
                         <path d="M12 5v14"></path>
                     </svg>
                     Upload Recipe
                 </button>
-                <button class="secondary-button large-button" onclick="location.href='recipes.php'">
+                <button class="secondary-button large-button" onclick="location.href='recipes'">
                     Browse All Recipes
                 </button>
             </div>
@@ -32,7 +32,7 @@ include_once 'assets/includes/header.php'; // Load the header
         <div class="featured-recipes-container">
             <div class="featured-recipes-header">
                 <h2>Featured Recipes</h2>
-                <a href="recipes.php">View all</a>
+                <a href="recipes">View all</a>
             </div>
             <div class="featured-recipes">
                 <?php                // Fetch featured recipes (top 4 best rated recipes)
@@ -94,7 +94,7 @@ include_once 'assets/includes/header.php'; // Load the header
                     }
 
                     if (empty($featured_recipes)) {
-                        echo '<p>No recipes available yet. <a href="upload.php">Upload the first recipe!</a></p>';
+                        echo '<p>No recipes available yet. <a href="upload">Upload the first recipe!</a></p>';
                     }
                 } catch (PDOException $e) {
                     echo '<p>Error loading featured recipes. Please try again later.</p>';
@@ -108,7 +108,7 @@ include_once 'assets/includes/header.php'; // Load the header
             <div class="start-sharing">
                 <h2>Share Your Culinary Creations</h2>
                 <p>Have a recipe that everyone loves? Share it with our community and get feedback from food enthusiasts.</p>
-                <button class="medium-button" onclick="location.href='upload.php'">
+                <button class="medium-button" onclick="location.href='upload'">
                     Start Sharing
                 </button>
             </div>

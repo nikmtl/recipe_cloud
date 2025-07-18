@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () { // Ensure the DOM is
             // Create a form to submit the delete request
             const form = document.createElement('form');
             form.method = 'POST';
-            form.action = 'be-logic/delete_review.php';
+            form.action = 'be-logic/delete_review';
 
             // Add recipe_id hidden input
             const recipeIdInput = document.createElement('input');
@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', function () { // Ensure the DOM is
             
             const form = document.createElement('form');
             form.method = 'POST';
-            form.action = 'be-logic/save_recipe.php';
+            form.action = 'be-logic/save_recipe';
             
             const recipeIdInput = document.createElement('input');
             recipeIdInput.type = 'hidden';
@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function () { // Ensure the DOM is
             
             const form = document.createElement('form');
             form.method = 'POST';
-            form.action = 'be-logic/save_recipe.php';
+            form.action = 'be-logic/save_recipe';
             
             const recipeIdInput = document.createElement('input');
             recipeIdInput.type = 'hidden';
@@ -258,7 +258,7 @@ document.addEventListener('DOMContentLoaded', function () { // Ensure the DOM is
                 // Create a form to submit the delete request
                 const form = document.createElement('form');
                 form.method = 'POST';
-                form.action = 'be-logic/delete_recipe.php';
+                form.action = 'be-logic/delete_recipe';
 
                 // Add recipe_id hidden input
                 const recipeIdInput = document.createElement('input');

@@ -226,7 +226,7 @@ recipe_cloud/
        index index.php index.html;
 
        location / {
-           try_files $uri $uri/ =404;
+           try_files $uri $uri/ $uri.php?$args;
        }
 
        location ~ \.php$ {

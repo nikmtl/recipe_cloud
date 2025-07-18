@@ -18,9 +18,9 @@
          <div class="footer-links-container">
              <h2>Quick Links</h2>
              <div>
-                 <a href="index.php">Home</a>
-                 <a href="recipes.php">Recipes</a>
-                 <a href="upload.php">Upload</a>
+                 <a href="index">Home</a>
+                 <a href="recipes">Recipes</a>
+                 <a href="upload">Upload</a>
              </div>
          </div>
          <div class="footer-links-container">

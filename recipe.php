@@ -10,7 +10,7 @@ if (!isset($_SESSION)) {
 }
 // Check if recipe ID is provided
 if (!isset($_GET['id']) || empty($_GET['id'])) {
-    header('Location: index.php');
+    header('Location: index');
     exit();
 }
 
@@ -28,7 +28,7 @@ try {
     $recipe = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$recipe) {
-        header('Location: recipes.php');
+        header('Location: recipes');
         exit();
     }
 
@@ -81,7 +81,7 @@ try {
     }
 } catch (PDOException $e) {
     error_log("Database error: " . $e->getMessage());
-    header('Location: recipes.php');
+    header('Location: recipes');
     exit();
 }
 
@@ -93,7 +93,8 @@ include_once 'assets/includes/header.php'; //load header
 <main>
     <div class="recipe-container">
         <div class="backnav">
-            <a class="back-button" href="recipes.php"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <a class="back-button" href="recipes">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="m12 19-7-7 7-7"></path>
                     <path d="M19 12H5"></path>
                 </svg>Back to Recipes
@@ -241,7 +242,7 @@ include_once 'assets/includes/header.php'; //load header
                                 </div>
                             <?php else: ?>
                                 <div id="login-prompt">
-                                    <p>Please <a href="login.php">log in</a> to leave a review.</p>
+                                    <p>Please <a href="login">log in</a> to leave a review.</p>
                                 </div>
                             <?php endif; ?>
 
@@ -376,7 +377,7 @@ include_once 'assets/includes/header.php'; //load header
                     <?php if (isset($_SESSION['username']) && $_SESSION['username'] === $recipe['user_id']): ?>
                         <div class="recipe-actions-edit">
                             <h2>Edit Your Recipe</h2>
-                            <a href="edit_recipe.php?id=<?php echo htmlspecialchars($recipe['id']); ?>" class="imitate-secondary-button">
+                            <a href="edit_recipe?id=<?php echo htmlspecialchars($recipe['id']); ?>" class="imitate-secondary-button">
                                 Edit Recipe
                             </a>
                             <button class="secondary-button warning-button" id="delete-recipe-btn">

@@ -17,14 +17,14 @@ require_once __DIR__ . '/protected_page.php';
 
 // Check if form was submitted via POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: ../recipes.php');
+    header('Location: ../recipes');
     exit();
 }
 
 // Check if recipe ID is provided
 if (!isset($_POST['recipe_id']) || empty($_POST['recipe_id'])) {
     $_SESSION['error'] = "Recipe ID is required.";
-    header('Location: ../recipes.php');
+    header('Location: ../recipes');
     exit();
 }
 
@@ -38,11 +38,11 @@ try {
 
     if (!$recipe) {
         $_SESSION['error'] = "Recipe not found.";
-        header('Location: ../recipes.php');
+        header('Location: ../recipes');
         exit();
     }    if ($recipe['user_id'] !== $_SESSION['username']) {
         $_SESSION['error'] = "You can only edit your own recipes.";
-        header('Location: ../recipes.php');
+        header('Location: ../recipes');
         exit();
     }
 
@@ -50,13 +50,13 @@ try {
     $result = processRecipeUpdate($pdo, $recipe_id);    if ($result['success']) {
         $_SESSION['success'] = "Recipe updated successfully!";
         // Redirect to the updated recipe page
-        header('Location: ../recipe.php?id=' . $recipe_id);
+        header('Location: ../recipe?id=' . $recipe_id);
         exit();
     } else {
         // Store errors and form data in session and redirect back to edit form
         $_SESSION['errors'] = $result['errors'];
         $_SESSION['edit_form_data'] = $_POST; // Preserve form data
-        header('Location: ../edit_recipe.php?id=' . $recipe_id);
+        header('Location: ../edit_recipe?id=' . $recipe_id);
         exit();
     }
 } catch (Exception $e) {
@@ -64,7 +64,7 @@ try {
     error_log("Recipe edit error: " . $e->getMessage());
     $_SESSION['errors'] = ['general' => "An unexpected error occurred. Please try again."];
     $_SESSION['edit_form_data'] = $_POST; // Preserve form data
-    header('Location: ../edit_recipe.php?id=' . $recipe_id);
+    header('Location: ../edit_recipe?id=' . $recipe_id);
     exit();
 }
 

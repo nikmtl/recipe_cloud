@@ -69,7 +69,7 @@ try {
                     <p class="username <?php echo ($userProfile['first_name'] ? '' : 'no-name'); ?>">@<?php echo htmlspecialchars($userProfile['username']); ?></p>
                     <p class="joined-date">Joined <?php echo htmlspecialchars($userProfile['joined_date']); ?></p>
                 </div>
-                <button class="secondary-button icon-button" onclick="window.location.href='settings.php'">
+                <button class="secondary-button icon-button" onclick="window.location.href='settings'">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
                         <circle cx="12" cy="12" r="3"></circle>
@@ -126,7 +126,7 @@ try {
             </div>
             <?php if (empty($userRecipes)) : ?>
                 <div>
-                    <p class="no-recipes">You haven't created any recipes yet. <a href="upload.php">Create your first recipe!</a></p>
+                    <p class="no-recipes">You haven't created any recipes yet. <a href="upload">Create your first recipe!</a></p>
                 </div>
             <?php endif; ?>
         </div>
@@ -152,7 +152,7 @@ try {
             </div>
             <?php if (empty($favoriteRecipes)) : ?>
                 <div>
-                    <p class="no-recipes">You haven't favorited any recipes yet. <a href="recipes.php">Browse recipes to find your favorites!</a></p>
+                    <p class="no-recipes">You haven't favorited any recipes yet. <a href="recipes">Browse recipes to find your favorites!</a></p>
                 </div>
             <?php endif; ?>
         </div>

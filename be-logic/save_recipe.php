@@ -9,13 +9,13 @@ require_once __DIR__ . '/protected_page.php'; // Include session management
 
 // Check if request method is POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: ../recipes.php');
+    header('Location: ../recipes');
     exit;
 }
 
 // Validate required fields
 if (!isset($_POST['recipe_id']) || !isset($_POST['action'])) {
-    header('Location: ../recipes.php');
+    header('Location: ../recipes');
     exit;
 }
 
@@ -30,7 +30,7 @@ try {
         $stmt->execute([$user_id, $recipe_id]);
 
         if ($stmt->fetch()) {
-            header('Location: ../recipe.php' . '?id=' . $recipe_id);
+            header('Location: ../recipe' . '?id=' . $recipe_id);
             exit;
         }
 
@@ -38,7 +38,7 @@ try {
         $stmt = $pdo->prepare("INSERT INTO favorites (user_id, recipe_id) VALUES (?, ?)");
         $stmt->execute([$user_id, $recipe_id]);
 
-        header('Location: ../recipe.php' . '?id=' . $recipe_id);
+        header('Location: ../recipe' . '?id=' . $recipe_id);
         exit;
 
     } elseif ($action === 'unsave') {
@@ -46,17 +46,17 @@ try {
         $stmt = $pdo->prepare("DELETE FROM favorites WHERE user_id = ? AND recipe_id = ?");
         $stmt->execute([$user_id, $recipe_id]);
 
-        header('Location: ../recipe.php' . '?id=' . $recipe_id);
+        header('Location: ../recipe' . '?id=' . $recipe_id);
         exit;
 
     } else {
-        header('Location: ../recipe.php' . '?id=' . $recipe_id);
+        header('Location: ../recipe' . '?id=' . $recipe_id);
         exit;
     }
 
 } catch (PDOException $e) {
     error_log("Database error in save_recipe.php: " . $e->getMessage());
-    header('Location: ../recipe.php' . '?id=' . $recipe_id);
+    header('Location: ../recipe' . '?id=' . $recipe_id);
     exit;
 }
 ?>

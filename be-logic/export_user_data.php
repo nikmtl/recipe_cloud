@@ -80,7 +80,7 @@ try {
 
 } catch (Exception $e) {
     // If there's an error, redirect to settings with error message
-    header('Location: ../settings.php?error=' . urlencode('Failed to export user data: ' . $e->getMessage()));
+    header('Location: ../settings?error=' . urlencode('Failed to export user data: ' . $e->getMessage()));
     exit;
 }
 ?>

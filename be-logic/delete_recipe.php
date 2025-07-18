@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recipe_id'])) {
         $recipeData = $stmt->fetch(PDO::FETCH_ASSOC);
         
         if (!$recipeData) {
-            header('Location: ../index.php');
+            header('Location: ../index');
             exit();
         }
         
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recipe_id'])) {
         $imagePath = $recipeData['image_path'];
     } catch (PDOException $e) {
         error_log("Database error: " . $e->getMessage());
-        header('Location: ../index.php');
+        header('Location: ../index');
         exit();
     }
     if ($recipeId && $recipeOwner == $user_id) {
@@ -48,13 +48,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recipe_id'])) {
             $stmt = $pdo->prepare('DELETE FROM recipes WHERE id = ?');
             $stmt->execute([$recipeId]);
             // Redirect to the user's profile page after deletion
-            header('Location: ../profile.php');
+            header('Location: ../profile');
         } catch (PDOException $e) {
             error_log("Database error: " . $e->getMessage());
-            header('Location: ../recipe.php?id=' . $recipeId);
+            header('Location: ../recipe?id=' . $recipeId);
             exit();
         }    }
 } else {
-    header('Location: ../profile.php?');
+    header('Location: ../profile?');
     exit();
 }

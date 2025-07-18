@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const currentOffset = parseInt(btn.dataset.currentOffset || urlParams.get('offset') || '0');
             const newOffset = currentOffset + 8; // Assuming limit is 8
             // Build request URL
-            const requestUrl = new URL('be-logic/load_more_recipes.php', window.location.origin + window.location.pathname.replace('recipes.php', ''));
+            const requestUrl = new URL('be-logic/load_more_recipes', window.location.origin + window.location.pathname.replace('recipes', ''));
             requestUrl.searchParams.set('search', urlParams.get('search') || '');
             requestUrl.searchParams.set('sort', urlParams.get('sort') || 'newest');
             requestUrl.searchParams.set('category', urlParams.get('category') || '');

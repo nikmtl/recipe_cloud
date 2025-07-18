@@ -105,22 +105,22 @@ if (session_status() === PHP_SESSION_NONE) {
     <header>
         <div>
             <!-- logo -->
-            <div class="logo-container" onclick="location.href='index.php'">
+            <div class="logo-container" onclick="location.href='index'">
                 <img src="assets/img/logo.svg" alt="Recipe Cloud Logo" class="logo" width="24" height="24">
                 <h1>Recipe Cloud</h1>
             </div>
             <!-- Navigation Links -->
             <div class="nav-links desktop-only">
-                <a href="index.php">Home</a>
-                <a href="recipes.php">Recipes</a>
-                <a href="upload.php">Upload</a>
+                <a href="index">Home</a>
+                <a href="recipes">Recipes</a>
+                <a href="upload">Upload</a>
                 <?php if (isset($_SESSION["username"])): ?> <!-- If user is logged in, show profile link -->
-                    <a href="profile.php">My Profile</a>
+                    <a href="profile">My Profile</a>
                 <?php endif; ?>
             </div>
             <!-- Authentication Buttons (Desktop) -->
             <?php if (isset($_SESSION["username"])): ?> <!-- If user is logged in, show sign out button -->
-                <form class=" desktop-only" method="POST" action="be-logic/auth.php">
+                <form class=" desktop-only" method="POST" action="be-logic/auth">
                     <input type="hidden" name="action" value="logout">
                     <button class="secondary-button icon-button" type="submit">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -133,20 +133,20 @@ if (session_status() === PHP_SESSION_NONE) {
                 </form>
             <?php else: ?> <!-- If user is not logged in, show search and sign in buttons -->
                 <div class="auth-buttons  desktop-only">
-                    <button class="ghost-button icon-button" onclick="location.href='recipes.php'">
+                    <button class="ghost-button icon-button" onclick="location.href='recipes'">
                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="11" cy="11" r="8"></circle>
                             <path d="m21 21-4.3-4.3"></path>
                         </svg>
                     </button>
-                    <button class="secondary-button icon-button" onclick="location.href='login.php'">
+                    <button class="secondary-button icon-button" onclick="location.href='login'">
                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
                         Sign In
                     </button>
-                    <button onclick="location.href='register.php'">Register</button>
+                    <button onclick="location.href='register'">Register</button>
                 </div>
             <?php endif; ?>
             <!-- Mobile Hamburger Menu Button (for smaller screens) -->
@@ -163,14 +163,14 @@ if (session_status() === PHP_SESSION_NONE) {
     </header>
     <!-- Mobile Navigation Menu -->
     <div class="mobile-nav">
-        <a href="index.php">Home</a>
-        <a href="recipes.php">Recipes</a>
-        <a href="upload.php">Upload</a>
+        <a href="index">Home</a>
+        <a href="recipes">Recipes</a>
+        <a href="upload">Upload</a>
         <?php if (isset($_SESSION["username"])): ?> <!-- If user is logged in, show profile link -->
-            <a href="profile.php?>">My Profile</a>
+            <a href="profile?>">My Profile</a>
         <?php endif; ?>
         <?php if (isset($_SESSION["username"])): ?> <!-- If user is logged in, show sign out button -->
-            <form method="POST" action="be-logic/auth.php">
+            <form method="POST" action="be-logic/auth">
                 <input type="hidden" name="action" value="logout">
                 <button class="secondary-button icon-button" type="submit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -182,14 +182,14 @@ if (session_status() === PHP_SESSION_NONE) {
                 </button>
             </form>
         <?php else: ?> <!-- If user is not logged in, show search and sign in buttons -->
-            <button class="secondary-button icon-button" onclick="location.href='login.php'">
+            <button class="secondary-button icon-button" onclick="location.href='login'">
                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
                     <circle cx="12" cy="7" r="4"></circle>
                 </svg>
                 Sign In
             </button>
-            <button onclick="location.href='register.php'">Register</button>
+            <button onclick="location.href='register'">Register</button>
         <?php endif; ?>
     </div>
     <div class="mobile-nav-background" id="mobile-nav-background"></div> <!-- Background for mobile menu to dim the rest of the page -->

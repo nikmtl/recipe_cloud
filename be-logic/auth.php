@@ -84,7 +84,7 @@ function registerUser($pdo): void {
       // If there are errors, store them in session and redirect back to register page
     if (!empty($errors)) {
         $_SESSION['errors'] = $errors;
-        header('Location: ../register.php');
+        header('Location: ../register');
         exit;
     }
     
@@ -100,14 +100,14 @@ function registerUser($pdo): void {
                 unset($_SESSION['errors']);
             }
             $_SESSION['username'] = $username; // Set username in session
-            header('Location: ../profile.php'); // Redirect to profile page
+            header('Location: ../profile'); // Redirect to profile page
             exit;
         }   
     } catch (PDOException $e) { // Catch any database errors this should not happen, but just in case
         error_log("Database error while registering user: " . $e->getMessage());
         $errors['general'] = "Error registering user. Please try again later.";
         $_SESSION['errors'] = $errors;
-        header('Location: ../register.php'); // Redirect back to register page with error
+        header('Location: ../register'); // Redirect back to register page with error
         exit;
     }
 }
@@ -134,7 +134,7 @@ function loginUser($pdo): never {
       // If there are errors, store them in session and redirect back to login page
     if (!empty($errors)) {
         $_SESSION['errors'] = $errors;
-        header('Location: ../login.php');
+        header('Location: ../login');
         exit;
     }
     
@@ -146,13 +146,13 @@ function loginUser($pdo): never {
         // Username not found -> set error
         $errors['username'] = "Username not found.";
         $_SESSION['errors'] = $errors;
-        header('Location: ../login.php');
+        header('Location: ../login');
         exit;
     } elseif (!password_verify($password, $user['password_hash'])) {
         // Password incorrect -> set error
         $errors['password'] = "Incorrect password.";
         $_SESSION['errors'] = $errors;
-        header('Location: ../login.php');
+        header('Location: ../login');
         exit;
     } else { // Login successful
         // Clear any previous session data including errors
@@ -163,7 +163,7 @@ function loginUser($pdo): never {
         // Set user ID in session (session already started at top)
         $_SESSION['username'] = $username; // Set username in session
         // Redirect to profile page
-        header('Location: ../profile.php');
+        header('Location: ../profile');
         exit;
     }
 }
@@ -173,7 +173,7 @@ function loginUser($pdo): never {
 function logoutUser(): never {
     session_destroy();  // Destroy the session to log out the user
     // Redirect to index page
-    header('Location: ../index.php');
+    header('Location: ../index');
     exit;
 }
 ?>

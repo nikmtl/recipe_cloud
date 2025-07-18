@@ -10,7 +10,7 @@ require_once __DIR__ . '/protected_page.php';
 
 // Check if request is POST and has required parameters
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['recipe_id'])) {
-    header('Location: ../recipes.php');
+    header('Location: ../recipes');
     exit();
 }
 
@@ -22,12 +22,12 @@ try {
     $stmt = $pdo->prepare("DELETE FROM ratings WHERE user_id = ? AND recipe_id = ?");
     $result = $stmt->execute([$user_id, $recipe_id]);
       //redirect back to the recipe page
-    header('Location: ../recipe.php?id=' . $recipe_id);
+    header('Location: ../recipe?id=' . $recipe_id);
     exit();
 
 } catch (PDOException $e) {
     error_log("Database error in delete_review.php: " . $e->getMessage());
-    header('Location: ../recipe.php?id=' . $recipe_id);
+    header('Location: ../recipe?id=' . $recipe_id);
     exit();
 }
 ?>

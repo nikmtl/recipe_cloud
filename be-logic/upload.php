@@ -18,7 +18,7 @@ require_once __DIR__ . '/protected_page.php';
 
 // Check if form was submitted via POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: ../upload.php');
+    header('Location: ../upload');
     exit();
 }
 
@@ -27,20 +27,20 @@ try {
     $result = processRecipeUpload($pdo);    
     if ($result['success']) {
         // Redirect to the newly created recipe page
-        header('Location: ../recipe.php?id=' . $result['recipe_id']);
+        header('Location: ../recipe?id=' . $result['recipe_id']);
         exit();
     } else {
         // Store errors and form data in session and redirect back to upload form
         $_SESSION['errors'] = $result['errors'];
         $_SESSION['upload_form_data'] = $_POST; // Preserve form data
-        header('Location: ../upload.php');
+        header('Location: ../upload');
         exit();
     }
 } catch (Exception $e) {    // Handle unexpected errors
     error_log("Recipe upload error: " . $e->getMessage());
     $_SESSION['errors'] = ["An unexpected error occurred. Please try again."];
     $_SESSION['upload_form_data'] = $_POST; // Preserve form data
-    header('Location: ../upload.php');
+    header('Location: ../upload');
     exit();
 }
 

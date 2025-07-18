@@ -12,7 +12,7 @@ require_once 'be-logic/db.php';
 
 // Check if recipe ID is provided
 if (!isset($_GET['id']) || empty($_GET['id'])) {
-    header('Location: recipes.php');
+    header('Location: recipes');
     exit();
 }
 
@@ -26,12 +26,12 @@ try {
 
     if (!$recipe) {
         $_SESSION['error'] = "Recipe not found.";
-        header('Location: recipes.php');
+        header('Location: recipes');
         exit();
     }    // Check if the current user owns this recipe
     if ($recipe['user_id'] !== $_SESSION['username']) {
         $_SESSION['error'] = "You can only edit your own recipes.";
-        header('Location: recipes.php');
+        header('Location: recipes');
         exit();
     }
 
@@ -47,7 +47,7 @@ try {
 } catch (PDOException $e) {
     error_log("Database error: " . $e->getMessage());
     $_SESSION['error'] = "Database error occurred.";
-    header('Location: recipes.php');
+    header('Location: recipes');
     exit();
 }
 
@@ -125,7 +125,7 @@ function isSelected($key, $value): string
 
 <main>
     <div class="upload-container">
-        <a class="back-button" href="recipe.php?id=<?php echo $recipe_id; ?>">
+        <a class="back-button" href="recipe?id=<?php echo $recipe_id; ?>">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="m12 19-7-7 7-7"></path>
                 <path d="M19 12H5"></path>

@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (!$user || !password_verify($currentPassword, $user['password_hash'])) {
-            header('Location: ../settings.php?error=invalid_password');
+            header('Location: ../settings?error=invalid_password');
             exit;
         }
 
@@ -29,16 +29,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $pdo->prepare(query: "UPDATE users SET password_hash = ? WHERE username = ?");
         $stmt->execute([password_hash($newPassword, PASSWORD_DEFAULT), $username]);
 
-        header('Location: ../settings.php?message=password_updated');
+        header('Location: ../settings?message=password_updated');
         exit;
     } catch (PDOException $e) {
         error_log("Database error in update_password.php: " . $e->getMessage());
-        header('Location: ../settings.php');
+        header('Location: ../settings');
         exit;
     }
 } else {
     // If not POST request, redirect to settings
-    header('Location: ../settings.php?error=invalid_request');
+    header('Location: ../settings?error=invalid_request');
     exit;
 }
 ?>

@@ -69,7 +69,7 @@ if (isset($_SESSION['errors'])) {
             </div>
             <button type="submit">Sign in</button>
         </form>
-        <p class="auth-mode-switch">Don't have an account? <a href="register.php">Register</a></p>
+        <p class="auth-mode-switch">Don't have an account? <a href="register">Register</a></p>
 
     </div>
 </main>

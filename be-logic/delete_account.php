@@ -70,19 +70,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         // Destroy session and redirect to home page
         session_destroy();
-        header('Location: ../index.php?message=account_deleted');
+        header('Location: ../index?message=account_deleted');
         exit;
         
     } catch (PDOException $e) {
         // Rollback transaction on error
         $pdo->rollback();
         error_log("Database error in delete_account.php: " . $e->getMessage());
-        header('Location: ../settings.php?error=delete_failed');
+        header('Location: ../settings?error=delete_failed');
         exit;
     }
 } else {
     // If not POST request, redirect to settings
-    header('Location: ../settings.php');
+    header('Location: ../settings');
     exit;
 }
 ?>
