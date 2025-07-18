@@ -139,58 +139,155 @@ The application uses a well-structured MySQL database with proper foreign key re
 - **Database**: MySQL with PDO for secure database operations
 ---
 
-## 🔧 Local Setup 
-> **Note:** This project is hosted online so users worldwide can share recipes and culinary experiences with each other. For testing you can still set Recipe Cloud up on your local device.
+## 🔧 Local Setup with Docker
+> **Note:** This project is hosted online so users worldwide can share recipes and culinary experiences with each other. For testing you can still set Recipe Cloud up on your local device using Docker.
 
-# 🚥 Requirements
+### 🚥 Requirements
 
-- **PHP:** 8.0 or higher
-- **MySQL:** 5.7 or higher
-- **Web Server:** Apache/Nginx (XAMPP, WAMP, or LAMP)
+- **Docker:** Latest version with Docker Compose
 - **Browser:** Modern web browser with JavaScript enabled
 
-1. Clone the project:
+### 📁 Project Structure
+
+Create the following project structure:
+```
+recipe_cloud/
+├── docker-compose.yml
+├── nginx/
+│   └── default.conf
+├── php/
+│   ├── Dockerfile
+│   └── php.ini
+├── src/                ← your cloned Git repo
+└── uploads/recipes/    ← target for images (local & server same)
+```
+
+### 🐳 Setup Steps
+
+1. **Create project directory and clone:**
    ```bash
-   git clone https://github.com/Edamame04/recipe_cloud
+   mkdir recipe_cloud
+   cd recipe_cloud
+   git clone https://github.com/Edamame04/recipe_cloud src
    ```
 
-2. Create MySQL database, e.g., `recipe_cloud`
+2. **Create Docker configuration files:**
 
-3. Configure database connection:
-   - Copy `be-logic/db_config.php.template` to `be-logic/db_config.php`
-   - Update the database credentials in `be-logic/db_config.php`:
+   **Create `docker-compose.yml`:**
+   ```yaml
+   services:
+     web:
+       image: nginx:alpine
+       container_name: recipe_web
+       ports:
+         - "8083:80"
+       volumes:
+         - ./src:/var/www/html
+         - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+         - ./uploads:/var/www/html/uploads
+       depends_on:
+         - php
+       restart: unless-stopped
+
+     php:
+       build:
+         context: ./php
+       container_name: recipe_php
+       volumes:
+         - ./src:/var/www/html
+         - ./uploads:/var/www/html/uploads
+       restart: unless-stopped
+
+     db:
+       image: mariadb
+       container_name: recipe_db
+       environment:
+         MYSQL_ROOT_PASSWORD: changeme
+         MYSQL_DATABASE: recipe_cloud
+         MYSQL_USER: recipe_user
+         MYSQL_PASSWORD: changemetoo
+       volumes:
+         - ./db:/var/lib/mysql
+       restart: unless-stopped
+   ```
+
+   **Create `nginx/default.conf`:**
+   ```nginx
+   server {
+       listen 80;
+       server_name localhost;
+
+       root /var/www/html;
+       index index.php index.html;
+
+       location / {
+           try_files $uri $uri/ =404;
+       }
+
+       location ~ \.php$ {
+           include fastcgi_params;
+           fastcgi_pass php:9000;
+           fastcgi_index index.php;
+           fastcgi_param SCRIPT_FILENAME /var/www/html$fastcgi_script_name;
+       }
+
+       location ~ /\.ht {
+           deny all;
+       }
+   }
+   ```
+
+   **Create `php/Dockerfile`:**
+   ```dockerfile
+   FROM php:8.2-fpm
+
+   RUN docker-php-ext-install pdo pdo_mysql
+
+   COPY php.ini /usr/local/etc/php/conf.d/custom.ini
+   RUN touch /var/log/php_errors.log && chmod 777 /var/log/php_errors.log
+   ```
+
+   **Create `php/php.ini`:**
+   ```ini
+   display_errors = On
+   display_startup_errors = On
+   log_errors = On
+   error_reporting = E_ALL
+   error_log = /var/log/php_errors.log
+   ```
+
+   **Create `uploads/recipes/` directory:**
+   ```bash
+   mkdir -p uploads/recipes
+   ```
+
+3. **Configure database connection:**
+   - Copy `src/be-logic/db_config.php.template` to `src/be-logic/db_config.php`
+   - Update the database credentials in `src/be-logic/db_config.php`:
    ```php
    return [
-       'host' => 'localhost',
+       'host' => 'db',
        'database' => 'recipe_cloud',
-       'username' => 'root',
-       'password' => '',
+       'username' => 'recipe_user',
+       'password' => 'changemetoo',
        'charset' => 'utf8mb4'
    ];
    ```
-   - **Note:** The `db_config.php` file is ignored by Git to keep your credentials secure
 
-4. The database tables and structure are created automatically on the first visit
-
-5. Open project in local web server (e.g., with XAMPP):
-
-   ```
-   Put the 'recipe_cloud' folder within the 'htdocs' folder in XAMPP
-   Then open: http://localhost/recipe_cloud/
+4. **Start containers:**
+   ```bash
+   docker compose up -d --build
    ```
 
-6. Load dummy recipes (optional):
-
+5. **Open application:**
    ```
-   Visit: http://localhost/recipe_cloud/be-logic/load_standard_data.php 
+   http://localhost:8083
    ```
----
 
-## 🔮 Future Enhancements
-
-- [ ] Mobile app development
-- [ ] Multi-language support
-
+6. **Load dummy recipes (optional):**
+   ```
+   Visit: http://localhost:8083/be-logic/load_standard_data.php
+   ```
 ---
 
 ## 📧 Contact
