@@ -442,6 +442,10 @@
     .recipe-content {
         flex-direction: column;
     }
+
+    .section-taps {
+        width: 100% !important;
+    }
 }
 
 /* Print Styles for Clean Recipe Printing */
