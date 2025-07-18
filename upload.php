@@ -62,7 +62,8 @@ function isSelected($key, $value): string{
                     <div>
                         <h3>Basic Information</h3>
                         <p>Let's start with the basic details of your recipe</p>
-                    </div>                    <div class="input-group">
+                    </div>                    
+                    <div class="input-group">
                         <label for="recipe-title">Recipe Title</label>
                         <div>
                             <input type="text" id="recipe-title" name="recipe-title" placeholder="e.g., Spaghetti Bolognese" value="<?php echo getFormValue('recipe-title'); ?>">
@@ -72,7 +73,8 @@ function isSelected($key, $value): string{
                                 } ?>
                             </p>
                         </div>
-                    </div>                    <div class="input-group">
+                    </div>                    
+                    <div class="input-group">
                         <label for="recipe-description">Description</label>
                         <div>
                             <textarea id="recipe-description" name="recipe-description" placeholder="Briefly describe your recipe"><?php echo getFormValue('recipe-description'); ?></textarea>
@@ -83,7 +85,8 @@ function isSelected($key, $value): string{
                             </p>
                         </div>
                     </div>
-                    <div class="input-line" id="recipe-details-input-difficulty">                        <div class="input-group">
+                    <div class="input-line" id="recipe-details-input-difficulty">                        
+                        <div class="input-group">
                             <label for="recipe-prep-time">Preparation Time</label>
                             <div>
                                 <div class="input-subgroup">
@@ -99,7 +102,8 @@ function isSelected($key, $value): string{
                                     } ?>
                                 </p>
                             </div>
-                        </div>                        <div class="input-group">
+                        </div>                        
+                        <div class="input-group">
                             <label for="recipe-cook-time">Cooking Time</label>
                             <div>
                                 <div class="input-subgroup">
@@ -115,7 +119,8 @@ function isSelected($key, $value): string{
                                     } ?>
                                 </p>
                             </div>
-                        </div>                        <div class="input-group">
+                        </div>                        
+                        <div class="input-group">
                             <label for="recipe-difficulty">Difficulty Level</label>
                             <div>
                                 <select id="recipe-difficulty" name="recipe-difficulty">
@@ -132,7 +137,8 @@ function isSelected($key, $value): string{
                             </div>
                         </div>
                     </div>
-                    <div class="input-line">                        <div class="input-group">
+                    <div class="input-line">
+                        <div class="input-group">
                             <label for="recipe-servings">Servings</label>
                             <div>
                                 <input type="number" id="recipe-servings" name="recipe-servings" min="1" value="<?php echo getFormValue('recipe-servings'); ?>">
@@ -142,7 +148,8 @@ function isSelected($key, $value): string{
                                     } ?>
                                 </p>
                             </div>
-                        </div>                        <div class="input-group">
+                        </div>                        
+                        <div class="input-group">
                             <label for="recipe-category">Category</label>
                             <div>
                                 <select id="recipe-category" name="recipe-category">
@@ -176,7 +183,8 @@ function isSelected($key, $value): string{
             </div>
 
             <div id="tap-ingredients" class="tap">
-                <div class="upload-tap-body">                    <div>
+                <div class="upload-tap-body">                    
+                    <div>
                         <h3>Ingredients</h3>
                         <p>List all ingredients needed for your recipe</p>
                         <?php if (isset($errors['ingredients'])): ?>
@@ -233,7 +241,8 @@ function isSelected($key, $value): string{
                 </div>
             </div>
             <div id="tap-instructions" class="tap">
-                <div class="upload-tap-body">                    <div>
+                <div class="upload-tap-body">                    
+                    <div>
                         <h3>Instructions</h3>
                         <p>Provide step-by-step instructions for your recipe</p>
                         <?php if (isset($errors['instructions'])): ?>
