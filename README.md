@@ -291,7 +291,7 @@ recipe_cloud/
 
 6. **Load dummy recipes (optional):**
    ```
-   Visit: http://localhost:8083/be-logic/load_standard_data.php
+   Visit: http://localhost:8083/be-logic/load_standard_data
    ```
 ---
 
