@@ -81,7 +81,6 @@ function getStandardRecipesData(): array {
             'difficulty' => 1,
             'servings' => 24,
             'category' => 'dessert',
-            'image_filename' => 'chocolate-chip-cookies.jpg',
             'ingredients' => [
                 ['amount' => 225, 'unit' => 'g', 'ingredient' => 'all-purpose flour'],
                 ['amount' => 1, 'unit' => 'tsp', 'ingredient' => 'baking soda'],
@@ -112,7 +111,6 @@ function getStandardRecipesData(): array {
             'difficulty' => 1,
             'servings' => 6,
             'category' => 'salad',
-            'image_filename' => 'mediterranean-quinoa-salad.jpg',
             'ingredients' => [
                 ['amount' => 200, 'unit' => 'g', 'ingredient' => 'quinoa'],
                 ['amount' => 400, 'unit' => 'ml', 'ingredient' => 'vegetable broth'],
@@ -146,7 +144,6 @@ function getStandardRecipesData(): array {
             'difficulty' => 2,
             'servings' => 8,
             'category' => 'soup',
-            'image_filename' => 'chicken-noodle-soup.jpg',
             'ingredients' => [
                 ['amount' => 1, 'unit' => 'kg', 'ingredient' => 'whole chicken'],
                 ['amount' => 2, 'unit' => null, 'ingredient' => 'bay leaves'],
@@ -181,7 +178,6 @@ function getStandardRecipesData(): array {
             'difficulty' => 2,
             'servings' => 2,
             'category' => 'breakfast',
-            'image_filename' => 'avocado-toast-poached-egg.jpg',
             'ingredients' => [
                 ['amount' => 2, 'unit' => null, 'ingredient' => 'slices sourdough bread'],
                 ['amount' => 1, 'unit' => null, 'ingredient' => 'ripe avocado'],
@@ -212,7 +208,6 @@ function getStandardRecipesData(): array {
             'difficulty' => 2,
             'servings' => 4,
             'category' => 'main',
-            'image_filename' => 'beef-stir-fry.jpg',
             'ingredients' => [
                 ['amount' => 500, 'unit' => 'g', 'ingredient' => 'beef sirloin, sliced thin'],
                 ['amount' => 2, 'unit' => 'tbsp', 'ingredient' => 'vegetable oil'],
@@ -251,7 +246,6 @@ function getStandardRecipesData(): array {
             'difficulty' => 1,
             'servings' => 12,
             'category' => 'baking',
-            'image_filename' => 'banana-bread.jpg',
             'ingredients' => [
                 ['amount' => 190, 'unit' => 'g', 'ingredient' => 'all-purpose flour'],
                 ['amount' => 1, 'unit' => 'tsp', 'ingredient' => 'baking soda'],
@@ -282,7 +276,6 @@ function getStandardRecipesData(): array {
             'difficulty' => 3,
             'servings' => 4,
             'category' => 'main',
-            'image_filename' => 'mushroom-risotto.jpg',
             'ingredients' => [
                 ['amount' => 300, 'unit' => 'g', 'ingredient' => 'arborio rice'],
                 ['amount' => 1, 'unit' => 'l', 'ingredient' => 'warm chicken or vegetable stock'],
@@ -317,7 +310,6 @@ function getStandardRecipesData(): array {
             'difficulty' => 2,
             'servings' => 4,
             'category' => 'main',
-            'image_filename' => 'fish-tacos.jpg',
             'ingredients' => [
                 ['amount' => 500, 'unit' => 'g', 'ingredient' => 'white fish fillets (cod or tilapia)'],
                 ['amount' => 8, 'unit' => null, 'ingredient' => 'small corn tortillas'],
@@ -354,7 +346,6 @@ function getStandardRecipesData(): array {
             'difficulty' => 1,
             'servings' => 4,
             'category' => 'breakfast',
-            'image_filename' => 'berry-parfait.jpg',
             'ingredients' => [
                 ['amount' => 500, 'unit' => 'g', 'ingredient' => 'Greek yogurt, plain'],
                 ['amount' => 200, 'unit' => 'g', 'ingredient' => 'mixed berries (strawberries, blueberries, raspberries)'],
@@ -401,18 +392,9 @@ function insertStandardRecipe($pdo, $recipeData): array {
         // Start transaction
         $pdo->beginTransaction();
         
-        // Handle image path - check if image exists in standard folder
-        $imagePath = null;
-        if (isset($recipeData['image_filename'])) {
-            $standardImagePath = __DIR__ . '/../uploads/recipes/standard/' . $recipeData['image_filename'];
-            if (file_exists($standardImagePath)) {
-                $imagePath = 'uploads/recipes/standard/' . $recipeData['image_filename'];
-            }
-        }
-        
         // Insert recipe
-        $sql = "INSERT INTO recipes (user_id, title, description, prep_time_min, cook_time_min, difficulty, servings, category, image_path) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO recipes (user_id, title, description, prep_time_min, cook_time_min, difficulty, servings, category) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
@@ -423,8 +405,7 @@ function insertStandardRecipe($pdo, $recipeData): array {
             $recipeData['cook_time_min'],
             $recipeData['difficulty'],
             $recipeData['servings'],
-            $recipeData['category'],
-            $imagePath
+            $recipeData['category']
         ]);
         
         $recipeId = $pdo->lastInsertId();
