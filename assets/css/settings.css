@@ -139,11 +139,10 @@ textarea {
     border: 1px solid var(--error-border);
     border-radius: 0.5rem;
     padding: 1rem;
-    margin-bottom: 1rem;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
+    gap: 0.25rem;
 }
-
 
 .delete-account h4{
     font-weight: 500;
@@ -152,8 +151,13 @@ textarea {
 
 .delete-account p{
     margin-bottom: 0px;
-    margin-right: 10px;
     font-size: 0.875rem;
+}
+
+.delete-account button {
+    min-width: fit-content;
+    height: fit-content;
+    align-self: flex-end;
 }
 
 
@@ -166,4 +170,8 @@ textarea {
 .delete-button:hover {
     background-color: var(--error-border);
     border: none;
+}
+
+#delete-account-form{
+    gap: 0;
 }
