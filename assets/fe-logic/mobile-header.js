@@ -11,13 +11,13 @@ const hamburgerIcon = document.querySelector('#hamburger-icon');
 const mainContent = document.querySelector('main');
 const contentOverlay = document.querySelector('.mobile-nav-background');
 const hamburgerSVG = `
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu h-6 w-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M3 12h18"></path>
                         <path d="M3 6h18"></path>
                         <path d="M3 18h18"></path>
                     </svg>`;
 const closeSVG = `
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x h-6 w-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M18 6L6 18"></path>
                         <path d="M6 6l12 12"></path>
                     </svg>`;

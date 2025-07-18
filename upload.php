@@ -205,7 +205,7 @@ function isSelected($key, $value): string{
                             <span id="ingredient-name-errormsg" class="error-message"></span>
                         </div>
                         <button type="button" class="icon-button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-4 w-4 mr-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M5 12h14"></path>
                                 <path d="M12 5v14"></path>
                             </svg>
@@ -247,7 +247,7 @@ function isSelected($key, $value): string{
                             <textarea id="instruction-step" name="instruction-step" placeholder="Describe this step..."></textarea>
                         </div>
                         <button type="button" class="icon-button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-4 w-4 mr-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M5 12h14"></path>
                                 <path d="M12 5v14"></path>
                             </svg>
@@ -284,7 +284,7 @@ function isSelected($key, $value): string{
                         <label for="recipe-image">Upload Image</label>
                         <div>
                             <div id="image-upload-container" class="image-upload-container">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7"></path>
                                     <line x1="16" x2="22" y1="5" y2="5"></line>
                                     <line x1="19" x2="19" y1="2" y2="8"></line>
