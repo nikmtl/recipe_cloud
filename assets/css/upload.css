@@ -263,4 +263,18 @@
     #recipe-details-input-difficulty{
         flex-direction: column;
     }
+
+    .upload-input-input {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .upload-input-input div, .upload-input-input input, .upload-input-input button, #ingredient-amount {
+        width: 100%;
+    }
+
+    #instruction-step-input button {
+        width: 100%;
+        height: auto;
+    }
 }

@@ -54,7 +54,7 @@ function isSelected($key, $value): string{
             <button id="tap-header-basic-info" class="tap-header" onclick="openTap('tap-basic-info','tap-header-basic-info')">Basic Info</button>
             <button id="tap-header-ingredients" class="tap-header" onclick="openTap('tap-ingredients', 'tap-header-ingredients')">Ingredients</button>
             <button id="tap-header-instructions" class="tap-header" onclick="openTap('tap-instructions', 'tap-header-instructions')">Instructions</button>
-            <button id="tap-header-media-and-publish" class="tap-header" onclick="openTap('tap-media-and-publish', 'tap-header-media-and-publish')">Media & Publish</button>
+            <button id="tap-header-media-and-publish" class="tap-header" onclick="openTap('tap-media-and-publish', 'tap-header-media-and-publish')">Media</button>
         </div>
         <form method="POST" action="be-logic/upload.php" enctype="multipart/form-data" class="upload-form">
             <div id="tap-basic-info" class="tap">
