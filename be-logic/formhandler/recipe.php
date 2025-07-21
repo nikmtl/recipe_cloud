@@ -19,8 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 } elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete_recipe') {
     deleteRecipe($pdo);
 } else { // Invalid action if no valid POST request or action unknown
-    echo "Invalid action.";
-    exit;
+    http_response_code(400); // Bad Request
+    die("Bad Request: Invalid action.");
 }
 
 /* 3. Delete Recipe Function
@@ -41,12 +41,13 @@ function deleteRecipe($pdo){
 
         // If no recipe found redirect to home
         if (!$recipeData) {
+            http_response_code(404); // Not Found
             header('Location: ../../');
             exit();
         }
     } catch (PDOException $e) {
         error_log("Database error while fetching recipe data: " . $e->getMessage());
-        $_SESSION['errors'] = ['general' => 'An error occurred while deleting the recipe. Please try again later.'];
+        http_response_code(500); // Internal Server Error
         header('Location: ../../recipe?id=' . $recipeId);
         exit();
     }
@@ -76,15 +77,16 @@ function deleteRecipe($pdo){
             $stmt = $pdo->prepare('DELETE FROM recipes WHERE id = ?');
             $stmt->execute([$recipeId]);
             // Redirect to the user's profile page after deletion
-            $_SESSION['success'] = ['delete_recipe' => 'Recipe deleted successfully.'];
+            http_response_code(200); // OK
             header('Location: ../../profile');
         } catch (PDOException $e) {
             error_log("Database error while deleting recipe: " . $e->getMessage());
-            $_SESSION['errors'] = ['general' => 'An error occurred while deleting the recipe. Please try again later.'];
+            http_response_code(500); // Internal Server Error
             header('Location: ../../recipe?id=' . $recipeId);
             exit();
         }
     } else {
+        http_response_code(403); // Forbidden
         die("You do not have permission to delete this recipe.");
     }
 }

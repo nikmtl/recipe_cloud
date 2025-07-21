@@ -11,6 +11,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 if (!isset($_SESSION['username'])) {
     $_SESSION['message'] = "You need to log in to access this page.";
+    http_response_code(403); // Forbidden
     header('Location: login');
     exit;
 }

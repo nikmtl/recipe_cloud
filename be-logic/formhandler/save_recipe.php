@@ -16,8 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recipe_id']) && isset
 } else if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recipe_id']) && isset($_POST['action']) && $_POST['action'] === 'unsave') {
     unsaveRecipe($pdo);
 } else {
-    echo "Invalid action.";
-    exit;
+    http_response_code(400); // Bad Request
+    die("Bad Request: Invalid action.");
 }
 
 /* 1. Save Recipe */
@@ -32,6 +32,7 @@ function saveRecipe($pdo){
         $stmt->execute([$user_id, $recipe_id]);
 
         if ($stmt->fetch()) {
+            http_response_code(409); // Conflict
             header('Location: ../../recipe' . '?id=' . $recipe_id);
             error_log("Recipe already saved by user: $user_id for recipe: $recipe_id");
             exit;
@@ -42,11 +43,13 @@ function saveRecipe($pdo){
         $stmt->execute([$user_id, $recipe_id]);
 
         // Redirect back to the recipe page
+        http_response_code(200); // OK
         header('Location: ../../recipe' . '?id=' . $recipe_id);
         exit;
     } catch (PDOException $e) {
         error_log("Database error in save_recipe.php: " . $e->getMessage());
         $_SESSION['errors'] = ['save_recipe' => 'An error occurred while saving the recipe.'];
+        http_response_code(500); // Internal Server Error
         header('Location: ../../recipe' . '?id=' . $recipe_id);
         exit;
     }
@@ -63,11 +66,12 @@ function unsaveRecipe($pdo){
         $stmt = $pdo->prepare("DELETE FROM favorites WHERE user_id = ? AND recipe_id = ?");
         $stmt->execute([$user_id, $recipe_id]);
         // Redirect back to the recipe page
+        http_response_code(200); // OK
         header('Location: ../../recipe' . '?id=' . $recipe_id);
         exit;
     } catch (PDOException $e) {
         error_log("Database error in save_recipe.php: " . $e->getMessage());
-        $_SESSION['errors'] = ['save_recipe' => 'An error occurred while saving the recipe.'];
+        http_response_code(500); // Internal Server Error
         header('Location: ../../recipe' . '?id=' . $recipe_id);
         exit;
     }

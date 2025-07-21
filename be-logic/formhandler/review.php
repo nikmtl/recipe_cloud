@@ -22,8 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 } elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete' && isset($_POST['recipe_id'])) { //delete review
     deleteReview($pdo);
 } else { // Invalid action if no valid POST request or action unknown
-    echo "Invalid action.";
-    exit;
+    http_response_code(400); // Bad Request
+    die("Bad Request: Invalid action.");
 }
 
 /* 1. Submit review function */
@@ -40,12 +40,12 @@ function submitReview($pdo){
         $stmt->execute([$reviewData['user_id'], $reviewData['recipe_id'], $reviewData['rating'], $reviewData['comment']]);
 
         // Redirect back to recipe page
-        $_SESSION['Success'] = ['review' => "Your review has been submitted successfully."];
+        http_response_code(201); // Created
         header('Location: ../../recipe?id=' . $reviewData['recipe_id']);
         exit();
     } catch (PDOException $e) {
         error_log("Database error while submitting review: " . $e->getMessage());
-        $_SESSION['errors'] = ['review' => 'An error occurred while submitting your review.'];
+        http_response_code(500); // Internal Server Error
         header('Location: ../../recipe?id=' . $reviewData['recipe_id']);
         exit();
     }
@@ -63,12 +63,12 @@ function updateReview($pdo){
         $stmt->execute([$reviewData['rating'], $reviewData['comment'], $reviewData['user_id'], $reviewData['recipe_id']]);
 
         // Redirect back to recipe page
-        $_SESSION['Success'] = ['review' => "Your review has been submitted successfully."];
+        http_response_code(200); // OK
         header('Location: ../../recipe?id=' . $reviewData['recipe_id']);
         exit();
     } catch (PDOException $e) {
         error_log("Database error while submitting review: " . $e->getMessage());
-        $_SESSION['errors'] = ['review' => 'An error occurred while submitting your review.'];
+        http_response_code(500); // Internal Server Error
         header('Location: ../../recipe?id=' . $reviewData['recipe_id']);
         exit();
     }
@@ -88,12 +88,12 @@ function deleteReview($pdo){
         $stmt->execute([$user_id, $recipeId]);
 
         // Redirect back to recipe page
-        $_SESSION['Success'] = ['review' => "Your review has been deleted successfully."];
+        http_response_code(200); // OK
         header('Location: ../../recipe?id=' . $recipeId);
         exit();
     } catch (PDOException $e) {
         error_log("Database error while deleting review: " . $e->getMessage());
-        $_SESSION['errors'] = ['review' => 'An error occurred while deleting your review.'];
+        http_response_code(500); // Internal Server Error
         header('Location: ../../recipe?id=' . $recipeId);
         exit();
     }
@@ -110,13 +110,14 @@ function getReviewData(): array {
 
     // Validate rating (1-5 stars)
     if ($rating < 1 || $rating > 5 || !is_numeric($rating)) {
-        echo "Invalid action. Rating must be between 1 and 5.";
-        exit;
+        http_response_code(400); // Bad Request
+        die("Bad Request: Rating must be between 1 and 5.");
     }
 
     // Validate comment length
     if (strlen($comment) > 500) {
         $_SESSION['errors'] = ['review_comment' => 'Comment must be shorter than 500 characters.'];
+        http_response_code(422); // Unprocessable Entity - validation error
         header('Location: ../../recipe?id=' . $recipe_id);
         exit;
     }

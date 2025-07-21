@@ -28,8 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 } elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'logout') {
     logoutUser();
 } else {
-    echo "Invalid action.";
-    exit;
+    http_response_code(400); // Bad Request
+    die("Bad Request: Invalid action.");
 }
 
 /* 1. User Registration */
@@ -57,8 +57,7 @@ function registerUser($pdo): void{
         $stmt->execute([$username]);
     } catch (PDOException $e) {
         error_log("Database error while checking username: " . $e->getMessage());
-        $errors['username'] = "Error checking username. Please try again later.";
-        $_SESSION['errors'] = $errors;
+        http_response_code(500); // Internal Server Error
         header('Location: ../../register'); // Redirect back to register page with error
         exit;
     }
@@ -82,8 +81,7 @@ function registerUser($pdo): void{
         $stmt->execute([$email]);
     } catch (PDOException $e) {
         error_log("Database error while checking email: " . $e->getMessage());
-        $errors['email'] = "Error checking email. Please try again later.";
-        $_SESSION['errors'] = $errors;
+        http_response_code(500); // Internal Server Error
         header('Location: ../../register'); // Redirect back to register page with error
         exit;
     }
@@ -110,6 +108,7 @@ function registerUser($pdo): void{
     // If there are errors, store them in session and redirect back to register page
     if (!empty($errors)) {
         $_SESSION['errors'] = $errors;
+        http_response_code(422); // Unprocessable Entity - validation errors
         header('Location: ../../register');
         exit;
     }
@@ -125,13 +124,13 @@ function registerUser($pdo): void{
             if (isset($_SESSION['errors']))
                 unset($_SESSION['errors']);
             $_SESSION['username'] = $username; // Set username in session
+            http_response_code(201); // Created
             header('Location: ../../profile'); // Redirect to profile page
             exit;
         }
     } catch (PDOException $e) { // Catch any database errors this should not happen, but just in case
         error_log("Database error while registering user: " . $e->getMessage());
-        $errors['general'] = "Error registering user. Please try again later.";
-        $_SESSION['errors'] = $errors;
+        http_response_code(500); // Internal Server Error
         header('Location: ../../register'); // Redirect back to register page with error
         exit;
     }
@@ -140,8 +139,7 @@ function registerUser($pdo): void{
 
 /* 2. User Login */
 // Function to handle user login
-function loginUser($pdo): never
-{
+function loginUser($pdo): never{
     $errors = [];
 
     // Get and sanitize input fields
@@ -160,6 +158,7 @@ function loginUser($pdo): never
     // If there are errors, store them in session and redirect back to login page
     if (!empty($errors)) {
         $_SESSION['errors'] = $errors;
+        http_response_code(422); // Unprocessable Entity - validation errors
         header('Location: ../../login');
         exit;
     }
@@ -171,8 +170,7 @@ function loginUser($pdo): never
         $stmt->execute([$username]);
     } catch (PDOException $e) {
         error_log("Database error while fetching user login: " . $e->getMessage());
-        $errors['general'] = "Error logging in. Please try again later.";
-        $_SESSION['errors'] = $errors;
+        http_response_code(500); // Internal Server Error
         header('Location: ../../login'); // Redirect back to login page with error
         exit;
     }
@@ -181,12 +179,14 @@ function loginUser($pdo): never
         // Username not found -> set error
         $errors['username'] = "Username not found.";
         $_SESSION['errors'] = $errors;
+        http_response_code(422); // Unprocessable Entity - validation errors
         header('Location: ../../login');
         exit;
     } elseif (!password_verify($password, $user['password_hash'])) {
         // Password incorrect -> set error
         $errors['password'] = "Incorrect password.";
         $_SESSION['errors'] = $errors;
+        http_response_code(422); // Unprocessable Entity - validation errors
         header('Location: ../../login');
         exit;
     } else { // Login successful
@@ -198,6 +198,7 @@ function loginUser($pdo): never
         // Set user ID in session (session already started at top)
         $_SESSION['username'] = $username; // Set username in session
         // Redirect to profile page
+        http_response_code(200); // OK
         header('Location: ../../profile');
         exit;
     }
@@ -208,6 +209,7 @@ function loginUser($pdo): never
 function logoutUser(): never{
     session_destroy();  // Destroy the session to log out the user
     // Redirect to index page
+    http_response_code(200); // OK
     header('Location: ../../');
     exit;
 }
