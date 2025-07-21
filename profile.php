@@ -6,17 +6,16 @@
     * It also shows how many times their recipes were favorited by others. This is useful for users to see how popular their recipes are and gives the user a sense of accomplishment.
 */
 require_once 'be-logic/protected_page.php';
-require_once 'be-logic/get_user_profile.php';
+require_once 'be-logic/fetch_user_profile.php';
 require_once 'be-logic/db.php';
 include_once 'assets/includes/header.php';
 
 // Fetch user information
 $currentUser = $_SESSION['username'];
-$userProfile = getUserProfile($currentUser);
+$userProfile = fetchUserProfile($currentUser);
 
 if (!$userProfile) {
-    echo "<p>Error loading profile information.</p>";
-    exit;
+    die("Error loading profile information.");
 }
 
 // Fetch user's own recipes
@@ -104,7 +103,7 @@ try {
             <button id="tap-header-my-recipes" class="tap-header" onclick="openTap('tap-my-recipes','tap-header-my-recipes')">My Recipes</button>
             <button id="tap-header-favorites" class="tap-header" onclick="openTap('tap-favorites', 'tap-header-favorites')">Favorites</button>
         </div>
-        <div id="tap-my-recipes" class="tap" style="display: block;">
+        <div id="tap-my-recipes" class="tap">
             <div class="recipes-grid">
                 <?php
                 if (!empty($userRecipes)) {
@@ -131,7 +130,8 @@ try {
             <?php endif; ?>
         </div>
 
-        <div id="tap-favorites" class="tap">            <div class="recipes-grid">
+        <div id="tap-favorites" class="tap">            
+            <div class="recipes-grid">
                 <?php
                 if (!empty($favoriteRecipes)) {
                     foreach ($favoriteRecipes as $recipe) {

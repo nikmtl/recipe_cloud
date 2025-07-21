@@ -99,13 +99,6 @@ include_once 'assets/includes/header.php'; //load header
                     <path d="M19 12H5"></path>
                 </svg>Back to Recipes
             </a>
-            <?php
-            // Display success message if it exists
-            if (isset($_SESSION['success'])) {
-                echo '<p class="success-message">' . htmlspecialchars($_SESSION['success']) . '</p>';
-                unset($_SESSION['success']);
-            }
-            ?>
         </div>
         <div>
             <?php if (!empty($recipe['image_path'])): ?>
@@ -195,7 +188,6 @@ include_once 'assets/includes/header.php'; //load header
                             </div>
 
                         </div>
-
                         <div id="tap-reviews" class="tap">
                             <?php if (isset($_SESSION['username'])): ?>
                                 <div id="review-form">
@@ -203,7 +195,8 @@ include_once 'assets/includes/header.php'; //load header
                                     <?php if ($user_review): ?>
                                         <p>You previously reviewed this recipe. You can update your review below.</p>
                                     <?php endif; ?>
-                                    <form action="be-logic/submit_review.php" method="POST">
+                                    <form action="be-logic/formhandler/review.php" method="POST">
+                                        <input type="hidden" name="action" value="<?php echo $user_review ? 'update' : 'submit'; ?>">
                                         <input type="hidden" name="recipe_id" value="<?php echo htmlspecialchars($recipe['id']); ?>">
 
                                         <div>

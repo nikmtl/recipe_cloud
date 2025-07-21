@@ -90,7 +90,6 @@ if (session_status() === PHP_SESSION_NONE) {
             break;
         case 'profile.php':
             echo '
-                <script src="assets/fe-logic/profile.js" defer></script>
                 <link rel="stylesheet" href="assets/css/profile.css">';
             break;
         case 'settings.php':
@@ -121,7 +120,7 @@ if (session_status() === PHP_SESSION_NONE) {
             </div>
             <!-- Authentication Buttons (Desktop) -->
             <?php if (isset($_SESSION["username"])): ?> <!-- If user is logged in, show sign out button -->
-                <form class=" desktop-only" method="POST" action="be-logic/auth">
+                <form class=" desktop-only" method="POST" action="be-logic/formhandler/auth">
                     <input type="hidden" name="action" value="logout">
                     <button class="secondary-button icon-button" type="submit">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -171,7 +170,7 @@ if (session_status() === PHP_SESSION_NONE) {
             <a href="profile?>">My Profile</a>
         <?php endif; ?>
         <?php if (isset($_SESSION["username"])): ?> <!-- If user is logged in, show sign out button -->
-            <form method="POST" action="be-logic/auth">
+            <form method="POST" action="be-logic/formhandler/auth">
                 <input type="hidden" name="action" value="logout">
                 <button class="secondary-button icon-button" type="submit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

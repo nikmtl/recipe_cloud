@@ -15,13 +15,13 @@ $pdo = initiateDatabaseConnection();
 function initiateDatabaseConnection(): PDO{
     // Load database configuration from external file
     $configFile = __DIR__ . '/db_config.php';
-    
+
     if (!file_exists($configFile)) {
         die("Database configuration file not found. Please copy db_config.php.template to db_config.php and configure your database settings.");
     }
-    
+
     $config = require $configFile;
-    
+
     // Extract database connection parameters from config
     $host = $config['host'];
     $db = $config['database'];
@@ -38,6 +38,7 @@ function initiateDatabaseConnection(): PDO{
         $pdo = new PDO($dsn, $user, $pass, $options);
         //The PDO has the benefit, to the method we learned in the course, that the connection is automatically closed when the script ends.
     } catch (\PDOException $e) {
+        error_log("Database connection error: " . $e->getMessage());
         die("Database connection failed: " . $e->getMessage());
         // If the connection fails, an error message is displayed and the script is terminated.
     }
@@ -53,8 +54,9 @@ function initiateDatabaseConnection(): PDO{
 // It creates the users, recipes, instructions, ingredients, ratings, and favorites tables with appropriate columns and constraints.
 // See the db documentation for more details on the table structure and constraints.
 function initializeTables($pdo): void{
-    // Create users table if it doesn't exist //The Profile image is not used at the moment, but it is a good idea to have it in case i want to implement user profile images in the future.
-    $sql = "CREATE TABLE IF NOT EXISTS users (
+    try {
+        // Create users table if it doesn't exist //The Profile image is not used at the moment, but it is a good idea to have it in case i want to implement user profile images in the future.
+        $sql = "CREATE TABLE IF NOT EXISTS users (
         first_name VARCHAR(50) DEFAULT NULL,
         last_name VARCHAR(50) DEFAULT NULL,
         username VARCHAR(20) NOT NULL PRIMARY KEY,
@@ -63,11 +65,11 @@ function initializeTables($pdo): void{
         bio TEXT DEFAULT NULL,
         profile_image VARCHAR(255) DEFAULT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    )";
-    $pdo->exec($sql);
+        )";
+        $pdo->exec($sql);
 
-    // Create recipes table if it doesn't exist
-    $sql = "CREATE TABLE IF NOT EXISTS recipes (
+        // Create recipes table if it doesn't exist
+        $sql = "CREATE TABLE IF NOT EXISTS recipes (
         id INT AUTO_INCREMENT PRIMARY KEY,
         user_id VARCHAR(20),
         title VARCHAR(100) NOT NULL,
@@ -79,32 +81,32 @@ function initializeTables($pdo): void{
         category VARCHAR(20) CHECK (category IN ('breakfast', 'appetizer', 'salad', 'soup', 'sandwich', 'main', 'side', 'snack', 'dessert', 'baking', 'sauce', 'drink')),
         image_path VARCHAR(255) DEFAULT NULL,
         FOREIGN KEY (user_id) REFERENCES users(username) ON DELETE SET NULL
-    )";
-    $pdo->exec($sql);
+        )";
+        $pdo->exec($sql);
 
-    // Create instructions table if it doesn't exist
-    $sql = "CREATE TABLE IF NOT EXISTS instructions (
+        // Create instructions table if it doesn't exist
+        $sql = "CREATE TABLE IF NOT EXISTS instructions (
         id INT AUTO_INCREMENT PRIMARY KEY,
         step_number INT NOT NULL CHECK (step_number > 0),
         instruction TEXT NOT NULL,
         recipe_id INT NOT NULL,
         FOREIGN KEY (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE
-    )";
-    $pdo->exec($sql);
+        )";
+        $pdo->exec($sql);
 
-    // Create ingredients table if it doesn't exist
-    $sql = "CREATE TABLE IF NOT EXISTS ingredients (
+        // Create ingredients table if it doesn't exist
+        $sql = "CREATE TABLE IF NOT EXISTS ingredients (
         id INT AUTO_INCREMENT PRIMARY KEY,
         amount INT DEFAULT NULL,
         unit VARCHAR(20) CHECK (unit IS NULL OR unit = 'g' OR unit = 'kg' OR unit = 'ml' OR unit = 'l' OR unit = 'cup' OR unit = 'tbsp' OR unit = 'tsp' OR unit = 'oz' OR unit = 'lb'),
         ingredient VARCHAR(100) NOT NULL,
         recipe_id INT NOT NULL,
         FOREIGN KEY (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE
-    )";
-    $pdo->exec($sql);
+        )";
+        $pdo->exec($sql);
 
-    // Create ratings table if it doesn't exist
-    $sql = "CREATE TABLE IF NOT EXISTS ratings (
+        // Create ratings table if it doesn't exist
+        $sql = "CREATE TABLE IF NOT EXISTS ratings (
         id INT AUTO_INCREMENT PRIMARY KEY,
         user_id VARCHAR(20) NOT NULL,
         recipe_id INT NOT NULL,
@@ -113,25 +115,31 @@ function initializeTables($pdo): void{
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (user_id) REFERENCES users(username) ON DELETE CASCADE,
         FOREIGN KEY (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE
-    )";
-    $pdo->exec($sql);
+        )";
+        $pdo->exec($sql);
 
-    // Create favorites table if it doesn't exist
-    $sql = "CREATE TABLE IF NOT EXISTS favorites (
+        // Create favorites table if it doesn't exist
+        $sql = "CREATE TABLE IF NOT EXISTS favorites (
         id INT AUTO_INCREMENT PRIMARY KEY,
         user_id VARCHAR(20) NOT NULL,
         recipe_id INT NOT NULL,
         FOREIGN KEY (user_id) REFERENCES users(username) ON DELETE CASCADE,
         FOREIGN KEY (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE
-    )";
-    $pdo->exec($sql);
+        )";
+        $pdo->exec($sql);
+    } catch (PDOException $e) {
+        error_log("Database table initialization error: " . $e->getMessage());
+        die("Error initializing database tables: " . $e->getMessage());
+        // If the table creation fails, an error message is displayed and the script is terminated.
+    }
 }
 
-// Function to remove all tables to reset the database
-function clearAllTables($pdo): void {
+// Function to remove all tables to reset the database for testing purposes
+// This function drops all tables in the database. Use with caution as it will delete all data
+function clearAllTables($pdo): void{
     $tables = ['favorites', 'ratings', 'ingredients', 'instructions', 'recipes', 'users'];
     foreach ($tables as $table) {
         $sql = "DROP TABLE IF EXISTS $table";
         $pdo->exec($sql);
     }
-}   
+}

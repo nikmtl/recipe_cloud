@@ -85,6 +85,13 @@ main div div {
     font-weight: 600;
 }
 
+.error-message {
+    color: var(--error-color);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0 !important;
+}
+
 /*responsive styles*/
 .mobile-only {
     display: none;

@@ -138,11 +138,6 @@ function isSelected($key, $value): string
         </div>
         <p class="upload-header-subtitle">Update your culinary masterpiece</p>
         <?php
-        // Display success message if it exists
-        if (isset($_SESSION['success'])) {
-            echo '<p class="success-message">' . htmlspecialchars($_SESSION['success']) . '</p>';
-            unset($_SESSION['success']);
-        }
 
         // Display any general errors from backend validation
         if (isset($errors['general'])) {
@@ -571,7 +566,13 @@ function isSelected($key, $value): string
             // Create a form to submit the delete request
             const form = document.createElement('form');
             form.method = 'POST';
-            form.action = 'be-logic/delete_recipe.php';
+            form.action = 'be-logic/formhandler/recipe.php';
+
+            const actionInput = document.createElement('input');
+            actionInput.type = 'hidden';
+            actionInput.name = 'action';
+            actionInput.value = 'delete_recipe';
+            form.appendChild(actionInput);
 
             const input = document.createElement('input');
             input.type = 'hidden';

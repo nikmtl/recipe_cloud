@@ -39,6 +39,10 @@
     color: var(--secondary-text-color);
 }
 
+.need-to-login-message {
+    color: orange !important;
+}
+
 /* password toggle button */
 .input-group div {
     position: relative;

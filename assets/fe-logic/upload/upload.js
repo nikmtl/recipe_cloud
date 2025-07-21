@@ -3,10 +3,6 @@
   * The form validation, ingredient and instruction management, and tab navigation functionality are implemented in external files in this directory.
 */
 
-window.addEventListener('load', function () {
-  openTap('tap-basic-info', 'tap-header-basic-info');
-});
-
 // Add event delegation for ingredient and instruction buttons because they are dynamically created by the tap view
 document.addEventListener('DOMContentLoaded', function() {
   // Initialize ingredients display on page load

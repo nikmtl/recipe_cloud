@@ -147,4 +147,3 @@ try {
         'error' => 'Database error occurred'
     ]);
 }
-?>

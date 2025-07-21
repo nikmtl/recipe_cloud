@@ -10,8 +10,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 if (!isset($_SESSION['username'])) {
-    header('Location: login?msg=To access this page, please log in.');
+    $_SESSION['message'] = "You need to log in to access this page.";
+    header('Location: login');
     exit;
 }
-
-?>

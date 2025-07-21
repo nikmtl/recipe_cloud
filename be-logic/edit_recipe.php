@@ -16,15 +16,8 @@ require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/protected_page.php';
 
 // Check if form was submitted via POST
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: ../recipes');
-    exit();
-}
-
-// Check if recipe ID is provided
-if (!isset($_POST['recipe_id']) || empty($_POST['recipe_id'])) {
-    $_SESSION['error'] = "Recipe ID is required.";
-    header('Location: ../recipes');
+if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST['recipe_id'])) {
+    echo "Invalid action.";
     exit();
 }
 

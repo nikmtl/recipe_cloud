@@ -1,11 +1,11 @@
- <!--footer.php
+<?php
+/* footer.php
     * This file contains the footer section of the website.
     * It includes links to the home page, recipes, upload page, and legal pages.
     * This is used across all pages of the site.
     * To use this: include this file at the end of your PHP document to display the footer.
- -->
- 
- <!-- footer -->
+ */
+ ?>
  <footer>
      <div>
          <div class="footer-logo-container">

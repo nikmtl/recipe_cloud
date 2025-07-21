@@ -1,14 +1,14 @@
 <?php
-/* get_user_profile.php
+/* fetch_user_profile.php
     * This file fetches user profile information including statistics
     * Returns user data: first name, last name, username, joined date, recipe count, favorites count, and how many times their recipes were favorited
 */
 
 require_once 'db.php';
 
-function getUserProfile($username) {
+function fetchUserProfile($username): array|null {
     global $pdo;
-    
+
     try {
         // Get basic user information
         $stmt = $pdo->prepare("
@@ -53,6 +53,7 @@ function getUserProfile($username) {
             'username' => $user['username'],
             'email' => $user['email'],
             'bio' => $user['bio'],
+            'profile_image' => $user['profile_image'],
             'joined_date' => $formattedJoinedDate,
             'recipe_count' => $recipeCount,
             'favorites_count' => $favoritesCount,
@@ -64,4 +65,3 @@ function getUserProfile($username) {
         return null;
     }
 }
-?>

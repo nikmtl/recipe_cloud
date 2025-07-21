@@ -2,7 +2,8 @@
 /* recipe_card.php 
     * This file contains the HTML structure for displaying a recipe card.
     * It includes the recipe image, title, rating, description, author, and time details.
-    * To use this: include this file in your PHP document where you want to display a recipe card. Make sure the `$recipe` array with the necessary data exists.
+    * To use this: include this file in the PHP document. Make sure the `$recipe` array with the necessary data exists.
+            * necessary data is: id, title, image_path, description, username, prep_time_min, cook_time_min, rating_count, avg_rating
 */
 
 

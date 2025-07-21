@@ -35,3 +35,41 @@ function openTap(tapId, headerId) {
     header.classList.add('active-tap');
     tap.style.display = 'block';
 }
+
+//Open the first tap by default
+document.addEventListener('DOMContentLoaded', () => {
+    // Hide all tabs initially
+    const allTaps = document.querySelectorAll('.tap');
+    const allHeaders = document.querySelectorAll('.tap-header');
+    
+    // Hide all tabs and remove active class from all headers
+    allTaps.forEach(tap => {
+        tap.style.display = 'none';
+    });
+    allHeaders.forEach(header => {
+        header.classList.remove('active-tap');
+    });
+    
+    // Find the first tab header and corresponding tab
+    const firstHeader = document.querySelector('.tap-header');
+    if (firstHeader) {
+        // Get the onclick attribute to extract the tap ID
+        const onclickAttr = firstHeader.getAttribute('onclick');
+        if (onclickAttr) {
+            // Extract tapId and headerId from onclick="openTap('tap-instructions','tap-header-instructions')"
+            const match = onclickAttr.match(/openTap\('([^']+)',\s*'([^']+)'\)/);
+            if (match) {
+                const tapId = match[1];
+                const headerId = match[2];
+                // Use the existing openTap function to properly open the first tab
+                openTap(tapId, headerId);
+            } else {
+                console.warn('Could not parse onclick attribute for first tab header.');
+            }
+        } else {
+            console.warn('First tab header has no onclick attribute.');
+        }
+    } else {
+        console.warn('No tab headers found to activate by default.');
+    }
+});

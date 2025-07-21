@@ -8,17 +8,17 @@
 
 //load header
 require_once 'be-logic/protected_page.php';
-require_once 'be-logic/get_user_profile.php';
+require_once 'be-logic/fetch_user_profile.php';
 include_once 'assets/includes/header.php';
 
 // Fetch user information
 $currentUser = $_SESSION['username'];
-$userProfile = getUserProfile($currentUser);
+$userProfile = fetchUserProfile($currentUser);
 
 if (!$userProfile) {
-    echo "<p>Error loading profile information.</p>";
-    exit;
+    die("Error loading profile information.");
 }
+
 ?>
 <main>
     <div class="profile-container">
@@ -36,25 +36,58 @@ if (!$userProfile) {
         </div>
         <div class="section">
             <h2>Profile Information</h2>
-            <p>Update your personal information and profile details</p>
-            <form action="be-logic/update_account.php" method="POST">
+            <?php if (isset($_SESSION['errors']['general_profile'])) {
+                echo "<p class=\"error-message\">
+                        " . htmlspecialchars($_SESSION['errors']['general_profile']) . "
+                    </p>";
+                unset($_SESSION['errors']['general_profile']);
+            } else{
+                echo "<p>Update your personal information and profile details</p>";
+            }
+            ?>
+            <form action="be-logic/formhandler/account.php" method="POST">
+                <input type="hidden" name="action" value="update_profile">
                 <div class="profile-field-group">
                     <div>
                         <label for="first_name">First Name</label>
-                        <input type="text" id="first_name" name="first_name" value="<?php echo htmlspecialchars($userProfile['first_name'] ?? ''); ?>" required>
+                        <input type="text" id="first_name" name="first_name" value="<?php echo htmlspecialchars($userProfile['first_name'] ?? ''); ?>">
+                        <?php if (isset($_SESSION['errors']['first_name'])) {
+                            echo "<p class=\"error-message\">
+                                    " . htmlspecialchars($_SESSION['errors']['first_name']) . "
+                                </p>";
+                            unset($_SESSION['errors']['first_name']);
+                        }?>
                     </div>
                     <div>
                         <label for="last_name">Last Name</label>
-                        <input type="text" id="last_name" name="last_name" value="<?php echo htmlspecialchars($userProfile['last_name'] ?? ''); ?>" required>
+                        <input type="text" id="last_name" name="last_name" value="<?php echo htmlspecialchars($userProfile['last_name'] ?? ''); ?>">
+                        <?php if (isset($_SESSION['errors']['last_name'])) {
+                            echo "<p class=\"error-message\">
+                                    " . htmlspecialchars($_SESSION['errors']['last_name']) . "
+                                </p>";
+                            unset($_SESSION['errors']['last_name']);
+                        }?>
                     </div>
                 </div>
                 <div>
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($userProfile['email'] ?? ''); ?>" required>
+                    <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($userProfile['email'] ?? ''); ?>">
+                    <?php if (isset($_SESSION['errors']['email'])) {
+                        echo "<p class=\"error-message\">
+                                " . htmlspecialchars($_SESSION['errors']['email']) . "
+                            </p>";
+                        unset($_SESSION['errors']['email']);
+                    }?>
                 </div>
                 <div>
                     <label for="bio">Bio</label>
                     <textarea id="bio" name="bio" style="resize: none;"><?php echo htmlspecialchars($userProfile['bio'] ?? ''); ?></textarea>
+                    <?php if (isset($_SESSION['errors']['bio'])) {
+                        echo "<p class=\"error-message\">
+                                " . htmlspecialchars($_SESSION['errors']['bio']) . "
+                            </p>";
+                        unset($_SESSION['errors']['bio']);
+                    }?>
                 </div>
                 <button type="submit" class="icon-button smt-bttn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -68,15 +101,40 @@ if (!$userProfile) {
         </div>
         <div class="section">
             <h2>Update Password</h2>
-            <p>Change your account password</p>
-            <form action="be-logic/update_password.php" method="POST">
+            <?php if (isset($_SESSION['errors']['password'])) {
+                echo "<p class=\"error-message\">
+                        " . htmlspecialchars($_SESSION['errors']['password']) . "
+                    </p>";
+                unset($_SESSION['errors']['password']);
+            } else if (isset($_SESSION['success']['password'])) {
+                echo "<p class=\"success-message\">
+                        " . htmlspecialchars($_SESSION['success']['password']) . "
+                    </p>";
+                unset($_SESSION['success']['password']);
+            } else {
+                echo "<p>Update your password to keep your account secure</p>";
+            }?>
+            <form action="be-logic/formhandler/account.php" method="POST">
+                <input type="hidden" name="action" value="change_password">
                 <div>
                     <label for="current_password">Current Password</label>
-                    <input type="password" id="current_password" name="current_password" required>
+                    <input type="password" id="current_password" name="current_password">
+                    <?php if (isset($_SESSION['errors']['current_password'])) {
+                        echo "<p class=\"error-message\">
+                                " . htmlspecialchars($_SESSION['errors']['current_password']) . "
+                            </p>";
+                        unset($_SESSION['errors']['current_password']);
+                    }?>
                 </div>
                 <div>
                     <label for="new_password">New Password</label>
-                    <input type="password" id="new_password" name="new_password" required>
+                    <input type="password" id="new_password" name="new_password">
+                    <?php if (isset($_SESSION['errors']['new_password'])) {
+                        echo "<p class=\"error-message\">
+                                " . htmlspecialchars($_SESSION['errors']['new_password']) . "
+                            </p>";
+                        unset($_SESSION['errors']['new_password']);
+                    }?>
                 </div>
                 <button type="submit" class="icon-button smt-bttn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -88,8 +146,15 @@ if (!$userProfile) {
         </div>
         <div class="section">
             <h2>Account Actions</h2>
-            <p>Manage your account session and data</p>
-            <form action="be-logic/auth.php" method="POST" id="logout-form">
+            <?php if (isset($_SESSION['errors']['general_account_actions'])) {
+                echo "<p class=\"error-message\">
+                        " . htmlspecialchars($_SESSION['errors']['general_account_actions']) . "
+                    </p>";
+                unset($_SESSION['errors']['general_account_actions']);
+            } else {
+                echo "<p>Manage your account session and data</p>";
+            }?>
+            <form action="be-logic/formhandler/auth.php" method="POST" id="logout-form">
                 <input type="hidden" name="action" value="logout">
                 <div>
                     <h4>Logout</h4>
@@ -104,7 +169,8 @@ if (!$userProfile) {
                     Logout
                 </button>
             </form>
-            <form action="be-logic/export_user_data.php" method="POST" id="export-form">
+            <form action="be-logic/formhandler/account.php" method="POST" id="export-form">
+                <input type="hidden" name="action" value="export_data">
                 <div>
                     <h4>Export Data</h4>
                     <p>Download all your data associated with your account.</p>
@@ -117,7 +183,8 @@ if (!$userProfile) {
                 </button>
             </form>
             <hr>
-            <form action="be-logic/delete_account.php" method="POST" id="delete-account-form">
+            <form action="be-logic/formhandler/account.php" method="POST" id="delete-account-form">
+                <input type="hidden" name="action" value="delete_account">
                 <div id="danger-zone">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path>

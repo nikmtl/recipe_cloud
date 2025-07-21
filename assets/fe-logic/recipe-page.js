@@ -1,21 +1,16 @@
 /* recipe-page.js
     * This file contains the JavaScript code for handling the recipe page  frontend-functionality.
     Sections in this file:
-    * 1. Default tab functionality
-    * 2. Copy link functionality
-    * 3. Star rating functionality and review functionality
-    * 4. Ingredient amount calculation based on servings
-    * 5. Save/unsave recipe functionality
-    * 6. Delete recipe functionality
+    * 1. Copy link functionality
+    * 2. Star rating functionality and review functionality
+    * 3. Ingredient amount calculation based on servings
+    * 4. Save/unsave recipe functionality
+    * 5. Delete recipe functionality
 */
 
 
 document.addEventListener('DOMContentLoaded', function () { // Ensure the DOM is fully loaded before executing the script
-    /* 1. Default tab functionality*/
-    openTap('tap-instructions', 'tap-header-instructions')
-
-
-    /* 2. Copy link functionality */
+    /* 1. Copy link functionality */
     document.getElementById('copy-link-btn').addEventListener('click', function () {
         var link = window.location.href;
         navigator.clipboard.writeText(link).then(function () {
@@ -28,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () { // Ensure the DOM is
     });
 
 
-    /* 3. Star rating functionality and review functionality */
+    /* 2. Star rating functionality and review functionality */
     const starLabels = document.querySelectorAll('.star-label');
     const starInputs = document.querySelectorAll('input[name="rating"]');
     const submitBtn = document.getElementById('submit-review-btn');
@@ -78,7 +73,13 @@ document.addEventListener('DOMContentLoaded', function () { // Ensure the DOM is
             // Create a form to submit the delete request
             const form = document.createElement('form');
             form.method = 'POST';
-            form.action = 'be-logic/delete_review';
+            form.action = 'be-logic/formhandler/review.php';
+
+            // Add action hidden input
+            const actionInput = document.createElement('input');
+            actionInput.type = 'hidden';
+            actionInput.name = 'action';
+            actionInput.value = 'delete';
 
             // Add recipe_id hidden input
             const recipeIdInput = document.createElement('input');
@@ -86,13 +87,14 @@ document.addEventListener('DOMContentLoaded', function () { // Ensure the DOM is
             recipeIdInput.name = 'recipe_id';
             recipeIdInput.value = document.querySelector('input[name="recipe_id"]').value;
 
+            form.appendChild(actionInput);
             form.appendChild(recipeIdInput);
             document.body.appendChild(form);
             form.submit();
         });
     }
 
-    /* 4. Ingredient amount calculation based on servings */
+    /* 3. Ingredient amount calculation based on servings */
     // Function to calculate the ingredient amount based on the number of servings
     // This is done in the frontend to provide immediate feedback to the user
     const servingsInput = document.getElementById('servings-input');
@@ -191,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function () { // Ensure the DOM is
         // Servings elements not found - functionality will be disabled
     }
 
-    /* 5. Save/unsave recipe functionality */
+    /* 4. Save/unsave recipe functionality */
     // Handle save recipe button
     const saveBtn = document.getElementById('save-recipe-btn');
     const unsaveBtn = document.getElementById('unsave-recipe-btn');
@@ -204,8 +206,8 @@ document.addEventListener('DOMContentLoaded', function () { // Ensure the DOM is
             
             const form = document.createElement('form');
             form.method = 'POST';
-            form.action = 'be-logic/save_recipe';
-            
+            form.action = 'be-logic/formhandler/save_recipe.php';
+
             const recipeIdInput = document.createElement('input');
             recipeIdInput.type = 'hidden';
             recipeIdInput.name = 'recipe_id';
@@ -231,8 +233,8 @@ document.addEventListener('DOMContentLoaded', function () { // Ensure the DOM is
             
             const form = document.createElement('form');
             form.method = 'POST';
-            form.action = 'be-logic/save_recipe';
-            
+            form.action = 'be-logic/formhandler/save_recipe.php';
+
             const recipeIdInput = document.createElement('input');
             recipeIdInput.type = 'hidden';
             recipeIdInput.name = 'recipe_id';
@@ -250,7 +252,7 @@ document.addEventListener('DOMContentLoaded', function () { // Ensure the DOM is
         });
     }
 
-    /* 6. Delete recipe functionality */
+    /* 5. Delete recipe functionality */
     const deleteRecipeBtn = document.getElementById('delete-recipe-btn');
     if (deleteRecipeBtn) {
         deleteRecipeBtn.addEventListener('click', function () {
@@ -258,7 +260,14 @@ document.addEventListener('DOMContentLoaded', function () { // Ensure the DOM is
                 // Create a form to submit the delete request
                 const form = document.createElement('form');
                 form.method = 'POST';
-                form.action = 'be-logic/delete_recipe';
+                form.action = 'be-logic/formhandler/recipe.php';
+
+                // Add action hidden input
+                const actionInput = document.createElement('input');
+                actionInput.type = 'hidden';
+                actionInput.name = 'action';
+                actionInput.value = 'delete_recipe';
+                form.appendChild(actionInput);
 
                 // Add recipe_id hidden input
                 const recipeIdInput = document.createElement('input');
