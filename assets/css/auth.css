@@ -40,7 +40,7 @@
 }
 
 .need-to-login-message {
-    color: orange !important;
+    color: var(--warning-color) !important;
 }
 
 /* password toggle button */

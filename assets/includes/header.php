@@ -41,18 +41,21 @@ if (session_status() === PHP_SESSION_NONE) {
     <link rel="stylesheet" href="assets/css/header.css">
     <link rel="stylesheet" href="assets/css/footer.css">
     <link rel="stylesheet" href="assets/css/button.css">
-    <link rel="stylesheet" href="assets/css/taps.css">
     <link rel="stylesheet" href="assets/css/form.css">
+    <link rel="stylesheet" href="assets/css/toast.css">
 
     <!-- load frontend mobile header logic -->
     <script src="assets/fe-logic/mobile-header.js" defer></script>
-    <!-- load frontend logic for the tap views -->
-    <script src="assets/fe-logic/tap-view.js" defer></script>
 
     <!-- load Inter font from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+    <!-- load Toast notification system -->
+    <?php include __DIR__ . '/response_toast.php'; ?>
+    <?php displayToast(); ?>
+    <script src="assets/fe-logic/toast.js" defer></script>
 
     <!-- Load page spesific stuff-->
     <?php
@@ -64,6 +67,8 @@ if (session_status() === PHP_SESSION_NONE) {
         case 'upload.php':
         case 'edit_recipe.php':
             echo '
+                <script src="assets/fe-logic/tap-view.js" defer></script>
+                <link rel="stylesheet" href="assets/css/taps.css">
                 <link rel="stylesheet" href="assets/css/upload.css">
                 <link rel="stylesheet" href="assets/css/image-upload.css">
                 <script src="assets/fe-logic/upload/upload.js" defer></script>
@@ -80,6 +85,8 @@ if (session_status() === PHP_SESSION_NONE) {
             break;
         case 'recipe.php':
             echo '
+                <script src="assets/fe-logic/tap-view.js" defer></script>
+                <link rel="stylesheet" href="assets/css/taps.css">
                 <link rel="stylesheet" href="assets/css/recipe.css">
                 <script src="assets/fe-logic/recipe-page.js" defer></script>';
             break;
@@ -90,6 +97,8 @@ if (session_status() === PHP_SESSION_NONE) {
             break;
         case 'profile.php':
             echo '
+                <script src="assets/fe-logic/tap-view.js" defer></script>
+                <link rel="stylesheet" href="assets/css/taps.css">
                 <link rel="stylesheet" href="assets/css/profile.css">';
             break;
         case 'settings.php':

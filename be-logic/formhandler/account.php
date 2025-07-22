@@ -49,7 +49,7 @@ function updateProfile($pdo)
     // Check for errors
     if (!empty($errors)) {
         $_SESSION['errors'] = $errors;
-        http_response_code(422); // Unprocessable Entity - validation errors
+        $_SESSION['response_code'] = 422; // Unprocessable Entity - validation errors
         header('Location:  ../../settings');
         exit;
     }
@@ -60,8 +60,8 @@ function updateProfile($pdo)
         $stmt = $pdo->prepare("SELECT username FROM users WHERE email = ? AND username != ?");
         $stmt->execute([$email, $username]);
         if ($stmt->fetch()) {
-            $_SESSION['error'] = ['email' => 'Email is already taken by another account.'];
-            http_response_code(422); // Unprocessable Entity - validation error
+            $_SESSION['errors'] = ['email' => 'Email is already taken by another account.'];
+            $_SESSION['response_code'] = 422; // Unprocessable Entity - validation error
             header('Location: ../../settings?error=email_taken');
             exit;
         }
@@ -106,12 +106,12 @@ function updateProfile($pdo)
         }
 
         // Redirect back to settings page
-        http_response_code(200); // OK
+        $_SESSION['response_code'] = 200; // OK
         header('Location: ../../settings');
         exit;
     } catch (PDOException $e) {
         error_log("Database error while updating account: " . $e->getMessage());
-        http_response_code(500); // Internal Server Error
+        $_SESSION['response_code'] = 500; // Internal Server Error
         header('Location: ../../settings');
         exit;
     }
@@ -137,7 +137,7 @@ function changePassword($pdo)
 
         if (!$user || !password_verify($currentPassword, $user['password_hash'])) {
             $_SESSION['errors'] = ['current_password' => 'Current password is incorrect.'];
-            http_response_code(422); // Unprocessable Entity - validation error
+            $_SESSION['response_code'] = 422; // Unprocessable Entity - validation error
             header('Location: ../../settings');
             exit;
         }
@@ -145,12 +145,12 @@ function changePassword($pdo)
         // Validate new password
         if (strlen($newPassword) < 8) {
             $_SESSION['errors'] = ['new_password' => 'New password must be at least 8 characters long.'];
-            http_response_code(422); // Unprocessable Entity - validation error
+            $_SESSION['response_code'] = 422; // Unprocessable Entity - validation error
             header('Location: ../../settings');
             exit;
         } elseif (strlen($newPassword) > 32) {
             $_SESSION['errors'] = ['new_password' => 'New password cannot exceed 32 characters.'];
-            http_response_code(422); // Unprocessable Entity - validation error
+            $_SESSION['response_code'] = 422; // Unprocessable Entity - validation error
             header('Location: ../../settings');
             exit;
         }
@@ -159,12 +159,12 @@ function changePassword($pdo)
         $stmt = $pdo->prepare(query: "UPDATE users SET password_hash = ? WHERE username = ?");
         $stmt->execute([password_hash($newPassword, PASSWORD_DEFAULT), $username]);
 
-        http_response_code(200); // OK
+        $_SESSION['response_code'] = 200; // OK
         header('Location: ../../settings');
         exit;
     } catch (PDOException $e) {
         error_log("Database error while updating password: " . $e->getMessage());
-        http_response_code(500); // Internal Server Error
+        $_SESSION['response_code'] = 500; // Internal Server Error
         header('Location: ../../settings');
         exit;
     }
@@ -242,14 +242,14 @@ function exportUserData($pdo)
 
         // Output the JSON data
         echo json_encode($userData, JSON_PRETTY_PRINT);
-        http_response_code(200); // OK
+        $_SESSION['response_code'] = 200; // OK
         exit;
     } catch (Exception $e) {
         // If there's an error, redirect to settings with error message
         // Redirect back to settings page with error message
         error_log("Error exporting user data: " . $e->getMessage());
         $_SESSION['errors'] = ['export' => 'An error occurred while exporting your data. Please try again later.'];
-        http_response_code(500); // Internal Server Error
+        $_SESSION['response_code'] = 500; // Internal Server Error
         header('Location: ../../settings');
         exit;
     }
@@ -281,7 +281,8 @@ function deleteAccount($pdo){
 
         // Destroy session and redirect to home page
         session_destroy();
-        http_response_code(200); // OK
+        // Note: Can't set session variables after session_destroy, 
+        // so we'll rely on the redirect to home page without a toast
         header('Location: ../../');
         exit;
     } catch (PDOException $e) {
@@ -289,7 +290,7 @@ function deleteAccount($pdo){
         $pdo->rollback();
         error_log("Database error in delete_account.php: " . $e->getMessage());
         $_SESSION['errors'] = ['general_account_actions' => 'An error occurred while deleting your account. Please try again later.'];
-        http_response_code(500); // Internal Server Error
+        $_SESSION['response_code'] = 500; // Internal Server Error
         header('Location: ../../settings');
         exit;
     }

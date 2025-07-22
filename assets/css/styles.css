@@ -20,7 +20,7 @@
     --error-color: #ef4444;
     --error-background: #ec0c0c1c;
     --success-color: #0d5a29;
-    --warning-color: var(--error-color);
+    --warning-color: orange;
     --max-width: 1400px;
 }
 

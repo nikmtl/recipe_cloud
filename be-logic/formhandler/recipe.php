@@ -41,13 +41,13 @@ function deleteRecipe($pdo){
 
         // If no recipe found redirect to home
         if (!$recipeData) {
-            http_response_code(404); // Not Found
+            $_SESSION['response_code'] = 404; // Not Found
             header('Location: ../../');
             exit();
         }
     } catch (PDOException $e) {
         error_log("Database error while fetching recipe data: " . $e->getMessage());
-        http_response_code(500); // Internal Server Error
+        $_SESSION['response_code'] = 500; // Internal Server Error
         header('Location: ../../recipe?id=' . $recipeId);
         exit();
     }
@@ -77,16 +77,16 @@ function deleteRecipe($pdo){
             $stmt = $pdo->prepare('DELETE FROM recipes WHERE id = ?');
             $stmt->execute([$recipeId]);
             // Redirect to the user's profile page after deletion
-            http_response_code(200); // OK
+            $_SESSION['response_code'] = 200; // OK
             header('Location: ../../profile');
         } catch (PDOException $e) {
             error_log("Database error while deleting recipe: " . $e->getMessage());
-            http_response_code(500); // Internal Server Error
+            $_SESSION['response_code'] = 500; // Internal Server Error
             header('Location: ../../recipe?id=' . $recipeId);
             exit();
         }
     } else {
-        http_response_code(403); // Forbidden
+        $_SESSION['response_code'] = 403; // Forbidden
         die("You do not have permission to delete this recipe.");
     }
 }
