@@ -10,8 +10,6 @@
 function displayToast() {
     // Check if there's a response code in session first, fallback to actual HTTP response code
     $responseCode = isset($_SESSION['response_code']) ? $_SESSION['response_code'] : null;
-    $toastMessage = '';
-    $toastType = '';
     
     // Define generic messages based on HTTP response codes
     switch ($responseCode) {
@@ -31,8 +29,8 @@ function displayToast() {
             $toastType = 'error';
             break;
         case 401:
-            $toastMessage = 'Authentication failed. Please check your credentials.';
-            $toastType = 'error';
+            $toastMessage = 'You need to log in to perform this action.';
+            $toastType = 'warning';
             break;
         case 403:
             $toastMessage = 'You do not have permission to perform this action.';
@@ -46,11 +44,12 @@ function displayToast() {
             $toastMessage = 'This action conflicts with existing data.';
             $toastType = 'warning';
             break;
+        /* 422 error coded are handled directly at the form level
         case 422:
             $toastMessage = 'Please correct the validation errors and try again.';
             $toastType = 'warning';
             break;
-            
+        */
         // Server error codes
         case 500:
             $toastMessage = 'A server error occurred. Please try again later.';

@@ -57,7 +57,7 @@ function registerUser($pdo): void{
         $stmt->execute([$username]);
     } catch (PDOException $e) {
         error_log("Database error while checking username: " . $e->getMessage());
-        http_response_code(500); // Internal Server Error
+        $_SESSION['response_code'] = 500; // Internal Server Error
         header('Location: ../../register'); // Redirect back to register page with error
         exit;
     }
@@ -81,7 +81,7 @@ function registerUser($pdo): void{
         $stmt->execute([$email]);
     } catch (PDOException $e) {
         error_log("Database error while checking email: " . $e->getMessage());
-        http_response_code(500); // Internal Server Error
+        $_SESSION['response_code'] = 500; // Internal Server Error
         header('Location: ../../register'); // Redirect back to register page with error
         exit;
     }
@@ -124,7 +124,7 @@ function registerUser($pdo): void{
             if (isset($_SESSION['errors']))
                 unset($_SESSION['errors']);
             $_SESSION['username'] = $username; // Set username in session
-            $_SESSION['response_code'] = 201; // Created
+            //$_SESSION['response_code'] = 201; // Created - not needed here, as we redirect to profile page
             header('Location: ../../profile'); // Redirect to profile page
             exit;
         }
@@ -198,7 +198,7 @@ function loginUser($pdo): never{
         // Set user ID in session (session already started at top)
         $_SESSION['username'] = $username; // Set username in session
         // Redirect to profile page
-        $_SESSION['response_code'] = 200; // OK
+        //$_SESSION['response_code'] = 200; // OK - not needed here, as we redirect to profile page
         header('Location: ../../profile');
         exit;
     }
@@ -210,6 +210,7 @@ function logoutUser(): never{
     session_destroy();  // Destroy the session to log out the user
     // Redirect to index page
     // Note: Can't set session variables after session_destroy
+    $_SESSION['response_code'] = 200; // OK
     header('Location: ../../');
     exit;
 }

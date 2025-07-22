@@ -61,6 +61,7 @@ function fetchUserProfile($username): array|null {
         ];
         
     } catch (PDOException $e) {
+        $_SESSION['response_code'] = 500; // Internal Server Error
         error_log("Error fetching user profile: " . $e->getMessage());
         return null;
     }

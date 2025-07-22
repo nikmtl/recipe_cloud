@@ -9,6 +9,7 @@ require_once 'db.php';
 // Only allow AJAX requests
 if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest') {
     http_response_code(400);
+    $_SESSION['response_code'] = 400; // Bad Request
     exit('Bad Request');
 }
 
@@ -142,6 +143,8 @@ try {
 } catch (PDOException $e) {
     error_log("Database error in load_more_recipes.php: " . $e->getMessage());
     header('Content-Type: application/json');
+    http_response_code(500); // Internal Server Error
+    $_SESSION['response_code'] = 500; // Internal Server Error
     echo json_encode([
         'success' => false,
         'error' => 'Database error occurred'

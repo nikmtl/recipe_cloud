@@ -43,12 +43,11 @@ function saveRecipe($pdo){
         $stmt->execute([$user_id, $recipe_id]);
 
         // Redirect back to the recipe page
-        $_SESSION['response_code'] = 200; // OK
+        //$_SESSION['response_code'] = 200; // OK - not needed here, as user feedback is obvious
         header('Location: ../../recipe' . '?id=' . $recipe_id);
         exit;
     } catch (PDOException $e) {
         error_log("Database error in save_recipe.php: " . $e->getMessage());
-        $_SESSION['errors'] = ['save_recipe' => 'An error occurred while saving the recipe.'];
         $_SESSION['response_code'] = 500; // Internal Server Error
         header('Location: ../../recipe' . '?id=' . $recipe_id);
         exit;
@@ -66,7 +65,7 @@ function unsaveRecipe($pdo){
         $stmt = $pdo->prepare("DELETE FROM favorites WHERE user_id = ? AND recipe_id = ?");
         $stmt->execute([$user_id, $recipe_id]);
         // Redirect back to the recipe page
-        $_SESSION['response_code'] = 200; // OK
+        //$_SESSION['response_code'] = 200; // OK - not needed here, as user feedback is obvious
         header('Location: ../../recipe' . '?id=' . $recipe_id);
         exit;
     } catch (PDOException $e) {

@@ -283,6 +283,7 @@ function deleteAccount($pdo){
         session_destroy();
         // Note: Can't set session variables after session_destroy, 
         // so we'll rely on the redirect to home page without a toast
+        $_SESSION['response_code'] = 200; // OK
         header('Location: ../../');
         exit;
     } catch (PDOException $e) {
