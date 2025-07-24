@@ -36,21 +36,13 @@ if (!$userProfile) {
         </div>
         <div class="section">
             <h2>Profile Information</h2>
-            <?php if (isset($_SESSION['errors']['general_profile'])) {
-                echo "<p class=\"error-message\">
-                        " . htmlspecialchars($_SESSION['errors']['general_profile']) . "
-                    </p>";
-                unset($_SESSION['errors']['general_profile']);
-            } else {
-                echo "<p>Update your personal information and profile details</p>";
-            }
-            ?>
+            <p>Update your personal information and profile details</p>
             <form action="be-logic/formhandler/account.php" method="POST">
                 <input type="hidden" name="action" value="update_profile">
                 <div class="profile-field-group">
                     <div>
                         <label for="first_name">First Name</label>
-                        <input type="text" id="first_name" name="first_name" value="<?php echo htmlspecialchars($userProfile['first_name'] ?? ''); ?>">
+                        <input type="text" id="first_name" name="first_name" value="<?php echo htmlspecialchars($userProfile['first_name'] ?? ''); ?>" class="<?php echo isset($_SESSION['errors']['first_name']) ? 'error-input' : ''; ?>">
                         <?php if (isset($_SESSION['errors']['first_name'])) {
                             echo "<p class=\"error-message\">
                                     " . htmlspecialchars($_SESSION['errors']['first_name']) . "
@@ -60,7 +52,7 @@ if (!$userProfile) {
                     </div>
                     <div>
                         <label for="last_name">Last Name</label>
-                        <input type="text" id="last_name" name="last_name" value="<?php echo htmlspecialchars($userProfile['last_name'] ?? ''); ?>">
+                        <input type="text" id="last_name" name="last_name" value="<?php echo htmlspecialchars($userProfile['last_name'] ?? ''); ?>" class="<?php echo isset($_SESSION['errors']['last_name']) ? 'error-input' : ''; ?>">
                         <?php if (isset($_SESSION['errors']['last_name'])) {
                             echo "<p class=\"error-message\">
                                     " . htmlspecialchars($_SESSION['errors']['last_name']) . "
@@ -71,7 +63,7 @@ if (!$userProfile) {
                 </div>
                 <div>
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($userProfile['email'] ?? ''); ?>">
+                    <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($userProfile['email'] ?? ''); ?>" class="<?php echo isset($_SESSION['errors']['email']) ? 'error-input' : ''; ?>">
                     <?php if (isset($_SESSION['errors']['email'])) {
                         echo "<p class=\"error-message\">
                                 " . htmlspecialchars($_SESSION['errors']['email']) . "
@@ -81,7 +73,7 @@ if (!$userProfile) {
                 </div>
                 <div>
                     <label for="bio">Bio</label>
-                    <textarea id="bio" name="bio" style="resize: none;"><?php echo htmlspecialchars($userProfile['bio'] ?? ''); ?></textarea>
+                    <textarea id="bio" name="bio" style="resize: none;" class="<?php echo isset($_SESSION['errors']['bio']) ? 'error-input' : ''; ?>"><?php echo htmlspecialchars($userProfile['bio'] ?? ''); ?></textarea>
                     <?php if (isset($_SESSION['errors']['bio'])) {
                         echo "<p class=\"error-message\">
                                 " . htmlspecialchars($_SESSION['errors']['bio']) . "
@@ -101,25 +93,13 @@ if (!$userProfile) {
         </div>
         <div class="section">
             <h2>Update Password</h2>
-            <?php if (isset($_SESSION['errors']['password'])) {
-                echo "<p class=\"error-message\">
-                        " . htmlspecialchars($_SESSION['errors']['password']) . "
-                    </p>";
-                unset($_SESSION['errors']['password']);
-            } else if (isset($_SESSION['success']['password'])) {
-                echo "<p class=\"success-message\">
-                        " . htmlspecialchars($_SESSION['success']['password']) . "
-                    </p>";
-                unset($_SESSION['success']['password']);
-            } else {
-                echo "<p>Update your password to keep your account secure</p>";
-            } ?>
+            <p>Update your password to keep your account secure</p>
             <form action="be-logic/formhandler/account.php" method="POST">
                 <input type="hidden" name="action" value="change_password">
                 <div class="input-group">
                     <label for="current_password">Current Password</label>
                     <div>
-                        <input type="password" id="current_password" name="current_password">
+                        <input type="password" id="current_password" name="current_password" class="<?php echo isset($_SESSION['errors']['current_password']) ? 'error-input' : ''; ?>">
                         <button type="button" class="password-toggle" tabindex="-1" onclick="togglePasswordVisibility('current_password')">
                             <svg xmlns="http://www.w3.org/2000/svg" class="eye-icon" fill="none" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
@@ -140,7 +120,7 @@ if (!$userProfile) {
                 <div class="input-group">
                     <label for="new_password">New Password</label>
                     <div>
-                        <input type="password" id="new_password" name="new_password">
+                        <input type="password" id="new_password" name="new_password" class="<?php echo isset($_SESSION['errors']['new_password']) ? 'error-input' : ''; ?>">
                         <button type="button" class="password-toggle" tabindex="-1" onclick="togglePasswordVisibility('new_password')">
                             <svg xmlns="http://www.w3.org/2000/svg" class="eye-icon" fill="none" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />

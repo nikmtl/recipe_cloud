@@ -219,7 +219,13 @@ include_once 'assets/includes/header.php'; //load header
                                         </div>
 
                                         <div>
-                                            <textarea id="comment" name="comment" rows="4" placeholder="Share your experience with this recipe..."><?php echo $user_review ? htmlspecialchars($user_review['comment_text']) : ''; ?></textarea>
+                                            <textarea id="comment" name="comment" rows="4" placeholder="Share your experience with this recipe..." class="<?php echo isset($_SESSION['errors']['review_comment']) ? 'error-input' : ''; ?>"><?php echo $user_review ? htmlspecialchars($user_review['comment_text']) : ''; ?></textarea>
+                                            <?php if (isset($_SESSION['errors']['review_comment'])) {
+                                                echo "<p class=\"error-message\">
+                                                        " . htmlspecialchars($_SESSION['errors']['review_comment']) . "
+                                                    </p>";
+                                                unset($_SESSION['errors']['review_comment']);
+                                            } ?>
                                         </div>
                                         <div class="review-buttons">
                                             <?php if ($user_review): ?>

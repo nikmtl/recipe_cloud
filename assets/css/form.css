@@ -89,8 +89,16 @@ form button {
     width: fit-content;
 }
 
+/* Error styles */
+.error-input {
+    border-color: var(--error-border);
+}
+
 .error-message {
-    color: var(--error-border) !important;
+    color: var(--error-color) !important;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0 !important;
 }
 
 /* Responsive styles */

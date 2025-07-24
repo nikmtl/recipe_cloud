@@ -17,26 +17,13 @@ if (session_status() === PHP_SESSION_NONE) {
         <!-- Logo and Welcome Message -->
         <img src="assets/img/logo.svg" alt="Recipe Cloud Logo" class="logo" width="40" height="40">
         <h1>Welcome Back</h1>
-        <?php if (isset($_SESSION['errors']['general'])) {
-            echo "<p class=\"error-message\">
-                        " . htmlspecialchars($_SESSION['errors']['general']) . "
-                    </p>";
-            unset($_SESSION['errors']['general']);
-        } else if (isset($_SESSION['message'])) {
-            echo "<p class=\"need-to-login-message\">
-                        " . htmlspecialchars($_SESSION['message']) . "
-                    </p>";
-            unset($_SESSION['message']);
-        } else {
-            echo "<p>Enter your credentials to access your account</p>";
-        }
-        ?>
+        <p>Enter your credentials to access your account</p>
         <form id="login-form" method="POST" action="be-logic/formhandler/auth.php">
             <input type="hidden" name="action" value="login">
             <div class="input-group">
                 <label for="login-username">Username</label>
                 <div>
-                    <input type="text" id="login-username" name="login-username" autocomplete="username" placeholder="JohnDoe">
+                    <input type="text" id="login-username" name="login-username" autocomplete="username" placeholder="JohnDoe" class="<?php echo isset($_SESSION['errors']['username']) ? 'error-input' : ''; ?>">
                     <?php if (isset($_SESSION['errors']['username'])) {
                         echo "<p class=\"error-message\">
                                     " . htmlspecialchars($_SESSION['errors']['username']) . "
@@ -48,7 +35,7 @@ if (session_status() === PHP_SESSION_NONE) {
             <div class="input-group">
                 <label for="login-password">Password</label>
                 <div>
-                    <input type="password" id="login-password" name="login-password" autocomplete="current-password">
+                    <input type="password" id="login-password" name="login-password" autocomplete="current-password" class="<?php echo isset($_SESSION['errors']['password']) ? 'error-input' : ''; ?>">
                     <button type="button" class="password-toggle" tabindex="-1" onclick="togglePasswordVisibility('login-password')">
                         <svg xmlns="http://www.w3.org/2000/svg" class="eye-icon" fill="none" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
