@@ -68,6 +68,7 @@ if (session_status() === PHP_SESSION_NONE) {
         case 'edit_recipe.php':
             echo '
                 <script src="assets/fe-logic/tap-view.js" defer></script>
+                <script src="assets/fe-logic/error-handling.js" defer></script>
                 <link rel="stylesheet" href="assets/css/taps.css">
                 <link rel="stylesheet" href="assets/css/upload.css">
                 <link rel="stylesheet" href="assets/css/image-upload.css">
@@ -82,12 +83,14 @@ if (session_status() === PHP_SESSION_NONE) {
             echo '
                 <link rel="stylesheet" href="assets/css/password_toggle.css">
                 <script src="assets/fe-logic/password_toggle.js" defer></script>
+                <script src="assets/fe-logic/error-handling.js" defer></script>
                 <link rel="stylesheet" href="assets/css/auth.css">
                 <script src="assets/fe-logic/auth.js" defer></script>';
             break;
         case 'recipe.php':
             echo '
                 <script src="assets/fe-logic/tap-view.js" defer></script>
+                <script src="assets/fe-logic/error-handling.js" defer></script>
                 <link rel="stylesheet" href="assets/css/taps.css">
                 <link rel="stylesheet" href="assets/css/recipe.css">
                 <script src="assets/fe-logic/recipe-page.js" defer></script>';
@@ -107,6 +110,7 @@ if (session_status() === PHP_SESSION_NONE) {
             echo '
                 <link rel="stylesheet" href="assets/css/password_toggle.css">
                 <script src="assets/fe-logic/password_toggle.js" defer></script>
+                <script src="assets/fe-logic/error-handling.js" defer></script>
                 <link rel="stylesheet" href="assets/css/settings.css">';
             break;
     }

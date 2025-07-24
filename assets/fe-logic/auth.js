@@ -45,13 +45,11 @@ if (registerForm) {
 
         if (passwordField.value.length < 8) { // Check if password is longer than 8 characters
             displayError(passwordField, passwordError, "Password must be longer than 8 characters.");
-            displayError(passwordField);
             event.preventDefault();
         }
 
         if (passwordField.value.length > 32) { // Check if password is shorter than 32 characters
             displayError(passwordField, passwordError, "Password must be shorter than 32 characters.");
-            displayError(passwordField);
             event.preventDefault();
         }
 
