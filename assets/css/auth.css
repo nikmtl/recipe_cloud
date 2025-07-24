@@ -43,45 +43,6 @@
     color: var(--warning-color) !important;
 }
 
-/* password toggle button */
-.input-group div {
-    position: relative;
-}
-
-input[type="password"] {
-    padding-right: 45px;
-}
-
-.password-toggle {
-    width: 35px;
-    height: 35px;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    position: absolute;
-    right: 0px;
-    transform: translateY(-35px);
-}
-.password-toggle:hover {
-    background-color: transparent;
-    border: none;
-}
-.password-toggle:focus {
-    border: none;
-    outline: none;
-}
-
-.password-toggle svg {
-    stroke: var(--secondary-text-color);
-}
-.password-toggle:hover svg {
-    stroke: var(--primary-color);
-}
-
 @media (max-width: 700px) {
     .auth-container {
         max-width: 100%;

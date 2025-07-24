@@ -6,7 +6,6 @@
     * 1. Registration form validation
     * 2. Login form validation
     * 3. Helper functions for displaying and clearing error messages
-    * 4. Password visibility toggle
 */
 
 /*1. Registration form validation*/
@@ -138,20 +137,3 @@ function clearError(inputField, messageField) {
     inputField.classList.remove('error');
 }
 
-/*4. Password toggle functionality */
-
-function togglePasswordVisibility(passwordFieldId) {
-    const passwordField = document.getElementById(passwordFieldId);
-    const eyeIcon = passwordField.nextElementSibling.querySelector('.eye-icon');
-    const eyeOffIcon = passwordField.nextElementSibling.querySelector('.eye-off-icon');
-
-    if (passwordField.type === 'password') {
-        passwordField.type = 'text';
-        eyeIcon.style.display = 'none';
-        eyeOffIcon.style.display = 'inline';
-    } else {
-        passwordField.type = 'password';
-        eyeIcon.style.display = 'inline';
-        eyeOffIcon.style.display = 'none';
-    }
-}

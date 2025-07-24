@@ -80,6 +80,8 @@ if (session_status() === PHP_SESSION_NONE) {
         case 'login.php':
         case 'register.php':
             echo '
+                <link rel="stylesheet" href="assets/css/password_toggle.css">
+                <script src="assets/fe-logic/password_toggle.js" defer></script>
                 <link rel="stylesheet" href="assets/css/auth.css">
                 <script src="assets/fe-logic/auth.js" defer></script>';
             break;
@@ -103,6 +105,8 @@ if (session_status() === PHP_SESSION_NONE) {
             break;
         case 'settings.php':
             echo '
+                <link rel="stylesheet" href="assets/css/password_toggle.css">
+                <script src="assets/fe-logic/password_toggle.js" defer></script>
                 <link rel="stylesheet" href="assets/css/settings.css">';
             break;
     }
