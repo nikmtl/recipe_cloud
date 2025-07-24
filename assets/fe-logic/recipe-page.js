@@ -4,8 +4,8 @@
     * 1. Copy link functionality
     * 2. Star rating functionality and review functionality
     * 3. Ingredient amount calculation based on servings
-    * 4. Save/unsave recipe functionality
-    * 5. Delete recipe functionality
+    * 4. Save/unsave recipe forms
+    * 5. Delete recipe forms
 */
 
 
