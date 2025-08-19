@@ -228,14 +228,14 @@ include_once 'assets/includes/header.php'; //load header
                                             } ?>
                                         </div>
                                         <div class="review-buttons">
+                                            <button id="submit-review-btn" type="submit" <?php echo !$user_review ? 'disabled' : ''; ?>>
+                                                <?php echo $user_review ? 'Update Review' : 'Submit Review'; ?>
+                                            </button>
                                             <?php if ($user_review): ?>
                                                 <button id="remove-review-btn" type="button" class="secondary-button">
                                                     Remove Review
                                                 </button>
                                             <?php endif; ?>
-                                            <button id="submit-review-btn" type="submit" <?php echo !$user_review ? 'disabled' : ''; ?>>
-                                                <?php echo $user_review ? 'Update Review' : 'Submit Review'; ?>
-                                            </button>
                                         </div>
                                     </form>
                                 </div>
