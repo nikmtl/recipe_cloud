@@ -34,9 +34,16 @@ function openTap(tapId, headerId) {
     // Activate the current header and show the corresponding tap
     header.classList.add('active-tap');
     tap.style.display = 'block';
+    
+    // Update the URL anchor to reflect the current active tab
+    // This allows users to bookmark or share the URL with the specific tab open
+    if (window.history && window.history.replaceState) {
+        const newUrl = window.location.pathname + window.location.search + '#' + tapId;
+        window.history.replaceState(null, '', newUrl);
+    }
 }
 
-//Open the first tap by default
+//Open the first tap by default or the tab specified in the URL anchor
 document.addEventListener('DOMContentLoaded', () => {
     // Hide all tabs initially
     const allTaps = document.querySelectorAll('.tap');
@@ -50,26 +57,58 @@ document.addEventListener('DOMContentLoaded', () => {
         header.classList.remove('active-tap');
     });
     
-    // Find the first tab header and corresponding tab
-    const firstHeader = document.querySelector('.tap-header');
-    if (firstHeader) {
-        // Get the onclick attribute to extract the tap ID
-        const onclickAttr = firstHeader.getAttribute('onclick');
-        if (onclickAttr) {
-            // Extract tapId and headerId from onclick="openTap('tap-instructions','tap-header-instructions')"
-            const match = onclickAttr.match(/openTap\('([^']+)',\s*'([^']+)'\)/);
-            if (match) {
-                const tapId = match[1];
-                const headerId = match[2];
-                // Use the existing openTap function to properly open the first tab
-                openTap(tapId, headerId);
+    // Check if there's an anchor in the URL that matches a tab
+    const urlHash = window.location.hash.substring(1); // Remove the # symbol
+    let targetTapId = null;
+    let targetHeaderId = null;
+    
+    if (urlHash) {
+        // Check if the anchor corresponds to a tab
+        const targetTap = document.querySelector(`#${urlHash}`);
+        if (targetTap && targetTap.classList.contains('tap')) {
+            targetTapId = urlHash;
+            // Find the corresponding header by looking for the header that opens this tab
+            const allHeadersArray = Array.from(allHeaders);
+            const correspondingHeader = allHeadersArray.find(header => {
+                const onclickAttr = header.getAttribute('onclick');
+                if (onclickAttr) {
+                    const match = onclickAttr.match(/openTap\('([^']+)',\s*'([^']+)'\)/);
+                    return match && match[1] === targetTapId;
+                }
+                return false;
+            });
+            
+            if (correspondingHeader) {
+                targetHeaderId = correspondingHeader.id;
+            }
+        }
+    }
+    
+    // If we found a target tab from the URL anchor, open it
+    if (targetTapId && targetHeaderId) {
+        openTap(targetTapId, targetHeaderId);
+    } else {
+        // Otherwise, open the first tab by default
+        const firstHeader = document.querySelector('.tap-header');
+        if (firstHeader) {
+            // Get the onclick attribute to extract the tap ID
+            const onclickAttr = firstHeader.getAttribute('onclick');
+            if (onclickAttr) {
+                // Extract tapId and headerId from onclick="openTap('tap-instructions','tap-header-instructions')"
+                const match = onclickAttr.match(/openTap\('([^']+)',\s*'([^']+)'\)/);
+                if (match) {
+                    const tapId = match[1];
+                    const headerId = match[2];
+                    // Use the existing openTap function to properly open the first tab
+                    openTap(tapId, headerId);
+                } else {
+                    console.warn('Could not parse onclick attribute for first tab header.');
+                }
             } else {
-                console.warn('Could not parse onclick attribute for first tab header.');
+                console.warn('First tab header has no onclick attribute.');
             }
         } else {
-            console.warn('First tab header has no onclick attribute.');
+            console.warn('No tab headers found to activate by default.');
         }
-    } else {
-        console.warn('No tab headers found to activate by default.');
     }
 });
