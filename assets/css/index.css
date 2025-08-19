@@ -137,6 +137,7 @@
     border: 1px solid var(--border-color);
     border-radius: 0.5rem;
     gap: 0.5rem !important;
+    flex: 1;
 }
 
 .how-to-step div {
@@ -150,10 +151,6 @@
     background-color: var(--icon-background);
 }
 
-.how-tp-step h3 {
-    font-size: 1.25rem;
-    font-weight: 600;
-}
 
 .how-to-step p {
     text-align: center;
