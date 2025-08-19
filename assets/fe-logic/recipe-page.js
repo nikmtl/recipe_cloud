@@ -12,7 +12,8 @@
 document.addEventListener('DOMContentLoaded', function () { // Ensure the DOM is fully loaded before executing the script
     /* 1. Copy link functionality */
     document.getElementById('copy-link-btn').addEventListener('click', function () {
-        var link = window.location.href;
+        // Remove the anchor from the URL before copying
+        var link = window.location.protocol + '//' + window.location.host + window.location.pathname + window.location.search;
         navigator.clipboard.writeText(link).then(function () {
             var button = document.getElementById('copy-link-btn');
             button.style.backgroundColor = '#22c55e'; // Change button color to indicate success

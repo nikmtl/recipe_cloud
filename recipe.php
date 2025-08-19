@@ -329,7 +329,13 @@ include_once 'assets/includes/header.php'; //load header
                     </div>
                     <div>
                         <?php
-                        $current_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                        // Create URL without anchor fragment for sharing
+                        $base_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+                        $path_and_query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+                        if (parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY)) {
+                            $path_and_query .= '?' . parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
+                        }
+                        $current_url = $base_url . $path_and_query;
                         ?>
                         <h2>Share This Recipe</h2>
                         <div class="social-share-buttons">
