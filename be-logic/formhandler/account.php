@@ -50,7 +50,7 @@ function updateProfile($pdo)
     if (!empty($errors)) {
         $_SESSION['errors'] = $errors;
         $_SESSION['response_code'] = 422; // Unprocessable Entity - validation errors
-        header('Location:  ../../settings');
+        header('Location: ../../settings#profile-section');
         exit;
     }
 
@@ -62,7 +62,7 @@ function updateProfile($pdo)
         if ($stmt->fetch()) {
             $_SESSION['errors'] = ['email' => 'Email is already taken by another account.'];
             $_SESSION['response_code'] = 422; // Unprocessable Entity - validation error
-            header('Location: ../../settings?error=email_taken');
+            header('Location: ../../settings#profile-section');
             exit;
         }
 
@@ -107,12 +107,12 @@ function updateProfile($pdo)
 
         // Redirect back to settings page
         $_SESSION['response_code'] = 200; // OK
-        header('Location: ../../settings');
+        header('Location: ../../settings#profile-section');
         exit;
     } catch (PDOException $e) {
         error_log("Database error while updating account: " . $e->getMessage());
         $_SESSION['response_code'] = 500; // Internal Server Error
-        header('Location: ../../settings');
+        header('Location: ../../settings#profile-section');
         exit;
     }
 }
@@ -138,7 +138,7 @@ function changePassword($pdo)
         if (!$user || !password_verify($currentPassword, $user['password_hash'])) {
             $_SESSION['errors'] = ['current_password' => 'Current password is incorrect.'];
             $_SESSION['response_code'] = 422; // Unprocessable Entity - validation error
-            header('Location: ../../settings');
+            header('Location: ../../settings#password-section');
             exit;
         }
 
@@ -146,12 +146,12 @@ function changePassword($pdo)
         if (strlen($newPassword) < 8) {
             $_SESSION['errors'] = ['new_password' => 'New password must be at least 8 characters long.'];
             $_SESSION['response_code'] = 422; // Unprocessable Entity - validation error
-            header('Location: ../../settings');
+            header('Location: ../../settings#password-section');
             exit;
         } elseif (strlen($newPassword) > 32) {
             $_SESSION['errors'] = ['new_password' => 'New password cannot exceed 32 characters.'];
             $_SESSION['response_code'] = 422; // Unprocessable Entity - validation error
-            header('Location: ../../settings');
+            header('Location: ../../settings#password-section');
             exit;
         }
 
@@ -160,12 +160,12 @@ function changePassword($pdo)
         $stmt->execute([password_hash($newPassword, PASSWORD_DEFAULT), $username]);
 
         $_SESSION['response_code'] = 200; // OK
-        header('Location: ../../settings');
+        header('Location: ../../settings#password-section');
         exit;
     } catch (PDOException $e) {
         error_log("Database error while updating password: " . $e->getMessage());
         $_SESSION['response_code'] = 500; // Internal Server Error
-        header('Location: ../../settings');
+        header('Location: ../../settings#password-section');
         exit;
     }
 }
@@ -250,7 +250,7 @@ function exportUserData($pdo)
         error_log("Error exporting user data: " . $e->getMessage());
         $_SESSION['errors'] = ['export' => 'An error occurred while exporting your data. Please try again later.'];
         $_SESSION['response_code'] = 500; // Internal Server Error
-        header('Location: ../../settings');
+        header('Location: ../../settings#account-actions-section');
         exit;
     }
 }
@@ -292,7 +292,7 @@ function deleteAccount($pdo){
         error_log("Database error in delete_account.php: " . $e->getMessage());
         $_SESSION['errors'] = ['general_account_actions' => 'An error occurred while deleting your account. Please try again later.'];
         $_SESSION['response_code'] = 500; // Internal Server Error
-        header('Location: ../../settings');
+        header('Location: ../../settings#account-actions-section');
         exit;
     }
 }

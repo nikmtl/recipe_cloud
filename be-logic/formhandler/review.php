@@ -41,12 +41,12 @@ function submitReview($pdo){
 
         // Redirect back to recipe page
         $_SESSION['response_code'] = 201; // Created
-        header('Location: ../../recipe?id=' . $reviewData['recipe_id']);
+        header('Location: ../../recipe?id=' . $reviewData['recipe_id'].'#tab-reviews');
         exit();
     } catch (PDOException $e) {
         error_log("Database error while submitting review: " . $e->getMessage());
         $_SESSION['response_code'] = 500; // Internal Server Error
-        header('Location: ../../recipe?id=' . $reviewData['recipe_id']);
+        header('Location: ../../recipe?id=' . $reviewData['recipe_id'].'#tab-reviews');
         exit();
     }
 }
@@ -64,12 +64,12 @@ function updateReview($pdo){
 
         // Redirect back to recipe page
         $_SESSION['response_code'] = 200; // OK
-        header('Location: ../../recipe?id=' . $reviewData['recipe_id']);
+        header('Location: ../../recipe?id=' . $reviewData['recipe_id'].'#tab-reviews');
         exit();
     } catch (PDOException $e) {
         error_log("Database error while submitting review: " . $e->getMessage());
         $_SESSION['response_code'] = 500; // Internal Server Error
-        header('Location: ../../recipe?id=' . $reviewData['recipe_id']);
+        header('Location: ../../recipe?id=' . $reviewData['recipe_id'].'#tab-reviews');
         exit();
     }
 }
@@ -89,12 +89,12 @@ function deleteReview($pdo){
 
         // Redirect back to recipe page
         $_SESSION['response_code'] = 200; // OK
-        header('Location: ../../recipe?id=' . $recipeId);
+        header('Location: ../../recipe?id=' . $recipeId.'#tab-reviews');
         exit();
     } catch (PDOException $e) {
         error_log("Database error while deleting review: " . $e->getMessage());
         $_SESSION['response_code'] = 500; // Internal Server Error
-        header('Location: ../../recipe?id=' . $recipeId);
+        header('Location: ../../recipe?id=' . $recipeId.'#tab-reviews');
         exit();
     }
 }
@@ -118,7 +118,7 @@ function getReviewData(): array {
     if (strlen($comment) > 500) {
         $_SESSION['errors'] = ['review_comment' => 'Comment must be shorter than 500 characters.'];
         $_SESSION['response_code'] = 422; // Unprocessable Entity - validation error
-        header('Location: ../../recipe?id=' . $recipe_id);
+        header('Location: ../../recipe?id=' . $recipe_id.'#tab-reviews');
         exit;
     }
 

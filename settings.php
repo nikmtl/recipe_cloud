@@ -34,7 +34,7 @@ if (!$userProfile) {
             <h1>Account Settings</h1>
             <p>Manage your account preferences and security settings</p>
         </div>
-        <div class="section">
+        <div class="section" id="profile-section">
             <h2>Profile Information</h2>
             <p>Update your personal information and profile details</p>
             <form action="be-logic/formhandler/account.php" method="POST">
@@ -91,7 +91,7 @@ if (!$userProfile) {
                 </button>
             </form>
         </div>
-        <div class="section">
+        <div class="section" id="password-section">
             <h2>Update Password</h2>
             <p>Update your password to keep your account secure</p>
             <form action="be-logic/formhandler/account.php" method="POST">
@@ -146,7 +146,7 @@ if (!$userProfile) {
                 </button>
             </form>
         </div>
-        <div class="section">
+        <div class="section" id="account-actions-section">
             <h2>Account Actions</h2>
             <?php if (isset($_SESSION['errors']['general_account_actions'])) {
                 echo "<p class=\"error-message\">
