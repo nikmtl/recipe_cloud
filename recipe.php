@@ -113,7 +113,7 @@ include_once 'assets/includes/header.php'; //load header
                         <p class="recipe-description"><?php echo nl2br(htmlspecialchars($recipe['description'])); ?></p>
                         <p>Recipe by <?php echo htmlspecialchars($recipe['username']); ?></p>
                         <div class="recipe-meta">
-                            <div onclick="openTap('tap-reviews', 'tap-header-reviews')">
+                            <div onclick="openTab('tab-reviews', 'tab-header-reviews')">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#facc15" stroke="#facc15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                                 </svg>
@@ -142,12 +142,12 @@ include_once 'assets/includes/header.php'; //load header
                         </div>
                     </div>
                     <div>
-                        <div class="section-taps">
-                            <button id="tap-header-instructions" class="tap-header" onclick="openTap('tap-instructions','tap-header-instructions')">Instructions</button>
-                            <button id="tap-header-ingredients" class="tap-header" onclick="openTap('tap-ingredients', 'tap-header-ingredients')">Ingredients</button>
-                            <button id="tap-header-reviews" class="tap-header" onclick="openTap('tap-reviews', 'tap-header-reviews')">Reviews</button>
+                        <div class="section-tabs">
+                            <button id="tab-header-instructions" class="tab-header" onclick="openTab('tab-instructions','tab-header-instructions')">Instructions</button>
+                            <button id="tab-header-ingredients" class="tab-header" onclick="openTab('tab-ingredients', 'tab-header-ingredients')">Ingredients</button>
+                            <button id="tab-header-reviews" class="tab-header" onclick="openTab('tab-reviews', 'tab-header-reviews')">Reviews</button>
                         </div>
-                        <div id="tap-instructions" class="tap">
+                        <div id="tab-instructions" class="tab">
                             <div class="instructions-list">
                                 <?php foreach ($instructions as $instruction): ?>
                                     <div>
@@ -157,7 +157,7 @@ include_once 'assets/includes/header.php'; //load header
                                 <?php endforeach; ?>
                             </div>
                         </div>
-                        <div id="tap-ingredients" class="tap">
+                        <div id="tab-ingredients" class="tab">
                             <div class="ingredients-list">
                                 <div class="servings-adjuster">
                                     <h4>Ingredients</h4>
@@ -188,7 +188,7 @@ include_once 'assets/includes/header.php'; //load header
                             </div>
 
                         </div>
-                        <div id="tap-reviews" class="tap">
+                        <div id="tab-reviews" class="tab">
                             <?php if (isset($_SESSION['username'])): ?>
                                 <div id="review-form">
                                     <h4><?php echo $user_review ? 'Update Your Review' : 'Rate this recipe'; ?></h4>

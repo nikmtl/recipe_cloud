@@ -99,11 +99,11 @@ try {
             </div>
         </div>
 
-        <div class="section-taps">
-            <button id="tap-header-my-recipes" class="tap-header" onclick="openTap('tap-my-recipes','tap-header-my-recipes')">My Recipes</button>
-            <button id="tap-header-favorites" class="tap-header" onclick="openTap('tap-favorites', 'tap-header-favorites')">Favorites</button>
+        <div class="section-tabs">
+            <button id="tab-header-my-recipes" class="tab-header" onclick="openTab('tab-my-recipes','tab-header-my-recipes')">My Recipes</button>
+            <button id="tab-header-favorites" class="tab-header" onclick="openTab('tab-favorites', 'tab-header-favorites')">Favorites</button>
         </div>
-        <div id="tap-my-recipes" class="tap">
+        <div id="tab-my-recipes" class="tab">
             <div class="recipes-grid">
                 <?php
                 if (!empty($userRecipes)) {
@@ -130,7 +130,7 @@ try {
             <?php endif; ?>
         </div>
 
-        <div id="tap-favorites" class="tap">            
+        <div id="tab-favorites" class="tab">            
             <div class="recipes-grid">
                 <?php
                 if (!empty($favoriteRecipes)) {

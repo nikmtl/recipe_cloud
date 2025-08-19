@@ -50,15 +50,15 @@ function isSelected($key, $value): string{
         }
         ?>
 
-        <div class="section-taps">
-            <button id="tap-header-basic-info" class="tap-header" onclick="openTap('tap-basic-info','tap-header-basic-info')">Basic Info</button>
-            <button id="tap-header-ingredients" class="tap-header" onclick="openTap('tap-ingredients', 'tap-header-ingredients')">Ingredients</button>
-            <button id="tap-header-instructions" class="tap-header" onclick="openTap('tap-instructions', 'tap-header-instructions')">Instructions</button>
-            <button id="tap-header-media-and-publish" class="tap-header" onclick="openTap('tap-media-and-publish', 'tap-header-media-and-publish')">Media</button>
+        <div class="section-tabs">
+            <button id="tab-header-basic-info" class="tab-header" onclick="openTab('tab-basic-info','tab-header-basic-info')">Basic Info</button>
+            <button id="tab-header-ingredients" class="tab-header" onclick="openTab('tab-ingredients', 'tab-header-ingredients')">Ingredients</button>
+            <button id="tab-header-instructions" class="tab-header" onclick="openTab('tab-instructions', 'tab-header-instructions')">Instructions</button>
+            <button id="tab-header-media-and-publish" class="tab-header" onclick="openTab('tab-media-and-publish', 'tab-header-media-and-publish')">Media</button>
         </div>
         <form method="POST" action="be-logic/upload.php" enctype="multipart/form-data" class="upload-form">
-            <div id="tap-basic-info" class="tap">
-                <div class="upload-tap-body">
+            <div id="tab-basic-info" class="tab">
+                <div class="upload-tab-body">
                     <div>
                         <h3>Basic Information</h3>
                         <p>Let's start with the basic details of your recipe</p>
@@ -178,12 +178,12 @@ function isSelected($key, $value): string{
                     </div>
                 </div>
                 <div class="navigation-buttons">
-                    <button class="primary" type="button" onclick="openTap('tap-ingredients', 'tap-header-ingredients')">Next: Ingredients</button>
+                    <button class="primary" type="button" onclick="openTab('tab-ingredients', 'tab-header-ingredients')">Next: Ingredients</button>
                 </div>
             </div>
 
-            <div id="tap-ingredients" class="tap">
-                <div class="upload-tap-body">                    
+            <div id="tab-ingredients" class="tab">
+                <div class="upload-tab-body">                    
                     <div>
                         <h3>Ingredients</h3>
                         <p>List all ingredients needed for your recipe</p>
@@ -236,12 +236,12 @@ function isSelected($key, $value): string{
                     </div>
                 </div>
                 <div class="navigation-buttons">
-                    <button class="secondary-button" type="button" onclick="openTap('tap-basic-info','tap-header-basic-info')">Back: Basic Info</button>
-                    <button type="button" onclick="openTap('tap-instructions', 'tap-header-instructions')">Next: Instructions</button>
+                    <button class="secondary-button" type="button" onclick="openTab('tab-basic-info','tab-header-basic-info')">Back: Basic Info</button>
+                    <button type="button" onclick="openTab('tab-instructions', 'tab-header-instructions')">Next: Instructions</button>
                 </div>
             </div>
-            <div id="tap-instructions" class="tap">
-                <div class="upload-tap-body">                    
+            <div id="tab-instructions" class="tab">
+                <div class="upload-tab-body">                    
                     <div>
                         <h3>Instructions</h3>
                         <p>Provide step-by-step instructions for your recipe</p>
@@ -280,12 +280,12 @@ function isSelected($key, $value): string{
                     </div>
                 </div>
                 <div class="navigation-buttons">
-                    <button class="secondary-button" type="button" onclick="openTap('tap-ingredients', 'tap-header-ingredients')">Back: Ingredients</button>
-                    <button type="button" onclick="openTap('tap-media-and-publish', 'tap-header-media-and-publish')">Next: Media & Publish</button>
+                    <button class="secondary-button" type="button" onclick="openTab('tab-ingredients', 'tab-header-ingredients')">Back: Ingredients</button>
+                    <button type="button" onclick="openTab('tab-media-and-publish', 'tab-header-media-and-publish')">Next: Media & Publish</button>
                 </div>
             </div>
-            <div id="tap-media-and-publish" class="tap">
-                <div class="upload-tap-body">
+            <div id="tab-media-and-publish" class="tab">
+                <div class="upload-tab-body">
                     <div>
                         <h3>Media Upload</h3>
                         <p>Upload a image of your finished dish</p>
@@ -332,7 +332,7 @@ function isSelected($key, $value): string{
                     </div>
                 </div>
                 <div class="navigation-buttons">
-                    <button type="button" onclick="openTap('tap-instructions', 'tap-header-instructions')" class="secondary-button">Back: Instructions</button>
+                    <button type="button" onclick="openTab('tab-instructions', 'tab-header-instructions')" class="secondary-button">Back: Instructions</button>
                     <button type="submit">Publish Recipe</button>
                 </div>
             </div>

@@ -67,9 +67,9 @@ if (session_status() === PHP_SESSION_NONE) {
         case 'upload.php':
         case 'edit_recipe.php':
             echo '
-                <script src="assets/fe-logic/tap-view.js" defer></script>
+                <script src="assets/fe-logic/tab-view.js" defer></script>
                 <script src="assets/fe-logic/error-handling.js" defer></script>
-                <link rel="stylesheet" href="assets/css/taps.css">
+                <link rel="stylesheet" href="assets/css/tabs.css">
                 <link rel="stylesheet" href="assets/css/upload.css">
                 <link rel="stylesheet" href="assets/css/image-upload.css">
                 <script src="assets/fe-logic/upload/upload.js" defer></script>
@@ -89,9 +89,9 @@ if (session_status() === PHP_SESSION_NONE) {
             break;
         case 'recipe.php':
             echo '
-                <script src="assets/fe-logic/tap-view.js" defer></script>
+                <script src="assets/fe-logic/tab-view.js" defer></script>
                 <script src="assets/fe-logic/error-handling.js" defer></script>
-                <link rel="stylesheet" href="assets/css/taps.css">
+                <link rel="stylesheet" href="assets/css/tabs.css">
                 <link rel="stylesheet" href="assets/css/recipe.css">
                 <script src="assets/fe-logic/recipe-page.js" defer></script>';
             break;
@@ -102,8 +102,8 @@ if (session_status() === PHP_SESSION_NONE) {
             break;
         case 'profile.php':
             echo '
-                <script src="assets/fe-logic/tap-view.js" defer></script>
-                <link rel="stylesheet" href="assets/css/taps.css">
+                <script src="assets/fe-logic/tab-view.js" defer></script>
+                <link rel="stylesheet" href="assets/css/tabs.css">
                 <link rel="stylesheet" href="assets/css/profile.css">';
             break;
         case 'settings.php':

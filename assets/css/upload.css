@@ -47,13 +47,13 @@
 }
 
 /* Specific styles for the upload form */
-/*chage form border to be handeld by the upload-tap-body class to enable the naviagtion buttons to be outside the form*/
+/*chage form border to be handeld by the upload-tab-body class to enable the naviagtion buttons to be outside the form*/
 .upload-form{
     border: none;
     padding: 0;
 }
 
-.upload-tap-body{
+.upload-tab-body{
     display: flex;
     flex-direction: column;
     border-radius: 0.5rem;
@@ -64,12 +64,12 @@
 }
 
 /* styles for the title inside the upload form */
-.upload-tap-body h3{
+.upload-tab-body h3{
     font-size: 1.5rem;
     font-weight: 600;
 }
 
-.upload-tap-body p{
+.upload-tab-body p{
     color: var(--secondary-text-color);
     font-size: 0.875rem;
     margin-top: 6px;

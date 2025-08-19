@@ -71,32 +71,32 @@ if (uploadForm) {
     if (!titleField || !titleField.value.trim()) {
       displayError(titleField, document.getElementById('recipe-title-errormsg'), "Recipe title is required.");
       isValid = false;
-      if (!firstErrorTab) firstErrorTab = { tabId: 'tap-basic-info', headerId: 'tap-header-basic-info' };
+      if (!firstErrorTab) firstErrorTab = { tabId: 'tab-basic-info', headerId: 'tab-header-basic-info' };
     } else if (titleField.value.length > 100) {
       displayError(titleField, document.getElementById('recipe-title-errormsg'), "Title must be less than 100 characters.");
       isValid = false;
-      if (!firstErrorTab) firstErrorTab = { tabId: 'tap-basic-info', headerId: 'tap-header-basic-info' };
+      if (!firstErrorTab) firstErrorTab = { tabId: 'tab-basic-info', headerId: 'tab-header-basic-info' };
     }
 
     // Preparation time validation - must be a positive number
     if (prepTimeField && prepTimeField.value.trim() && !isPositiveNumber(prepTimeField.value)) {
       displayError(prepTimeField, document.getElementById('recipe-prep-time-errormsg'), "Preparation time must be a positive number.");
       isValid = false;
-      if (!firstErrorTab) firstErrorTab = { tabId: 'tap-basic-info', headerId: 'tap-header-basic-info' };
+      if (!firstErrorTab) firstErrorTab = { tabId: 'tab-basic-info', headerId: 'tab-header-basic-info' };
     }
 
     // Cooking time validation - must be a positive number
     if (cookTimeField && cookTimeField.value.trim() && !isPositiveNumber(cookTimeField.value)) {
       displayError(cookTimeField, document.getElementById('recipe-cook-time-errormsg'), "Cooking time must be a positive number.");
       isValid = false;
-      if (!firstErrorTab) firstErrorTab = { tabId: 'tap-basic-info', headerId: 'tap-header-basic-info' };
+      if (!firstErrorTab) firstErrorTab = { tabId: 'tab-basic-info', headerId: 'tab-header-basic-info' };
     }
 
     // Servings validation - must be a positive number
     if (!servingsField || !isPositiveNumber(servingsField.value)) {
       displayError(servingsField, document.getElementById('recipe-servings-errormsg'), "Servings must be a positive number.");
       isValid = false;
-      if (!firstErrorTab) firstErrorTab = { tabId: 'tap-basic-info', headerId: 'tap-header-basic-info' };
+      if (!firstErrorTab) firstErrorTab = { tabId: 'tab-basic-info', headerId: 'tab-header-basic-info' };
     }// Check if at least one ingredient has been added
     const ingredientList = document.getElementById('ingredient-list');
     if (ingredientList && ingredientList.children.length === 0) {
@@ -105,7 +105,7 @@ if (uploadForm) {
         displayError(null, errorElement, "At least one ingredient is required.");
       }
       isValid = false;
-      if (!firstErrorTab) firstErrorTab = { tabId: 'tap-ingredients', headerId: 'tap-header-ingredients' };
+      if (!firstErrorTab) firstErrorTab = { tabId: 'tab-ingredients', headerId: 'tab-header-ingredients' };
     }
 
     // Check if at least one instruction has been added
@@ -116,14 +116,14 @@ if (uploadForm) {
         displayError(null, errorElement, "At least one instruction step is required.");
       }
       isValid = false;
-      if (!firstErrorTab) firstErrorTab = { tabId: 'tap-instructions', headerId: 'tap-header-instructions' };
+      if (!firstErrorTab) firstErrorTab = { tabId: 'tab-instructions', headerId: 'tab-header-instructions' };
     }
 
     // If validation fails, prevent form submission and open the first error tab
     if (!isValid) {
       event.preventDefault();
-      if (firstErrorTab && typeof openTap === 'function') {
-        openTap(firstErrorTab.tabId, firstErrorTab.headerId);
+      if (firstErrorTab && typeof openTab === 'function') {
+        openTab(firstErrorTab.tabId, firstErrorTab.headerId);
       }
     }
   });
