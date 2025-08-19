@@ -45,6 +45,27 @@ function openTap(tapId, headerId) {
 
 //Open the first tap by default or the tab specified in the URL anchor
 document.addEventListener('DOMContentLoaded', () => {
+    // IMPORTANT: This approach handles a specific browser issue where loading a page with an 
+    // anchor fragment (e.g., #tap-ingredients) can interfere with favicon and other resource loading.
+    // The solution: temporarily clear the hash during initial load, then restore it after resources load.
+    //
+    // Why this weird approach is necessary:
+    // 1. Browsers may resolve relative resource paths differently when an anchor is present
+    // 2. This can cause favicons and other assets to fail loading or disappear
+    // 3. By temporarily removing the hash, we ensure clean resource loading
+    // 4. After everything loads, we process the original anchor and restore the URL state
+    //
+    // Timeline: URL with hash → temp clean URL → resources load → process anchor → restore hash URL
+    
+    // Store the original hash and temporarily clear it to prevent favicon issues
+    const originalHash = window.location.hash.substring(1);
+    
+    // Temporarily clear the hash if it exists to prevent resource loading issues
+    if (originalHash && window.history && window.history.replaceState) {
+        const cleanUrl = window.location.pathname + window.location.search;
+        window.history.replaceState(null, '', cleanUrl);
+    }
+    
     // Hide all tabs initially
     const allTaps = document.querySelectorAll('.tap');
     const allHeaders = document.querySelectorAll('.tap-header');
@@ -57,58 +78,70 @@ document.addEventListener('DOMContentLoaded', () => {
         header.classList.remove('active-tap');
     });
     
-    // Check if there's an anchor in the URL that matches a tab
-    const urlHash = window.location.hash.substring(1); // Remove the # symbol
-    let targetTapId = null;
-    let targetHeaderId = null;
-    
-    if (urlHash) {
-        // Check if the anchor corresponds to a tab
-        const targetTap = document.querySelector(`#${urlHash}`);
-        if (targetTap && targetTap.classList.contains('tap')) {
-            targetTapId = urlHash;
-            // Find the corresponding header by looking for the header that opens this tab
-            const allHeadersArray = Array.from(allHeaders);
-            const correspondingHeader = allHeadersArray.find(header => {
-                const onclickAttr = header.getAttribute('onclick');
-                if (onclickAttr) {
-                    const match = onclickAttr.match(/openTap\('([^']+)',\s*'([^']+)'\)/);
-                    return match && match[1] === targetTapId;
+    // Function to process the anchor after resources are loaded
+    function processAnchor() {
+        let targetTapId = null;
+        let targetHeaderId = null;
+        
+        if (originalHash) {
+            // Check if the anchor corresponds to a tab
+            const targetTap = document.querySelector(`#${originalHash}`);
+            if (targetTap && targetTap.classList.contains('tap')) {
+                targetTapId = originalHash;
+                // Find the corresponding header by looking for the header that opens this tab
+                const allHeadersArray = Array.from(allHeaders);
+                const correspondingHeader = allHeadersArray.find(header => {
+                    const onclickAttr = header.getAttribute('onclick');
+                    if (onclickAttr) {
+                        const match = onclickAttr.match(/openTap\('([^']+)',\s*'([^']+)'\)/);
+                        return match && match[1] === targetTapId;
+                    }
+                    return false;
+                });
+                
+                if (correspondingHeader) {
+                    targetHeaderId = correspondingHeader.id;
                 }
-                return false;
-            });
-            
-            if (correspondingHeader) {
-                targetHeaderId = correspondingHeader.id;
+            }
+        }
+        
+        // If we found a target tab from the URL anchor, open it and restore the hash
+        if (targetTapId && targetHeaderId) {
+            openTap(targetTapId, targetHeaderId);
+        } else {
+            // Otherwise, open the first tab by default
+            const firstHeader = document.querySelector('.tap-header');
+            if (firstHeader) {
+                // Get the onclick attribute to extract the tap ID
+                const onclickAttr = firstHeader.getAttribute('onclick');
+                if (onclickAttr) {
+                    // Extract tapId and headerId from onclick="openTap('tap-instructions','tap-header-instructions')"
+                    const match = onclickAttr.match(/openTap\('([^']+)',\s*'([^']+)'\)/);
+                    if (match) {
+                        const tapId = match[1];
+                        const headerId = match[2];
+                        // Use the existing openTap function to properly open the first tab
+                        openTap(tapId, headerId);
+                    } else {
+                        console.warn('Could not parse onclick attribute for first tab header.');
+                    }
+                } else {
+                    console.warn('First tab header has no onclick attribute.');
+                }
+            } else {
+                console.warn('No tab headers found to activate by default.');
             }
         }
     }
     
-    // If we found a target tab from the URL anchor, open it
-    if (targetTapId && targetHeaderId) {
-        openTap(targetTapId, targetHeaderId);
+    // Wait for all resources to load before processing the anchor
+    if (document.readyState === 'complete') {
+        // If everything is already loaded, process immediately
+        setTimeout(processAnchor, 50);
     } else {
-        // Otherwise, open the first tab by default
-        const firstHeader = document.querySelector('.tap-header');
-        if (firstHeader) {
-            // Get the onclick attribute to extract the tap ID
-            const onclickAttr = firstHeader.getAttribute('onclick');
-            if (onclickAttr) {
-                // Extract tapId and headerId from onclick="openTap('tap-instructions','tap-header-instructions')"
-                const match = onclickAttr.match(/openTap\('([^']+)',\s*'([^']+)'\)/);
-                if (match) {
-                    const tapId = match[1];
-                    const headerId = match[2];
-                    // Use the existing openTap function to properly open the first tab
-                    openTap(tapId, headerId);
-                } else {
-                    console.warn('Could not parse onclick attribute for first tab header.');
-                }
-            } else {
-                console.warn('First tab header has no onclick attribute.');
-            }
-        } else {
-            console.warn('No tab headers found to activate by default.');
-        }
+        // Wait for the window to fully load (including images, styles, etc.)
+        window.addEventListener('load', () => {
+            setTimeout(processAnchor, 50);
+        });
     }
 });
