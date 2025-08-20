@@ -1,6 +1,6 @@
-# <img src="https://github.com/Edamame04/recipe_cloud/blob/main/assets/img/logo_with_bg.svg" alt="logo" width="30"/> Recipe Cloud 
+# <img src="https://github.com/Edamame04/recipe_cloud/blob/main/assets/img/logo.svg" alt="logo" width="30"/> Recipe Cloud 
 
-**Recipe Cloud** is a web application for managing and sharing recipes. Users can create, save, search, and rate recipes – all centrally in one place. The application was developed as part of the *Web Engineering 2* module and is based on PHP, HTML, CSS, JavaScript, and MySQL.
+**Recipe Cloud** is a web application for managing and sharing recipes. Users can create, save, search, and rate recipes – all centrally in one place. The application is based on PHP, HTML, CSS, JavaScript, and MySQL.
 
 The project serves to gain practical experience with **PHP** and **SQL** and deepen understanding of server-side web development with database integration. The application was deliberately developed without the use of frameworks or libraries. Only pure **HTML**, **CSS**, **JavaScript**, and **PHP** are used to deepen the fundamental concepts and techniques of web development.
 
@@ -49,12 +49,13 @@ The project serves to gain practical experience with **PHP** and **SQL** and dee
 **favorites:**
 `id *(PK)*`, `user_id *(FK)*`, `recipe_id *(FK)*`
 
+<!--
 ## 🗄️ Entity-Relationship Model
 
 ![Entity-Relationship Diagram](https://github.com/Edamame04/recipe_cloud/blob/main/docs/erm.png)
 
 The diagram illustrates the relationships between the database entities including users, recipes, ingredients, instructions, ratings, and favorites.
-
+-->
 ---
 
 ## 📁 Current Project Structure
